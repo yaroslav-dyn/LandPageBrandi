@@ -1,0 +1,58 @@
+/*MEDIA*/
+
+/* Landscape - smarfone */
+@media (max-width: 480px) {
+
+}//end < 480px
+
+
+@media (max-width: 767px) {
+  .header {
+    .header-top {
+      position: static;
+
+    }
+  }
+  .logo{
+    text-align: center;
+  }
+  .main-nav {
+    margin-top: 2.2em;
+    ul {
+      li {
+        display: block!important;
+        text-align: center;
+
+        a {
+          line-height: 2.8em;
+          color: #fff;
+          padding: 0;
+          &:hover, &.active {
+            border-top: none;
+            text-decoration: none;
+            background: rgba(16,22,54, 0.2);
+          }
+        }
+      }
+    }
+  }
+  .carousel-wrapper {
+    min-width: 100%;
+    margin-top: 34%;
+  }
+  .carousel-inner h2 {
+    font-size: 1.2em;
+  }
+  .carousel-inner p {
+    font-family: "open_sanslight", sans-serif;
+    font-size: 1.2em;
+  }
+
+}
+
+//
+@media (min-width: 768px) and (max-width: 979px) {}
+
+
+//
+@media (min-width: 1200px) {}

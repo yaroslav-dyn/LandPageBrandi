@@ -1,0 +1,6 @@
+psd/
+.idea/
+*.iml
+*.iws
+node_modules/
+
