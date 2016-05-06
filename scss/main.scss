@@ -3,6 +3,7 @@
 @import '_fonts';
 @import '_variables';
 
+
 //Main styles
 html{
   width: 100%;
@@ -12,9 +13,6 @@ html{
 body{
   font-family: 'open_sansregular', sans-serif;
   font-size: 16px;
-  height: 100%;
-  width: 100%;
-  overflow: auto;
 }
 ul{
   list-style: none;
@@ -22,6 +20,10 @@ ul{
 p{
   font-family: "open_sansregular", sans-serif;
 }
+img{
+	-webkit-user-drag: none;
+}
+
 //full-width container
 .container-fluid.full-width{
   padding: 0;
@@ -125,6 +127,9 @@ h3.h-category{	//global style
   text-align: center;
   padding-top: 70px;
 }
+.features-h{
+  margin-bottom: 60px;
+}
 //features
 .features{
   background: $features-sec-color;
@@ -136,9 +141,7 @@ h3.h-category{	//global style
     font-size: 1.25em;
     font-weight: 600;
   }
-  .features-h{
-    margin-bottom: 60px;
-  }
+
 }
 .icon-fue{
   width: 40px;
@@ -173,76 +176,196 @@ p.s-description{
 }
 //gallery
 //-nav
-.gallery-nav{
-  ul{
+.gallery-image{
+  margin: 0 auto;
+}
+//-nav mobile
+.gallery-nav-mobile{
+  margin-bottom: 12px;
+  select{
+    padding: 8px;
+  }
+}
+.gallery-nav {
+  margin-top: 14px;
+  ul {
     margin-bottom: 42px;
-    li{
+    li {
       display: inline-block;
-      padding: 0 25px;
-      a{
+      margin-right: 50px;
+      a {
         font-weight: bold;
         color: #062033;
         font-size: 0.875em;
-        &:hover, &:active, &:focus{
+        &:hover, &:active, &:focus {
           text-decoration: none;
         }
-        &:hover{
+        &:hover {
           color: $accent-green;
         }
       }
-      .label-success{
+    }
+    li.current-cat {
+      margin-right: 30px;
+      .label-success {
         color: #fff;
         background: $accent-green;
-        padding: 8px 20px;
+        padding: 6px 20px;
         border-radius: 6px;
-        &:hover{
+        &:hover {
           color: #fff;
         }
       }
     }
   }
+} //END Gallery Nav
+
+//Global class for similar blocks like gallery
+.item-gallery-global{
+  float: left;
+  position: relative;
+  //hidden content
+  .item-gall-hidden{
+    display: none;
+    color: #fff;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left:0;
+  }
 }
 .gallery-image{
+  .item-gallery-global{
+    &:hover .item-gall-hidden{
+      display: block;
+    }
+  }
   .item-img{
-    display: block;
-    float: left;
     width: 25%;
-    max-height:295px;
+    max-height:300px;
     overflow: hidden;
-    position: relative;
-    .hidden-gal-content{
-      color: #fff;
+
+    @media all and (max-width: 480px){
       width: 100%;
-      height: 100%;
-      position: absolute;
-      top: 0;
-      left:0;
+    }
+    @media all and (min-width: 481px)and(max-width: 1100px){
+      width: 50%;
+    }
+    img{
+      width: 100%;
+      height: auto;
+      cursor: pointer;
+    }
+    &:hover .hidden-gal-content{
+      display: block;
+    }
+    .item-gall-hidden{
       background: rgba(35,184,153,.9);
-      .hidden-gal-inner{
+      a.hidden-gal-inner{
+        display: block;
+        text-decoration: none;
+        color: inherit;
         position: relative;
         top: 50%;
-        margin-top: -55px;
+        margin-top: -56px;
         i{
           border: 1px solid #fff;
           padding: 12px;
           border-radius: 50%;
           font-size: 18px;
         }
-
+        p{
+          font-weight: bold;
+          margin: 22px 0 2px 0;
+          font-size: 1.125em;
+        }
+        .gal-category{
+          font-size: 0.875em;
+        }
       }
+    }
   }
-    img{
+}//END Gallery images section
+
+//Section TEAM
+.team-sec {
+  .item-gallery-global {
+    float: none;
+    overflow: hidden;
+    img {
+      -webkit-filter: grayscale(100%);
+      filter: grayscale(100%);
       width: 100%;
-      height: auto;
       cursor: pointer;
+      &:hover{
+        -webkit-filter: grayscale(0);
+        filter: grayscale(0);
+      }
+    }
+    //hidden block
+    .item-gall-hidden {
+      padding: 10px 28px 22px 28px;
+      display: block;
+      background: rgba(24, 182, 151, .9);
+      @include mainTransi(0.9s);
+      //elements
+      font-size: 1em;
+      h6{
+        font: bold 1em/1.5em "open_sansregular", sans-serif;
+      }
     }
   }
 }
-
-
-
+.full-item-team{
+  .social-wrap{
+    margin: 54px 0 12px 0;
+    ul{
+      padding: 0;
+      li{
+        padding: 10px;
+        background: rgba(0,0,0,0.2);
+        min-height: 42px;
+        min-width: 42px;
+        display: inline-block;
+        a{
+          display: block;
+          width: 100%;
+        }
+        i{
+          font-size: 22px;
+        }
+      }
+    }
+  }
+  .active-green{
+    color: $accent-green;
+  }
+  .profession-list{
+    h6{
+    font: bold 1.5em  'open_sansregular', sans-serif;
+      margin: 12px 14px;
+      line-height: 1;
+    }
+    span{
+      font-size: 0.8em;
+      color: rgba(115,130,141,.5);
+      display: block;
+    }
+  }
+}
+//Sections fun-facts
+.fun-facts{
+  background-size: cover ;
+  background: url("../img/fan-section-bg.jpg") repeat-x fixed top center;
+  width: 100%;
+  min-height: 600px;
+  position: relative;
+}
 //import media
 @import '_media';
+
+
 
 
 

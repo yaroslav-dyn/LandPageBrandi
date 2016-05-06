@@ -90,16 +90,16 @@ html {
 
 body {
   font-family: 'open_sansregular', sans-serif;
-  font-size: 16px;
-  height: 100%;
-  width: 100%;
-  overflow: auto; }
+  font-size: 16px; }
 
 ul {
   list-style: none; }
 
 p {
   font-family: "open_sansregular", sans-serif; }
+
+img {
+  -webkit-user-drag: none; }
 
 .container-fluid.full-width {
   padding: 0; }
@@ -171,6 +171,9 @@ h3.h-category {
   text-align: center;
   padding-top: 70px; }
 
+.features-h {
+  margin-bottom: 60px; }
+
 .features {
   background: #f4f7f9;
   min-height: 460px; }
@@ -179,8 +182,6 @@ h3.h-category {
   .features h4 {
     font-size: 1.25em;
     font-weight: 600; }
-  .features .features-h {
-    margin-bottom: 60px; }
 
 .icon-fue {
   width: 40px;
@@ -207,55 +208,150 @@ p.s-description {
 .carousel-indicators li {
   border-color: rgba(255, 255, 255, 0.2); }
 
-.gallery-nav ul {
-  margin-bottom: 42px; }
-  .gallery-nav ul li {
-    display: inline-block;
-    padding: 0 25px; }
-    .gallery-nav ul li a {
-      font-weight: bold;
-      color: #062033;
-      font-size: 0.875em; }
-      .gallery-nav ul li a:hover, .gallery-nav ul li a:active, .gallery-nav ul li a:focus {
-        text-decoration: none; }
-      .gallery-nav ul li a:hover {
-        color: #0eb493; }
-    .gallery-nav ul li .label-success {
-      color: #fff;
-      background: #0eb493;
-      padding: 8px 20px;
-      border-radius: 6px; }
-      .gallery-nav ul li .label-success:hover {
-        color: #fff; }
+.gallery-image {
+  margin: 0 auto; }
 
-.gallery-image .item-img {
-  display: block;
+.gallery-nav-mobile {
+  margin-bottom: 12px; }
+  .gallery-nav-mobile select {
+    padding: 8px; }
+
+.gallery-nav {
+  margin-top: 14px; }
+  .gallery-nav ul {
+    margin-bottom: 42px; }
+    .gallery-nav ul li {
+      display: inline-block;
+      margin-right: 50px; }
+      .gallery-nav ul li a {
+        font-weight: bold;
+        color: #062033;
+        font-size: 0.875em; }
+        .gallery-nav ul li a:hover, .gallery-nav ul li a:active, .gallery-nav ul li a:focus {
+          text-decoration: none; }
+        .gallery-nav ul li a:hover {
+          color: #0eb493; }
+    .gallery-nav ul li.current-cat {
+      margin-right: 30px; }
+      .gallery-nav ul li.current-cat .label-success {
+        color: #fff;
+        background: #0eb493;
+        padding: 6px 20px;
+        border-radius: 6px; }
+        .gallery-nav ul li.current-cat .label-success:hover {
+          color: #fff; }
+
+.item-gallery-global {
   float: left;
-  width: 25%;
-  max-height: 295px;
-  overflow: hidden;
   position: relative; }
-  .gallery-image .item-img .hidden-gal-content {
+  .item-gallery-global .item-gall-hidden {
+    display: none;
     color: #fff;
     width: 100%;
     height: 100%;
     position: absolute;
     top: 0;
-    left: 0;
-    background: rgba(35, 184, 153, 0.9); }
-    .gallery-image .item-img .hidden-gal-content .hidden-gal-inner {
-      position: relative;
-      top: 50%;
-      margin-top: -55px; }
-      .gallery-image .item-img .hidden-gal-content .hidden-gal-inner i {
-        border: 1px solid #fff;
-        padding: 12px;
-        border-radius: 50%;
-        font-size: 18px; }
+    left: 0; }
+
+.gallery-image .item-gallery-global:hover .item-gall-hidden {
+  display: block; }
+
+.gallery-image .item-img {
+  width: 25%;
+  max-height: 300px;
+  overflow: hidden; }
+  @media all and (max-width: 480px) {
+    .gallery-image .item-img {
+      width: 100%; } }
+  @media all and (min-width: 481px) and (max-width: 1100px) {
+    .gallery-image .item-img {
+      width: 50%; } }
   .gallery-image .item-img img {
     width: 100%;
     height: auto;
     cursor: pointer; }
+  .gallery-image .item-img:hover .hidden-gal-content {
+    display: block; }
+  .gallery-image .item-img .item-gall-hidden {
+    background: rgba(35, 184, 153, 0.9); }
+    .gallery-image .item-img .item-gall-hidden a.hidden-gal-inner {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      position: relative;
+      top: 50%;
+      margin-top: -56px; }
+      .gallery-image .item-img .item-gall-hidden a.hidden-gal-inner i {
+        border: 1px solid #fff;
+        padding: 12px;
+        border-radius: 50%;
+        font-size: 18px; }
+      .gallery-image .item-img .item-gall-hidden a.hidden-gal-inner p {
+        font-weight: bold;
+        margin: 22px 0 2px 0;
+        font-size: 1.125em; }
+      .gallery-image .item-img .item-gall-hidden a.hidden-gal-inner .gal-category {
+        font-size: 0.875em; }
+
+.team-sec .item-gallery-global {
+  float: none;
+  overflow: hidden; }
+  .team-sec .item-gallery-global img {
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+    width: 100%;
+    cursor: pointer; }
+    .team-sec .item-gallery-global img:hover {
+      -webkit-filter: grayscale(0);
+      filter: grayscale(0); }
+  .team-sec .item-gallery-global .item-gall-hidden {
+    padding: 10px 28px 22px 28px;
+    display: block;
+    background: rgba(24, 182, 151, 0.9);
+    -webkit-transition: all 0.9s ease;
+    -moz-transition: all 0.9s ease;
+    -ms-transition: all 0.9s ease;
+    -o-transition: all 0.9s ease;
+    transition: all 0.9s ease;
+    font-size: 1em; }
+    .team-sec .item-gallery-global .item-gall-hidden h6 {
+      font: bold 1em/1.5em "open_sansregular", sans-serif; }
+
+.full-item-team .social-wrap {
+  margin: 54px 0 12px 0; }
+  .full-item-team .social-wrap ul {
+    padding: 0; }
+    .full-item-team .social-wrap ul li {
+      padding: 10px;
+      background: rgba(0, 0, 0, 0.2);
+      min-height: 42px;
+      min-width: 42px;
+      display: inline-block; }
+      .full-item-team .social-wrap ul li a {
+        display: block;
+        width: 100%; }
+      .full-item-team .social-wrap ul li i {
+        font-size: 22px; }
+
+.full-item-team .active-green {
+  color: #0eb493; }
+
+.full-item-team .profession-list h6 {
+  font: bold 1.5em  'open_sansregular', sans-serif;
+  margin: 12px 14px;
+  line-height: 1; }
+
+.full-item-team .profession-list span {
+  font-size: 0.8em;
+  color: rgba(115, 130, 141, 0.5);
+  display: block; }
+
+.fun-facts {
+  background-size: cover;
+  background: url("../img/fan-section-bg.jpg") repeat-x fixed top center;
+  width: 100%;
+  min-height: 600px;
+  position: relative; }
 
 /*MEDIA*/
 /* Landscape - smarfone */

@@ -1,3 +1,13 @@
 //variables
 $features-sec-color: #f4f7f9;
 $accent-green: #0eb493;
+
+//Mixins
+//mixin transitions
+@mixin mainTransi ($time...){
+	-webkit-transition: all $time ease;
+	-moz-transition: all $time ease;
+	-ms-transition: all $time ease;
+	-o-transition: all $time ease;
+	transition: all $time ease;
+}
