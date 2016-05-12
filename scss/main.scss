@@ -21,13 +21,34 @@ p{
   font-family: "open_sansregular", sans-serif;
 }
 img{
-	-webkit-user-drag: none;
+  -webkit-user-drag: none;
+}
+textarea {
+  resize: none;
 }
 
 //full-width container
 .container-fluid.full-width{
   padding: 0;
 }
+//Global margin on section
+.pad-normal{
+  &-lg{
+    padding-bottom: 60px;
+  }
+}
+.pad-big{
+  &-lg{
+    padding-bottom: 215px;
+  }
+  &-sm{
+    @media all and(max-width: 767px){
+      padding-bottom: 90px;
+    }
+
+  }
+}
+
 //
 //HEADER
 
@@ -127,13 +148,9 @@ h3.h-category{	//global style
   text-align: center;
   padding-top: 70px;
 }
-.features-h{
-  margin-bottom: 60px;
-}
 //features
 .features{
   background: $features-sec-color;
-  min-height: 460px;
   h3{
     padding-top: 50px;
   }
@@ -168,6 +185,7 @@ h3.h-category{	//global style
 p.s-description{
   padding: 28px 0;
   font-weight: 600;
+  color: $description-info;
 }
 .carousel-indicators{
   li{
@@ -314,12 +332,20 @@ p.s-description{
       h6{
         font: bold 1em/1.5em "open_sansregular", sans-serif;
       }
+      p{
+        display: none;
+      }
     }
   }
 }
 .full-item-team{
   .social-wrap{
-    margin: 54px 0 12px 0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: block;
+    text-align: center;
+    width: 100%;
     ul{
       padding: 0;
       li{
@@ -342,8 +368,9 @@ p.s-description{
     color: $accent-green;
   }
   .profession-list{
+    margin-bottom: 16px;
     h6{
-    font: bold 1.5em  'open_sansregular', sans-serif;
+      font: bold 1.5em  'open_sansregular', sans-serif;
       margin: 12px 14px;
       line-height: 1;
     }
@@ -356,11 +383,142 @@ p.s-description{
 }
 //Sections fun-facts
 .fun-facts{
-  background-size: cover ;
+  background-size: cover;
   background: url("../img/fan-section-bg.jpg") repeat-x fixed top center;
   width: 100%;
   min-height: 600px;
   position: relative;
+  .icon-tablate{
+    width: 125px;
+    height: 125px;
+    border: 2px solid rgba(255,255,255,.4);
+    border-radius: 50%;
+    position: relative;
+    display: inline-block;
+    margin: 14px  0 20px 0;
+    .icon-facts{
+      background: url("../img/facts-sprite.png") no-repeat 0 0;
+      display: inline-block;
+      width: 38px;
+      height: 38px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin: -19px 0 0 -19px;
+      &-clock{
+        background-position: 0 0;
+      }
+      &-friends{
+        background-position: -45px 0;
+      }
+      &-rockets{
+        background-position: -84px 0;
+      }
+      &-cup{
+        background-position: -124px 0;
+        width: 40px;
+      }
+    }
+  }
+  .facts-info{
+    color: #fff;
+    margin-top: -6px;
+    margin-bottom: 16px;
+    strong{
+      font-size: 3.75em;
+      font-weight: bold;
+      display: block;
+    }
+    span{
+      font-size: 1.125em;
+      text-transform: uppercase;
+      display: block;
+      opacity: 0.7;
+    }
+  }
+}//End section fun-facts
+
+//section Discuss
+
+.contact-form{
+  .header-address{
+    font: 1.375em 'open_sansregular', sans-serif;
+    color: $description-info;
+  }
+  address{
+    font: 0.8em/2em 'open_sansregular', sans-serif;
+    color: #6a737b;
+  }
+  .form-send{
+    .header-address{
+      font-weight: bold;
+      font-size: 1.5em;
+      color: rgba(6,32,51,1);
+      margin-bottom: 45px;
+    }
+    .form-elem{
+      display: block;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      border-bottom: 1px solid rgba(91,100,110,.5);
+      width: 100%;
+      outline: none;
+      font-size: 0.75em;
+    }
+    label{
+      display: block;
+      color: rgba(91,100,110,.5);
+      font-size: 0.81em;
+      font-weight: normal;
+    }
+    textarea{
+      display: block;
+    }
+    .message-block{
+      margin-top: 45px;
+    }
+    .complex-submit{
+      margin-top: 34px;
+      .icon-send{
+        color: $accent-green;
+        font-size: 22px;
+        vertical-align: middle;
+      }
+      .submit-button{
+        border: none;
+        background: none;
+        color: #000;
+        vertical-align: middle;
+        outline: none;
+      }
+    }
+  }
+  .address-social{
+    a{
+      font-size: 20px;
+      color: $address-icon;
+      text-decoration: none;
+      &:hover{
+        color: $description-info;
+      }
+      &:hover img{
+        opacity: 0.8;
+      }
+      img{
+        width: 22px;
+        height: 26px;
+        opacity: 0.2;
+      }
+    }
+  }
+}//End contact-form
+
+
+
+#map{
+  width: 100%;
+  height: 212px;
 }
 //import media
 @import '_media';

@@ -7,12 +7,6 @@
 
 
 @media (max-width: 767px) {
-  .header {
-    .header-top {
-      position: static;
-
-    }
-  }
   .logo{
     text-align: center;
   }
@@ -48,10 +42,20 @@
     font-size: 1.2em;
   }
 
+  //hidden overlay in team
+  .full-item-team {
+    .social-wrap{
+      margin-top: 48px;
+    }
+    .item-gall-hidden {
+      font-size: 0.8em;
+    }
+  }
 }
-
 //
-@media (min-width: 768px) and (max-width: 979px) {}
+@media (min-width: 768px) and (max-width: 979px) {
+
+}
 
 
 //
