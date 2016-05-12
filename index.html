@@ -423,82 +423,134 @@
         </div>
       </div>
       <div class="contact-form">
-        <div class="row">
-          <div class="col-md-3">
-            <h4 class="header-address">Cras at ultrices erat, sed vulputate</h4>
-            <div class="row">
-              <div class="col-md-8">
-                <address>
-                  2345 Setwant natrer, 1234,
-                  Washington. United States.
-                  (401) 1234 567
-                  hello@brandi.com
-                  ww.brandi.com
-                </address>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-8 form-send">
-            <h4 class="header-address">Say hello!</h4>
-            <div class="row">
-              <div class="col-md-6">
-                <label for="name-lp">Name</label>
-                <input id="name-lp" class="form-elem" type="text"/>
-              </div>
-              <div class="col-md-6">
-                <label for="email-lp">Email</label>
-                <input type="email" class="form-elem" id="email-lp"/>
-              </div>
-              <div class="col-md-12">
-                <div class="message-block">
-                  <label for="text-lg">Message</label>
-                  <textarea id="text-lg" class="form-elem" rows="1"></textarea>
-                </div>
-              </div>
-              <div class="col-md-12 text-right">
-                <div class="complex-submit">
-                  <i class="fa fa-envelope-o icon-send" aria-hidden="true"></i>
-                  <input class="submit-button" type="submit" value="Send message"/>
+        <form action="#">
+          <div class="row">
+            <div class="col-md-3 col-xs-12 col-sm-12">
+              <h4 class="header-address">Cras at ultrices erat, sed vulputate</h4>
+              <div class="row">
+                <div class="col-md-8">
+                  <address>
+                    2345 Setwant natrer, 1234,
+                    Washington. United States.
+                    (401) 1234 567
+                    hello@brandi.com
+                    ww.brandi.com
+                  </address>
                 </div>
               </div>
             </div>
+            <div class="col-md-8 col-xs-12 col-sm-12 form-send">
+              <h4 class="header-address">Say hello!</h4>
+              <div class="row">
+                <div class="col-md-6">
+                  <label for="name-lp">Name</label>
+                  <input id="name-lp" class="form-elem" type="text"/>
+                </div>
+                <div class="col-md-6">
+                  <label for="email-lp">Email</label>
+                  <input type="email" class="form-elem" id="email-lp"/>
+                </div>
+                <div class="col-md-12">
+                  <div class="message-block">
+                    <label for="text-lg">Message</label>
+                    <textarea id="text-lg" class="form-elem" rows="1"></textarea>
+                  </div>
+                </div>
+                <div class="col-md-12 text-right">
+                  <div class="complex-submit">
+                    <i class="fa fa-envelope-o icon-send" aria-hidden="true"></i>
+                    <input id="discuss-submit" class="submit-button" type="submit" value="Send message"/>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-1 col-xs-12 col-sm-12">
+              <ul class="address-social">
+                <li><a href="#" title="Me on Behance"><i class="fa fa-behance" aria-hidden="true"></i></a></li>
+                <li><a href="#" title="Our Twitter"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="#" title="Dribbble"><i class="fa fa-dribbble"></i></a></li>
+                <li><a href="#" title="They forrst"><img src="/app/img/forrst.svg" alt="forrst"/></a></li>
+                <li><a href="#" title="Cheack in Google+">g+</a></li>
+              </ul>
+            </div>
           </div>
-          <div class="col-md-1">
-            <ul class="address-social">
-              <li><a href="#" title="Me on Behance"><i class="fa fa-behance" aria-hidden="true"></i></a></li>
-              <li><a href="#" title="Our Twitter"><i class="fa fa-twitter"></i></a></li>
-              <li><a href="#" title="Dribbble"><i class="fa fa-dribbble"></i></a></li>
-              <li><a href="#" title="They forrst"><img src="/app/img/forrst.svg" alt="forrst"/></a></li>
-              <li><a href="#" title="Cheack in Google+">g+</a></li>
-            </ul>
-          </div>
-        </div>
+        </form>
       </div>
     </div>
   </section><!--End discuss-->
 
-
   <!--  MAP for section-->
   <section>
       <div class="map" id="map"></div>
-  </section>
-  <script type="text/javascript">
+    <script type="text/javascript">
       function initMap() {
-      var mapDiv = document.getElementById('map');
-      var map = new google.maps.Map(mapDiv, {
-        center: {lat: 44.540, lng: -78.546},
-        zoom: 8,
-        scrollwheel: false
-      });
-    }
-  </script>
-  <script src="https://maps.googleapis.com/maps/api/js?callback=initMap"async defer></script>
+        var mapDiv = document.getElementById('map');
+        var map = new google.maps.Map(mapDiv, {
+          center: {lat: 44.540, lng: -78.546},
+          zoom: 8,
+          scrollwheel: false
+        });
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?callback=initMap"async defer></script>
+  </section>
 <!--End map-->
-
-  <footer>
-    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-  </footer>
 </div><!-- END WRAPPER -->
+<!--Footer-->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="container">
+      <div class="col-md-3">
+        <div class="logo">
+          <img src="app/img/logo.png" alt="Home"/>
+        </div>
+        <p>
+          eusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          consequat.
+        </p>
+      </div>
+      <div class="col-md-3">
+        <h6>Subscribe</h6>
+        <div class="footer-form subscribe-cut-form">
+          <form action="#" id="footer-subscribe">
+            <input type="text"/>
+            <label for="sub-submit"></label>
+              <input id="sub-submit" type="submit" value=""/>
+          </form>
+        </div>
+        <p>
+          eusmod tempor incididunt ut labore et dolore magna aliqua.
+        </p>
+      </div>
+      <div class="col-md-3">
+        <h6>Explore</h6>
+        <div class="links-list-footer">
+          <ul>
+            <li><a href="#">Envato</a></li>
+            <li><a href="#">Themecurve</a></li>
+            <li><a href="#">Kreativeshowcase</a></li>
+            <li><a href="#">Freebiescurve</a></li>
+            <li><a href="#">Themeforest</a></li>
+            <li><a href="#">Microsoft</a></li>
+            <li><a href="#">Google</a></li>
+            <li><a href="#">Yahoo</a></li>
+          </ul>
+        </div>
+
+      </div>
+      <div class="col-md-3 ">
+        <div class="copyright">
+          <p>
+            Created with <i class="fa fa-heart-o" aria-hidden="true"></i> by <span>themecurve</span>,<br/>
+            exclusive for kreativeshowcase
+          </p>
+        </div>
+        <small>© 2014 Brandi. All Rights Reserved.</small>
+
+      </div>
+    </div>
+  </div>
+</footer>
 
 <script src="node_modules/jquery/dist/jquery.min.js"></script>
 <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>

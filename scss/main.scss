@@ -123,8 +123,6 @@ textarea {
 }
 
 /*social inks*/
-$icon-soc-color: rgba(255,255,255,.4);
-$icon-soc-color-hover: rgba(255,255,255,.9);
 .social-wrap{
   margin: 105px 0 40px 0;
   ul {
@@ -259,15 +257,18 @@ p.s-description{
       display: block;
     }
   }
+  $small-landscape: 480px;
+  $tablet-start: 481px;
+  $tablet-end:  1100px;
   .item-img{
     width: 25%;
     max-height:300px;
     overflow: hidden;
 
-    @media all and (max-width: 480px){
+    @media all and (max-width:  $small-landscape){
       width: 100%;
     }
-    @media all and (min-width: 481px)and(max-width: 1100px){
+    @media all and (min-width:  $tablet-start)and(max-width: $tablet-end){
       width: 50%;
     }
     img{
@@ -439,7 +440,6 @@ p.s-description{
 }//End section fun-facts
 
 //section Discuss
-
 .contact-form{
   .header-address{
     font: 1.375em 'open_sansregular', sans-serif;
@@ -455,6 +455,9 @@ p.s-description{
       font-size: 1.5em;
       color: rgba(6,32,51,1);
       margin-bottom: 45px;
+      @media all and (max-width: $underPc){
+        text-align: center;
+      }
     }
     .form-elem{
       display: block;
@@ -465,6 +468,10 @@ p.s-description{
       width: 100%;
       outline: none;
       font-size: 0.75em;
+      //Media-inject
+      @media all and (max-width: $underPc){
+        margin-bottom: 14px;
+      }
     }
     label{
       display: block;
@@ -494,36 +501,167 @@ p.s-description{
       }
     }
   }
-  .address-social{
-    a{
-      font-size: 20px;
-      color: $address-icon;
-      text-decoration: none;
-      &:hover{
-        color: $description-info;
+  ul.address-social{
+    padding: 0;
+    margin-top: 18px ;
+    //Media-inject
+    @media all and (max-width: $underPc){
+      display: block;
+      text-align: center;
+    }
+    li{
+      //Media-inject
+      @media all and (max-width: $underPc){
+        display: inline-block;
+        padding-right: 2em;
+        &:last-child{
+          padding-right: 0;
+        }
       }
-      &:hover img{
-        opacity: 0.8;
-      }
-      img{
-        width: 22px;
-        height: 26px;
-        opacity: 0.2;
+      a{
+        font-size: 20px;
+        color: $address-icon;
+        text-decoration: none;
+        &:hover{
+          color: $description-info;
+        }
+        &:hover img{
+          opacity: 0.8;
+        }
+        img{
+          width: 22px;
+          height: 26px;
+          opacity: 0.2;
+        }
       }
     }
   }
 }//End contact-form
+%footer-logo-bottom-pad{
+  margin-bottom: 34px;
+}
+.footer{
+  border-top: 5px solid $description-info;
+  background: $accent-green;
+  @media all and (max-width: $underPc){
+    text-align: center;
+  }
+  .logo{
+    @extend %footer-logo-bottom-pad;
+  }
+  .footer-inner{
+   padding: 90px 0;
+    position: relative;
+  }
+  p{
+    font-size: 0.8125em;
+    line-height: 1.8em;
+    color: #fff;
+  }
+  h6{
+    font: 0.875em 'OpenSansBold', sans-serif;
+    color: rgba(255,255,255,0.8);
+    @extend %footer-logo-bottom-pad;
+  }
+  //links list
+  .links-list-footer{
+    ul{
+      padding: 0;
+      -webkit-column-count: 2;
+      -moz-column-count: 2;
+      column-count: 2;
+      li{
+        padding-right: 8px;
+        a{
+          font: 0.8125em/2.2em 'open_sansregular', sans-serif;
+          color: #fff;
+          &:hover, &:active, &:focus{
+            text-decoration: none;
+            color: $icon-soc-color;
+          }
+        }
+      }
+    }
+  }
+  .copyright{
+    height: 100%;
+    margin-top: 70px;
+    p{
+      border-left: 1px solid $address-icon;
+      padding-left: 12px;
+      line-height: 1.95em;
+      @media all and (max-width: $underPc){
+        border: none;
+      }
+      .fa-heart-o{
+        color: $address-icon;
+        padding: 0 10px;
+      }
+      span{
+        color: $description-info;
+      }
+    }
+  }
+  small{
+    font-size: 0.8125em;
+    color: rgba(6, 32, 51, 0.8);
+    position: absolute;
+    bottom: -39px;
+    left: 27px;
+    @media all and (max-width: $underPc){
+      position: static;
+      text-align: center;
+    }
+  }
+}
+//Subscribe cut form
+%input-drop{
+  background: transparent;
+  color: rgba(255,255,255,0.8);
+  outline: none;
+  &:focus{
+   border: 2px solid $icon-soc-color;
+  }
 
-
-
+}
+.subscribe-cut-form{
+  position: relative;
+  input[type=text]{
+    display: inline-block;
+    background: transparent;
+    color: rgba(255,255,255,0.8);
+    outline: none;
+    border: 2px solid #fff;
+    border-radius: 4px;
+    font-size: 14px;
+    padding: 9px 5px;
+    width: 100%;
+    @extend %input-drop;
+  }
+  input[type=submit]{
+    border: none;
+    @extend %input-drop;
+  }
+  #sub-submit{
+    background: url("../img/facts-sprite.png")-172px 0;
+    width: 18px;
+    height: 26px;
+    position: absolute;
+    top: 2px;
+    right: 18px;
+    display: inline-block;
+    cursor: pointer;
+    &:focus{
+     border: none;
+    }
+  }
+}
 #map{
   width: 100%;
   height: 212px;
 }
 //import media
 @import '_media';
-
-
 
 
 

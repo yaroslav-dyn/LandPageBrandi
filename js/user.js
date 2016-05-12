@@ -15,7 +15,7 @@ $( document ).ready(function() {
 
 	$(window).on('scroll', function(){
 		var docSctop = $(this).scrollTop();
-		console.log(docSctop);
+		//console.log(docSctop);
 		if(docSctop >= 3300 && docSctop <= 3980){
 			$('.header-top').css('background', 'rgba(255,255,255,0.2');
 		}
