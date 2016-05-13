@@ -3,7 +3,7 @@ $( document ).ready(function() {
 
 	//carousel in first screen
 	$('.carousel').carousel({
-		interval: false
+		interval: 4000
 	});
 
 	//Gallery team

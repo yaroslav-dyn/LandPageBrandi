@@ -108,6 +108,7 @@ textarea {
         font: 0.9em/4.5em 'open_sansregular', sans-serif;
         color: #fff;
         display: block;
+        border-top: 1px solid transparent;
         &:hover, &:active{
           @extend  %main-nav-style-event;
         }

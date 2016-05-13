@@ -168,7 +168,8 @@ textarea {
     .main-nav ul li a {
       font: 0.9em/4.5em 'open_sansregular', sans-serif;
       color: #fff;
-      display: block; }
+      display: block;
+      border-top: 1px solid transparent; }
       .main-nav ul li a:focus {
         text-decoration: none; }
 
