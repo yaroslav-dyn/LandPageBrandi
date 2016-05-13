@@ -579,7 +579,6 @@ p.s-description{
           color: #fff;
           &:hover, &:active, &:focus{
             text-decoration: none;
-            color: $icon-soc-color;
           }
         }
       }
@@ -601,6 +600,9 @@ p.s-description{
       }
       span{
         color: $description-info;
+      }
+      a{
+        color: #fff;
       }
     }
   }

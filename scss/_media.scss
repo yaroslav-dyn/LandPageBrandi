@@ -11,20 +11,29 @@
     text-align: center;
   }
   .main-nav {
-    margin-top: 2.2em;
+    overflow-y: hidden;
+    width: 100%;
+    background: rgba(0, 0, 0,.4);
+    position: relative;
+    top: 20px;
     ul {
       li {
         display: block!important;
         text-align: center;
+        margin-bottom: 8px;
 
         a {
           line-height: 2.8em;
           color: #fff;
           padding: 0;
+          font-size: 1em;
           &:hover, &.active {
+            font-weight: bold;
             border-top: none;
             text-decoration: none;
-            background: rgba(16,22,54, 0.2);
+            color: $description-info;
+            width: 100%;
+            background: rgba(255,255,255,0.5);
           }
         }
       }

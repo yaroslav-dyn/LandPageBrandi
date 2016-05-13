@@ -529,8 +529,7 @@ p.s-description {
         font: 0.8125em/2.2em 'open_sansregular', sans-serif;
         color: #fff; }
         .footer .links-list-footer ul li a:hover, .footer .links-list-footer ul li a:active, .footer .links-list-footer ul li a:focus {
-          text-decoration: none;
-          color: rgba(255, 255, 255, 0.4); }
+          text-decoration: none; }
   .footer .copyright {
     height: 100%;
     margin-top: 70px; }
@@ -546,6 +545,8 @@ p.s-description {
         padding: 0 10px; }
       .footer .copyright p span {
         color: rgba(6, 32, 51, 0.8); }
+      .footer .copyright p a {
+        color: #fff; }
   .footer small {
     font-size: 0.8125em;
     color: rgba(6, 32, 51, 0.8);
@@ -603,18 +604,27 @@ p.s-description {
   .logo {
     text-align: center; }
   .main-nav {
-    margin-top: 2.2em; }
+    overflow-y: hidden;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    position: relative;
+    top: 20px; }
     .main-nav ul li {
       display: block !important;
-      text-align: center; }
+      text-align: center;
+      margin-bottom: 8px; }
       .main-nav ul li a {
         line-height: 2.8em;
         color: #fff;
-        padding: 0; }
+        padding: 0;
+        font-size: 1em; }
         .main-nav ul li a:hover, .main-nav ul li a.active {
+          font-weight: bold;
           border-top: none;
           text-decoration: none;
-          background: rgba(16, 22, 54, 0.2); }
+          color: rgba(6, 32, 51, 0.8);
+          width: 100%;
+          background: rgba(255, 255, 255, 0.5); }
   .carousel-wrapper {
     min-width: 100%;
     margin-top: 34%; }
