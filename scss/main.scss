@@ -7,12 +7,12 @@
 //Main styles
 html{
   width: 100%;
-  overflow-x: hidden;
 }
 
 body{
   font-family: 'open_sansregular', sans-serif;
   font-size: 16px;
+  overflow-x: hidden;
 }
 ul{
   list-style: none;
@@ -213,6 +213,7 @@ p.s-description{
         font-weight: bold;
         color: #062033;
         font-size: 0.875em;
+        cursor: pointer;
         &:hover, &:active, &:focus {
           text-decoration: none;
         }
@@ -230,6 +231,7 @@ p.s-description{
         border-radius: 6px;
         &:hover {
           color: #fff;
+          background: darken($accent-green, 5%);
         }
       }
     }
@@ -659,6 +661,9 @@ p.s-description{
 #map{
   width: 100%;
   height: 212px;
+}
+#gal-portfolio .mix{
+  display: none;
 }
 //import media
 @import '_media';

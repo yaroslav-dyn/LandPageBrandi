@@ -155,103 +155,104 @@
         <div class="col-md-12 text-center">
           <div class="gallery-nav hidden-xs">
             <ul>
-              <li class="current-cat"><a class="label label-success" href="/" >All</a></li>
-              <li><a href="#">Branding</a></li>
-              <li><a href="#">Web</a></li>
-              <li><a href="#">Logo Design</a></li>
-              <li><a href="#">Photography</a></li>
+              <li class="current-cat"><a class="filter label label-success" data-filter="all">All</a></li>
+              <li><a class="filter" data-filter=".brands">Branding</a></li>
+              <li><a class="filter" data-filter=".web">Web</a></li>
+              <li><a class="filter" data-filter=".logotype">Logo Design</a></li>
+              <li><a class="filter" data-filter=".photo">Photography</a></li>
             </ul>
           </div>
+          <!-- mobile nav-gallery-->
           <div class="gallery-nav-mobile hidden-lg hidden-md hidden-sm">
-            <!-- mobile nav-gallery-->
-            <select>
-              <option>Branding</option>
-              <option>Web</option>
-              <option>Logo Design</option>
-              <option>Photography</option>
+            <select id="filter-gal-select">
+              <option value="all">All</option>
+              <option value=".brands">Branding</option>
+              <option value=".web">Web</option>
+              <option value=".logotype">Logo Design</option>
+              <option value=".photo">Photography</option>
             </select>
           </div>
         </div>
       </div>
       <div class="row">
-        <div class="gallery-image clearfix">
-          <div class="item-gallery-global item-img">
+        <div id="gal-portfolio" class="gallery-image clearfix">
+          <div class="item-gallery-global item-img mix logotype">
             <img src="app/img/gallery/gallery-image-1.jpg" alt=""/>
             <div class="item-gall-hidden hidden-gal-content text-center">
-              <a href="#" class="hidden-gal-inner">
+              <a href="#" class="hidden-gal-inner" title="Click to more...">
                 <i class="fa fa-eye" aria-hidden="true"></i>
                 <p>Labore et dolore magnam </p>
-                <span class="gal-category">Photography</span>
+                <span class="gal-category">logotype</span>
               </a>
             </div>
           </div>
-          <div class="item-gallery-global item-img">
+          <div class="item-gallery-global item-img mix web">
             <img src="app/img/gallery/gallery-image-2.jpg" alt=""/>
             <div class="item-gall-hidden hidden-gal-content text-center">
-              <a href="#" class="hidden-gal-inner">
+              <a href="#" class="hidden-gal-inner" title="Click to more...">
                 <i class="fa fa-eye" aria-hidden="true"></i>
                 <p>Labore et dolore magnam </p>
-                <span class="gal-category">Photography</span>
+                <span class="gal-category">web</span>
               </a>
             </div>
           </div>
-          <div class="item-gallery-global item-img">
+          <div class="item-gallery-global item-img mix photo">
             <img src="app/img/gallery/gallery-image-3.jpg" alt=""/>
             <div class="item-gall-hidden hidden-gal-content text-center">
-              <a href="#" class="hidden-gal-inner">
+              <a href="#" class="hidden-gal-inner" title="Click to more...">
                 <i class="fa fa-eye" aria-hidden="true"></i>
                 <p>Labore et dolore magnam </p>
                 <span class="gal-category">Photography</span>
               </a>
             </div>
           </div>
-          <div class="item-gallery-global item-img">
+          <div class="item-gallery-global item-img mix brands">
             <img src="app/img/gallery/gallery-image-4.jpg" alt=""/>
             <div class="item-gall-hidden hidden-gal-content text-center">
-              <a href="#" class="hidden-gal-inner">
+              <a href="#" class="hidden-gal-inner" title="Click to more...">
                 <i class="fa fa-eye" aria-hidden="true"></i>
                 <p>Labore et dolore magnam </p>
-                <span class="gal-category">Photography</span>
+                <span class="gal-category">brands</span>
               </a>
             </div>
           </div>
-          <div class="item-gallery-global item-img">
+          <div class="item-gallery-global item-img mix photo">
             <img src="app/img/gallery/gallery-image-5.jpg" alt=""/>
             <div class="item-gall-hidden hidden-gal-content text-center">
-              <a href="#" class="hidden-gal-inner">
+              <a href="#" class="hidden-gal-inner" title="Click to more...">
                 <i class="fa fa-eye" aria-hidden="true"></i>
                 <p>Labore et dolore magnam </p>
                 <span class="gal-category">Photography</span>
               </a>
             </div>
           </div>
-          <div class="item-gallery-global item-img">
+          <div class="item-gallery-global item-img mix web">
             <img src="app/img/gallery/gallery-image-6.jpg" alt=""/>
             <div class="item-gall-hidden hidden-gal-content text-center">
-              <a href="#" class="hidden-gal-inner">
+              <a href="#" class="hidden-gal-inner" title="Click to more...">
                 <i class="fa fa-eye" aria-hidden="true"></i>
                 <p>Labore et dolore magnam </p>
-                <span class="gal-category">Photography</span>
+                <span class="gal-category">web</span>
               </a>
             </div>
           </div>
-          <div class="item-gallery-global item-img">
+          <div class="item-gallery-global item-img mix logotype" >
             <img src="app/img/gallery/gallery-image-7.jpg" alt=""/>
             <div class="item-gall-hidden hidden-gal-content text-center">
-              <a href="#" class="hidden-gal-inner">
+              <a href="#" class="hidden-gal-inner" title="Click to more...">
                 <i class="fa fa-eye" aria-hidden="true"></i>
                 <p>Labore et dolore magnam </p>
-                <span class="gal-category">Photography</span>
+                <span class="gal-category">Logo design</span>
               </a>
             </div>
           </div>
-          <div class="item-gallery-global item-img">
+          <div class="item-gallery-global item-img mix brands">
             <img src="app/img/gallery/gallery-image-8.jpg" alt=""/>
             <div class="item-gall-hidden hidden-gal-content text-center">
-              <a href="#" class="hidden-gal-inner">
+              <a href="#" class="hidden-gal-inner" title="Click to more...">
                 <i class="fa fa-eye" aria-hidden="true"></i>
                 <p>Labore et dolore magnam </p>
-                <span class="gal-category">Photography</span>
+                <span class="gal-category">Brands</span>
               </a>
             </div>
           </div>
@@ -554,6 +555,7 @@
 
 <script src="node_modules/jquery/dist/jquery.min.js"></script>
 <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="js/jquery.mixitup.js"></script>
 <script src="js/user.js"></script>
 
 </body>

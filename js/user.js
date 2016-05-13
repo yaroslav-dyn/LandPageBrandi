@@ -24,5 +24,32 @@ $( document ).ready(function() {
 		}
 	});
 
+	//Sort item in gallery
+	$('.item-gallery-global').each(function(e){
+		e = e+1;
+		$(this).attr('data-my-order', e );
+	});
+	$(function(){
+		$('#gal-portfolio').mixItUp();
+	});
+	//toggle active class on navigation of gallery
+	$('.gallery-nav li').on('click', function(){
+		$(this).parent().find('li').removeClass('current-cat');
+		$(this).parent().find('li>a').removeClass('label label-success');
+		$(this).addClass('current-cat');
+		$(this).find('a').addClass('label label-success');
+	});
+	//select category in mobile version
+	$(function(){
+		var filterSelect = $('#filter-gal-select'),
+			container = $('#gal-portfolio');
+
+			container.mixItUp();
+
+		filterSelect.on('change', function(){
+			container.mixItUp('filter', this.value);
+		});
+
+	});
 });
 
