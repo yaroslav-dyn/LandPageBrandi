@@ -13,6 +13,7 @@ body{
   font-family: 'open_sansregular', sans-serif;
   font-size: 16px;
   overflow-x: hidden;
+  width: 100%;
 }
 ul{
   list-style: none;
@@ -54,7 +55,7 @@ textarea {
 
 .header{
   background-size: cover;
-  background: #020c13 url(../img/slide-1.jpg) no-repeat fixed top center;
+  background: #020c13 url(../img/slide-1.jpg) repeat-x fixed top center;
   min-height: 100%;
   width: 100%;
   color: #fff;
@@ -82,6 +83,11 @@ textarea {
         color: #32b0ee;
       }
     }
+  }
+  .soc-block-wrap{
+    position: absolute;
+    bottom: 18px;
+    width: 100%;
   }
   .navbar-toggle{
     background: #000;
@@ -119,6 +125,10 @@ textarea {
       .active{
         @extend  %main-nav-style-event;
       }
+      .active-full-screen{
+        @extend  %main-nav-style-event;
+
+      }
     }
   }
 }
@@ -147,7 +157,14 @@ h3.h-category{	//global style
   text-align: center;
   padding-top: 70px;
 }
-//features
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 .features{
   background: $features-sec-color;
   h3{
@@ -157,8 +174,29 @@ h3.h-category{	//global style
     font-size: 1.25em;
     font-weight: 600;
   }
-
+  .item-features{
+    opacity: 0;
+  }
+  // del
+  .item-features-anim{
+    animation-name: fadeIn;
+    animation-duration: 3s;
+    &:nth-child(1){
+      animation-duration: 1s;
+      opacity: 1;
+    }
+    &:nth-child(2){
+      animation-duration: 3s;
+      opacity: 1;
+    }
+    &:nth-child(3){
+      animation-duration: 5s;
+      opacity: 1;
+    }
+  }
+  //
 }
+
 .icon-fue{
   width: 40px;
   height: 40px;
@@ -668,8 +706,8 @@ p.s-description{
 #gal-portfolio .mix{
   display: none;
 }
+
 //import media
 @import '_media';
-
 
 

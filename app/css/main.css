@@ -96,7 +96,8 @@ html {
 body {
   font-family: 'open_sansregular', sans-serif;
   font-size: 16px;
-  overflow-x: hidden; }
+  overflow-x: hidden;
+  width: 100%; }
 
 ul {
   list-style: none; }
@@ -125,7 +126,7 @@ textarea {
 
 .header {
   background-size: cover;
-  background: #020c13 url(../img/slide-1.jpg) no-repeat fixed top center;
+  background: #020c13 url(../img/slide-1.jpg) repeat-x fixed top center;
   min-height: 100%;
   width: 100%;
   color: #fff;
@@ -148,6 +149,10 @@ textarea {
       .header .header-top .slogan span {
         font-size: 14px;
         color: #32b0ee; }
+  .header .soc-block-wrap {
+    position: absolute;
+    bottom: 18px;
+    width: 100%; }
   .header .navbar-toggle {
     background: #000;
     margin-right: 0;
@@ -156,7 +161,7 @@ textarea {
     .header .navbar-toggle .icon-bar {
       background: #f4f7f9; }
 
-.main-nav ul li a:hover, .main-nav ul li a:active, .main-nav ul li .active {
+.main-nav ul li a:hover, .main-nav ul li a:active, .main-nav ul li .active, .main-nav ul li .active-full-screen {
   border-top: 1px solid #32b0ee;
   text-decoration: none; }
 
@@ -191,6 +196,12 @@ h3.h-category {
   text-align: center;
   padding-top: 70px; }
 
+@keyframes fadeIn {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+
 .features {
   background: #f4f7f9; }
   .features h3 {
@@ -198,6 +209,20 @@ h3.h-category {
   .features h4 {
     font-size: 1.25em;
     font-weight: 600; }
+  .features .item-features {
+    opacity: 0; }
+  .features .item-features-anim {
+    animation-name: fadeIn;
+    animation-duration: 3s; }
+    .features .item-features-anim:nth-child(1) {
+      animation-duration: 1s;
+      opacity: 1; }
+    .features .item-features-anim:nth-child(2) {
+      animation-duration: 3s;
+      opacity: 1; }
+    .features .item-features-anim:nth-child(3) {
+      animation-duration: 5s;
+      opacity: 1; }
 
 .icon-fue {
   width: 40px;
@@ -626,6 +651,8 @@ p.s-description {
           color: rgba(6, 32, 51, 0.8);
           width: 100%;
           background: rgba(255, 255, 255, 0.5); }
+      .main-nav ul li .active-full-screen {
+        border: none; }
   .carousel-wrapper {
     min-width: 100%;
     margin-top: 34%; }

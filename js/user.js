@@ -1,6 +1,29 @@
 //initialize Carousel
 $( document ).ready(function() {
 
+	//first screen height -global
+	function resizeScreen(elem){
+		 var heightWindow = $(elem).height();
+		return heightWindow;
+	}
+
+	function resizeFirstScreen(){
+		var objWindow = $(window);
+		var sliderHeight = $('.carousel-wrapper');
+		$('.header').height(resizeScreen(objWindow)).css('maxHeight','800px');
+		sliderHeight.css({
+			'margin-top':resizeScreen(objWindow)/2
+		});
+	}
+	//Callback function
+	resizeFirstScreen();
+
+	function sectionPosition(elPos) {
+		var sPos = elPos;
+		return sPos.offset().top;
+	}
+
+
 	//carousel in first screen
 	$('.carousel').carousel({
 		interval: 4000
@@ -10,20 +33,16 @@ $( document ).ready(function() {
 	$('.full-item-team').on('click', function(){
 		$(this).find('.item-gall-hidden').toggleClass('hidden');
 		$(this).find('.pf-name').toggleClass('active-green');
-
 	});
 
 	$(window).on('scroll', function(){
-		var docSctop = $(this).scrollTop();
-		//console.log(docSctop);
-		if(docSctop >= 3300 && docSctop <= 3980){
-			$('.header-top').css('background', 'rgba(255,255,255,0.2');
-		}
-		else{
-			$('.header-top').css('background', 'rgba(16,22,54, 0.2');
+		var sectPos = sectionPosition($('#features-section'));
+		var docStop = $(this).scrollTop();
+
+		if (docStop  >= sectPos - 350 && docStop <= sectPos + 100){
+			$('.item-features').addClass('item-features-anim');
 		}
 	});
-
 	//Sort item in gallery
 	$('.item-gallery-global').each(function(e){
 		e = e+1;
@@ -43,9 +62,7 @@ $( document ).ready(function() {
 	$(function(){
 		var filterSelect = $('#filter-gal-select'),
 			container = $('#gal-portfolio');
-
 			container.mixItUp();
-
 		filterSelect.on('change', function(){
 			container.mixItUp('filter', this.value);
 		});
