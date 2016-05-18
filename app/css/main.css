@@ -161,6 +161,9 @@ textarea {
     .header .navbar-toggle .icon-bar {
       background: #f4f7f9; }
 
+#file {
+  display: none; }
+
 .main-nav ul li a:hover, .main-nav ul li a:active, .main-nav ul li .active, .main-nav ul li .active-full-screen {
   border-top: 1px solid #32b0ee;
   text-decoration: none; }

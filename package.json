@@ -6,6 +6,7 @@
     "bootstrap": "^3.3.6",
     "browser-sync": "^2.11.1",
     "gulp": "^3.9.1",
+    "gulp-rigger": "^0.5.8",
     "gulp-sass": "^2.3.0",
     "jquery": "^2.2.1"
   }
