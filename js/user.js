@@ -1,12 +1,12 @@
 //initialize Carousel
 $( document ).ready(function() {
 
-	//first screen height -global
+	 // *Cheking height elem.
 	function resizeScreen(elem){
-		 var heightWindow = $(elem).height();
-		return heightWindow;
+		 var heightElem = elem.height();
+		return heightElem;
 	}
-
+	//Seting first screen height
 	function resizeFirstScreen(){
 		var objWindow = $(window);
 		var sliderHeight = $('.carousel-wrapper');
@@ -18,6 +18,7 @@ $( document ).ready(function() {
 	//Callback function
 	resizeFirstScreen();
 
+	// *function for checking elem. top position
 	function sectionPosition(elPos) {
 		var sPos = elPos;
 		return sPos.offset().top;
@@ -35,14 +36,29 @@ $( document ).ready(function() {
 		$(this).find('.pf-name').toggleClass('active-green');
 	});
 
+	//Event scroling
 	$(window).on('scroll', function(){
-		var sectPos = sectionPosition($('#features-section'));
 		var docStop = $(this).scrollTop();
+		var sectPos = sectionPosition($('#features-section'));
+		var sectPosFacts = sectionPosition($('#facts-section'));
 
 		if (docStop  >= sectPos - 350 && docStop <= sectPos + 100){
 			$('.item-features').addClass('item-features-anim');
 		}
+
+		console.log(docStop + " window");
+		console.log(sectPosFacts + " facts");
+
+		if(docStop >= 2350 && docStop <= 2690){
+			
+			$('#facts-section .heart-img').attr('src','app/img/heart_icon.png');
+		}
+		else{
+			$('#facts-section .heart-img').attr('src','app/img/heart_icon-white.png');
+		}
+		
 	});
+
 	//Sort item in gallery
 	$('.item-gallery-global').each(function(e){
 		e = e+1;

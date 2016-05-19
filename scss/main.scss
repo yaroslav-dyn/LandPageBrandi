@@ -233,6 +233,9 @@ p.s-description{
 //-nav
 .gallery-image{
   margin: 0 auto;
+  @media only screen and(min-width: 1140px) {
+  	  min-height: 586px;
+  	}
 }
 //-nav mobile
 .gallery-nav-mobile{

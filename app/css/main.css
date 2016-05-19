@@ -252,6 +252,9 @@ p.s-description {
 
 .gallery-image {
   margin: 0 auto; }
+  @media only screen and (min-width: 1140px) {
+    .gallery-image {
+      min-height: 586px; } }
 
 .gallery-nav-mobile {
   margin-bottom: 12px; }
