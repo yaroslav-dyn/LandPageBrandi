@@ -1,54 +1,197 @@
 (function () {
 
-    var app = angular.module('LpBrandi', []);
+var app = angular.module('LpBrandi', []);
 
-    app.controller('itemGalleryCTRL',function(){
-        this.itemGallery = itemGems;
-    });
+app.controller('itemCTRL',function(){
+  this.itemGallery = itemGalleryGems;
+  this.linkFooter = itemFooterLinksGem;
+  this.itemsTeam = itemTeamGem;
+});
 
-    var itemGems = [
+var itemGalleryGems = [
+  {
+      "classItemCategory": "logo",
+      "urlImage": "app/img/gallery/gallery-image-1.jpg",
+      "catInOverlay":"Logotypes"
+  },
+  {
+      "classItemCategory": "web",
+      "urlImage": "app/img/gallery/gallery-image-2.jpg",
+      "catInOverlay":"Web"
+  },
+  {
+      "classItemCategory": "photo",
+      "urlImage": "app/img/gallery/gallery-image-3.jpg",
+      "catInOverlay":"Photography"
+  },
+  {
+      "classItemCategory": "logo",
+      "urlImage": "app/img/gallery/gallery-image-4.jpg",
+      "catInOverlay":"Logotypes"
+  },
+  {
+      "classItemCategory": "photo",
+      "urlImage": "app/img/gallery/gallery-image-5.jpg",
+      "catInOverlay":"Photography"
+  },
+  {
+      "classItemCategory": "logo",
+      "urlImage": "app/img/gallery/gallery-image-6.jpg",
+      "catInOverlay":"Logo design"
+  },
+  {
+      "classItemCategory": "web",
+      "urlImage": "app/img/gallery/gallery-image-7.jpg",
+      "catInOverlay":"Web"
+  },
+  {
+      "classItemCategory": "brands",
+      "urlImage": "app/img/gallery/gallery-image-8.jpg",
+      "catInOverlay":"Branding"
+  }
+];
+
+var itemFooterLinksGem = [
+  {
+      "headerLink":"Envato",
+      "urlLink":"#"
+  },
+  {
+      "headerLink":"Themecurve",
+      "urlLink":"#"
+  },
+  {
+      "headerLink":"Kreativeshowcase",
+      "urlLink":"#"
+  },
+  {
+      "headerLink":"Freebiescurve",
+      "urlLink":"#"
+  },
+  {
+      "headerLink":"Themeforest",
+      "urlLink":"#"
+  },
+  {
+      "headerLink":"Microsoft",
+      "urlLink":"#"
+  },
+  {
+      "headerLink":"Google",
+      "urlLink":"#"
+  },
+  {
+      "headerLink":"Yahoo",
+      "urlLink":"#"
+  }
+
+];
+
+var itemTeamGem = [
+  {
+  	"imgUrl": "app/img/gallery/team-1.jpg",
+  	"nameCo":"John Filrm Doe",
+  	"prof":"Managing Director",
+  	"headerDescr":"Nemo enim ipsam voluptatem quia voluptas",
+  	"textDescr":"sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem.",
+  	"social":[
+  		{
+  			"class":"fa fa-twitter",
+            "title":"Twitter",
+            "url":"#"
+  		},
         {
-            "classItemCategory": "logo",
-            "urlImage": "app/img/gallery/gallery-image-1.jpg",
-            "catInOverlay":"Logotypes"
+            "class":"fa fa-facebook",
+            "title":"Facebook",
+            "url":"#"
         },
         {
-            "classItemCategory": "web",
-            "urlImage": "app/img/gallery/gallery-image-2.jpg",
-            "catInOverlay":"Web"
-        },
-        {
-            "classItemCategory": "photo",
-            "urlImage": "app/img/gallery/gallery-image-3.jpg",
-            "catInOverlay":"Photography"
-        },
-        {
-            "classItemCategory": "logo",
-            "urlImage": "app/img/gallery/gallery-image-4.jpg",
-            "catInOverlay":"Logotypes"
-        },
-        {
-            "classItemCategory": "photo",
-            "urlImage": "app/img/gallery/gallery-image-5.jpg",
-            "catInOverlay":"Photography"
-        },
-        {
-            "classItemCategory": "logo",
-            "urlImage": "app/img/gallery/gallery-image-6.jpg",
-            "catInOverlay":"Logo design"
-        },
-        {
-            "classItemCategory": "web",
-            "urlImage": "app/img/gallery/gallery-image-7.jpg",
-            "catInOverlay":"Web"
-        },
-        {
-            "classItemCategory": "brands",
-            "urlImage": "app/img/gallery/gallery-image-8.jpg",
-            "catInOverlay":"Branding"
+            "class":"fa fa-google-plus",
+            "title":"Google +",
+            "url":"#"
         }
-    ];
 
 
+  	]
+  },
+
+  {
+    "imgUrl": "app/img/gallery/team-2.jpg",
+    "nameCo":"Chystine Hineu",
+    "prof":"Lead Designer",
+    "headerDescr":"Nemo enim ipsam voluptatem quia voluptas",
+    "textDescr":"sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem.",
+    "social":[
+        {
+            "class":"fa fa-twitter",
+            "title":"Twitter",
+            "url":"#"
+        },
+        {
+            "class":"fa fa-facebook",
+            "title":"Facebook",
+            "url":"#"
+        },
+        {
+            "class":"fa fa-google-plus",
+            "title":"Google +",
+            "url":"#"
+        }
+
+
+    ]
+  },
+
+    {
+    "imgUrl": "app/img/gallery/team-3.jpg",
+    "nameCo":"Martin Matrone",
+    "prof":"Lead Developer",
+    "headerDescr":"Nemo enim ipsam voluptatem quia voluptas",
+    "textDescr":"sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem.",
+    "social":[
+        {
+            "class":"fa fa-twitter",
+            "title":"Twitter",
+            "url":"#"
+        },
+        {
+            "class":"fa fa-facebook",
+            "title":"Facebook",
+            "url":"#"
+        },
+        {
+            "class":"fa fa-google-plus",
+            "title":"Google +",
+            "url":"#"
+        }
+
+
+    ]
+  },
+  {
+    "imgUrl": "app/img/gallery/team-4.jpg",
+    "nameCo":"Steve Flaulkin",
+    "prof":"Sr. UI Designer",
+    "headerDescr":"Nemo enim ipsam voluptatem quia voluptas",
+    "textDescr":"sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem.",
+    "social":[
+        {
+            "class":"fa fa-twitter",
+            "title":"Twitter",
+            "url":"#"
+        },
+        {
+            "class":"fa fa-facebook",
+            "title":"Facebook",
+            "url":"#"
+        },
+        {
+            "class":"fa fa-google-plus",
+            "title":"Google +",
+            "url":"#"
+        }
+    ]
+  }
+]
 
 })();//End app

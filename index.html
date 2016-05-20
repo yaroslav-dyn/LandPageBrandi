@@ -14,7 +14,7 @@
 <body>
 <div class="wrapper">
   <header class = "header"><!--header-->
-    <div class="header-top"><!--header-top -->
+    <div id="header-top" class="header-top"><!--header-top -->
       <div class="container">
         <div class="row">
           <div class="col-md-6 col-xs-12">
@@ -47,56 +47,56 @@
       </div>
     </div><!--end header-top-->
     <div class="container-fluid"><!-- carousel -->
-      <div class="row">
-        <div class="col-md-12 col-xs-12">
-          <div class="carousel-wrapper">
-            <div id="carousel-header" class="carousel slide vertical text-center">
-              <div class="slide-indicators">
-                <ol class="carousel-indicators">
-                  <li data-target="#carousel-header" data-slide-to="0" class="active"></li>
-                  <li data-target="#carousel-header" data-slide-to="1"></li>
-                  <li data-target="#carousel-header" data-slide-to="2"></li>
-                </ol>
-              </div>
-              <div class="carousel-inner" role="listbox">
-                <div class="active item">
-                  <h2>Meet <span>Brandi!</span></h2>
-                  <p><span>/creative</span> one page template.</p>
-                  <p class="skills">
-                    <span>&mdash;</span><em>We are a team of professionals</em><span>&mdash;</span>
-                  </p>
-                </div>
-                <div class="item">
-                  <h2>Two <span>Brandi!</span></h2>
-                  <p><span>/creative</span> one page template.</p>
-                  <p class="skills">
-                    <span>&mdash;</span>We are a team of professionals<span>&mdash;</span>
-                  </p>
-                </div>
-                <div class="item">
-                  <h2>Three <span>Brandi!</span></h2>
-                  <p><span>/creative</span> one page template.</p>
-                  <p class="skills">
-                    <span>&mdash;</span>We are a team of professionals<span>&mdash;</span>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>              <!--end carousel-wrapper-->
-        </div>
-        <div class="soc-block-wrap">
-          <div class="col-md-12">
-            <div class="social-wrap text-center">
-              <ul>
-                <li><a href="/"><i class="fa fa-twitter"></i></a></li>
-                <li><a href="/"><i class="fa fa-facebook"></i></a></li>
-                <li><a href="/"><i class="fa fa-google-plus"></i></a></li>
-                <li><a href="/"><i class="fa fa-skype"></i></a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
+	  <div class="row">
+	    <div class="col-md-12 col-xs-12">
+	      <div class="carousel-wrapper">
+	        <div id="carousel-header" class="carousel slide vertical text-center">
+	          <div class="slide-indicators">
+	            <ol class="carousel-indicators">
+	              <li data-target="#carousel-header" data-slide-to="0" class="active"></li>
+	              <li data-target="#carousel-header" data-slide-to="1"></li>
+	              <li data-target="#carousel-header" data-slide-to="2"></li>
+	            </ol>
+	          </div>
+	          <div class="carousel-inner" role="listbox">
+	            <div class="active item">
+	              <h2>Meet <span>Brandi!</span></h2>
+	              <p><span>/creative</span> one page template.</p>
+	              <p class="skills">
+	                <span>&mdash;</span><em>We are a team of professionals</em><span>&mdash;</span>
+	              </p>
+	            </div>
+	            <div class="item">
+	              <h2>Two <span>Brandi!</span></h2>
+	              <p><span>/creative</span> one page template.</p>
+	              <p class="skills">
+	                <span>&mdash;</span>We are a team of professionals<span>&mdash;</span>
+	              </p>
+	            </div>
+	            <div class="item">
+	              <h2>Three <span>Brandi!</span></h2>
+	              <p><span>/creative</span> one page template.</p>
+	              <p class="skills">
+	                <span>&mdash;</span>We are a team of professionals<span>&mdash;</span>
+	              </p>
+	            </div>
+	          </div>
+	        </div>
+	      </div>              <!--end carousel-wrapper-->
+	    </div>
+	    <div class="soc-block-wrap">
+	      <div class="col-md-12">
+	        <div class="social-wrap text-center">
+	          <ul>
+	            <li><a href="/"><i class="fa fa-twitter"></i></a></li>
+	            <li><a href="/"><i class="fa fa-facebook"></i></a></li>
+	            <li><a href="/"><i class="fa fa-google-plus"></i></a></li>
+	            <li><a href="/"><i class="fa fa-skype"></i></a></li>
+	          </ul>
+	        </div>
+	      </div>
+	    </div>
+	  </div>
     </div>
   </header><!-- End header -->
   <section  id="features-section" class="features pad-big-lg pad-big-sm">  <!-- section features -->
@@ -179,9 +179,9 @@
           </div>
         </div>
       </div>
-      <div class="row">
 
-        <div id="gal-portfolio" class="gallery-image clearfix" ng-controller="itemGalleryCTRL as itemGall">
+      <div class="row">
+        <div id="gal-portfolio" class="gallery-image clearfix" ng-controller="itemCTRL as itemGall">
           <div class="item-gallery-global item-img mix {{item.classItemCategory}}" ng-repeat="item in itemGall.itemGallery" >
             <img ng-src="{{item.urlImage}}" alt="{{item.catInOverlay}}"/>
             <div class="item-gall-hidden hidden-gal-content text-center">
@@ -197,7 +197,7 @@
       </div>
     </div>
   </section>
-  <section id="team-section" class="team-sec pad-big-lg pad-big-sm">
+  <section id="team-section" class="team-sec pad-big-lg pad-big-sm" ng-controller="itemCTRL as itemTeam">
     <div class = "container">
       <div class = "row">
         <div class = "col-md-12 text-center">
@@ -210,84 +210,26 @@
       </div>
       <!-- Items personal-->
       <div class="row">
-        <div class="col-md-3 col-xs-6 full-item-team">
+        <div class="col-md-3 col-xs-6 full-item-team" ng-repeat="item in itemTeam.itemsTeam">
           <div class="item-gallery-global">
-            <img src="app/img/gallery/team-1.jpg" alt="" title="Click to more info"/>
+            <img ng-src="{{item.imgUrl}}" alt="{{item.nameCo}} {{item.prof}}" title="Click to more info"/>
             <div class="item-gall-hidden text-center hidden">
-              <h6>Nemo enim ipsam voluptatem quia voluptas </h6>
-              <p class="visible-sm-block visible-lg-block">sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem.</p>
+              <h6>{{item.headerDescr}}</h6>
+              <p class="visible-sm-block visible-lg-block">
+              	{{item.textDescr}}
+              </p>
               <div class="social-wrap text-center">
                 <ul>
-                  <li><a href="/"><i class="fa fa-twitter"></i></a></li>
-                  <li><a href="/"><i class="fa fa-facebook"></i></a></li>
-                  <li><a href="/"><i class="fa fa-google-plus"></i></a></li>
+                  <li ng-repeat="socItem in item.social">
+                  	<a href="{{socItem.url}}" title="{{socItem.title}}"><i class="{{socItem.class}}"></i></a>
+                  </li>
                 </ul>
               </div>
             </div>
           </div>
           <div class="profession-list text-center">
-            <h6 class="pf-name">John Filrm Doe</h6>
-            <span>Managing Director</span>
-          </div>
-        </div>
-        <div class="col-md-3 col-xs-6 full-item-team">
-          <div class="item-gallery-global">
-            <img src="app/img/gallery/team-2.jpg" alt="" title="Click to more info"/>
-            <div class="item-gall-hidden text-center hidden">
-              <h6>Nemo enim ipsam voluptatem quia voluptas</h6>
-              <p class="visible-sm-block visible-lg-block">sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem.</p>
-              <div class="social-wrap text-center">
-                <ul>
-                  <li><a href="/"><i class="fa fa-twitter"></i></a></li>
-                  <li><a href="/"><i class="fa fa-facebook"></i></a></li>
-                  <li><a href="/"><i class="fa fa-google-plus"></i></a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div class="profession-list text-center">
-            <h6 class="pf-name">Chystine Hineu</h6>
-            <span>Lead Designer</span>
-          </div>
-        </div>
-        <div class="col-md-3 col-xs-6 full-item-team">
-          <div class="item-gallery-global">
-            <img  src="app/img/gallery/team-3.jpg" alt="" title="Click to more info"/>
-            <div class="item-gall-hidden text-center hidden">
-              <h6>Nemo enim ipsam voluptatem quia voluptas</h6>
-              <p class="visible-sm-block visible-lg-block">sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem.</p>
-              <div class="social-wrap text-center">
-                <ul>
-                  <li><a href="/"><i class="fa fa-twitter"></i></a></li>
-                  <li><a href="/"><i class="fa fa-facebook"></i></a></li>
-                  <li><a href="/"><i class="fa fa-google-plus"></i></a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div class="profession-list text-center">
-            <h6 class="pf-name">Martin Matrone</h6>
-            <span>Lead Developer</span>
-          </div>
-        </div>
-        <div class="col-md-3 col-xs-6 full-item-team">
-          <div class="item-gallery-global">
-            <img  src="app/img/gallery/team-4.jpg" alt="" title="Click to more info"/>
-            <div class="item-gall-hidden text-center hidden">
-              <h6>Nemo enim ipsam voluptatem quia voluptas</h6>
-              <p class="visible-sm-block visible-lg-block">sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem.</p>
-              <div class="social-wrap text-center">
-                <ul>
-                  <li><a href="/"><i class="fa fa-twitter"></i></a></li>
-                  <li><a href="/"><i class="fa fa-facebook"></i></a></li>
-                  <li><a href="/"><i class="fa fa-google-plus"></i></a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div class="profession-list text-center">
-            <h6 class="pf-name">Steve Flaulkin</h6>
-            <span>Sr. UI Designer</span>
+            <h6 class="pf-name">{{item.nameCo}}</h6>
+            <span>{{item.prof}}</span>
           </div>
         </div>
       </div>
@@ -386,7 +328,7 @@
                 </div>
                 <div class="col-md-6">
                   <label for="email-lp">Email</label>
-                  <input type="email" class="form-elem" id="email-lp" />
+                  <input type="email" class="form-elem" id="email-lp" requered/>
                 </div>
                 <div class="col-md-12">
                   <div class="message-block">
@@ -418,8 +360,8 @@
   </section><!--End discuss-->
 
   <!--  MAP for section-->
-  <section>
-      <div class="map" id="map"></div>
+	<section class="map-section">
+  <div class="map" id="map"></div>
     <script type="text/javascript">
       function initMap() {
         var mapDiv = document.getElementById('map');
@@ -431,7 +373,7 @@
       }
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?callback=initMap"async defer></script>
-  </section>
+	</section>
 <!--End map-->
 </div><!-- END WRAPPER -->
 <!--Footer-->
@@ -462,16 +404,11 @@
       </div>
       <div class="col-md-3">
         <h6>Explore</h6>
-        <div class="links-list-footer">
+        <div class="links-list-footer" ng-controller="itemCTRL as footLink">
           <ul>
-            <li><a href="#">Envato</a></li>
-            <li><a href="#">Themecurve</a></li>
-            <li><a href="#">Kreativeshowcase</a></li>
-            <li><a href="#">Freebiescurve</a></li>
-            <li><a href="#">Themeforest</a></li>
-            <li><a href="#">Microsoft</a></li>
-            <li><a href="#">Google</a></li>
-            <li><a href="#">Yahoo</a></li>
+            <li ng-repeat="link in footLink.linkFooter">
+              <a href="{{link.urlLink}}">{{link.headerLink}}</a>
+            </li>
           </ul>
         </div>
 

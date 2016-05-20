@@ -101,10 +101,15 @@ textarea {
 }
 //main-nav
 %main-nav-style-event{
-  border-top: 1px solid #32b0ee;
+  border-top: 2px solid #32b0ee;
   text-decoration: none;
 }
 .main-nav{
+  @media all and (min-width: 767px) and (max-width: 1200px){
+    position: absolute;
+    top: 0;
+    right: 2%;
+  }
   ul {
     z-index: 2;
     li{
@@ -114,7 +119,7 @@ textarea {
         font: 0.9em/4.5em 'open_sansregular', sans-serif;
         color: #fff;
         display: block;
-        border-top: 1px solid transparent;
+        border-top: 2px solid transparent;
         &:hover, &:active{
           @extend  %main-nav-style-event;
         }
@@ -190,7 +195,7 @@ h3.h-category{	//global style
       opacity: 1;
     }
     &:nth-child(3){
-      animation-duration: 5s;
+      animation-duration: 4s;
       opacity: 1;
     }
   }
@@ -399,6 +404,7 @@ p.s-description{
         min-height: 42px;
         min-width: 42px;
         display: inline-block;
+        margin-right: 5px;
         a{
           display: block;
           width: 100%;
@@ -584,6 +590,16 @@ p.s-description{
 %footer-logo-bottom-pad{
   margin-bottom: 34px;
 }
+
+.map-section{
+	position: relative;
+	opacity: 0.6;
+	#map{
+	  width: 100%;
+	  height: 212px;
+	}
+}
+
 .footer{
   border-top: 5px solid $description-info;
   background: $accent-green;
@@ -702,10 +718,7 @@ p.s-description{
     }
   }
 }
-#map{
-  width: 100%;
-  height: 212px;
-}
+
 #gal-portfolio .mix{
   display: none;
 }

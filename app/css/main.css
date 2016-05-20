@@ -162,8 +162,14 @@ textarea {
       background: #f4f7f9; }
 
 .main-nav ul li a:hover, .main-nav ul li a:active, .main-nav ul li .active, .main-nav ul li .active-full-screen {
-  border-top: 1px solid #32b0ee;
+  border-top: 2px solid #32b0ee;
   text-decoration: none; }
+
+@media all and (min-width: 767px) and (max-width: 1200px) {
+  .main-nav {
+    position: absolute;
+    top: 0;
+    right: 2%; } }
 
 .main-nav ul {
   z-index: 2; }
@@ -174,7 +180,7 @@ textarea {
       font: 0.9em/4.5em 'open_sansregular', sans-serif;
       color: #fff;
       display: block;
-      border-top: 1px solid transparent; }
+      border-top: 2px solid transparent; }
       .main-nav ul li a:focus {
         text-decoration: none; }
 
@@ -221,7 +227,7 @@ h3.h-category {
       animation-duration: 3s;
       opacity: 1; }
     .features .item-features-anim:nth-child(3) {
-      animation-duration: 5s;
+      animation-duration: 4s;
       opacity: 1; }
 
 .icon-fue {
@@ -380,7 +386,8 @@ p.s-description {
       background: rgba(0, 0, 0, 0.2);
       min-height: 42px;
       min-width: 42px;
-      display: inline-block; }
+      display: inline-block;
+      margin-right: 5px; }
       .full-item-team .social-wrap ul li a {
         display: block;
         width: 100%; }
@@ -531,6 +538,13 @@ p.s-description {
 .footer .logo, .footer h6 {
   margin-bottom: 34px; }
 
+.map-section {
+  position: relative;
+  opacity: 0.6; }
+  .map-section #map {
+    width: 100%;
+    height: 212px; }
+
 .footer {
   border-top: 5px solid rgba(6, 32, 51, 0.8);
   background: #0eb493; }
@@ -620,10 +634,6 @@ p.s-description {
     .subscribe-cut-form #sub-submit:focus {
       border: none; }
 
-#map {
-  width: 100%;
-  height: 212px; }
-
 #gal-portfolio .mix {
   display: none; }
 
@@ -635,7 +645,7 @@ p.s-description {
   .main-nav {
     overflow-y: hidden;
     width: 100%;
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.6);
     position: relative;
     top: 20px; }
     .main-nav ul li {
