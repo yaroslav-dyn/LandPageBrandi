@@ -7,9 +7,7 @@ app.controller('itemCTRL',function(){
   this.linkFooter = itemFooterLinksGem;
   this.itemsTeam = itemTeamGem;
 });
-app.controller('modelView', function($scope){
-   $scope.emailLabel = "Your e-mail: ";
-});
+
 var itemGalleryGems = [
   {
       "classItemCategory": "logo",
@@ -139,6 +137,8 @@ var itemTeamGem = [
             "title":"Google +",
             "url":"#"
         }
+
+
     ]
   },
 

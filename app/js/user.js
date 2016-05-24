@@ -40,8 +40,7 @@ $( document ).ready(function() {
 	$(window).on('scroll', function(){
 		var docStop = $(this).scrollTop();
 		var sectPos = sectionPosition($('#features-section'));
-		//var sectPosFacts = sectionPosition($('#facts-section'));
-		var sectPosTeam = sectionPosition($('#team-section'));
+		var sectPosFacts = sectionPosition($('#facts-section'));
 
 		var headerHeight = $(this).height();
 		var headTop = sectionPosition($('#header-top'));
@@ -74,11 +73,7 @@ $( document ).ready(function() {
 		if(docStop >= factsPos && docStop <= factsPos + factsHeight ){
 			$("#header-top").css('backgroundColor','rgba(16, 22, 54, 0.2)');	
 		}
-		if(docStop >= sectPosTeam - 200){
-			$('.full-item-team').addClass('animate-w-delay');
-		}
-
-
+		
 	});
 
 	//Sort item in gallery
@@ -108,7 +103,7 @@ $( document ).ready(function() {
 		var filterSelect = $('#filter-gal-select'),
 			container = $('#gal-portfolio');
 			container.mixItUp();
-			filterSelect.on('change', function(){
+		filterSelect.on('change', function(){
 			container.mixItUp('filter', this.value);
 		});
 

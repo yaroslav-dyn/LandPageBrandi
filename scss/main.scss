@@ -187,15 +187,15 @@ h3.h-category{	//global style
     animation-name: fadeIn;
     animation-duration: 3s;
     &:nth-child(1){
-      animation-duration: 1s;
+      animation-duration: 0.5s;
       opacity: 1;
     }
     &:nth-child(2){
-      animation-duration: 3s;
+      animation-duration: 2s;
       opacity: 1;
     }
     &:nth-child(3){
-      animation-duration: 4s;
+      animation-duration: 2.5s;
       opacity: 1;
     }
   }
@@ -356,6 +356,27 @@ p.s-description{
   }
 }//END Gallery images section
 
+
+.animate-w-delay {
+  animation-name: fadeIn;
+  &:nth-of-type(1) {
+    animation-delay: 1s;
+    animation-duration: 3s;
+  }
+  &:nth-of-type(2) {
+    animation-delay: 1.9s;
+    animation-duration: 3s;
+  }
+  &:nth-of-type(3) {
+    animation-delay: 2.8s;
+    animation-duration: 3s;
+  }
+  &:nth-of-type(4) {
+    animation-delay: 3.4s;
+    animation-duration: 3s;
+  }
+}
+
 //Section TEAM
 .team-sec {
   .item-gallery-global {
@@ -494,10 +515,12 @@ p.s-description{
   .header-address{
     font: 1.375em 'open_sansregular', sans-serif;
     color: $description-info;
+    margin-top: 30px;
   }
   address{
     font: 0.8em/2em 'open_sansregular', sans-serif;
     color: #6a737b;
+    margin-top: 10px;
   }
   .form-send{
     .header-address{
@@ -552,8 +575,8 @@ p.s-description{
     }
   }
   ul.address-social{
-    padding: 0;
-    margin-top: 18px ;
+    padding-left: 40px;
+    margin-top: 43px;
     //Media-inject
     @media all and (max-width: $underPc){
       display: block;
@@ -569,7 +592,7 @@ p.s-description{
         }
       }
       a{
-        font-size: 20px;
+        font-size: 29px;
         color: $address-icon;
         text-decoration: none;
         &:hover{
@@ -579,8 +602,8 @@ p.s-description{
           opacity: 0.8;
         }
         img{
-          width: 22px;
-          height: 26px;
+          width: 32px;
+          height: 32px;
           opacity: 0.2;
         }
       }
@@ -631,7 +654,8 @@ p.s-description{
       -moz-column-count: 2;
       column-count: 2;
       li{
-        padding-right: 8px;
+
+        padding-right: 8px;   
         a{
           font: 0.8125em/2.2em 'open_sansregular', sans-serif;
           color: #fff;
@@ -642,6 +666,7 @@ p.s-description{
       }
     }
   }
+
   .copyright{
     height: 100%;
     margin-top: 70px;

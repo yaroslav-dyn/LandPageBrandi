@@ -1,11 +1,24 @@
 var gulp = require('gulp');
 var browserSync = require('browser-sync').create();
 var sass = require('gulp-sass');
+var useref = require('gulp-useref');
+
 
 gulp.task('sass', function () {
     return gulp.src('scss/main.scss')
         .pipe(sass().on('error', sass.logError))
         .pipe(gulp.dest('app/css'));
+});
+
+gulp.task('js-build', function(){
+    gulp.src('js/*.js')
+    .pipe(gulp.dest('app/js/'))
+});
+//build html with Dependencies
+gulp.task('html-build', function () {
+    return gulp.src('./*.html')
+        .pipe(useref())
+        .pipe(gulp.dest('app/'));
 });
 
 

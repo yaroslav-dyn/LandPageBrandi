@@ -221,13 +221,13 @@ h3.h-category {
     animation-name: fadeIn;
     animation-duration: 3s; }
     .features .item-features-anim:nth-child(1) {
-      animation-duration: 1s;
+      animation-duration: 0.5s;
       opacity: 1; }
     .features .item-features-anim:nth-child(2) {
-      animation-duration: 3s;
+      animation-duration: 2s;
       opacity: 1; }
     .features .item-features-anim:nth-child(3) {
-      animation-duration: 4s;
+      animation-duration: 2.5s;
       opacity: 1; }
 
 .icon-fue {
@@ -346,6 +346,21 @@ p.s-description {
       .gallery-image .item-img .item-gall-hidden a.hidden-gal-inner .gal-category {
         font-size: 0.875em; }
 
+.animate-w-delay {
+  animation-name: fadeIn; }
+  .animate-w-delay:nth-of-type(1) {
+    animation-delay: 1s;
+    animation-duration: 3s; }
+  .animate-w-delay:nth-of-type(2) {
+    animation-delay: 1.9s;
+    animation-duration: 3s; }
+  .animate-w-delay:nth-of-type(3) {
+    animation-delay: 2.8s;
+    animation-duration: 3s; }
+  .animate-w-delay:nth-of-type(4) {
+    animation-delay: 3.4s;
+    animation-duration: 3s; }
+
 .team-sec .item-gallery-global {
   float: none;
   overflow: hidden; }
@@ -456,11 +471,13 @@ p.s-description {
 
 .contact-form .header-address {
   font: 1.375em 'open_sansregular', sans-serif;
-  color: rgba(6, 32, 51, 0.8); }
+  color: rgba(6, 32, 51, 0.8);
+  margin-top: 30px; }
 
 .contact-form address {
   font: 0.8em/2em 'open_sansregular', sans-serif;
-  color: #6a737b; }
+  color: #6a737b;
+  margin-top: 10px; }
 
 .contact-form .form-send .header-address {
   font-weight: bold;
@@ -510,8 +527,8 @@ p.s-description {
     outline: none; }
 
 .contact-form ul.address-social {
-  padding: 0;
-  margin-top: 18px; }
+  padding-left: 40px;
+  margin-top: 43px; }
   @media all and (max-width: 979px) {
     .contact-form ul.address-social {
       display: block;
@@ -523,7 +540,7 @@ p.s-description {
       .contact-form ul.address-social li:last-child {
         padding-right: 0; } }
   .contact-form ul.address-social li a {
-    font-size: 20px;
+    font-size: 29px;
     color: rgba(6, 32, 51, 0.2);
     text-decoration: none; }
     .contact-form ul.address-social li a:hover {
@@ -531,8 +548,8 @@ p.s-description {
     .contact-form ul.address-social li a:hover img {
       opacity: 0.8; }
     .contact-form ul.address-social li a img {
-      width: 22px;
-      height: 26px;
+      width: 32px;
+      height: 32px;
       opacity: 0.2; }
 
 .footer .logo, .footer h6 {
