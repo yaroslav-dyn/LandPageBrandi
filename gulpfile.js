@@ -10,6 +10,7 @@ gulp.task('sass', function () {
         .pipe(gulp.dest('app/css'));
 });
 
+//build js
 gulp.task('js-build', function(){
     gulp.src('js/*.js')
     .pipe(gulp.dest('app/js/'))
@@ -20,7 +21,19 @@ gulp.task('html-build', function () {
         .pipe(useref())
         .pipe(gulp.dest('app/'));
 });
+//build img
+gulp.task('img-build', function () {
+    gulp.src('img/**/')
+    .pipe(gulp.dest('app/img/'));
+});
 
+//all build in app
+gulp.task('build', 
+[
+    'html-build',
+    'js-build',
+    'img-build'
+]);
 
 // Static Server + watching css/html files
 gulp.task('serv', function() {

@@ -7,46 +7,48 @@ app.controller('itemCTRL',function(){
   this.linkFooter = itemFooterLinksGem;
   this.itemsTeam = itemTeamGem;
 });
-
+app.controller('modelView', function($scope){
+   $scope.emailLabel = "Your e-mail: ";
+});
 var itemGalleryGems = [
   {
       "classItemCategory": "logo",
-      "urlImage": "app/img/gallery/gallery-image-1.jpg",
+      "urlImage": "img/gallery/gallery-image-1.jpg",
       "catInOverlay":"Logotypes"
   },
   {
       "classItemCategory": "web",
-      "urlImage": "app/img/gallery/gallery-image-2.jpg",
+      "urlImage": "img/gallery/gallery-image-2.jpg",
       "catInOverlay":"Web"
   },
   {
       "classItemCategory": "photo",
-      "urlImage": "app/img/gallery/gallery-image-3.jpg",
+      "urlImage": "img/gallery/gallery-image-3.jpg",
       "catInOverlay":"Photography"
   },
   {
       "classItemCategory": "logo",
-      "urlImage": "app/img/gallery/gallery-image-4.jpg",
+      "urlImage": "img/gallery/gallery-image-4.jpg",
       "catInOverlay":"Logotypes"
   },
   {
       "classItemCategory": "photo",
-      "urlImage": "app/img/gallery/gallery-image-5.jpg",
+      "urlImage": "img/gallery/gallery-image-5.jpg",
       "catInOverlay":"Photography"
   },
   {
       "classItemCategory": "logo",
-      "urlImage": "app/img/gallery/gallery-image-6.jpg",
+      "urlImage": "img/gallery/gallery-image-6.jpg",
       "catInOverlay":"Logo design"
   },
   {
       "classItemCategory": "web",
-      "urlImage": "app/img/gallery/gallery-image-7.jpg",
+      "urlImage": "img/gallery/gallery-image-7.jpg",
       "catInOverlay":"Web"
   },
   {
       "classItemCategory": "brands",
-      "urlImage": "app/img/gallery/gallery-image-8.jpg",
+      "urlImage": "img/gallery/gallery-image-8.jpg",
       "catInOverlay":"Branding"
   }
 ];
@@ -89,7 +91,7 @@ var itemFooterLinksGem = [
 
 var itemTeamGem = [
   {
-  	"imgUrl": "app/img/gallery/team-1.jpg",
+  	"imgUrl": "img/gallery/team-1.jpg",
   	"nameCo":"John Filrm Doe",
   	"prof":"Managing Director",
   	"headerDescr":"Nemo enim ipsam voluptatem quia voluptas",
@@ -116,7 +118,7 @@ var itemTeamGem = [
   },
 
   {
-    "imgUrl": "app/img/gallery/team-2.jpg",
+    "imgUrl": "img/gallery/team-2.jpg",
     "nameCo":"Chystine Hineu",
     "prof":"Lead Designer",
     "headerDescr":"Nemo enim ipsam voluptatem quia voluptas",
@@ -137,13 +139,11 @@ var itemTeamGem = [
             "title":"Google +",
             "url":"#"
         }
-
-
     ]
   },
 
     {
-    "imgUrl": "app/img/gallery/team-3.jpg",
+    "imgUrl": "img/gallery/team-3.jpg",
     "nameCo":"Martin Matrone",
     "prof":"Lead Developer",
     "headerDescr":"Nemo enim ipsam voluptatem quia voluptas",
@@ -167,7 +167,7 @@ var itemTeamGem = [
     ]
   },
   {
-    "imgUrl": "app/img/gallery/team-4.jpg",
+    "imgUrl": "img/gallery/team-4.jpg",
     "nameCo":"Steve Flaulkin",
     "prof":"Sr. UI Designer",
     "headerDescr":"Nemo enim ipsam voluptatem quia voluptas",

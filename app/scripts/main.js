@@ -7,46 +7,48 @@ app.controller('itemCTRL',function(){
   this.linkFooter = itemFooterLinksGem;
   this.itemsTeam = itemTeamGem;
 });
-
+app.controller('modelView', function($scope){
+   $scope.emailLabel = "Your e-mail: ";
+});
 var itemGalleryGems = [
   {
       "classItemCategory": "logo",
-      "urlImage": "app/img/gallery/gallery-image-1.jpg",
+      "urlImage": "img/gallery/gallery-image-1.jpg",
       "catInOverlay":"Logotypes"
   },
   {
       "classItemCategory": "web",
-      "urlImage": "app/img/gallery/gallery-image-2.jpg",
+      "urlImage": "img/gallery/gallery-image-2.jpg",
       "catInOverlay":"Web"
   },
   {
       "classItemCategory": "photo",
-      "urlImage": "app/img/gallery/gallery-image-3.jpg",
+      "urlImage": "img/gallery/gallery-image-3.jpg",
       "catInOverlay":"Photography"
   },
   {
       "classItemCategory": "logo",
-      "urlImage": "app/img/gallery/gallery-image-4.jpg",
+      "urlImage": "img/gallery/gallery-image-4.jpg",
       "catInOverlay":"Logotypes"
   },
   {
       "classItemCategory": "photo",
-      "urlImage": "app/img/gallery/gallery-image-5.jpg",
+      "urlImage": "img/gallery/gallery-image-5.jpg",
       "catInOverlay":"Photography"
   },
   {
       "classItemCategory": "logo",
-      "urlImage": "app/img/gallery/gallery-image-6.jpg",
+      "urlImage": "img/gallery/gallery-image-6.jpg",
       "catInOverlay":"Logo design"
   },
   {
       "classItemCategory": "web",
-      "urlImage": "app/img/gallery/gallery-image-7.jpg",
+      "urlImage": "img/gallery/gallery-image-7.jpg",
       "catInOverlay":"Web"
   },
   {
       "classItemCategory": "brands",
-      "urlImage": "app/img/gallery/gallery-image-8.jpg",
+      "urlImage": "img/gallery/gallery-image-8.jpg",
       "catInOverlay":"Branding"
   }
 ];
@@ -89,7 +91,7 @@ var itemFooterLinksGem = [
 
 var itemTeamGem = [
   {
-  	"imgUrl": "app/img/gallery/team-1.jpg",
+  	"imgUrl": "img/gallery/team-1.jpg",
   	"nameCo":"John Filrm Doe",
   	"prof":"Managing Director",
   	"headerDescr":"Nemo enim ipsam voluptatem quia voluptas",
@@ -116,7 +118,7 @@ var itemTeamGem = [
   },
 
   {
-    "imgUrl": "app/img/gallery/team-2.jpg",
+    "imgUrl": "img/gallery/team-2.jpg",
     "nameCo":"Chystine Hineu",
     "prof":"Lead Designer",
     "headerDescr":"Nemo enim ipsam voluptatem quia voluptas",
@@ -137,13 +139,11 @@ var itemTeamGem = [
             "title":"Google +",
             "url":"#"
         }
-
-
     ]
   },
 
     {
-    "imgUrl": "app/img/gallery/team-3.jpg",
+    "imgUrl": "img/gallery/team-3.jpg",
     "nameCo":"Martin Matrone",
     "prof":"Lead Developer",
     "headerDescr":"Nemo enim ipsam voluptatem quia voluptas",
@@ -167,7 +167,7 @@ var itemTeamGem = [
     ]
   },
   {
-    "imgUrl": "app/img/gallery/team-4.jpg",
+    "imgUrl": "img/gallery/team-4.jpg",
     "nameCo":"Steve Flaulkin",
     "prof":"Sr. UI Designer",
     "headerDescr":"Nemo enim ipsam voluptatem quia voluptas",
@@ -235,7 +235,7 @@ $( document ).ready(function() {
 	$(window).on('scroll', function(){
 		var docStop = $(this).scrollTop();
 		var sectPos = sectionPosition($('#features-section'));
-		var sectPosFacts = sectionPosition($('#facts-section'));
+		var sectPosTeam = sectionPosition($('#team-section'));
 
 		var headerHeight = $(this).height();
 		var headTop = sectionPosition($('#header-top'));
@@ -247,17 +247,40 @@ $( document ).ready(function() {
 			$('.item-features').addClass('item-features-anim');
 		}
 
+		if (docStop <= factsPos+27 && docStop >= factsPos+21){
+			function allFull(){
+				//function with method
+				function animateNumberLp(idF,numberF,timeF){		
+					var idF;
+					var numberF;
+					var timeF;
+
+					idF.animateNumber( 
+						    {
+						      number:numberF 
+						    },
+				    	timeF
+				    )
+				}	
+				animateNumberLp($('#facts-0'),3200,3800);
+				animateNumberLp($('#facts-1'),120,3800);
+				animateNumberLp($('#facts-2'),360,3800);
+				animateNumberLp($('#facts-3'),42,3800);
+			}
+			allFull();
+
+		}		
 		if(docStop >= 2350 && docStop <= 2690){		
-			$('#facts-section .heart-img').attr('src','app/img/heart_icon.png');
+			$('#facts-section .heart-img').attr('src','img/heart_icon.png');
 		}
 		else{
-			$('#facts-section .heart-img').attr('src','app/img/heart_icon-white.png');
+			$('#facts-section .heart-img').attr('src','img/heart_icon-white.png');
 		}
-		/*
+	
 		console.log(docStop + " position Window");
 		console.log(factsPos + " position facts");
-		console.log(factsHeight + " heightfacts");
-		*/
+
+		
 		if(headTop >= headerHeight){
 			$("#header-top").css('backgroundColor','rgba(30,167,141,.8)');	
 		}
@@ -268,7 +291,9 @@ $( document ).ready(function() {
 		if(docStop >= factsPos && docStop <= factsPos + factsHeight ){
 			$("#header-top").css('backgroundColor','rgba(16, 22, 54, 0.2)');	
 		}
-		
+		if(docStop >= sectPosTeam - 200){
+			$('.full-item-team').addClass('animate-w-delay');
+		}
 	});
 
 	//Sort item in gallery
@@ -298,11 +323,15 @@ $( document ).ready(function() {
 		var filterSelect = $('#filter-gal-select'),
 			container = $('#gal-portfolio');
 			container.mixItUp();
-		filterSelect.on('change', function(){
+			filterSelect.on('change', function(){
 			container.mixItUp('filter', this.value);
 		});
 
 	});
+	//animate number facts 
+	//add unique id
+	$('.facts-info strong').each(function(e){
+		$(this).attr('id','facts-' + e);
+	});
 
 });
-
