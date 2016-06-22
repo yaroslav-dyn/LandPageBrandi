@@ -1,0 +1,65 @@
+//main scss file
+//include modules libs
+@import '_fonts';
+@import '_variables';
+
+
+
+.wrapper{
+  margin-top:  12px;
+}
+ #container-gexf, #container-gexf-2 {
+    max-width: 100%;
+    width: $width-frame;
+    height: 400px;
+    margin: auto;
+    border: 1px dashed darken($button-upload, 40%);
+}
+
+.upload-wrapper{
+  text-align: center;
+  margin-top: 40px;
+}
+.nav-uploader{
+  display: inline-block;
+  background: $button-upload;
+  color: #fff;
+  font: 1em "Helvetica Neue", Helvetica, Arial, sans-serif;
+  padding: 12px 24px;
+  border-radius: 6px;
+  border: 1px solid darken($button-upload, 30%);
+  &:hover{
+    background: lighten($button-upload, 20%);
+    border: 1px solid darken($button-upload, 10%)
+  }
+  &:focus{
+    outline: none;
+  }
+}
+#upload-input{
+  display: none;
+}
+.data-nav{
+  width:  $width-frame;
+  margin: 18px auto;
+}
+.load-file-name{
+    font:  16px/2 "Helvetica Neue", Helvetica, Arial, sans-serif;
+    -webkit-transition: all 0.4s ease-in-out;
+    -moz-transition: all 0.4s ease-in-out;
+    -ms-transition: all 0.4s ease-in-out;
+    -o-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+    text-transform: uppercase;
+    opacity: 0;
+    color: #654d4d;
+  &:nth-of-type(1){
+    font-weight: bold;
+  }
+  &:nth-of-type(2){
+    font-style: italic;
+  }
+}
+
+//import media
+@import '_media';

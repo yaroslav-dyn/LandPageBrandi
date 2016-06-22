@@ -1,9 +1,9 @@
 //initialize Carousel
-$( document ).ready(function() {
+$(document).ready(function() {
 
-	 // *Cheking height elem.
+	// *Cheking height elem.
 	function resizeScreen(elem){
-		 var heightElem = elem.height();
+		var heightElem = elem.height();
 		return heightElem;
 	}
 	//Seting first screen height
@@ -52,53 +52,52 @@ $( document ).ready(function() {
 			$('.item-features').addClass('item-features-anim');
 		}
 
-			if (docStop <= factsPos+27 && docStop >= factsPos+21){
-				var allFull = function(){
-					//animate number facts 
-					//add unique id
-					$('.facts-info strong').each(function(e){
-						$(this).attr('id','facts-' + e);
-					});	
+		if (docStop <= factsPos+27 && docStop >= factsPos+21){
+			var allFull = function(){
+				//animate number facts
+				//add unique id
+				$('.facts-info strong').each(function(e){
+					$(this).attr('id','facts-' + e);
+				});
 				//function with method
-				function animateNumberLp(idF,numberF,timeF){		
-					idF.animateNumber( 
-						    {
-						      number:numberF 
-						    },
-				    	timeF
-				    )
-				}	
-				animateNumberLp($('#facts-0'),3200,2000);
-				animateNumberLp($('#facts-1'),120,2000);
-				animateNumberLp($('#facts-2'),360,2000);
-				animateNumberLp($('#facts-3'),42,2000);		
+				function animateNumberLp(idF,numberF,timeF){
+					idF.animateNumber(
+						{
+							number:numberF
+						},
+						timeF
+					)
+				}
+				animateNumberLp($('#facts-0'),3200,1800);
+				animateNumberLp($('#facts-1'),120,1800);
+				animateNumberLp($('#facts-2'),360,1800);
+				animateNumberLp($('#facts-3'),42,1800);
 			};
 
 			allFull();
 
-	
-
-		}		
-		if(docStop >= 2350 && docStop <= 2690){		
+		}
+		if(docStop >= 2350 && docStop <= 2690){
 			$('#facts-section .heart-img').attr('src','img/heart_icon.png');
 		}
 		else{
 			$('#facts-section .heart-img').attr('src','img/heart_icon-white.png');
 		}
-	
-		console.log(docStop + " position Window");
-		console.log(factsPos + " position facts");
 
-		
+		//
+		//console.log(docStop + " position Window");
+		//console.log(factsPos + " position facts");
+
+
 		if(headTop >= headerHeight){
-			$("#header-top").css('backgroundColor','rgba(30,167,141,.8)');	
+			$("#header-top").css('backgroundColor','rgba(30,167,141,.8)');
 		}
 		else{
-			$("#header-top").css('backgroundColor','rgba(16, 22, 54, 0.2)');	
+			$("#header-top").css('backgroundColor','rgba(16, 22, 54, 0.2)');
 		}
 
 		if(docStop >= factsPos && docStop <= factsPos + factsHeight ){
-			$("#header-top").css('backgroundColor','rgba(16, 22, 54, 0.2)');	
+			$("#header-top").css('backgroundColor','rgba(16, 22, 54, 0.2)');
 		}
 		if(docStop >= sectPosTeam - 200){
 			$('.full-item-team').addClass('animate-w-delay');
@@ -131,12 +130,28 @@ $( document ).ready(function() {
 	$(function(){
 		var filterSelect = $('#filter-gal-select'),
 			container = $('#gal-portfolio');
-			container.mixItUp();
-			filterSelect.on('change', function(){
+		container.mixItUp();
+		filterSelect.on('change', function(){
 			container.mixItUp('filter', this.value);
 		});
 
 	});
+	//tooltips on a team section
+	$('body').tooltip({
+		title:"Click to more info",
+		selector:".item-gallery-global.team"
+	});
+
+
+	$('#facts-section').scroolly([{
+		from: 'vp-top',
+		to: 'vb-bottom',
+		css: {
+			background: "rgba(255,255,255,.6)"
+		}
+	}]);
 
 
 });
+
+

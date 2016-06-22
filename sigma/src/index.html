@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Start front-end template</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+  <!-- *plugin 'userev' concat your vendor css -->
+  <!-- build:css css/vendor.css -->
+  <link rel="stylesheet" href="vendor/bootstrap.min.css"/>
+  <!-- endbuild -->
+
+  <!-- *plugin 'userev' concat your dev css -->
+  <!-- build:css css/main.css -->
+  <link rel="stylesheet" href="css/main.css"/>
+  <!-- endbuild -->
+
+<div class="wrapper">
+  <!-- Container for graphics-->
+  <div id="container-gexf"></div>
+
+  <div class="upload-wrapper">
+    <div class="button-nav">
+      <label class="nav-uploader" for="upload-input" title="upload your gexf file">UPLOAD</label>
+      <input  id="upload-input" type="file" value="UPLOAD" >
+      <!--<button class="nav-uploader" onclick="handleFileSelect()"  title="parse into area">PARSE</button>-->
+    </div>
+    <div class="data-nav">
+        <span id="load-file" class="load-file-name">
+        </span>
+        <span id="header-file" class="load-file-name" ></span>
+    </div>
+
+  </div>
+</div>
+
+
+  <!-- *plugin 'userev' concat your vendor js -->
+  <!-- build:js scripts/vendor.js -->
+  <script src="vendor/jquery.js"></script>
+  <script src="vendor/sigma/sigma.js"></script>
+  <script src="vendor/sigma.parsers.gexf.js"></script>
+  <script src="vendor/gexf-parser.js"></script>
+  <!-- endbuild -->
+
+  <!-- *plugin 'userev' concat your dev js -->
+  <!-- build:js scripts/main.js -->
+  <script src="js/main.js"></script>
+  <!-- endbuild -->
+
+
+</head>
+<body>
+
+</body>
+</html>

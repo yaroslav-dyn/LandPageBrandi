@@ -111,6 +111,9 @@ img {
 textarea {
   resize: none; }
 
+section {
+  position: relative; }
+
 .container-fluid.full-width {
   padding: 0; }
 

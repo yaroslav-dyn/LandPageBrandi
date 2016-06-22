@@ -1,5 +1,5 @@
 //initialize Carousel
-$( document ).ready(function() {
+$(document).ready(function() {
 
 	 // *Cheking height elem.
 	function resizeScreen(elem){
@@ -52,14 +52,15 @@ $( document ).ready(function() {
 			$('.item-features').addClass('item-features-anim');
 		}
 
-		if (docStop <= factsPos+27 && docStop >= factsPos+21){
-			function allFull(){
+			if (docStop <= factsPos+27 && docStop >= factsPos+21){
+				var allFull = function(){
+					//animate number facts 
+					//add unique id
+					$('.facts-info strong').each(function(e){
+						$(this).attr('id','facts-' + e);
+					});	
 				//function with method
 				function animateNumberLp(idF,numberF,timeF){		
-					var idF;
-					var numberF;
-					var timeF;
-
 					idF.animateNumber( 
 						    {
 						      number:numberF 
@@ -67,13 +68,14 @@ $( document ).ready(function() {
 				    	timeF
 				    )
 				}	
-				animateNumberLp($('#facts-0'),3200,3800);
-				animateNumberLp($('#facts-1'),120,3800);
-				animateNumberLp($('#facts-2'),360,3800);
-				animateNumberLp($('#facts-3'),42,3800);
-			}
-			allFull();
+				animateNumberLp($('#facts-0'),3200,1800);
+				animateNumberLp($('#facts-1'),120,1800);
+				animateNumberLp($('#facts-2'),360,1800);
+				animateNumberLp($('#facts-3'),42,1800);
+			};
 
+			allFull();
+	
 		}		
 		if(docStop >= 2350 && docStop <= 2690){		
 			$('#facts-section .heart-img').attr('src','img/heart_icon.png');
@@ -81,9 +83,10 @@ $( document ).ready(function() {
 		else{
 			$('#facts-section .heart-img').attr('src','img/heart_icon-white.png');
 		}
-	
-		console.log(docStop + " position Window");
-		console.log(factsPos + " position facts");
+
+        //
+		//console.log(docStop + " position Window");
+		//console.log(factsPos + " position facts");
 
 		
 		if(headTop >= headerHeight){
@@ -133,10 +136,22 @@ $( document ).ready(function() {
 		});
 
 	});
-	//animate number facts 
-	//add unique id
-	$('.facts-info strong').each(function(e){
-		$(this).attr('id','facts-' + e);
+	//tooltips on a team section
+	$('body').tooltip({
+		title:"Click to more info",
+		selector:".item-gallery-global.team"
 	});
 
+
+	$('#facts-section').scroolly([{
+		from: 'vp-top',
+		to: 'vb-bottom',
+		css: {
+			background: "rgba(255,255,255,.6)"
+		}
+	}]);
+
+
 });
+
+

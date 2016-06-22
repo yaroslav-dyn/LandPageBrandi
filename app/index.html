@@ -42,6 +42,7 @@
                 <li><a href="#contact-section">Contact</a></li>
               </ul>
             </nav>
+          
           </div>
         </div>
       </div>
@@ -192,7 +193,6 @@
               </a>
             </div>
           </div>
-
         </div><!--END Gallery images-->
       </div>
     </div>
@@ -211,7 +211,7 @@
       <!-- Items personal-->
       <div class="row">
         <div class="col-md-3 col-xs-6 full-item-team" ng-repeat="item in itemTeam.itemsTeam">
-          <div class="item-gallery-global">
+          <div class="item-gallery-global team">
             <img ng-src="{{item.imgUrl}}" alt="{{item.nameCo}} {{item.prof}}" title="Click to more info"/>
             <div class="item-gall-hidden text-center hidden">
               <h6>{{item.headerDescr}}</h6>
@@ -236,7 +236,7 @@
     </div>
   </section>
   <!-- Section FUN FACTS-->
-  <section id="facts-section" class="fun-facts">
+  <section id="facts-section" class="fun-facts" >
     <div class = "container">
       <div class = "row">
         <div class = "col-md-12 text-center">
@@ -285,11 +285,9 @@
             <span>Awards Won</span>
           </div>
         </div>
-
       </div>
     </div>
   </section>
-
   <!-- Section Discuss -->
   <section class="discuss pad-normal-lg">
     <div class = "container">
@@ -396,6 +394,7 @@
             <label for="sub-submit"></label>
             <input id="sub-submit" type="submit" value=""/>
           </form>
+
         </div>
         <p>{{emailLabel}}{{emailFoot}}</p>
         <p>
@@ -411,7 +410,6 @@
             </li>
           </ul>
         </div>
-
       </div>
       <div class="col-md-3">
         <div class="copyright">
@@ -421,19 +419,14 @@
           </p>
         </div>
         <small>© 2014 Brandi. All Rights Reserved.</small>
-
       </div>
     </div>
-  </div>
-</footer>
-
+  </div> 
+</footer> 
 <script src="scripts/vendor.js"></script>
-
 <script src="scripts/main.js"></script>
 </body>
 </html>
-
-
 
 
 
