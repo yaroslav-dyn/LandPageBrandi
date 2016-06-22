@@ -16,26 +16,6 @@
   <link rel="stylesheet" href="css/main.css"/>
   <!-- endbuild -->
 
-<div class="wrapper">
-  <!-- Container for graphics-->
-  <div id="container-gexf"></div>
-
-  <div class="upload-wrapper">
-    <div class="button-nav">
-      <label class="nav-uploader" for="upload-input" title="upload your gexf file">UPLOAD</label>
-      <input  id="upload-input" type="file" value="UPLOAD" >
-      <!--<button class="nav-uploader" onclick="handleFileSelect()"  title="parse into area">PARSE</button>-->
-    </div>
-    <div class="data-nav">
-        <span id="load-file" class="load-file-name">
-        </span>
-        <span id="header-file" class="load-file-name" ></span>
-    </div>
-
-  </div>
-</div>
-
-
   <!-- *plugin 'userev' concat your vendor js -->
   <!-- build:js scripts/vendor.js -->
   <script src="vendor/jquery.js"></script>
@@ -52,6 +32,23 @@
 
 </head>
 <body>
+<div class="wrapper">
+  <!-- Container for graphics-->
+  <div id="container-gexf"></div>
 
+  <div class="upload-wrapper">
+    <div class="button-nav">
+      <label class="nav-uploader" for="upload-input" title="upload your gexf file">UPLOAD</label>
+      <input  id="upload-input" type="file" value="UPLOAD" >
+      <!--<button class="nav-uploader" onclick="handleFileSelect()"  title="parse into area">PARSE</button>-->
+    </div>
+    <div class="data-nav">
+        <span id="load-file" class="load-file-name">
+        </span>
+      <span id="header-file" class="load-file-name" ></span>
+    </div>
+
+  </div>
+</div>
 </body>
 </html>
