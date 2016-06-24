@@ -1,2 +1,28 @@
+//variables
 $button-upload: #1e83dc;
 $width-frame: 860px;
+$hyper-color: #654d4d;
+
+//custom classes
+.text{
+  &-left{
+    text-align: left;
+  }
+  &-center{
+    text-align: center;
+  }
+  &-right{
+    text-align: right;
+  }
+}
+
+//mixins
+
+@mixin transEff($time,$function:ease-in-out){
+  -webkit-transition: all $time $function;
+  -moz-transition: all $time $function;
+  -ms-transition: all $time $function;
+  -o-transition: all $time $function;
+  transition: all $time $function;
+  text-transform: uppercase;
+}

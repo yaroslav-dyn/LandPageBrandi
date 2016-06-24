@@ -3,17 +3,26 @@
 @import '_fonts';
 @import '_variables';
 
+//typography
+h1,h2,h3,h4,h5,h6{
 
+}
 
 .wrapper{
   margin-top:  12px;
 }
- #container-gexf, #container-gexf-2 {
+ #container-gexf, {
     max-width: 100%;
     width: $width-frame;
     height: 400px;
     margin: auto;
     border: 1px dashed darken($button-upload, 40%);
+}
+#graph-container{
+  width: 100%;
+  height: 200px;
+  margin: auto;
+  border: 1px dashed darken($button-upload, 40%);
 }
 
 .upload-wrapper{
@@ -25,7 +34,7 @@
   background: $button-upload;
   color: #fff;
   font: 1em "Helvetica Neue", Helvetica, Arial, sans-serif;
-  padding: 12px 24px;
+  padding: 12px 45px;
   border-radius: 6px;
   border: 1px solid darken($button-upload, 30%);
   &:hover{
@@ -40,19 +49,13 @@
   display: none;
 }
 .data-nav{
-  width:  $width-frame;
-  margin: 18px auto;
+  margin-top: 18px;
 }
 .load-file-name{
     font:  16px/2 "Helvetica Neue", Helvetica, Arial, sans-serif;
-    -webkit-transition: all 0.4s ease-in-out;
-    -moz-transition: all 0.4s ease-in-out;
-    -ms-transition: all 0.4s ease-in-out;
-    -o-transition: all 0.4s ease-in-out;
-    transition: all 0.4s ease-in-out;
-    text-transform: uppercase;
+    @include transEff(0.4s);
     opacity: 0;
-    color: #654d4d;
+    color: $hyper-color;
   &:nth-of-type(1){
     font-weight: bold;
   }
@@ -60,6 +63,26 @@
     font-style: italic;
   }
 }
+
+
+.name{
+  &-show{
+    opacity: 1;
+  }
+  &-hidden{
+    opacity: 0;
+  }
+}
+
+.right-area{
+  h2{
+    color: $hyper-color;
+  }
+  .button-nav{
+    margin-top: 12px;
+  }
+}
+
 
 //import media
 @import '_media';

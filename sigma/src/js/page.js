@@ -27,15 +27,31 @@ function fileAppStare(){
     fr.readAsDataURL(file);
 }
 
+
+var myExistingInstance = new sigma();
+
+
 //  parse file in area
 function receivedText() {
     var nameFile = fr.result;
     sigma.parsers.gexf(
+        nameFile, {
+            container: 'container-gexf'
+        }
+
+    );
+
+    sigma.parsers.gexf(
         nameFile,
-        { container: 'container-gexf' }
+        myExistingInstance,
+        function() {
+            myExistingInstance.refresh();
+        }
+
     );
 
 }
+
 //On change do all
 $('#upload-input').on('change',function(){
     handleFileSelect();
@@ -55,24 +71,38 @@ var g = {
     "nodes": [
         {
             "id": "n0",
-            "label": "A node",
+            "label": "node 1",
             "x": 0,
             "y": 0,
-            "size": 3
+            'size': 1
         },
         {
             "id": "n1",
-            "label": "Another node",
+            "label": "node 2",
             "x": 3,
-            "y": 1,
-            "size": 2
+            "y": 0,
+            'size': 1
         },
         {
             "id": "n2",
-            "label": "And a last one",
-            "x": 1,
+            "label": "node 3",
+            "x": 3,
             "y": 3,
-            "size": 1
+            'size': 1
+        },
+        {
+            "id": "n3",
+            "label": "node 4",
+            "x": 0,
+            "y": 3,
+            'size': 1
+        },
+        {
+            "id": "n4",
+            "label": "node 4",
+            "x": 1.5,
+            "y": 1.5,
+            'size': 1
         }
     ],
     "edges": [
@@ -89,7 +119,22 @@ var g = {
         {
             "id": "e2",
             "source": "n2",
+            "target": "n3"
+        },
+        {
+            "id": "e3",
+            "source": "n3",
             "target": "n0"
+        },
+        {
+            "id": "e4",
+            "source": "n0",
+            "target": "n2"
+        },
+        {
+            "id": "e5",
+            "source": "n1",
+            "target": "n3"
         }
     ]
 };
@@ -104,12 +149,20 @@ var s = new sigma({
         type: 'canvas'
     },
     settings: {
-        minNodeSize: 3,
+        minEdgeSize: 1,
+        maxEdgeSize: 3,
+        minNodeSize: 2,
         maxNodeSize: 3,
-        minEdgeSize: 3,
-        maxEdgeSize: 3
+        defaultEdgeColor: 'purple',
+        edgeColor: 'edge',
+        defaultNodeColor: 'red',
+        nodeColor: 'node',
+        font: "Verdana",
+        labelThreshold: "3",
+        defaultLabelColor:"green"
     }
 });
+
 
 
 

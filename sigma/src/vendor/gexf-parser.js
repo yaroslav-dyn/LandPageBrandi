@@ -507,7 +507,7 @@
           callback(getResult(xhr));
       };
 
-    xhr.send();
+      xhr.send();
 
     return (async) ? xhr : getResult(xhr);
   }
