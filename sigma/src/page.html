@@ -8,8 +8,8 @@
 
   <!-- *plugin 'userev' concat your vendor css -->
   <!-- build:css css/vendor.css -->
-  <link rel="stylesheet" href="vendor/bootstrap.min.css"/>
-  <link rel="stylesheet" href="vendor/bootstrap-theme.min.css"/>
+  <link rel="stylesheet" href="vendor/bootstrap/bootstrap.css"/>
+  <link rel="stylesheet" href="vendor/bootstrap/bootstrap-theme.min.css"/>
   <!-- endbuild -->
 
   <!-- *plugin 'userev' concat your dev css -->
@@ -22,11 +22,13 @@
 <body>
 <div class="wrapper">
   <header>
-    <h1>Graphy individual</h1>
+    <nav class="navbar navbar-default">
+      <h1><span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span><a href="/">Graphy individual</a></h1>
+    </nav>
   </header>
   <div class="container">
     <div class="row">
-      <div class="col-md-8">
+      <div class="col-md-12">
         <h2 class="text-center">Upload .gexf file and render into an area</h2>
         <!-- Container for graphics-->
         <div id="container-gexf"></div>
@@ -43,19 +45,13 @@
           </div>
         </div>
       </div>
-      <div class= "col-md-4 right-area">
-        <h2 class="text-center">Enter out js object</h2>
-        <div id="graph-container"></div>
-        <div class="button-nav text-center">
-          <button class=" nav-uploader" onclick="">convert</button>
-        </div>
-      </div>
      </div>
   </div>
 </div><!--End wrapper-->
 <!-- *plugin 'userev' concat your vendor js -->
 <!-- build:js scripts/vendor.js -->
 <script src="vendor/jquery.js"></script>
+<script src="vendor/bootstrap/bootstrap.min.js"></script>
 <script src="vendor/sigma/sigma.js"></script>
 <script src="vendor/sigma.parsers.gexf.js"></script>
 <script src="vendor/gexf-parser.js"></script>
