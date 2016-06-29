@@ -1,6 +1,6 @@
 
 var input = document.getElementById('upload-input');
-//onclick upload file
+//rules to upload file
 function handleFileSelect()
 {
 
@@ -28,24 +28,30 @@ function fileAppStare(){
 }
 
 
-var myExistingInstance = new sigma();
-
 
 //  parse file in area
 function receivedText() {
     var nameFile = fr.result;
-    sigma.parsers.gexf(
-        nameFile, {
-            container: 'container-gexf'
+    var gexfSigma = new sigma({
+        renderer: {
+            container: document.getElementById('container-gexf'),
+            type: 'canvas'
+        },
+        settings:{
+            doubleClickEnabled: false
+            //enableEdgeHovering: true,
+            //edgeHoverColor: 'edge',
+            //defaultEdgeHoverColor: '#fff',
+            //edgeHoverSizeRatio: 1,
+            //edgeHoverExtremities: true
         }
 
-    );
-
+    });
     sigma.parsers.gexf(
         nameFile,
-        myExistingInstance,
+        gexfSigma,
         function() {
-            myExistingInstance.refresh();
+            gexfSigma.refresh();
         }
 
     );
