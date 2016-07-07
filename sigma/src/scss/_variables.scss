@@ -1,20 +1,39 @@
 //variables
 $button-upload: #1e83dc;
 $width-frame: 860px;
-$hyper-color: #654d4d;
-$hyperColor: #333;
+$hyper-color: #636b66;
+$canvas-line: #333;
+$button-color: linear-gradient(to bottom, rgba(105,115,109,1) 0%,rgba(99,107,102,1) 100%);
 
-//custom classes
-.text{
-  &-left{
-    text-align: left;
-  }
-  &-center{
-    text-align: center;
-  }
-  &-right{
-    text-align: right;
-  }
+$logos-color: #EDEA00;
+
+//color theme
+$footer-bg: #369F4D;  
+$nav-link-color-hover: #EDEA00;
+$nav-bg: #57B96D;
+$border-color: #1D8935;
+$nav-link-color: #fff;
+
+
+//classes
+%button-style-hover{
+   border: 1px solid #80a64a;
+    -webkit-box-shadow: 1px 1px 0 #b6e96c inset, 0 1px 2px rgba(0,0,0,0.1);
+    -moz-box-shadow: 1px 1px 0 #b6e96c inset, 0 1px 2px rgba(0,0,0,0.1);
+    box-shadow: 1px 1px 0 #b6e96c inset, 0 1px 2px rgba(0,0,0,0.1);
+    background: rgb(165,218,89);
+    background: -moz-linear-gradient(top, rgba(165,218,89,1) 0%, rgba(149,197,79,1) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(165,218,89,1)), color-stop(100%,rgba(149,197,79,1)));
+    background: -webkit-linear-gradient(top, rgba(165,218,89,1) 0%,rgba(149,197,79,1) 100%);
+    background: -o-linear-gradient(top, rgba(165,218,89,1) 0%,rgba(149,197,79,1) 100%);
+    background: -ms-linear-gradient(top, rgba(165,218,89,1) 0%,rgba(149,197,79,1) 100%);
+    background: linear-gradient(to bottom, #57B96D 0%, #87D498 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a5da59', endColorstr='#95c54f',GradientType=0 );
+    color: #fff;
+    text-shadow: 1px 1px 0 rgba(0,0,0,0.2);
+}
+%logos-shadow{
+   text-shadow: 0 0 1px rgba(0,0,0,0.2);
 }
 
 //mixins

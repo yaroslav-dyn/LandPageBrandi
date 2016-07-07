@@ -8,37 +8,93 @@ body{
 }
 //typography
 h1,h2,h3,h4,h5,h6{
-  color: $hyperColor;
+  color: $hyper-color;
 }
-
+a{
+  &:hover, &:focus{
+    text-decoration: none;
+  } 
+}
 .wrapper{
-
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: space-between;
 }
 //HEADER
 header{
+  .navbar{
+    margin-bottom: 0;
+  }
+  flex: 0 0 auto;
   h1{
     margin: 0;
     font-size: 1em;
     padding: 1em;
+    display: inline-block;
+    float: left; 
     a{
-      color: $hyperColor;
+      color: $logos-color;
       font-size: 1.3em;
       text-transform: uppercase;
+      @extend %logos-shadow;
       &:hover, &:focus{
         text-decoration: none;
+        color: #fff;
       }
     }
   }
+  .main-nav{
+    background: $nav-bg;
+    border-color: $border-color;
+    border-left: none;
+    border-right: none;
+    border-radius: 0;
+    .nav{
+      a{
+       line-height: 1.5em;
+       color: $nav-link-color;
+         &:hover, &:focus {
+          color: $nav-link-color-hover;
+         }
+       }
+    }
+  } 
+}//End header
+  .logo-wrapper{
+    padding: 1em 0;
+    img{
+      height: 20px;
+      display: inline-block;
+      margin-right: 10px;
+    }
+    a{
+       &:hover{
+        color: #fff;
+        text-shadow: 1px 1px 0 rgba(0,0,0,0.2);
+    }
+  }
+}
+//CONTENT
+.content{
+  flex: 0 0 auto;
+
 }
 .render-area{
   h2{
-    font-size: 1.2em;
+    color: #1D8935;
+    font-weight: 700;
+    font-size: 1.8em;
+  }
+  .page-description{
+    font-size: 1.1em;
   }
 }
- #container-gexf, #up-static {
+ #container-gexf, #parse-csv {
     width: 100%;
     height: 0;
     margin: auto;
+    background: #f8f8f8; 
 }
 
 .upload-wrapper{
@@ -47,18 +103,20 @@ header{
 }
 .nav-uploader{
   display: inline-block;
-  background: $button-upload;
-  color: #fff;
   font: 1em "Helvetica Neue", Helvetica, Arial, sans-serif;
   padding: 12px 45px;
   border-radius: 6px;
-  border: 1px solid darken($button-upload, 30%);
-  &:hover{
-    background: lighten($button-upload, 20%);
-    border: 1px solid darken($button-upload, 10%)
+  @extend %button-style-hover;
+  &:hover{  
+    color: $logos-color;
   }
-  &:focus{
-    outline: none;
+  &:active, &:focus{
+     @extend %button-style-hover;
+     color: $logos-color;
+     outline: none !important;
+  }
+  &:active::hover{
+    color: $logos-color;
   }
 }
 #upload-input{
@@ -102,17 +160,20 @@ header{
   background: #f6f6f6;
   max-height: 400px;
   overflow-y: scroll;
-  span{
-   
+  span{  
     display: inline-block;
   }
   canvas{
      width: 48%;
      margin: 4px 8px 0 8px;
-     outline: 1px dashed $hyperColor;
+     outline: 1px dashed $canvas-line;
   }
 }
 
-
+footer{
+  background: $footer-bg;
+  min-height: 40px;
+  flex: 0 0 auto;
+}
 //import media
 @import '_media';

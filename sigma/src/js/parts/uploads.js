@@ -47,38 +47,23 @@ function receivedText() {
     sigma.parsers.gexf(
         nameFile,
         gexfSigma,
-        function() {
-            gexfSigma.refresh();
-            gexfSigma.graph.nodes().forEach(function (n) {  
+        function(s) {
+            s.refresh();
+            filter = new sigma.plugins.filter(s);    
+            filter.neighborsOf('n1');
+
+            s.graph.nodes().forEach(function (n) {  
                 if(n.attributes[0] != undefined){
-                    var el = n.attributes[0];
+                    var el = n.attributes;
+                    console.log(el);
                 }
                 else{
                     console.log("attribute not found")
                 }
               
             })
+          
         }
-               // Array.prototype.contains = function(v) {
-               //      for(var i = 0; i < this.length; i++) {
-               //          if(this[i] === v) return true;
-               //      }
-               //      return false;
-               //  };
-
-               //  Array.prototype.unique = function() {
-               //      var arr = [];
-               //      for(var i = 0; i < this.length; i++) {
-               //          if(!arr.contains(this[i])) {
-               //              arr.push(this[i]);
-               //          }
-               //      }
-               //      return arr; 
-               //  }
-               //  var uniqueMas = n.attributes[0].unique()
-
-
-
     );
     //export json
     //$('#pj').click(function(){
@@ -101,7 +86,7 @@ $('#upload-input').on('change',function(){
     spanEl.innerText = parseName;
     var nameEl = $('.load-file-name');
     nameEl.addClass('name-show');
-    $('#container-gexf').height(400);
+    $('#container-gexf').height(800);
  
     //snapshot
     $('#pj').on('click', function(){
