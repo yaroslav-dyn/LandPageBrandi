@@ -52,45 +52,36 @@ var _ = {
   }
 };
 function updatePane (graph, filter) {
-  // get max degree
-  var maxDegree = 0,
-      categories = {};
+  var categories = {};
+
   // read nodes
   graph.nodes().forEach(function(n) {
-    maxDegree = Math.max(maxDegree, graph.degree(n.id));
     categories[n.attributes.cat] = true;
-  })
-  // min degree
-  _.$('min-degree').max = maxDegree;
-  _.$('max-degree-value').textContent = maxDegree;
-  // node category
-  var nodecategoryElt = _.$('node-category');
+  });
+
+  var nodecategoryElt = $('#node-category');
   Object.keys(categories).forEach(function(c) {
-    var optionElt = document.createElement("option");
+    var optionElt = document.createElement("li");
     optionElt.text = c;
-    nodecategoryElt.add(optionElt);
+    console.log(optionElt.text);
+    nodecategoryElt.append("<li>"+optionElt.text +"</li>");
   });
   // reset button
   _.$('reset-btn').addEventListener("click", function(e) {
-    _.$('min-degree').value = 0;
-    _.$('min-degree-val').textContent = '0';
     _.$('node-category').selectedIndex = 0;
     filter.undo().apply();
     _.$('dump').textContent = '';
     _.hide('#dump');
   });
-  // export button
-  _.$('export-btn').addEventListener("click", function(e) {
-    var chain = filter.serialize();
-    console.log(chain);
-    _.$('dump').textContent = JSON.stringify(chain);
-    _.show('#dump');
-  });
+  //// export button
+  //_.$('export-btn').addEventListener("click", function(e) {
+  //  var chain = filter.serialize();
+  //  console.log(chain);
+  //  _.$('dump').textContent = JSON.stringify(chain);
+  //  _.show('#dump');
+  //});
 }
 // Initialize sigma with the dataset:
-//   e-Diaspora Moroccan corpus of websites
-//   by Dana Diminescu & Matthieu Renault
-//   http://www.e-diasporas.fr/wp/moroccan.html
 sigma.parsers.gexf('gexf/graph-4.gexf', {
   container: 'container-gexf',
   settings: {
@@ -101,22 +92,6 @@ sigma.parsers.gexf('gexf/graph-4.gexf', {
   // Initialize the Filter API
   filter = sigma.plugins.filter(s);
   updatePane(s.graph, filter);
-  function applyMinDegreeFilter(e) {
-    var v = e.target.value;
-    _.$('min-degree-val').textContent = v;
-    filter
-      .undo('min-degree')
-      .nodesBy(
-        function(n, options) {
-          return this.graph.degree(n.id) >= options.minDegreeVal;
-        },
-        {
-          minDegreeVal: +v
-        },
-        'min-degree'
-      )
-      .apply();
-  }
   function applyCategoryFilter(e) {
     var c = e.target[e.target.selectedIndex].value;
     filter
@@ -132,7 +107,6 @@ sigma.parsers.gexf('gexf/graph-4.gexf', {
       )
       .apply();
   }
-  _.$('min-degree').addEventListener("input", applyMinDegreeFilter);  // for Chrome and FF
-  _.$('min-degree').addEventListener("change", applyMinDegreeFilter); // for IE10+, that sucks
+
   _.$('node-category').addEventListener("change", applyCategoryFilter);
 });

@@ -102,7 +102,7 @@ header {
   .nav-uploader:active, .nav-uploader:focus {
     color: #EDEA00;
     outline: none !important; }
-  .nav-uploader:active::hover {
+  .nav-uploader:active:hover {
     color: #EDEA00; }
 
 #upload-input {

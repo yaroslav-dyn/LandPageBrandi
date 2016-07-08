@@ -115,7 +115,7 @@ header{
      color: $logos-color;
      outline: none !important;
   }
-  &:active::hover{
+  &:active:hover{
     color: $logos-color;
   }
 }
