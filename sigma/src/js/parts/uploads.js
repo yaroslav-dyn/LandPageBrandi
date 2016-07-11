@@ -48,21 +48,25 @@ function receivedText() {
         nameFile,
         gexfSigma,
         function(s) {
-            s.refresh();
-            filter = new sigma.plugins.filter(s);    
-            filter.neighborsOf('n1');
 
-            s.graph.nodes().forEach(function (n) {  
-                if(n.attributes[0] != undefined){
-                    var el = n.attributes;
-                    console.log(el);
-                }
-                else{
-                    console.log("attribute not found")
-                }
-              
-            })
-          
+
+            //
+            //s.graph.nodes().forEach(function (n) {
+            //    if(n.attributes['cat'] != undefined){
+            //        var el = n.attributes;
+            //        console.log(el);
+            //    }
+            //    else{
+            //        console.log("attribute not found")
+            //    }
+            //
+            //});
+
+
+
+
+
+            s.refresh();
         }
     );
     //export json
@@ -73,7 +77,16 @@ function receivedText() {
     //    });
     //})
 
+
+
+
 }//End parse file in area (sigma.js)
+
+
+
+
+
+
 
 
 //On change do all

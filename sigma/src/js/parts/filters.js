@@ -59,13 +59,28 @@ function updatePane (graph, filter) {
     categories[n.attributes.cat] = true;
   });
 
-  var nodecategoryElt = $('#node-category');
+  var nodecategoryElt = _.$('node-category');
   Object.keys(categories).forEach(function(c) {
-    var optionElt = document.createElement("li");
+    var optionElt = document.createElement("option");
     optionElt.text = c;
-    console.log(optionElt.text);
-    nodecategoryElt.append("<li>"+optionElt.text +"</li>");
+    nodecategoryElt.add(optionElt);
+
   });
+
+  //custom each for categories
+  var catList = $('#list-cat');
+  Object.keys(categories).forEach(function(c) {
+    var liElt = document.createElement("li");
+    liElt.text = c;
+    catList.append('<li>'+ c + '</li>');
+  });
+
+
+  //$(' li').click(function(){
+  //    var tt = $(this).text();
+  //  $('#node-category').val(tt);
+  //});
+
   // reset button
   _.$('reset-btn').addEventListener("click", function(e) {
     _.$('node-category').selectedIndex = 0;
@@ -81,14 +96,24 @@ function updatePane (graph, filter) {
   //  _.show('#dump');
   //});
 }
+sigma.renderers.def = sigma.renderers.canvas;
 // Initialize sigma with the dataset:
 sigma.parsers.gexf('gexf/graph-4.gexf', {
   container: 'container-gexf',
   settings: {
-    edgeColor: 'default',
-    defaultEdgeColor: '#ccc'
+
   }
 }, function(s) {
+
+
+  s.graph.nodes().forEach(function (n) {
+   console.log(n.viz.color);
+    n.viz.color = 'rgb(0,0,0)';
+
+  });
+  s.refresh();
+
+
   // Initialize the Filter API
   filter = sigma.plugins.filter(s);
   updatePane(s.graph, filter);
@@ -107,6 +132,14 @@ sigma.parsers.gexf('gexf/graph-4.gexf', {
       )
       .apply();
   }
+
+
+
+  $(' #list-cat li').on("click", applyCategoryFilter, function(){
+    var tt = $(this).text();
+    $('#node-category').val(tt);
+  });
+
 
   _.$('node-category').addEventListener("change", applyCategoryFilter);
 });

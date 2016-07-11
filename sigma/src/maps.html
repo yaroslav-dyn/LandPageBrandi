@@ -43,47 +43,45 @@
           </div>
         </nav>
   </header>
-<div class="content">
-  <section> 
-    <div class="container-fluid render-area">
-      <div class="row">
-        <div class="col-md-10 col-md-push-1">
-        <div id="container-gexf" style="height: 400px"></div>
-         <div id="control-pane">
-            <h2 class="underline">filters</h2>
-            <!--<div>-->
-            <!--<h3>min degree <span id="min-degree-val">0</span></h3>-->
-             <!--0 <input id="min-degree" type="range" min="0" max="0" value="0"> <span id="max-degree-value">0</span><br>-->
-            <!--</div>-->
-            <!--<div>-->
-              <h3>node category</h3>
-              <ul id="node-category">
-                <!--<option value="" selected>All categories</option>-->
-              </ul>
+  <div class="content">
+    <section>
+      <div class="container-fluid render-area">
+        <div class="row">
+          <div class="col-md-10 col-md-push-1">
+          <div id="container-gexf" style="height: 400px"></div>
+           <div id="control-pane">
+              <h2 class="underline">filters</h2>
+                <h3>node category</h3>
+                <select id="node-category">
+                  <option value="" selected>All categories</option>
+                </select>
+              </div>
+              <div>
+                <ul id="list-cat"></ul>
+              </div>
+              <span class="line"></span>
+              <div>
+                <button id="reset-btn">Reset filters</button>
+                <!--<button id="export-btn">Export</button>-->
+              </div>
+              <div id="dump" class="hidden"></div>
             </div>
-            <span class="line"></span>
-            <div>
-              <button id="reset-btn">Reset filters</button>
-              <button id="export-btn">Export</button>
-            </div>
-            <div id="dump" class="hidden"></div> 
           </div>
-        </div>
-       </div>
-    </div>
-  </section>
-  <section>
-    <div class="container">
-       <div class="row">
-         <div class="col-md-12">
-            <div id="snap-area"></div>
          </div>
-       </div>
-    </div>   
-  </section>  
-</div><!-- end-content  -->
+    </section>
+  </div><!-- end-content  -->
 
 <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <h4>Risk Insights</h4>
+        <p>
+          the tool that allows you to create,visualise and categorise risk information networks.
+        </p>
+      </div>
+    </div>
+  </div>
 
 </footer>  
 <!-- *plugin 'userev' concat your vendor js -->
@@ -105,4 +103,4 @@
 <!-- endbuild -->
 </body>
 </html>
-</div><!--End wrapper-->
+</div><!--end wrapper-->
