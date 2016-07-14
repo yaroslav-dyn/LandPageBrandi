@@ -1,0 +1,28 @@
+{
+  "nodes": [
+    {"id": "R_ASSET", "label": "Asset bubble", "type": "Risk" ,
+    	"category":"Economic",
+    	"description": "Unsustainably overpriced assets such as commodities, housing, shares, etc. in a major economy or region."},
+    {"id": "R_DEFLATION", "label": "Deflation", "type": "Risk" ,
+    	"category":"Economic",
+    	"description": "Prolonged ultra-low inflation or deflation in a major economy or region."},
+	{"id": "R_FINANCIALMECH", "label": "Failure of financial mechanism or institution", "type": "Risk" ,
+		"category":"Economic",
+		"description": "Prolonged ultra-low inflation or deflation in a major economy or region."},
+	{"id": "R_CRITICALINFRA", "label": "Failure of critical infrastructure", "type": "Risk" ,
+		"category":"Environmental",
+		"description": "Failure to adequately invest in, upgrade and secure infrastructure networks (e.g. energy, transportation and communications) leads to pressure or a breakdown with system-wide implications."},
+	{"id": "R_FISCALCRISES", "label": "Failure of critical infrastructure", "type": "Risk" ,
+		"category":"Geopolitical",
+		"description": "Failure to adequately invest in, upgrade and secure infrastructure networks (e.g. energy, transportation and communications) leads to pressure or a breakdown with system-wide implications."}
+
+	],
+  	"links":[
+  		{"source":"R_ASSET","target":"R_DEFLATION","type":"Trend-Risk","value":16},
+  		{"source":"R_ASSET","target":"R_FINANCIALMECH","type":"Trend-Risk","value":1},
+  		{"source":"R_ASSET","target":"R_CRITICALINFRA","type":"Trend-Risk","value":2},
+  		{"source":"R_CRITICALINFRA","target":"R_ASSET","type":"Trend-Risk","value":26},
+  		{"source":"R_FISCALCRISES","target":"R_CRITICALINFRA","type":"Trend-Risk","value":26}
+  	]
+
+}    

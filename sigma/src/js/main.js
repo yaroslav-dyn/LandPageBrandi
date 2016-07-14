@@ -1,148 +1,4 @@
-var filter;
-/**
- * DOM utility functions
- */
-var _ = {
-  $: function (id) {
-    return document.getElementById(id);
-  },
-  all: function (selectors) {
-    return document.querySelectorAll(selectors);
-  },
-  removeClass: function(selectors, cssClass) {
-    var nodes = document.querySelectorAll(selectors);
-    var l = nodes.length;
-    for ( i = 0 ; i < l; i++ ) {
-      var el = nodes[i];
-      // Bootstrap compatibility
-      el.className = el.className.replace(cssClass, '');
-    }
-  },
-  addClass: function (selectors, cssClass) {
-    var nodes = document.querySelectorAll(selectors);
-    var l = nodes.length;
-    for ( i = 0 ; i < l; i++ ) {
-      var el = nodes[i];
-      // Bootstrap compatibility
-      if (-1 == el.className.indexOf(cssClass)) {
-        el.className += ' ' + cssClass;
-      }
-    }
-  },
-  show: function (selectors) {
-    this.removeClass(selectors, 'hidden');
-  },
-  hide: function (selectors) {
-    this.addClass(selectors, 'hidden');
-  },
-  toggle: function (selectors, cssClass) {
-    var cssClass = cssClass || "hidden";
-    var nodes = document.querySelectorAll(selectors);
-    var l = nodes.length;
-    for ( i = 0 ; i < l; i++ ) {
-      var el = nodes[i];
-      //el.style.display = (el.style.display != 'none' ? 'none' : '' );
-      // Bootstrap compatibility
-      if (-1 !== el.className.indexOf(cssClass)) {
-        el.className = el.className.replace(cssClass, '');
-      } else {
-        el.className += ' ' + cssClass;
-      }
-    }
-  }
-};
-function updatePane (graph, filter) {
-  var categories = {};
 
-  // read nodes
-  graph.nodes().forEach(function(n) {
-    categories[n.attributes.cat] = true;
-  });
-
-  var nodecategoryElt = _.$('node-category');
-  Object.keys(categories).forEach(function(c) {
-    var optionElt = document.createElement("option");
-    optionElt.text = c;
-    nodecategoryElt.add(optionElt);
-
-  });
-
-  //custom each for categories
-  var catList = $('#list-cat');
-  Object.keys(categories).forEach(function(c) {
-    var liElt = document.createElement("li");
-    liElt.text = c;
-    catList.append('<li>'+ c + '</li>');
-  });
-
-
-  //$(' li').click(function(){
-  //    var tt = $(this).text();
-  //  $('#node-category').val(tt);
-  //});
-
-  // reset button
-  _.$('reset-btn').addEventListener("click", function(e) {
-    _.$('node-category').selectedIndex = 0;
-    filter.undo().apply();
-    _.$('dump').textContent = '';
-    _.hide('#dump');
-  });
-  //// export button
-  //_.$('export-btn').addEventListener("click", function(e) {
-  //  var chain = filter.serialize();
-  //  console.log(chain);
-  //  _.$('dump').textContent = JSON.stringify(chain);
-  //  _.show('#dump');
-  //});
-}
-sigma.renderers.def = sigma.renderers.canvas;
-// Initialize sigma with the dataset:
-sigma.parsers.gexf('gexf/graph-4.gexf', {
-  container: 'container-gexf',
-  settings: {
-
-  }
-}, function(s) {
-
-
-  s.graph.nodes().forEach(function (n) {
-   console.log(n.viz.color);
-    n.viz.color = 'rgb(0,0,0)';
-
-  });
-  s.refresh();
-
-
-  // Initialize the Filter API
-  filter = sigma.plugins.filter(s);
-  updatePane(s.graph, filter);
-  function applyCategoryFilter(e) {
-    var c = e.target[e.target.selectedIndex].value;
-    filter
-      .undo('node-category')
-      .nodesBy(
-        function(n, options) {
-          return !c.length || n.attributes[options.property] === c;
-        },
-        {
-          property: 'cat'
-        },
-        'node-category'
-      )
-      .apply();
-  }
-
-
-
-  $(' #list-cat li').on("click", applyCategoryFilter, function(){
-    var tt = $(this).text();
-    $('#node-category').val(tt);
-  });
-
-
-  _.$('node-category').addEventListener("change", applyCategoryFilter);
-});
 
 var input = document.getElementById('upload-input');
 //rules to upload file
@@ -159,10 +15,9 @@ function handleFileSelect()
         fileAppStare();
     }
 }
-
+//inicialize fileReader(uploader)
 function fileAppStare(){
-    var contanGraph = document.getElementById('container-gexf');
-    contanGraph.innerText = "";
+    $('#container-graph').html('')
     file = input.files[0];
     fr = new FileReader();
     fr.onload = receivedText;
@@ -171,68 +26,7 @@ function fileAppStare(){
 }
 
 
-//  parse file in area (sigma.js)
-function receivedText() {
-    var nameFile = fr.result;
-    var gexfSigma = new sigma({
-        renderer: {
-            container: document.getElementById('container-gexf'),
-            type: 'canvas'
-        },
-        settings:{
-            doubleClickEnabled: false
-            //enableEdgeHovering: true,
-            //edgeHoverColor: 'edge',
-            //defaultEdgeHoverColor: '#fff',
-            //edgeHoverSizeRatio: 1,
-            //edgeHoverExtremities: true
-        }
-
-    });
-    sigma.parsers.gexf(
-        nameFile,
-        gexfSigma,
-        function(s) {
-
-
-            //
-            //s.graph.nodes().forEach(function (n) {
-            //    if(n.attributes['cat'] != undefined){
-            //        var el = n.attributes;
-            //        console.log(el);
-            //    }
-            //    else{
-            //        console.log("attribute not found")
-            //    }
-            //
-            //});
-
-
-
-
-
-            s.refresh();
-        }
-    );
-    //export json
-    //$('#pj').click(function(){
-    //    gexfSigma.toJSON({
-    //        download: true,
-    //        filename: 'graph.json'
-    //    });
-    //})
-
-
-
-
-}//End parse file in area (sigma.js)
-
-
-
-
-
-
-
+//* files parser in parts/parsers
 
 //On change do all
 $('#upload-input').on('change',function(){
@@ -244,21 +38,107 @@ $('#upload-input').on('change',function(){
     spanEl.innerText = parseName;
     var nameEl = $('.load-file-name');
     nameEl.addClass('name-show');
-    $('#container-gexf').height(800);
+    $('#container-graph').attr('width','960').attr('height','800').css('height','800px');
  
     //snapshot
     $('#pj').on('click', function(){
-        html2canvas([ document.getElementById('container-gexf') ], {
+        html2canvas([ document.getElementById('container-graph') ], {
             onrendered: function(canvas) {
                $('#snap-area').append(canvas);
             }
         });
     });
 
-
 });
 //parsers
-sigma.parsers.json(
-  'gexf/convertcsv.json',
-  { container: 'parse-csv' }
-);
+
+//  parse json file in area (d3.js)
+function receivedText() {
+	var nameFile = fr.result;
+
+	var svg = d3.select("svg"),
+		width = +svg.attr("width"),
+		height = +svg.attr("height");
+
+	var color = d3.scaleOrdinal(d3.schemeCategory20);
+
+	var simulation = d3.forceSimulation()
+		.force("link", d3.forceLink().id(function(d) { return d.id; }))
+		.force("charge", d3.forceManyBody())
+		.force("center", d3.forceCenter(width / 2, height / 2));
+
+	d3.json(nameFile, function(error, graph) {
+
+		if (error) throw error;
+
+
+		var link = svg.append("g")
+			.attr("class", "links")
+			.selectAll("line")
+			.data(graph.links)
+			.enter().append("line")
+			.attr("stroke-width", function(d) { return Math.sqrt(d.value);});
+		link.append("title")
+			.text(function(d) { return d.value || d.strength ; })   
+		
+
+		var gNode = svg.selectAll(".nodes")
+				.data(graph.nodes)
+				.enter().append("g")
+				.attr("class", "nodes")		
+
+		var node = gNode
+				.append("circle")			
+				.attr("r", 8)
+				.attr("fill", function(d) { return color(d.category || d.group); })
+				// .on('mouseover', showText)
+				// .on('mouseout', hideText);
+			   
+			
+	   
+		var text = gNode
+				.append("text")
+				.attr("class", "text")  
+				.attr("dy", ".35em")
+				.text(function(d) { return d.label || d.id; });
+	  			
+		simulation
+			.nodes(graph.nodes)
+			.on("tick", ticked);
+
+		simulation.force("link")
+			.links(graph.links);
+
+		function ticked() {
+			link
+				.attr("x1", function(d) { return d.source.x; })
+				.attr("y1", function(d) { return d.source.y; })
+				.attr("x2", function(d) { return d.target.x; })
+				.attr("y2", function(d) { return d.target.y; });
+
+			node
+				.attr("cx", function(d) { return d.x; })
+				.attr("cy", function(d) { return d.y; });
+
+			text
+				.attr("dx", function(d) { return d.x + 5; })
+				.attr("dy", function(d) { return d.y-5; });    
+		  
+		}
+
+		//functionsc
+
+		function showText() {       
+			 text.attr('class','visible');
+			 console.log('event');    
+		}
+
+		function hideText() {       
+			 text.attr('class','hidden');
+		}
+
+	});//End json d3.js
+
+
+
+}//End parse file in area (d3.js)

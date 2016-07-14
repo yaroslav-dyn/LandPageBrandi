@@ -64,12 +64,14 @@ header {
 .logo-wrapper {
   padding: 1em 0; }
   .logo-wrapper img {
-    height: 20px;
+    height: 14px;
     display: inline-block;
     margin-right: 10px; }
-  .logo-wrapper a:hover {
-    color: #fff;
-    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2); }
+  .logo-wrapper a {
+    font-size: 14px; }
+    .logo-wrapper a:hover {
+      color: #fff;
+      text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2); }
 
 .content {
   flex: 0 0 auto; }
@@ -83,7 +85,6 @@ header {
   font-size: 1.1em; }
 
 #container-gexf, #parse-csv {
-  width: 100%;
   height: 0;
   margin: auto;
   background: #f8f8f8; }
@@ -141,7 +142,7 @@ header {
 #snap-area {
   background: #f6f6f6;
   max-height: 400px;
-  overflow-y: scroll; }
+  overflow-y: auto; }
   #snap-area span {
     display: inline-block; }
   #snap-area canvas {
@@ -153,3 +154,11 @@ footer {
   background: #369F4D;
   min-height: 40px;
   flex: 0 0 auto; }
+
+line {
+  stroke: #c8c8c8;
+  stroke-width: 1.5px; }
+
+text {
+  font-size: 12px;
+  font-family: cursive, sans-serif; }
