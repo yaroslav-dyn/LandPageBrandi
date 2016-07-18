@@ -1,8 +1,9 @@
 //parsers
 
 //  parse json file in area (d3.js)
-function receivedText() {
-	var nameFile = fr.result;
+function receivedText() { 
+
+  var nameFile = fr.result;
 
 	var svg = d3.select("svg"),
 		width = +svg.attr("width"),
@@ -15,10 +16,9 @@ function receivedText() {
 		.force("charge", d3.forceManyBody())
 		.force("center", d3.forceCenter(width / 2, height / 2));
 
+//parse json D3.js
 	d3.json(nameFile, function(error, graph) {
-
 		if (error) throw error;
-
 
 		var link = svg.append("g")
 			.attr("class", "links")
@@ -29,11 +29,10 @@ function receivedText() {
 		link.append("title")
 			.text(function(d) { return d.value || d.strength ; })   
 		
-
 		var gNode = svg.selectAll(".nodes")
 				.data(graph.nodes)
 				.enter().append("g")
-				.attr("class", "nodes")		
+				.attr("class", "nodes");
 
 		var node = gNode
 				.append("circle")			
@@ -41,13 +40,10 @@ function receivedText() {
 				.attr("fill", function(d) { return color(d.category || d.group); })
 				// .on('mouseover', showText)
 				// .on('mouseout', hideText);
-			   
-			
-	   
+			   				   
 		var text = gNode
 				.append("text")
 				.attr("class", "text")  
-				.attr("dy", ".35em")
 				.text(function(d) { return d.label || d.id; });
 	  			
 		simulation
@@ -69,12 +65,12 @@ function receivedText() {
 				.attr("cy", function(d) { return d.y; });
 
 			text
-				.attr("dx", function(d) { return d.x + 5; })
-				.attr("dy", function(d) { return d.y-5; });    
+				.attr("dx", function(d) { return d.x + 10; })
+				.attr("dy", function(d) { return d.y-10; });    
 		  
 		}
 
-		//functionsc
+		//functions
 
 		function showText() {       
 			 text.attr('class','visible');
@@ -90,3 +86,5 @@ function receivedText() {
 
 
 }//End parse file in area (d3.js)
+
+

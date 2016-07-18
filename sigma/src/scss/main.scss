@@ -92,7 +92,7 @@ header{
     font-size: 1.1em;
   }
 }
- #container-gexf, #parse-csv {
+ #container-gexf {
     //width: 100%;
     height: 0;
     margin: auto;
@@ -101,7 +101,7 @@ header{
 
 .upload-wrapper{
   text-align: center;
-  margin-top: 40px;
+  margin-top: 10px;
 }
 .nav-uploader{
   display: inline-block;
@@ -179,13 +179,22 @@ footer{
 }
 
 //svg
-line{
-  stroke: #c8c8c8;
-  stroke-width: 1.5px;
-}
-text{
-  font-size: 12px;
-  font-family: cursive, sans-serif;
+.graph-wrapper{
+  svg{
+    height: 0;
+  }
+  .nodes:hover > .text{
+    display: inline;
+  }
+  line{
+    stroke: #c8c8c8;
+    stroke-width: 1.5px;
+  }
+  text{
+    display: none;
+    font-size: 12px;
+    font-family: cursive, sans-serif;
+  }
 }
 
 

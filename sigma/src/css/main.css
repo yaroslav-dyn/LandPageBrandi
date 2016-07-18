@@ -84,14 +84,14 @@ header {
 .render-area .page-description {
   font-size: 1.1em; }
 
-#container-gexf, #parse-csv {
+#container-gexf {
   height: 0;
   margin: auto;
   background: #f8f8f8; }
 
 .upload-wrapper {
   text-align: center;
-  margin-top: 40px; }
+  margin-top: 10px; }
 
 .nav-uploader {
   display: inline-block;
@@ -155,10 +155,17 @@ footer {
   min-height: 40px;
   flex: 0 0 auto; }
 
-line {
+.graph-wrapper svg {
+  height: 0; }
+
+.graph-wrapper .nodes:hover > .text {
+  display: inline; }
+
+.graph-wrapper line {
   stroke: #c8c8c8;
   stroke-width: 1.5px; }
 
-text {
+.graph-wrapper text {
+  display: none;
   font-size: 12px;
   font-family: cursive, sans-serif; }
