@@ -72,7 +72,6 @@ header{
       font-size: 14px;
        &:hover{
         color: #fff;
-
         text-shadow: 1px 1px 0 rgba(0,0,0,0.2);
     }
   }
@@ -148,7 +147,6 @@ header{
     opacity: 0;
   }
 }
-
 .right-area{
   h2{
     color: $hyper-color;
@@ -171,11 +169,21 @@ header{
      outline: 1px dashed $canvas-line;
   }
 }
-
 footer{
   background: $footer-bg;
   min-height: 40px;
   flex: 0 0 auto;
+  color: #fff;
+  @extend %logos-shadow;
+  h4{
+    color: $logos-color;
+    @extend %logos-shadow;
+    font-size: 1em;
+    margin: 8px 0;
+  }
+  p{
+   font-size: 0.8em;
+  }
 }
 
 //svg
@@ -183,18 +191,22 @@ footer{
   svg{
     height: 0;
   }
-  .nodes:hover > .text{
+
+  .nodes:hover > .text, .nodes:hover + .text{
     display: inline;
   }
   line{
-    stroke: #c8c8c8;
-    stroke-width: 1.5px;
+    //stroke: lighten($nav-bg, 15%);
+    stroke-width: 1px;
   }
-  text{
+  .text{
     display: none;
     font-size: 12px;
     font-family: cursive, sans-serif;
   }
+  //.text.trends{
+  //  display: inline;
+  //}
 }
 
 

@@ -14,7 +14,7 @@
   color: #fff;
   text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2); }
 
-header h1 a {
+header h1 a, footer, footer h4 {
   text-shadow: 0 0 1px rgba(0, 0, 0, 0.2); }
 
 body {
@@ -153,19 +153,25 @@ header {
 footer {
   background: #369F4D;
   min-height: 40px;
-  flex: 0 0 auto; }
+  flex: 0 0 auto;
+  color: #fff; }
+  footer h4 {
+    color: #EDEA00;
+    font-size: 1em;
+    margin: 8px 0; }
+  footer p {
+    font-size: 0.8em; }
 
 .graph-wrapper svg {
   height: 0; }
 
-.graph-wrapper .nodes:hover > .text {
+.graph-wrapper .nodes:hover > .text, .graph-wrapper .nodes:hover + .text {
   display: inline; }
 
 .graph-wrapper line {
-  stroke: #c8c8c8;
-  stroke-width: 1.5px; }
+  stroke-width: 1px; }
 
-.graph-wrapper text {
+.graph-wrapper .text {
   display: none;
   font-size: 12px;
   font-family: cursive, sans-serif; }

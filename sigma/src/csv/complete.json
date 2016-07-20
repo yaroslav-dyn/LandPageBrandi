@@ -6,23 +6,95 @@
     {"id": "R_DEFLATION", "label": "Deflation", "type": "Risk" ,
     	"category":"Economic",
     	"description": "Prolonged ultra-low inflation or deflation in a major economy or region."},
-	{"id": "R_FINANCIALMECH", "label": "Failure of financial mechanism or institution", "type": "Risk" ,
+	   {"id": "R_FINANCIALMECH", "label": "Failure of financial mechanism or institution", "type": "Risk" ,
 		"category":"Economic",
 		"description": "Prolonged ultra-low inflation or deflation in a major economy or region."},
 	{"id": "R_CRITICALINFRA", "label": "Failure of critical infrastructure", "type": "Risk" ,
 		"category":"Environmental",
 		"description": "Failure to adequately invest in, upgrade and secure infrastructure networks (e.g. energy, transportation and communications) leads to pressure or a breakdown with system-wide implications."},
-	{"id": "R_FISCALCRISES", "label": "Failure of critical infrastructure", "type": "Risk" ,
+	{"id": "R_FISCALCRISES", "label": "Fiscal crises", "type": "Risk" ,
 		"category":"Geopolitical",
-		"description": "Failure to adequately invest in, upgrade and secure infrastructure networks (e.g. energy, transportation and communications) leads to pressure or a breakdown with system-wide implications."}
+		"description": " END  Failure to adequately invest in, upgrade and secure infrastructure networks (e.g. energy, transportation and communications) leads to pressure or a breakdown with system-wide implications."},
+  
+  {"id": "T_AGEING", "label": " Ageing population", "type": "Trend" ,
+    "category":"Trend",
+    "description": "Ageing populations in developed and developing countries driven by declining fertility and decrease of middle and old age mortality."},
+  
+  {"id": "T_INTERGOVERNANCE", "label": "Changing landscape of international governance", "type": "Trend" ,
+    "category":"Trend",
+    "description": "Changing landscape of global or regional institutions (e.g.  UN, IMF, NATO, etc.), agreements or networks."},
+
+    {"id": "T_CLIMATECHANGE", "label": "Climate change", "type": "Trend" ,
+    "category":"Trend",
+    "description": "Change of climate which is attributed directly or indirectly to human activity that alters the composition of the global atmosphere, in addition to natural climate variability. "},
+
+    {"id": "T_ENVIRONMENTALDEG", "label": "Environmental degradation ", "type": "Trend" ,
+    "category":"Trend",
+    "description": "Deterioration in the quality of air, soil and water from ambient concentrations of pollutants and other activities and processes. "},
+
+
+     {"id": "T_MIDDLECLASS", "label": "Growing middle class in emerging economies", "type": "Trend" ,
+    "category":"Trend",
+    "description": "Growing share of population reaching middle-class income levels in emerging economies. "},
+
+
+    {"id": "T_NATIONALSENTIMENT", "label": "Increasing national sentiment", "type": "Trend" ,
+    "category":"Trend",
+    "description": "Increasing national sentiment among populations and political leaders affecting countries??? national and international political positions."},
+    
+    {"id": "T_POLARIZATION", "label": "Increasing polarization of societies ", "type": "Trend" ,
+    "category":"Trend",
+    "description": "Inability to reach agreement on key issues within countries because of diverging or extreme values, political or religious views. "},
+
+    {"id": "T_CHRONICDISEASES", "label": "Rise of chronic diseases", "type": "Trend" ,
+    "category":"Trend",
+    "description": "Increasing rates of non-communicable diseases, also known as chronic diseases, leading to long-term costs of treatment and threatening recent societal gains in life expectancy and quality."},
+    
+    {"id": "T_CYBERDEPENDENCY", "label": "Rise of cyber dependency", "type": "Trend" ,
+    "category":"Trend",
+    "description": "Rise of cyber dependency due to increasing digital interconnection of people, things and organizations. "},
+
+    {"id": "T_MOBILITY", "label": "Rising geographic mobility  ", "type": "Trend" ,
+    "category":"Trend",
+    "description": "Increasing mobility of people and things due to quicker and better-performing means of transport and lowered regulatory barriers."},
+
+    {"id": "T_INCOMEDISP", "label": "Rising income and wealth disparity ", "type": "Trend" ,
+    "category":"Trend",
+    "description": "Increasing socioeconomic gap between rich and poor in major countries or regions. "},
+
+
+    {"id": "T_SHIFTPOWER", "label": "Shifts in power", "type": "Trend" ,
+    "category":"Trend",
+    "description": "Shifting power from state to non-state actors and individuals, from global to regional levels, and from developed to emerging market and developing economies."},
+
+    {"id": "T_URBANIZATION", "label": "Urbanization", "type": "Trend" ,
+    "category":"Trend",
+    "description": "Rising number of people living in urban areas resulting in physical growth of cities."}
 
 	],
   	"links":[
-  		{"source":"R_ASSET","target":"R_DEFLATION","type":"Trend-Risk","value":16},
-  		{"source":"R_ASSET","target":"R_FINANCIALMECH","type":"Trend-Risk","value":1},
-  		{"source":"R_ASSET","target":"R_CRITICALINFRA","type":"Trend-Risk","value":2},
-  		{"source":"R_CRITICALINFRA","target":"R_ASSET","type":"Trend-Risk","value":26},
-  		{"source":"R_FISCALCRISES","target":"R_CRITICALINFRA","type":"Trend-Risk","value":26}
-  	]
+  		{"source":"T_URBANIZATION","target":"R_DEFLATION","type":"Trend-Risk","value":3},
+  		{"source":"T_SHIFTPOWER","target":"R_FINANCIALMECH","type":"Trend-Risk","value":1},
+  		{"source":"T_MOBILITY","target":"R_CRITICALINFRA","type":"Trend-Risk","value":2},
+  		{"source":"T_CYBERDEPENDENCY","target":"R_ASSET","type":"Trend-Risk","value":26},
+  		{"source":"T_CHRONICDISEASES","target":"R_CRITICALINFRA","type":"Trend-Risk","value":26},
+        {"source":"R_CRITICALINFRA","target":"R_FISCALCRISES","type":"Risk-Risk","value":4},
+        {"source":"R_CRITICALINFRA","target":"R_FISCALCRISES","type":"Risk-Risk","value":4},
+        {"source":"T_AGEING","target":"R_ASSET","type":"Trend-Risk","value":16},
+        {"source":"T_MOBILITY","target":"R_FISCALCRISES","type":"Trend-Risk","value":3}
+
+
+
+
+    ]
 
 }    
+
+              
+                              
+                    
+                  
+                
+                  
+                      
+                    
