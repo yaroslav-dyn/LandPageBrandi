@@ -11,7 +11,7 @@ function staticMap(){
 		halfHeight = height/ 2,
 
 		rLage = halfHeight / 1.1,
-		rSmall = rLage / 2,
+		rSmall = rLage / 1.4,
 		trendObj = [],
 		riskObj = [],
 		edges = [];
