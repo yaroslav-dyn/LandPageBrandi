@@ -38,7 +38,7 @@ $('#upload-input').on('change',function(){
     var nameEl = $('.load-file-name');
     nameEl.addClass('name-show');
     $('#container-graph').attr('width','960').attr('height','800').css('height','800px');
- 
+
     //snapshot
     $('#pj').on('click', function(){
         html2canvas([ document.getElementById('container-graph') ], {

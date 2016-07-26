@@ -5,6 +5,7 @@
 
 body{
   font-size: 16px;
+  overflow-x: hidden;
 }
 //typography
 h1,h2,h3,h4,h5,h6{
@@ -171,6 +172,8 @@ header{
 }
 footer{
   background: $footer-bg;
+  border-top: 1px solid $border-color;
+  border-bottom: 1px solid $border-color;
   min-height: 40px;
   flex: 0 0 auto;
   color: #fff;
@@ -192,21 +195,31 @@ footer{
     height: 0;
   }
 
-  .nodes:hover > .text, .nodes:hover + .text{
+  .g-nodes:hover > .text, .nodes:hover + .text{
     display: inline;
   }
   line{
     //stroke: lighten($nav-bg, 15%);
-    stroke-width: 1px;
+    //stroke-width: 0.3px;
   }
   .text{
     display: none;
-    font-size: 12px;
-    font-family: cursive, sans-serif;
+    font: 100 0.9em cursive, sans-serif;
+    stroke: none;
+    fill: #000;
   }
-  //.text.trends{
-  //  display: inline;
-  //}
+  .text-visible{
+    display: inline;
+    font-size: 1em;
+    font-weight: 300;
+    text-transform: none!important;
+    @include transEff(0.3s);
+  }
+
+  .nodes{
+    stroke: rgba(0,0,0,0.6);
+    stroke-width: 1;
+  }
 }
 
 

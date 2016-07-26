@@ -18,7 +18,8 @@ header h1 a, footer, footer h4 {
   text-shadow: 0 0 1px rgba(0, 0, 0, 0.2); }
 
 body {
-  font-size: 16px; }
+  font-size: 16px;
+  overflow-x: hidden; }
 
 h1, h2, h3, h4, h5, h6 {
   color: #636b66; }
@@ -152,6 +153,8 @@ header {
 
 footer {
   background: #369F4D;
+  border-top: 1px solid #1D8935;
+  border-bottom: 1px solid #1D8935;
   min-height: 40px;
   flex: 0 0 auto;
   color: #fff; }
@@ -165,13 +168,27 @@ footer {
 .graph-wrapper svg {
   height: 0; }
 
-.graph-wrapper .nodes:hover > .text, .graph-wrapper .nodes:hover + .text {
+.graph-wrapper .g-nodes:hover > .text, .graph-wrapper .nodes:hover + .text {
   display: inline; }
-
-.graph-wrapper line {
-  stroke-width: 1px; }
 
 .graph-wrapper .text {
   display: none;
-  font-size: 12px;
-  font-family: cursive, sans-serif; }
+  font: 100 0.9em cursive, sans-serif;
+  stroke: none;
+  fill: #000; }
+
+.graph-wrapper .text-visible {
+  display: inline;
+  font-size: 1em;
+  font-weight: 300;
+  text-transform: none !important;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  text-transform: uppercase; }
+
+.graph-wrapper .nodes {
+  stroke: rgba(0, 0, 0, 0.6);
+  stroke-width: 1; }
