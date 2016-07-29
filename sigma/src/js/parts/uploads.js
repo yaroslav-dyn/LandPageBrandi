@@ -37,7 +37,6 @@ $('#upload-input').on('change',function(){
     spanEl.innerText = parseName;
     var nameEl = $('.load-file-name');
     nameEl.addClass('name-show');
-    $('#container-graph').attr('width','960').attr('height','800').css('height','800px');
 
     //snapshot
     $('#pj').on('click', function(){

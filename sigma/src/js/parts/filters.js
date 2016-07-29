@@ -181,8 +181,6 @@ function staticMap(){
 				.attr("class","g-nodes trends")
 				.on("click", currentNodeTrend);
 
-
-
 		//append nodes in 'g' containers
 		var node = gNode
 				.append("circle")
@@ -235,14 +233,13 @@ function staticMap(){
 			.attr("fill", function(d) { return color(d.category || d.group); });
 
 
-
-
-//abort filter function
+//-------------ABORTING filters FUNCTION--------------------------------------------
 
 	$("#clear-filter").click(function(){
 
 		d3.selectAll(".nodes-trends")
-			.attr("r", nodesRadius + 2);
+			.attr("r", nodesRadius + 2)
+			.attr("fill", trendsColor);
 
 		d3.selectAll(".nodes-risks")
 			.attr("r", nodesRadius );
@@ -259,14 +256,11 @@ function staticMap(){
 			.attr("stroke-width",strokeWidth)
 			.attr("style","opacity: 1");
 
-
 		//----Sidebar text data clearing--------------------------
 
 		//clearing all sidebar data text
 		d3.selectAll(".s-data-text")
 			.text("");
-
-
 
 	});
 
@@ -291,7 +285,8 @@ function staticMap(){
 		d3.selectAll(".nodes-trends")
 			.transition()
 			.duration(300)
-			.attr("r", nodesRadius + 2);
+			.attr("r", nodesRadius + 2)
+			.attr("fill", trendsColor);
 
 		d3.select(this).select(".nodes-trends").transition()
 			.duration(300)
@@ -481,8 +476,6 @@ function staticMap(){
 			.text(function(d) { return d.category || "No category"; })
 			.attr("style","color:" + currentColor);
 
-
-console.log(currentColor);
 		//clearing array
 		oneTrend = [];
 		edgesCutRisk = [];

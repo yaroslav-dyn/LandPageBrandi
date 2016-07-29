@@ -31,7 +31,8 @@ a:hover, a:focus {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  justify-content: space-between; }
+  justify-content: space-between;
+  align-content: center; }
 
 header {
   flex: 0 0 auto; }
@@ -154,13 +155,6 @@ header {
     width: 48%;
     margin: 4px 8px 0 8px;
     outline: 1px dashed #333; }
-
-.container-expo {
-  -webkit-transition: all 0.1s ease-in-out;
-  -moz-transition: all 0.1s ease-in-out;
-  -ms-transition: all 0.1s ease-in-out;
-  -o-transition: all 0.1s ease-in-out;
-  transition: all 0.1s ease-in-out; }
 
 .graph-wrapper svg {
   height: 0; }
