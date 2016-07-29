@@ -1,9 +1,13 @@
+
 var heightWindow = $(window).innerHeight() - 120,
 	widthWindow = $(".container-expo").innerWidth() - 120;
 
+if(heightWindow <= 600){
+	heightWindow = 600;
+}
 
 
-$('#container-graph-static').attr('width',widthWindow).attr('height',heightWindow).css('height',heightWindow);
+$('#container-graph-static').attr('width', widthWindow).attr('height', heightWindow).css("height", heightWindow);
 
 function staticMap(){
 
@@ -20,22 +24,19 @@ function staticMap(){
 		riskObj = [],
 		edges = [],
 		categoryObj = {},
-		nodesRadius = 5;
+		nodesRadius = 5,
+		strokeWidth = 0.3,
+		edgesCutTrend  = [],
+		edgesCutRisk = [],
+		oneTrend = [];
 
 	//color palette d3
 	var color = d3.scaleOrdinal(d3.schemeCategory20),
-		trendsColor = "purple";
-
-
-	// var simulation = d3.forceSimulation()
-	// 	.force("link", d3.forceLink().id(function(d) { return d.id; }))
-	// 	.force("charge", d3.forceManyBody())
-	// 	.force("center", d3.forceCenter(width / 2, height / 2));
-
-
+		trendsColor = "#AB00AB",
+		trendsColorCurrent  = "#E54FBD";
 
 //parse json D3.js
-	d3.json("csv/complete.json", function(error, graph) {
+	d3.json("csv/complete-cut.json", function(error, graph) {
 		if (error) throw error;
 
 //-----------------filtering and coordinates-------------------
@@ -75,7 +76,6 @@ function staticMap(){
 				p.cy = rSmall * Math.sin(angle);
 		});
 
-
 		//creating object links
 		graph.links.forEach(function(e) {
 			var sourceNode = graph.nodes.filter(function(n) { return n.id === e.source; })[0],
@@ -87,7 +87,6 @@ function staticMap(){
 		//created object for risk nodes
 		riskObj.forEach(function(e){
 			var categories = e.category;
-
 
 			if(categoryObj[categories] == undefined){
 				categoryObj[categories] = [];
@@ -152,10 +151,6 @@ function staticMap(){
 
 		}
 
-//----------------filtering Data----------------------------------
-
-
-
 
 
 //----------------Append in DOM SVG--------------------------------
@@ -172,13 +167,10 @@ function staticMap(){
 			.attr("x2", function(d) { return d.target.cx + halfWidth; })
 			.attr("y2", function(d) { return d.target.cy + halfHeight; })
 			.attr("stroke",function(d){return color(d.target.category)})
-			.attr("stroke-width", "0.3")
+			.attr("stroke-width", strokeWidth)
 			.attr("title", function(d){return d.value})
 			.attr("source", function(d){return d.source.id})
 			.attr("target", function(d){return d.target.id});
-
-
-
 
 
 	//--------------TRENDS NODES------------------------------------------
@@ -186,9 +178,9 @@ function staticMap(){
 		var gNode = svg.selectAll(".nodes-trends")
 				.data(trendObj)
 				.enter().append("g")
-				.attr("fill",trendsColor)
 				.attr("class","g-nodes trends")
-				.on("click", currentNode);
+				.on("click", currentNodeTrend);
+
 
 
 		//append nodes in 'g' containers
@@ -198,15 +190,19 @@ function staticMap(){
 				.attr("id",function(d){return d.id})
 				.attr("cx", function(d){ return d.cx  + halfWidth })
 				.attr("cy", function(d){ return d.cy  + halfHeight })
-				.attr("r", nodesRadius + 2);
+				.attr("r", nodesRadius + 2)
+				.attr("fill",trendsColor);
+
+
 
 		//add nodes text
 		var textTrends = gNode
 			.append("text")
-			.attr("class","text trends")
+			.attr("class","text text-trends")
 			.text(function(d) { return d.label || d.id; })
 			.attr("dx", function(d){ return d.cx + halfWidth + 10})
 			.attr("dy", function(d){ return d.cy + halfHeight - 10});
+
 
 
 	//--------------RISK NODES-----------------------------------------
@@ -214,12 +210,22 @@ function staticMap(){
 		var rNode = svg.selectAll(".nodes-risks")
 			.data(riskObj)
 			.enter().append("g")
-			.attr("class","g-nodes risks");
+			.attr("class","g-nodes risks")
+			.on("click", currentNodeRisk);
+
+		//add nodes text
+		var textRisks = rNode
+			.append("text")
+			.attr("class","text text-risks")
+			.text(function(d) { return d.label || d.id; })
+			.attr("dx", function(d){ return d.cx + halfWidth + 10})
+			.attr("dy", function(d){ return d.cy + halfHeight - 6})
+			.attr("id", function(d){return d.id});
 
 
 
 		//append nodes in 'g' containers
-		var risknode = rNode
+		var riskNode = rNode
 			.append("circle")
 			.attr("class","nodes nodes-risks")
 			.attr("cx", function(d){ return d.cx  + halfWidth })
@@ -229,68 +235,260 @@ function staticMap(){
 			.attr("fill", function(d) { return color(d.category || d.group); });
 
 
-		//add nodes text
-		var textRisks = rNode
-			.append("text")
-			.attr("class","text risks")
-			.text(function(d) { return d.label || d.id; })
-			.attr("dx", function(d){ return d.cx + halfWidth + 10})
-			.attr("dy", function(d){ return d.cy + halfHeight - 6});
 
+
+//abort filter function
+
+	$("#clear-filter").click(function(){
+
+		d3.selectAll(".nodes-trends")
+			.attr("r", nodesRadius + 2);
+
+		d3.selectAll(".nodes-risks")
+			.attr("r", nodesRadius );
+
+		d3.selectAll(".text-trends")
+			.attr("class","text text-trends text-hidden")
+			.attr("style","font-weight: normal");
+
+		d3.selectAll(".text-risks")
+			.attr("class","text text-risks text-hidden")
+			.attr("style","font-weight: normal");
+
+		d3.selectAll("line")
+			.attr("stroke-width",strokeWidth)
+			.attr("style","opacity: 1");
+
+
+		//----Sidebar text data clearing--------------------------
+
+		//clearing all sidebar data text
+		d3.selectAll(".s-data-text")
+			.text("");
+
+
+
+	});
+
+
+//----------------filtering Data--------------------------------------
 
 	//------------Event functions---------------------------------------
-
-		//fun on click TRENDS NODES
-		function currentNode() {
-
-			//visible & transform NODES
-			d3.selectAll(".nodes-trends")
-				.transition()
-				.duration(300)
-				.attr("r", nodesRadius + 2);
-
-			d3.select(this).select("circle").transition()
-				.duration(300)
-				.attr("r", nodesRadius + 5);
-
-
-			d3.select(this).select("circle").attr("cx");
-
-
-			//visible & transform TEXT
-			d3.selectAll(".text")
-				.attr("class","text trends");
-
-			d3.select(this).select("text")
-				.attr("class","text trends text-visible");
-
-			var currentID = d3.select(this).select("circle").attr("id");
-
-
-			if( $("line").attr('source') == currentID ){
-				alert(this);
-			}
-
-
-
-
-
-
-
-
-				//dd
-				//.filter(function(d){
-				//	return d.source === 'R_WATER';
-                //
-				//})
-				//.attr("stroke-width","4");
-
-
-
+		//show sidebar
+		function changeSidebar(){
+			$("#container-expo").removeClass("col-md-offset-1 ");
+			$("#sidebar-data").removeClass("hidden")
 		}
 
 
 
+//-------------fun on click TRENDS NODES--------------------------------
+	function currentNodeTrend() {
+
+		changeSidebar();
+
+		//visible & transform trendsNodes
+		d3.selectAll(".nodes-trends")
+			.transition()
+			.duration(300)
+			.attr("r", nodesRadius + 2);
+
+		d3.select(this).select(".nodes-trends").transition()
+			.duration(300)
+			.attr("r", nodesRadius + 5);
+
+		//visible & transform TEXT
+		d3.selectAll(".text-trends")
+			.attr("class","text text-trends text-hidden")
+			.attr("style", "font-size: 0.9em");
+
+		d3.select(this).select(".text-trends")
+			.attr("class","text text-trends text-visible")
+			.attr("style", "font-size: 1em: font-weight: bold");
+
+		//check current node id
+		var currentID = d3.select(this).select("circle").attr("id"),
+			currentColor = d3.select(this).select("circle").attr("fill");
+
+		//filtering all lines where currentId = source
+		d3.selectAll("line")
+			.attr("stroke-width", strokeWidth)
+			.attr("style","opacity: 0.6")
+			.data(edges)
+			.filter(function(d){
+				if(d.source.id == currentID){
+					edgesCutTrend.push(d.target.id)
+				}
+				return d.source.id == currentID;
+			})
+			.attr("stroke-width", strokeWidth * 5)
+			.attr("style","opacity: 1");
+
+		//filtering current risk nodes
+		d3.selectAll(".nodes-risks")
+			.attr("r", nodesRadius + 1)
+			.filter(function(d){
+				return edgesCutTrend.indexOf(d.id) >= 0;
+
+			})
+			.transition()
+			.duration(300)
+			.attr("r", nodesRadius + 3);
+
+
+		//abort filtering current text nodes
+		d3.selectAll(".text-risks")
+			.attr("class","text text-risks text-hidden")
+			.attr("style", "font-weight: normal");
+		//filtering current risk-text nodes
+		d3.selectAll(".text-risks")
+			.filter(function(d){
+				return edgesCutTrend.indexOf(d.id) >= 0;
+			})
+			.attr("class","text text-risks text-visible");
+
+
+		//----Sidebar text data--------------------------
+
+		//create one current object for sidebar data
+		trendObj.forEach(function(e){
+			if(e.id == currentID){
+				oneTrend.push(e);
+			}
+		});
+
+		//type of risk
+		d3.selectAll(".trend-risk")
+			.text("trend");
+		//Nodes label
+		d3.selectAll(".trends-selected")
+			.data(oneTrend)
+			.text(function(d) { return d.label || d.id; });
+		//Nodes description
+		d3.selectAll(".description-risk")
+			.data(oneTrend)
+			.text(function(d) { return d.description || "No description"; });
+		//Nodes category
+		d3.selectAll(".sel-cat")
+			.data(oneTrend)
+			.text(function(d) { return d.category || "No category"; })
+			.attr("style","color:" + currentColor);
+
+		oneTrend = [];
+		edgesCutTrend = [];
+
+	}//END currentNodeTrends
+
+
+//-------fun on click RISKS NODES----------------------------
+
+	function currentNodeRisk(){
+		changeSidebar();
+		//visible & transform RiskNodes
+		d3.selectAll(".nodes-risks")
+			.transition()
+			.duration(300)
+			.attr("r", nodesRadius);
+
+		d3.select(this).select("circle").transition()
+			.duration(300)
+			.attr("r", nodesRadius + 3);
+
+		//visible & transform TEXT
+		d3.selectAll(".text-risks")
+			.attr("class","text text-risks text-hidden")
+			.attr("style","font-weight: normal");
+
+		d3.select(this).select(".text-risks")
+			.attr("class","text text-risks text-visible")
+			.attr("style","font-weight: bold; font-size: 0.9em");
+
+		//check current node id
+		var currentID = d3.select(this).select("circle").attr("id"),
+			currentColor = d3.select(this).select("circle").attr("fill");
+
+		//filtering all lines where currentId = target
+		d3.selectAll("line")
+			.attr("stroke-width",strokeWidth)
+			.attr("style","opacity: 0.6")
+			.data(edges)
+			.filter(function(d){
+				if(d.target.id == currentID && d.source.type == "Trend"){
+					edgesCutRisk.push(d.source.id)
+				}
+				if(d.source.type == "Trend"){
+					return d.target.id == currentID;
+				}
+
+			})
+			.attr("stroke-width", strokeWidth * 5)
+			.attr("style","opacity: 1");
+
+
+		//filtering current trend nodes
+		d3.selectAll(".nodes-trends")
+			.attr("fill", trendsColor)
+			.attr("r", nodesRadius + 2)
+			.filter(function(d){
+				return edgesCutRisk.indexOf(d.id) >= 0;
+			})
+			.transition()
+			.attr("fill",trendsColorCurrent)
+			.attr("r", nodesRadius + 5);
+
+
+		//filtering corresponding text trends
+		d3.selectAll(".text-trends")
+			.attr("class","text text-trends text-hidden")
+			.attr("style","font-size: inherit");
+
+
+		d3.selectAll(".text-trends")
+			.filter(function(d){
+				return edgesCutRisk.indexOf(d.id) >= 0;
+			})
+			.attr("class","text text-trends text-visible")
+			.attr("style","font-size: 0.8em");
+
+
+		d3.selectAll(".trend-risk")
+			.text("risk");
+
+
+		//----Sidebar text data--------------------------
+
+		//create one current object for sidebar data
+		riskObj.forEach(function(e){
+			if(e.id == currentID){
+				oneTrend.push(e);
+			}
+		});
+
+		//type of risk
+		d3.selectAll(".trend-risk")
+			.text("risk");
+		//Nodes label
+		d3.selectAll(".trends-selected")
+			.data(oneTrend)
+			.text(function(d) { return d.label || d.id; });
+		//Nodes description
+		d3.selectAll(".description-risk")
+			.data(oneTrend)
+			.text(function(d) { return d.description || "No description"; });
+		//Nodes category
+		d3.selectAll(".sel-cat")
+			.data(oneTrend)
+			.text(function(d) { return d.category || "No category"; })
+			.attr("style","color:" + currentColor);
+
+
+console.log(currentColor);
+		//clearing array
+		oneTrend = [];
+		edgesCutRisk = [];
+
+
+	}//END currentNodeRisk
 
 	});//End json d3.js
 }//end static map
@@ -312,7 +510,7 @@ function handleFileSelect()
 }
 //inicialize fileReader(uploader)
 function fileAppStare(){
-    $('#container-graph').html('')
+    $('#container-graph').html('');
     file = input.files[0];
     fr = new FileReader();
     fr.onload = receivedText;
@@ -348,15 +546,13 @@ $('#upload-input').on('change',function(){
 //parsers
 
 
-
-
 //  parse json file in area (d3.js)
 function receivedText() {
 
 	var heightWindow = $(window).innerHeight() - 120,
 		widthWindow = $(".container-expo").innerWidth() - 120;
 
-	$('#container-graph').attr('width',widthWindow).attr('height',heightWindow).css('height',heightWindow);
+	$('#container-graph-static').attr('width',widthWindow).attr('height',heightWindow).css('height',heightWindow);
 
 		//main variables
 		var svg = d3.select("svg"),
@@ -496,7 +692,6 @@ function receivedText() {
 						zenith = clasterRadius/100;
 					}
 
-
 					var angle = j * step;
 					e.cx =   ( ( Math.cos(b) * (( halfWidth/n/1.4) * zenith ) ) + ( Math.sin(angle) * ( clasterRadius / j) ) );
 					e.cy =   ( ( Math.sin(b) * (( halfHeight/n/1.2) * zenith ) ) + ( Math.cos(angle) * ( clasterRadius / j) ) );
@@ -505,7 +700,6 @@ function receivedText() {
 				})
 
 			}
-
 
 //----------------Append in DOM SVG--------------------------------
 
@@ -576,9 +770,6 @@ function receivedText() {
 
 
 		});//End json d3.js
-
-
-
 
 
 

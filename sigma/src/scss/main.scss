@@ -33,7 +33,12 @@ header{
     font-size: 1em;
     padding: 1em;
     display: inline-block;
-    float: left; 
+    float: left;
+    @media all and(max-width: 991px){
+      text-align: center;
+      display: block;
+      width: 100%;
+    }
     a{
       color: $logos-color;
       font-size: 1.3em;
@@ -170,6 +175,114 @@ header{
      outline: 1px dashed $canvas-line;
   }
 }
+//svg
+.container-expo{
+  @include transEff(0.1s);
+}
+.graph-wrapper{
+  svg{
+    height: 0;
+  }
+
+  .g-nodes:hover > .text, .nodes:hover + .text{
+    display: inline;
+  }
+  line{
+    //stroke: lighten($nav-bg, 15%);
+    //stroke-width: 0.3px;
+  }
+  .text{
+    display: none;
+    font: 100 0.9em cursive, sans-serif;
+    stroke: none;
+    fill: #000;
+
+    &-visible {
+      display: inline;
+      font-size: 1em;
+      font-weight: 300;
+      text-transform: none !important;
+      @include transEff(0.3s);
+    }
+    &-hidden{
+      display: none;
+    }
+    &-risks{
+      font-size: 0.75em;
+    }
+  }
+
+  .nodes{
+    stroke: rgba(0,0,0,.6);
+    stroke-width: 1;
+    &:hover{
+      cursor: pointer;
+    }
+  }
+}
+hr{
+  margin: 10px 10px 10px 0;
+}
+//sidebar
+.sidebar-data{
+  @include transEff(0.1s);
+  .sidebar-main-header{
+    font-size: 1.2em;
+    margin-left: 10px;
+    text-transform: uppercase;
+  }
+  .sidebar-data-wrapper{
+    margin: 34px 0;
+  }
+  ul.map-list{
+    li{
+      a{
+        font-size: 0.72em;
+        padding: 8px;
+      }
+    }
+    li.active > a{
+      background-color: $nav-bg;
+    }
+  }
+  .category-selected{
+    font-size: 0.9em;
+    color: #333;
+    margin-top: 10px;
+    .sel-cat{
+      font-weight: bold;
+    }
+  }
+  p.description-risk{
+    font-size: 0.75em;
+    color: $hyper-color;
+    margin-bottom: 15px;
+  }
+  .category-hyper{
+    margin-bottom: 0;
+    font-size: 0.9em;
+  }
+  .sidebar-data-unity{
+    padding-left: 10px;
+    margin: 18px 0 34px 0;
+  }
+  .nav-wrap{
+    padding-left: 10px;
+    .panel-btn{
+      line-height: 1.7em;
+      background: lighten($border-color, 8%);
+      color: #fff;
+      &:hover{
+        background: lighten($border-color, 12%);
+      }
+      &:focus, &:active{
+        outline: none;
+      }
+    }
+  }
+
+}//End sidebar-data
+
 footer{
   background: $footer-bg;
   border-top: 1px solid $border-color;
@@ -189,38 +302,7 @@ footer{
   }
 }
 
-//svg
-.graph-wrapper{
-  svg{
-    height: 0;
-  }
 
-  .g-nodes:hover > .text, .nodes:hover + .text{
-    display: inline;
-  }
-  line{
-    //stroke: lighten($nav-bg, 15%);
-    //stroke-width: 0.3px;
-  }
-  .text{
-    display: none;
-    font: 100 0.9em cursive, sans-serif;
-    stroke: none;
-    fill: #000;
-  }
-  .text-visible{
-    display: inline;
-    font-size: 1em;
-    font-weight: 300;
-    text-transform: none!important;
-    @include transEff(0.3s);
-  }
-
-  .nodes{
-    stroke: rgba(0,0,0,0.6);
-    stroke-width: 1;
-  }
-}
 
 
 

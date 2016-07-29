@@ -1,15 +1,13 @@
 //parsers
 
 
-
-
 //  parse json file in area (d3.js)
 function receivedText() {
 
 	var heightWindow = $(window).innerHeight() - 120,
 		widthWindow = $(".container-expo").innerWidth() - 120;
 
-	$('#container-graph').attr('width',widthWindow).attr('height',heightWindow).css('height',heightWindow);
+	$('#container-graph-static').attr('width',widthWindow).attr('height',heightWindow).css('height',heightWindow);
 
 		//main variables
 		var svg = d3.select("svg"),
@@ -149,7 +147,6 @@ function receivedText() {
 						zenith = clasterRadius/100;
 					}
 
-
 					var angle = j * step;
 					e.cx =   ( ( Math.cos(b) * (( halfWidth/n/1.4) * zenith ) ) + ( Math.sin(angle) * ( clasterRadius / j) ) );
 					e.cy =   ( ( Math.sin(b) * (( halfHeight/n/1.2) * zenith ) ) + ( Math.cos(angle) * ( clasterRadius / j) ) );
@@ -158,7 +155,6 @@ function receivedText() {
 				})
 
 			}
-
 
 //----------------Append in DOM SVG--------------------------------
 
@@ -229,9 +225,6 @@ function receivedText() {
 
 
 		});//End json d3.js
-
-
-
 
 
 

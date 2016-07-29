@@ -16,7 +16,7 @@ function handleFileSelect()
 }
 //inicialize fileReader(uploader)
 function fileAppStare(){
-    $('#container-graph').html('')
+    $('#container-graph').html('');
     file = input.files[0];
     fr = new FileReader();
     fr.onload = receivedText;
