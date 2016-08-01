@@ -208,12 +208,14 @@ hr {
     padding: 8px; }
   .sidebar-data ul.map-list li.active > a {
     background-color: #57B96D; }
-  .sidebar-data .category-selected {
+  .sidebar-data .category-selected, .sidebar-data .file-name {
     font-size: 0.9em;
     color: #333;
     margin-top: 10px; }
-    .sidebar-data .category-selected .sel-cat {
+    .sidebar-data .category-selected .sel-cat, .sidebar-data .category-selected .trends-selected, .sidebar-data .category-selected #header-file-sb, .sidebar-data .file-name .sel-cat, .sidebar-data .file-name .trends-selected, .sidebar-data .file-name #header-file-sb {
       font-weight: bold; }
+  .sidebar-data .category-selected, .sidebar-data .file-name {
+    color: #636b66; }
   .sidebar-data p.description-risk {
     font-size: 0.75em;
     color: #636b66;

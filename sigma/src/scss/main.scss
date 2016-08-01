@@ -245,13 +245,16 @@ hr{
       background-color: $nav-bg;
     }
   }
-  .category-selected{
+  .category-selected, .file-name{
     font-size: 0.9em;
     color: #333;
     margin-top: 10px;
-    .sel-cat{
+    .sel-cat, .trends-selected, #header-file-sb{
       font-weight: bold;
     }
+  }
+  .category-selected, .file-name{
+    color: $hyper-color;
   }
   p.description-risk{
     font-size: 0.75em;

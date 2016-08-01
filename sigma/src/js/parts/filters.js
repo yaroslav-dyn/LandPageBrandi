@@ -2,10 +2,10 @@
 var heightWindow = $(window).innerHeight() - 120,
 	widthWindow = $(".container-expo").innerWidth() - 120;
 
+//min height for testing
 if(heightWindow <= 600){
 	heightWindow = 600;
 }
-
 
 $('#container-graph-static').attr('width', widthWindow).attr('height', heightWindow).css("height", heightWindow);
 
@@ -152,7 +152,6 @@ function staticMap(){
 		}
 
 
-
 //----------------Append in DOM SVG--------------------------------
 
 	//--------------LINKS-----------------------------------------
@@ -191,8 +190,6 @@ function staticMap(){
 				.attr("r", nodesRadius + 2)
 				.attr("fill",trendsColor);
 
-
-
 		//add nodes text
 		var textTrends = gNode
 			.append("text")
@@ -200,7 +197,6 @@ function staticMap(){
 			.text(function(d) { return d.label || d.id; })
 			.attr("dx", function(d){ return d.cx + halfWidth + 10})
 			.attr("dy", function(d){ return d.cy + halfHeight - 10});
-
 
 
 	//--------------RISK NODES-----------------------------------------
@@ -273,7 +269,6 @@ function staticMap(){
 			$("#container-expo").removeClass("col-md-offset-1 ");
 			$("#sidebar-data").removeClass("hidden")
 		}
-
 
 
 //-------------fun on click TRENDS NODES--------------------------------

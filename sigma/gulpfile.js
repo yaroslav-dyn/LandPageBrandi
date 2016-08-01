@@ -23,7 +23,7 @@ gulp.task('js-build', function(){
 });
 //build html with Dependencies
 gulp.task('html-build', function () {
-    return gulp.src('src/**/*.html')
+    return gulp.src('src/*.html')
         .pipe(useref())
         .pipe(gulp.dest('public/'));
 });
