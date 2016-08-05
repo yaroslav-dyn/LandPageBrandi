@@ -35,8 +35,8 @@ $('#upload-input').on('change',function(){
     var parseName =  file.name;
     var spanEl = document.getElementById('header-file');
     var spanElSb = document.getElementById('header-file-sb');
-    fileName.innerText = "file Upload: ";
-    fileNameSb.innerText = "file Upload: ";
+    fileName.innerText = "File Upload: ";
+    fileNameSb.innerText = "File Upload: ";
     spanEl.innerText = parseName;
     spanElSb.innerText = parseName;
     var nameEl = $('.load-file-name');

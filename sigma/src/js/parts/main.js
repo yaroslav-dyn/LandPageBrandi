@@ -1,3 +1,4 @@
 //= filters.js
 //= uploads.js
-//= parsers.js
+//= trends-risks-map.js
+//= risks-interconnection-map.js

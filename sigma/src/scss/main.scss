@@ -183,7 +183,9 @@ header{
   svg{
     height: 0;
   }
+  rect{
 
+  }
   .g-nodes:hover > .text, .nodes:hover + .text{
     display: inline;
   }
