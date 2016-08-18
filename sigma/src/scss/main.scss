@@ -31,7 +31,7 @@ header{
   flex: 0 0 auto;
   h1{
     margin: 0;
-    font-size: 1em;
+    font-size: 0.9em;
     padding: 1em;
     display: inline-block;
     float: left;
@@ -192,12 +192,14 @@ header{
   line{
     //stroke: lighten($nav-bg, 15%);
     //stroke-width: 0.3px;
+    @include transEff(0.2s);
   }
   .text{
     display: none;
     font: 100 0.9em cursive, sans-serif;
     stroke: none;
     fill: #000;
+    text-anchor: middle;
 
     &-visible {
       display: inline;
@@ -227,14 +229,14 @@ hr{
 }
 //sidebar
 .sidebar-data{
-  @include transEff(0.1s);
+  @include transEff(0.4s);
   .sidebar-main-header{
     font-size: 1.2em;
     margin-left: 10px;
     text-transform: uppercase;
   }
   .sidebar-data-wrapper{
-    margin: 34px 0;
+    margin: 24px 0;
   }
   ul.map-list{
     li{
@@ -277,12 +279,17 @@ hr{
       line-height: 1.7em;
       background: lighten($border-color, 8%);
       color: #fff;
-      &:hover{
-        background: lighten($border-color, 12%);
-      }
-      &:focus, &:active{
-        outline: none;
-      }
+
+    }
+  }
+  .panel-btn{
+    color: #fff;
+    background: #57B96D;
+    &:hover{
+      background: lighten($border-color, 12%);
+    }
+    &:focus, &:active{
+      outline: none;
     }
   }
 

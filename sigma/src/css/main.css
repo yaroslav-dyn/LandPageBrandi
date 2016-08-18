@@ -40,7 +40,7 @@ header {
     margin-bottom: 0; }
   header h1 {
     margin: 0;
-    font-size: 1em;
+    font-size: 0.9em;
     padding: 1em;
     display: inline-block;
     float: left; }
@@ -162,11 +162,19 @@ header {
 .graph-wrapper .g-nodes:hover > .text, .graph-wrapper .nodes:hover + .text {
   display: inline; }
 
+.graph-wrapper line {
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -ms-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out; }
+
 .graph-wrapper .text {
   display: none;
   font: 100 0.9em cursive, sans-serif;
   stroke: none;
-  fill: #000; }
+  fill: #000;
+  text-anchor: middle; }
   .graph-wrapper .text-visible {
     display: inline;
     font-size: 1em;
@@ -192,17 +200,17 @@ hr {
   margin: 10px 10px 10px 0; }
 
 .sidebar-data {
-  -webkit-transition: all 0.1s ease-in-out;
-  -moz-transition: all 0.1s ease-in-out;
-  -ms-transition: all 0.1s ease-in-out;
-  -o-transition: all 0.1s ease-in-out;
-  transition: all 0.1s ease-in-out; }
+  -webkit-transition: all 0.4s ease-in-out;
+  -moz-transition: all 0.4s ease-in-out;
+  -ms-transition: all 0.4s ease-in-out;
+  -o-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out; }
   .sidebar-data .sidebar-main-header {
     font-size: 1.2em;
     margin-left: 10px;
     text-transform: uppercase; }
   .sidebar-data .sidebar-data-wrapper {
-    margin: 34px 0; }
+    margin: 24px 0; }
   .sidebar-data ul.map-list li a {
     font-size: 0.72em;
     padding: 8px; }
@@ -232,10 +240,13 @@ hr {
       line-height: 1.7em;
       background: #24ab42;
       color: #fff; }
-      .sidebar-data .nav-wrap .panel-btn:hover {
-        background: #28bc49; }
-      .sidebar-data .nav-wrap .panel-btn:focus, .sidebar-data .nav-wrap .panel-btn:active {
-        outline: none; }
+  .sidebar-data .panel-btn {
+    color: #fff;
+    background: #57B96D; }
+    .sidebar-data .panel-btn:hover {
+      background: #28bc49; }
+    .sidebar-data .panel-btn:focus, .sidebar-data .panel-btn:active {
+      outline: none; }
 
 footer {
   background: #369F4D;
