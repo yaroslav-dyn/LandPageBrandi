@@ -174,7 +174,7 @@ header {
   font: 100 0.9em cursive, sans-serif;
   stroke: none;
   fill: #000;
-  text-anchor: middle; }
+  text-anchor: start; }
   .graph-wrapper .text-visible {
     display: inline;
     font-size: 1em;
@@ -211,11 +211,28 @@ hr {
     text-transform: uppercase; }
   .sidebar-data .sidebar-data-wrapper {
     margin: 24px 0; }
-  .sidebar-data ul.map-list li a {
-    font-size: 0.72em;
-    padding: 8px; }
+  .sidebar-data ul.map-list li {
+    border: 1px solid #1D8935;
+    border-radius: 8px;
+    margin-bottom: 6px;
+    background: #fff; }
+    .sidebar-data ul.map-list li:hover {
+      border-color: #9fd7ac; }
+    .sidebar-data ul.map-list li:first-child {
+      margin-top: 6px; }
+    .sidebar-data ul.map-list li a {
+      font-size: 0.72em;
+      padding: 8px;
+      color: #636b66;
+      border-radius: 8px; }
+      .sidebar-data ul.map-list li a:hover {
+        background: #9fd7ac;
+        color: #fff; }
+  .sidebar-data ul.map-list li.active {
+    border-color: #57B96D; }
   .sidebar-data ul.map-list li.active > a {
-    background-color: #57B96D; }
+    background-color: #57B96D;
+    color: #f6f6f6; }
   .sidebar-data .category-selected, .sidebar-data .file-name {
     font-size: 0.9em;
     color: #333;

@@ -24,8 +24,6 @@ function riskInterconMap(graph){
         rSmall = rLage/1.1,
         nodesRadius = 5,
         strokeWidth = 0.5,
-        widthRect = 10,
-        heightRect = 10,
         edgesColor = "#a5a5a5",
         //increment current stroke width (stroke width = strokeWidth * gainStrokeWidth)
         inactiveOpacity = 0.2; //value inactive lines opacity (normal opacity = 1 )
@@ -89,23 +87,19 @@ function riskInterconMap(graph){
             x:[0,20,40,60,40,20, 10,20,30,40,50,60],
             y:[0,-20,-20,0,20,20, -5,-10,-10,-5,10,10]
 
-            //x:[0,20,40,60,80,20, 10,20,30,40,50,60],
-            //y:[0,-20,0,-20,0,20, -5,-10,-10,-5,10,10]
-
         };
 
     var sCluster = 3.5;
+    var countCategories = Object.keys(categoryObj).length;
 
 
-    for (var i in categoryObj){
-
-        //categoryObj[i].forEach(function(e,j){
-        //    e.cx = polygon.x[j] * sCluster ;
-        //    e.cy = polygon.y[j] * sCluster -halfHeight/2 ;
-        //})
-        console.log(i);
-
+    if(countCategories > 5){
+        halfHeight = halfHeight - 100;
+        halfWidth = halfWidth -100
     }
+
+
+
 
                             //1
     if(categoryObj[Object.keys(categoryObj)[0]]) {
@@ -156,19 +150,42 @@ function riskInterconMap(graph){
         });
 
     }
-
+                            //6
     if(categoryObj[Object.keys(categoryObj)[5]]) {
 
         categoryObj[Object.keys(categoryObj)[5]].forEach(function (e, j) {
 
             if (e) {
-                e.cx = polygon.x[j] * sCluster;
+                e.cx = polygon.x[j] * sCluster - halfWidth/2;
                 e.cy = polygon.y[j] * sCluster + halfHeight / 2;
             }
 
         });
     }
+                            //7
+    if(categoryObj[Object.keys(categoryObj)[6]]) {
 
+        categoryObj[Object.keys(categoryObj)[6]].forEach(function (e, j) {
+
+            if (e) {
+                e.cx = polygon.x[j] * sCluster + halfWidth/2;
+                e.cy = polygon.y[j] * sCluster + halfHeight / 2;
+            }
+
+        });
+    }
+                            //8
+    if(categoryObj[Object.keys(categoryObj)[7]]) {
+
+        categoryObj[Object.keys(categoryObj)[7]].forEach(function (e, j) {
+
+            if (e) {
+                e.cx = polygon.x[j] * sCluster;
+                e.cy = polygon.y[j] * sCluster + halfHeight ;
+            }
+
+        });
+    }
 
 
 //----------------Append in DOM SVG--------------------------------
@@ -220,7 +237,7 @@ function riskInterconMap(graph){
         .append("text")
         .attr("class", "text text-risks")
         .text(function (d) {
-            return d.id || d.label;
+            return d.label || d.id;
         })
         .attr("dx", function (d) {
             return d.cx + halfWidth + 10
@@ -259,7 +276,7 @@ function riskInterconMap(graph){
     //------------Event functions---------------------------------------
     //show sidebar
     function changeSidebar() {
-       // $("#container-expo").removeClass("col-md-offset-1");
+
         $("#sidebar-data").removeClass("hidden")
     }
 
@@ -496,7 +513,6 @@ function riskInterconMap(graph){
 
             })
             .attr("style", "opacity: 1")
-            .attr("stroke","gray")
             .attr("class", "");
 
         //----Sidebar text data clearing--------------------------
@@ -505,11 +521,6 @@ function riskInterconMap(graph){
         d3.selectAll(".s-data-text")
             .text("");
 
-    });
-
-    $("#highlight-text").click(function(){
-        d3.selectAll(".text-risks")
-            .attr("class", "text text-risks text-visible")
     });
 
 

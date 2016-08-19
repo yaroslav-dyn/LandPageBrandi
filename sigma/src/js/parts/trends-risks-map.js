@@ -107,11 +107,11 @@ function trendsRiskMap(graph){
             j += 5;
 
             if (n <= 2) {
-                clasterRadius = 250;
+                clasterRadius = 200;
                 zenith = clasterRadius / 100;
             }
             else if (n <= 4) {
-                clasterRadius = 300;
+                clasterRadius = 250;
                 zenith = clasterRadius / 100;
             }
             else if (n <= 6) {
@@ -137,6 +137,9 @@ function trendsRiskMap(graph){
             else if (n <= 16) {
                 clasterRadius = 500;
                 zenith = clasterRadius / 100;
+            }
+            if(n <= 4){
+                n = 4;
             }
 
             var angle = j * step;
@@ -268,45 +271,11 @@ function trendsRiskMap(graph){
             return color(d.category || d.group);
         });
 
-
-//-------------ABORTING filters FUNCTION--------------------------------------------
-
-    $("#clear-filter").click(function () {
-
-        d3.selectAll(".nodes-trends")
-            .attr("r", nodesRadius + 2)
-            .attr("fill", trendsColor);
-
-        d3.selectAll(".nodes-risks")
-            .attr("r", nodesRadius);
-
-        d3.selectAll(".text-trends")
-            .attr("class", "text text-trends text-hidden")
-            .attr("style", "font-weight: normal");
-
-        d3.selectAll(".text-risks")
-            .attr("class", "text text-risks text-hidden")
-            .attr("style", "font-weight: normal");
-
-        d3.selectAll("line")
-            .attr("stroke-width", strokeWidth)
-            .attr("style", "opacity: 1");
-
-        //----Sidebar text data clearing--------------------------
-
-        //clearing all sidebar data text
-        d3.selectAll(".s-data-text")
-            .text("");
-
-    });
-
-
 //----------------filtering Data--------------------------------------
 
     //------------Event functions---------------------------------------
     //show sidebar
     function changeSidebar() {
-        $("#container-expo").removeClass("col-md-offset-1 ");
         $("#sidebar-data").removeClass("hidden")
     }
 
@@ -527,7 +496,40 @@ function trendsRiskMap(graph){
         oneTrend = [];
         edgesCutRisk = [];
 
-
     }//END currentNodeRisk
+
+
+//-------------ABORTING filters FUNCTION--------------------------------------------
+
+$("#clear-filter").click(function () {
+
+    d3.selectAll(".nodes-trends")
+        .attr("r", nodesRadius + 2)
+        .attr("fill", trendsColor);
+
+    d3.selectAll(".nodes-risks")
+        .attr("r", nodesRadius);
+
+    d3.selectAll(".text-trends")
+        .attr("class", "text text-trends text-hidden")
+        .attr("style", "font-weight: normal");
+
+    d3.selectAll(".text-risks")
+        .attr("class", "text text-risks text-hidden")
+        .attr("style", "font-weight: normal");
+
+    d3.selectAll("line")
+        .attr("stroke-width", strokeWidth)
+        .attr("style", "opacity: 1");
+
+    //----Sidebar text data clearing--------------------------
+
+    //clearing all sidebar data text
+    d3.selectAll(".s-data-text")
+        .text("");
+
+});
+
+
 
 }//End trendsRiskMap

@@ -28,48 +28,53 @@ $('#container-graph').attr('width', widthWindow).attr('height', heightWindow).cs
 		riskInterconMap(graph);
 
 
+
+
+
+
+
+
 	});//End json d3.js
 
 }//end receivedText
 
 
-function staticMap(){
-
-	$('#container-graph').attr('width', widthWindow).attr('height', heightWindow).css("height", heightWindow);
-
-	d3.json( "csv/complete.json" , function(error, graph) {
-
-
-		if (error) throw error;
-
-
-		trendsRiskMap(graph);
-		//riskInterconMap(graph);
-
-
-	});//End json d3.js
-
-}
+//function staticMap(){
+//
+//	$('#container-graph').attr('width', widthWindow).attr('height', heightWindow).css("height", heightWindow);
+//
+//	d3.json( "csv/complete.json" , function(error, graph) {
+//
+//
+//		if (error) throw error;
+//
+//
+//		trendsRiskMap(graph);
+//		//riskInterconMap(graph);
+//
+//
+//	});//End json d3.js
+//
+//}
 
 
 //Click map trigger
-
-
-$(".map-list li").on("click", function(){
-	
+var currentListMap = $(".map-list li");
+currentListMap.on("click", function(){
 	$(this).parent().find('li').removeClass('active');
 	$(this).addClass("active");
-
-
 });
 
 
 
 
 $("#intercon-button").on("click",function(){
-	$('#container-graph').html('');
+	$("#container-graph").html("");
+	$("#graph-wrapper").css("text-align", "center");
+
+
 	function receivedText(){
-		$('#container-graph').attr('width', widthWindow).attr('height', heightWindow).css("height", heightWindow);
+		$("#container-graph").attr("width", widthWindow).attr("height", heightWindow).css("height", heightWindow);
 
 
 //parse json D3.js
@@ -91,22 +96,17 @@ $("#intercon-button").on("click",function(){
 	receivedText();
 });
 
-$("#risk-intercon-button").on("click",function(){
+$("#trends-button").on("click",function(){
 	$('#container-graph').html('');
+	$("#graph-wrapper").css("text-align", "right");
+
 	function receivedText(){
 		$('#container-graph').attr('width', widthWindow).attr('height', heightWindow).css("height", heightWindow);
-
 
 //parse json D3.js
 		var fileName = fr.result;
 		d3.json( fileName , function(error, graph) {
-
-
 			if (error) throw error;
-
-//-----------------filtering and coordinates-------------------
-
-
 
 			trendsRiskMap(graph);
 

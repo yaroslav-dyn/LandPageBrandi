@@ -199,7 +199,7 @@ header{
     font: 100 0.9em cursive, sans-serif;
     stroke: none;
     fill: #000;
-    text-anchor: middle;
+    text-anchor: start;
 
     &-visible {
       display: inline;
@@ -240,13 +240,33 @@ hr{
   }
   ul.map-list{
     li{
+      border: 1px solid $border-color;
+      border-radius: 8px;
+      margin-bottom: 6px;
+      background: #fff;
+      &:hover{
+        border-color: lighten($nav-bg, 20%);
+      }
+      &:first-child{
+        margin-top: 6px;
+      }
       a{
         font-size: 0.72em;
         padding: 8px;
+        color: #636b66;
+        border-radius: 8px;
+        &:hover{
+          background: lighten($nav-bg, 20%);
+          color: #fff;
+        }
       }
+    }
+    li.active{
+      border-color: $nav-bg;
     }
     li.active > a{
       background-color: $nav-bg;
+      color: #f6f6f6;
     }
   }
   .category-selected, .file-name{

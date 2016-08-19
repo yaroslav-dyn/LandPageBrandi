@@ -1,5 +1,39 @@
 {
   "nodes": [
+
+    {"id": "R_ASSET-6", "label": "Asset bubble", "type": "Risk" ,
+      "category":"six",
+      "description": "Unsustainably overpriced assets such as commodities, housing, shares, etc. in a major economy or region."},
+    {"id": "R_ASSET-7", "label": "Asset bubble", "type": "Risk" ,
+      "category":"six",
+      "description": "Unsustainably overpriced assets such as commodities, housing, shares, etc. in a major economy or region."},
+    {"id": "R_ASSET-8", "label": "Asset bubble", "type": "Risk" ,
+      "category":"six",
+      "description": "Unsustainably overpriced assets such as commodities, housing, shares, etc. in a major economy or region."},
+    {"id": "R_ASSET-9", "label": "Asset bubble", "type": "Risk" ,
+      "category":"six",
+      "description": "Unsustainably overpriced assets such as commodities, housing, shares, etc. in a major economy or region."},
+    {"id": "R_ASSET-10", "label": "Asset bubble", "type": "Risk" ,
+      "category":"six",
+      "description": "Unsustainably overpriced assets such as commodities, housing, shares, etc. in a major economy or region."},
+    {"id": "R_ASSET-11", "label": "Asset bubble", "type": "Risk" ,
+      "category":"six",
+      "description": "Unsustainably overpriced assets such as commodities, housing, shares, etc. in a major economy or region."},
+    {"id": "R_ASSE-12", "label": "Asset bubble", "type": "Risk" ,
+      "category":"seven",
+      "description": "Unsustainably overpriced assets such as commodities, housing, shares, etc. in a major economy or region."},
+    {"id": "R_ASSET-13", "label": "Asset bubble", "type": "Risk" ,
+      "category":"seven",
+      "description": "Unsustainably overpriced assets such as commodities, housing, shares, etc. in a major economy or region."},
+    {"id": "R_ASSET-14", "label": "Asset bubble", "type": "Risk" ,
+      "category":"eight",
+      "description": "Unsustainably overpriced assets such as commodities, housing, shares, etc. in a major economy or region."},
+    {"id": "R_ASSEt-15", "label": "Asset bubble", "type": "Risk" ,
+      "category":"eight",
+      "description": "Unsustainably overpriced assets such as commodities, housing, shares, etc. in a major economy or region."},
+
+
+
     {"id": "R_ASSET", "label": "Asset bubble", "type": "Risk" ,
     	"category":"Economic",
     	"description": "Unsustainably overpriced assets such as commodities, housing, shares, etc. in a major economy or region."},
@@ -169,7 +203,8 @@
               {"source":"R_TECHADV","target":"R_WMD","type":"Risk-Risk","value":2},
               {"source":"R_TERRORIST","target":"R_UNEMPLOYMENT","type":"Risk-Risk","value":1},
               {"source":"R_TERRORIST","target":"R_WMD","type":"Risk-Risk","value":29},
-              {"source":"R_WATER","target":"R_WEATHEREVENTS","type":"Risk-Risk","value":9}
+              {"source":"R_WATER","target":"R_WEATHEREVENTS","type":"Risk-Risk","value":9},
+              {"source":"T_AGEING","target":"R_WMD","type":"Trend-Risk","value":10}
 
     ]
 
