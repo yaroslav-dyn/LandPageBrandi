@@ -8,7 +8,6 @@ if(heightWindow <= 600){
 
 
 
-
 function receivedText(){
 $('#container-graph').attr('width', widthWindow).attr('height', heightWindow).css("height", heightWindow);
 
@@ -17,20 +16,17 @@ $('#container-graph').attr('width', widthWindow).attr('height', heightWindow).cs
 	var fileName = fr.result;
 	d3.json( fileName , function(error, graph) {
 
-
 		if (error) throw error;
 
 //-----------------filtering and coordinates-------------------
 
+	//show sidebar
+	 $("#sidebar-data").removeClass("hidden");
 
+	//default cart
+	//trendsRiskMap(graph);
 
-		//trendsRiskMap(graph);
-		riskInterconMap(graph);
-
-
-
-
-
+	riskInterconMap(graph);
 
 
 
@@ -39,31 +35,8 @@ $('#container-graph').attr('width', widthWindow).attr('height', heightWindow).cs
 }//end receivedText
 
 
-//function staticMap(){
-//
-//	$('#container-graph').attr('width', widthWindow).attr('height', heightWindow).css("height", heightWindow);
-//
-//	d3.json( "csv/complete.json" , function(error, graph) {
-//
-//
-//		if (error) throw error;
-//
-//
-//		trendsRiskMap(graph);
-//		//riskInterconMap(graph);
-//
-//
-//	});//End json d3.js
-//
-//}
 
 
-//Click map trigger
-var currentListMap = $(".map-list li");
-currentListMap.on("click", function(){
-	$(this).parent().find('li').removeClass('active');
-	$(this).addClass("active");
-});
 
 
 

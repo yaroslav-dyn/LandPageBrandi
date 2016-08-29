@@ -2,6 +2,16 @@
 
 function riskInterconMap(graph){
     $("#container-expo").removeClass("col-md-offset-1");
+    $("#intercon-button").addClass("active");
+
+
+
+    //Click map trigger
+    var currentListMap = $(".map-list li");
+    currentListMap.on("click", function(){
+        $(this).parent().find('li').removeClass('active');
+        $(this).addClass("active");
+    });
 
     //main variables
     var
@@ -81,24 +91,28 @@ function riskInterconMap(graph){
 
     //include coordinate in sort object
 
-    var n = Object.keys(categoryObj).length, //count of categories
+    var countCategories = Object.keys(categoryObj).length, //count of categories
 
         polygon = {
             x:[0,20,40,60,40,20, 10,20,30,40,50,60],
             y:[0,-20,-20,0,20,20, -5,-10,-10,-5,10,10]
 
+        },
+        polygonLow = {
+            x:[0,20,40,60,40,20, 10,20,30,40,50,60],
+            y:[-10,-30,-30,-10,10,10, -15,-20,-20,-15,0,0]
+
         };
 
+
+
     var sCluster = 3.5;
-    var countCategories = Object.keys(categoryObj).length;
 
 
     if(countCategories > 5){
         halfHeight = halfHeight - 100;
         halfWidth = halfWidth -100
     }
-
-
 
 
                             //1
@@ -114,8 +128,8 @@ function riskInterconMap(graph){
                                  //2
     if(categoryObj[Object.keys(categoryObj)[1]]) {
         categoryObj[Object.keys(categoryObj)[1]].forEach(function (e, j) {
-            e.cx = polygon.x[j] * sCluster + halfWidth / 2.5;
-            e.cy = polygon.y[j] * sCluster;
+            e.cx = polygonLow.x[j] * sCluster + halfWidth / 2.5;
+            e.cy = polygonLow.y[j] * sCluster;
 
         });
     }
@@ -131,34 +145,35 @@ function riskInterconMap(graph){
 
 
                             //4
-    if(categoryObj[Object.keys(categoryObj)[3]]) {
+
         categoryObj[Object.keys(categoryObj)[3]].forEach(function (e, j) {
 
-            e.cx = polygon.x[j] * sCluster - halfWidth / 2.5;
-            e.cy = polygon.y[j] * sCluster;
+
+            if (e) {
+                e.cx = polygonLow.x[j] * sCluster - halfWidth / 2.5;
+                e.cy = polygonLow.y[j] * sCluster;
+            }
 
         });
-    }
-                            //5
 
+
+                            //5
     if(categoryObj[Object.keys(categoryObj)[4]]) {
         categoryObj[Object.keys(categoryObj)[4]].forEach(function (e, j) {
 
+
             e.cx = polygon.x[j] * sCluster;
             e.cy = polygon.y[j] * sCluster + halfHeight / 2;
+
 
         });
 
     }
                             //6
     if(categoryObj[Object.keys(categoryObj)[5]]) {
-
         categoryObj[Object.keys(categoryObj)[5]].forEach(function (e, j) {
-
-            if (e) {
-                e.cx = polygon.x[j] * sCluster - halfWidth/2;
-                e.cy = polygon.y[j] * sCluster + halfHeight / 2;
-            }
+            e.cx = polygonLow.x[j] * sCluster - halfWidth/2;
+            e.cy = polygonLow.y[j] * sCluster + halfHeight / 2;
 
         });
     }
@@ -167,10 +182,8 @@ function riskInterconMap(graph){
 
         categoryObj[Object.keys(categoryObj)[6]].forEach(function (e, j) {
 
-            if (e) {
-                e.cx = polygon.x[j] * sCluster + halfWidth/2;
-                e.cy = polygon.y[j] * sCluster + halfHeight / 2;
-            }
+           e.cx = polygon.x[j] * sCluster + halfWidth/2;
+           e.cy = polygon.y[j] * sCluster + halfHeight / 2;
 
         });
     }
@@ -179,10 +192,8 @@ function riskInterconMap(graph){
 
         categoryObj[Object.keys(categoryObj)[7]].forEach(function (e, j) {
 
-            if (e) {
-                e.cx = polygon.x[j] * sCluster;
-                e.cy = polygon.y[j] * sCluster + halfHeight ;
-            }
+            e.cx = polygonLow.x[j] * sCluster;
+            e.cy = polygonLow.y[j] * sCluster + halfHeight;
 
         });
     }
@@ -274,16 +285,11 @@ function riskInterconMap(graph){
 //----------------filtering Data--------------------------------------
 
     //------------Event functions---------------------------------------
-    //show sidebar
-    function changeSidebar() {
 
-        $("#sidebar-data").removeClass("hidden")
-    }
 
 
 //-------function on click RISKS NODES----------------------------
     function currentNodeRisk() {
-        changeSidebar();
 
         //visible & transform RiskNodes
         d3.selectAll(".nodes-risks")

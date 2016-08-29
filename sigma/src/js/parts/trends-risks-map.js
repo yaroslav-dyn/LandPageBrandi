@@ -2,6 +2,7 @@
 
 function trendsRiskMap(graph){
 
+    $("#trends-button").addClass("active");
 
     //main variables
     var
@@ -274,16 +275,11 @@ function trendsRiskMap(graph){
 //----------------filtering Data--------------------------------------
 
     //------------Event functions---------------------------------------
-    //show sidebar
-    function changeSidebar() {
-        $("#sidebar-data").removeClass("hidden")
-    }
 
 
 //-------------fun on click TRENDS NODES--------------------------------
     function currentNodeTrend() {
 
-        changeSidebar();
 
         //visible & transform trendsNodes
         d3.selectAll(".nodes-trends")
@@ -387,8 +383,7 @@ function trendsRiskMap(graph){
 
 //-------fun on click RISKS NODES----------------------------
 
-    function currentNodeRisk() {
-        changeSidebar();
+    function currentNodeRisk(){
         //visible & transform RiskNodes
         d3.selectAll(".nodes-risks")
             .transition()
@@ -501,7 +496,7 @@ function trendsRiskMap(graph){
 
 //-------------ABORTING filters FUNCTION--------------------------------------------
 
-$("#clear-filter").click(function () {
+$("#clear-filter").click(function() {
 
     d3.selectAll(".nodes-trends")
         .attr("r", nodesRadius + 2)

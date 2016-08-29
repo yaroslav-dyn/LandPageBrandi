@@ -33,7 +33,6 @@
       "description": "Unsustainably overpriced assets such as commodities, housing, shares, etc. in a major economy or region."},
 
 
-
     {"id": "R_ASSET", "label": "Asset bubble", "type": "Risk" ,
     	"category":"Economic",
     	"description": "Unsustainably overpriced assets such as commodities, housing, shares, etc. in a major economy or region."},
