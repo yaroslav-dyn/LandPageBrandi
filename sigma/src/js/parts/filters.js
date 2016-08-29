@@ -34,6 +34,28 @@ $('#container-graph').attr('width', widthWindow).attr('height', heightWindow).cs
 
 }//end receivedText
 
+function staticMap(){
+
+	$('#container-graph').attr('width', widthWindow).attr('height', heightWindow).css("height", heightWindow);
+
+
+	//show sidebar
+	$("#sidebar-data").removeClass("hidden");
+
+
+	d3.json( "csv/complete-cut.json" , function(error, graph) {
+
+
+		if (error) throw error;
+
+
+		//trendsRiskMap(graph);
+		riskInterconMap(graph);
+
+
+	});//End json d3.js
+
+}
 
 
 $("#intercon-button").on("click",function(){

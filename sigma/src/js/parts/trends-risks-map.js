@@ -1,6 +1,8 @@
 //creating trend-risk map
 
 function trendsRiskMap(graph){
+    // map trigger
+    $(".map-list li").removeClass('active');
 
     $("#trends-button").addClass("active");
 

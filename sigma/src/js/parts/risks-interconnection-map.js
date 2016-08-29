@@ -1,17 +1,15 @@
 //creating risk-interconnections map
 
 function riskInterconMap(graph){
+
     $("#container-expo").removeClass("col-md-offset-1");
-    $("#intercon-button").addClass("active");
+
+    // map trigger
+    $(".map-list li").removeClass('active');
+
+   $("#intercon-button").addClass("active");
 
 
-
-    //Click map trigger
-    var currentListMap = $(".map-list li");
-    currentListMap.on("click", function(){
-        $(this).parent().find('li').removeClass('active');
-        $(this).addClass("active");
-    });
 
     //main variables
     var
@@ -94,22 +92,23 @@ function riskInterconMap(graph){
     var countCategories = Object.keys(categoryObj).length, //count of categories
 
         polygon = {
-            x:[0,20,40,60,40,20, 10,20,30,40,50,60],
-            y:[0,-20,-15,5,15,20, -5,-10,-15,-10,10,10],
+            x:[0,20,40,60,40,20, 15,25,35,45,55,65],
+            y:[0,-20,-15,5,15,20, -5,-10,-25,-15,0,10],
 
-            xLow: [-5,15,35,55,35,15, 5,15,25,35,45,55],
-            yLow:[-5,-25,-20,0,10,15, -10,-30,-25,-5,5,10]
+            xHeight: [-10,10,30,50,30,10, 5,15,25,35,45,55],
+            yHeight:[-10,-30,-25,-5,5,10, -15,-20,-35,-25,0,-10],
+
+            xLow: [10,30,50,70,50,30, 25,35,45,55,65,75],
+            yLow:[10,-10,-5,15,25,30, 5,0,-15,-5,20,10]
 
         };
 
-
-    var sCluster = 3.5;
+    var sCluster = 3.8;
 
     if(countCategories > 5){
         halfHeight = halfHeight - 100;
         halfWidth = halfWidth -100
     }
-
 
                             //1
     if(categoryObj[Object.keys(categoryObj)[0]]) {
@@ -132,19 +131,18 @@ function riskInterconMap(graph){
 
                          //3
     if(categoryObj[Object.keys(categoryObj)[2]]) {
-
         categoryObj[Object.keys(categoryObj)[2]].forEach(function (e, j) {
-            e.cx = polygon.xLow[j] * sCluster;
-            e.cy = polygon.yLow[j] * sCluster;
+
+
+            e.cx = (polygon.xLow[j] - 10) * sCluster;
+            e.cy = polygon.yLow[j]  * sCluster;
         });
     }
 
                             //4
-
         categoryObj[Object.keys(categoryObj)[3]].forEach(function (e, j) {
-
-          e.cx = polygon.x[j] * sCluster - halfWidth / 2.5;
-          e.cy = polygon.y[j] * sCluster;
+          e.cx = (polygon.xHeight[j] + 10) * sCluster - halfWidth / 2.5;
+          e.cy = (polygon.yHeight[j] + 5) * sCluster;
 
         });
 
@@ -153,9 +151,8 @@ function riskInterconMap(graph){
     if(categoryObj[Object.keys(categoryObj)[4]]) {
         categoryObj[Object.keys(categoryObj)[4]].forEach(function (e, j) {
 
-            e.cx = polygon.x[j] * sCluster;
-            e.cy = polygon.yLow[j] * sCluster + halfHeight / 2;
-
+            e.cx = (polygon.x[j] + 10)  * sCluster;
+            e.cy = polygon.y[j] * sCluster + halfHeight / 2;
 
         });
 
@@ -163,14 +160,15 @@ function riskInterconMap(graph){
                             //6
     if(categoryObj[Object.keys(categoryObj)[5]]) {
         categoryObj[Object.keys(categoryObj)[5]].forEach(function (e, j) {
-            e.cx = polygon.x[j] * sCluster - halfWidth/2;
-            e.cy = polygon.y[j] * sCluster + halfHeight / 2;
+
+
+            e.cx = (polygon.xHeight[j] + 5) * sCluster - halfWidth/2;
+            e.cy = polygon.yHeight[j] * sCluster + halfHeight / 2;
 
         });
     }
                             //7
     if(categoryObj[Object.keys(categoryObj)[6]]) {
-
         categoryObj[Object.keys(categoryObj)[6]].forEach(function (e, j) {
 
            e.cx = polygon.xLow[j] * sCluster + halfWidth/2;
@@ -180,7 +178,6 @@ function riskInterconMap(graph){
     }
                             //8
     if(categoryObj[Object.keys(categoryObj)[7]]) {
-
         categoryObj[Object.keys(categoryObj)[7]].forEach(function (e, j) {
 
             e.cx = polygon.x[j] * sCluster;
