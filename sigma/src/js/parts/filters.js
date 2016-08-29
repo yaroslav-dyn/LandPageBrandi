@@ -36,11 +36,6 @@ $('#container-graph').attr('width', widthWindow).attr('height', heightWindow).cs
 
 
 
-
-
-
-
-
 $("#intercon-button").on("click",function(){
 	$("#container-graph").html("");
 	$("#graph-wrapper").css("text-align", "center");

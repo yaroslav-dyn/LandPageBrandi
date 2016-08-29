@@ -36,11 +36,6 @@ $('#container-graph').attr('width', widthWindow).attr('height', heightWindow).cs
 
 
 
-
-
-
-
-
 $("#intercon-button").on("click",function(){
 	$("#container-graph").html("");
 	$("#graph-wrapper").css("text-align", "center");
@@ -770,19 +765,15 @@ function riskInterconMap(graph){
 
         polygon = {
             x:[0,20,40,60,40,20, 10,20,30,40,50,60],
-            y:[0,-20,-20,0,20,20, -5,-10,-10,-5,10,10]
+            y:[0,-20,-15,5,15,20, -5,-10,-15,-10,10,10],
 
-        },
-        polygonLow = {
-            x:[0,20,40,60,40,20, 10,20,30,40,50,60],
-            y:[-10,-30,-30,-10,10,10, -15,-20,-20,-15,0,0]
+            xLow: [-5,15,35,55,35,15, 5,15,25,35,45,55],
+            yLow:[-5,-25,-20,0,10,15, -10,-30,-25,-5,5,10]
 
         };
 
 
-
     var sCluster = 3.5;
-
 
     if(countCategories > 5){
         halfHeight = halfHeight - 100;
@@ -800,11 +791,11 @@ function riskInterconMap(graph){
         });
     }
 
-                                 //2
+                            //2
     if(categoryObj[Object.keys(categoryObj)[1]]) {
         categoryObj[Object.keys(categoryObj)[1]].forEach(function (e, j) {
-            e.cx = polygonLow.x[j] * sCluster + halfWidth / 2.5;
-            e.cy = polygonLow.y[j] * sCluster;
+            e.cx = polygon.x[j] * sCluster + halfWidth / 2.5;
+            e.cy = polygon.y[j] * sCluster;
 
         });
     }
@@ -813,21 +804,17 @@ function riskInterconMap(graph){
     if(categoryObj[Object.keys(categoryObj)[2]]) {
 
         categoryObj[Object.keys(categoryObj)[2]].forEach(function (e, j) {
-            e.cx = polygon.x[j] * sCluster;
-            e.cy = polygon.y[j] * sCluster;
+            e.cx = polygon.xLow[j] * sCluster;
+            e.cy = polygon.yLow[j] * sCluster;
         });
     }
-
 
                             //4
 
         categoryObj[Object.keys(categoryObj)[3]].forEach(function (e, j) {
 
-
-            if (e) {
-                e.cx = polygonLow.x[j] * sCluster - halfWidth / 2.5;
-                e.cy = polygonLow.y[j] * sCluster;
-            }
+          e.cx = polygon.x[j] * sCluster - halfWidth / 2.5;
+          e.cy = polygon.y[j] * sCluster;
 
         });
 
@@ -836,9 +823,8 @@ function riskInterconMap(graph){
     if(categoryObj[Object.keys(categoryObj)[4]]) {
         categoryObj[Object.keys(categoryObj)[4]].forEach(function (e, j) {
 
-
             e.cx = polygon.x[j] * sCluster;
-            e.cy = polygon.y[j] * sCluster + halfHeight / 2;
+            e.cy = polygon.yLow[j] * sCluster + halfHeight / 2;
 
 
         });
@@ -847,8 +833,8 @@ function riskInterconMap(graph){
                             //6
     if(categoryObj[Object.keys(categoryObj)[5]]) {
         categoryObj[Object.keys(categoryObj)[5]].forEach(function (e, j) {
-            e.cx = polygonLow.x[j] * sCluster - halfWidth/2;
-            e.cy = polygonLow.y[j] * sCluster + halfHeight / 2;
+            e.cx = polygon.x[j] * sCluster - halfWidth/2;
+            e.cy = polygon.y[j] * sCluster + halfHeight / 2;
 
         });
     }
@@ -857,8 +843,8 @@ function riskInterconMap(graph){
 
         categoryObj[Object.keys(categoryObj)[6]].forEach(function (e, j) {
 
-           e.cx = polygon.x[j] * sCluster + halfWidth/2;
-           e.cy = polygon.y[j] * sCluster + halfHeight / 2;
+           e.cx = polygon.xLow[j] * sCluster + halfWidth/2;
+           e.cy = polygon.yLow[j] * sCluster + halfHeight / 2;
 
         });
     }
@@ -867,8 +853,8 @@ function riskInterconMap(graph){
 
         categoryObj[Object.keys(categoryObj)[7]].forEach(function (e, j) {
 
-            e.cx = polygonLow.x[j] * sCluster;
-            e.cy = polygonLow.y[j] * sCluster + halfHeight;
+            e.cx = polygon.x[j] * sCluster;
+            e.cy = polygon.y[j] * sCluster + halfHeight;
 
         });
     }
