@@ -8,12 +8,12 @@ if(heightWindow <= 600){
 
 
 
-function receivedText(){
+function receivedText(e){
 $('#container-graph').attr('width', widthWindow).attr('height', heightWindow).css("height", heightWindow);
 
-
 //parse json D3.js
-	var fileName = fr.result;
+	var fileName = e.target.result;
+
 	d3.json( fileName , function(error, graph) {
 
 		if (error) throw error;

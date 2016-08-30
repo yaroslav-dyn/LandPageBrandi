@@ -8,12 +8,12 @@ if(heightWindow <= 600){
 
 
 
-function receivedText(){
+function receivedText(e){
 $('#container-graph').attr('width', widthWindow).attr('height', heightWindow).css("height", heightWindow);
 
-
 //parse json D3.js
-	var fileName = fr.result;
+	var fileName = e.target.result;
+
 	d3.json( fileName , function(error, graph) {
 
 		if (error) throw error;
@@ -712,8 +712,6 @@ function riskInterconMap(graph){
         categoryObj = {},
         edgesCutRisk = [],
         oneTrend = [],
-        allLinks = [],
-        sortedAllLinks = [],
         linksCut = [];
 
 
@@ -724,7 +722,7 @@ function riskInterconMap(graph){
         halfHeight = height/ 2,
         rLage = halfHeight - 20,
         rSmall = rLage/1.1,
-        nodesRadius = 5,
+        nodesRadius = 4,
         strokeWidth = 0.5,
         edgesColor = "#a5a5a5",
         //increment current stroke width (stroke width = strokeWidth * gainStrokeWidth)
@@ -745,7 +743,6 @@ function riskInterconMap(graph){
         }
 
     });
-
 
     //creating object links
     graph.links.forEach(function (e) {
@@ -769,7 +766,6 @@ function riskInterconMap(graph){
         edges.push({source: sourceNode, target: targetNode, value: e.value});
     });
 
-
     //created object for risk nodes
     riskObj.forEach(function (e) {
         var categories = e.category;
@@ -787,17 +783,25 @@ function riskInterconMap(graph){
 
         polygon = {
             x:[0,20,40,60,40,20, 15,25,35,45,55,65],
-            y:[0,-20,-15,5,15,20, -5,-10,-25,-15,0,10],
+            y:[0,-20,-15,5,15,20, -3,-8,-23,-13,2,8],
 
             xHeight: [-10,10,30,50,30,10, 5,15,25,35,45,55],
-            yHeight:[-10,-30,-25,-5,5,10, -15,-20,-35,-25,0,-10],
+            yHeight:[-10,-30,-25,-5,5,10, -13,-18,-32,-23,2,-8],
 
             xLow: [10,30,50,70,50,30, 25,35,45,55,65,75],
-            yLow:[10,-10,-5,15,25,30, 5,0,-15,-5,20,10]
+            yLow:[10,-10,-5,15,25,30, 7,2,-13,-3,18,8]
 
         };
 
-    var sCluster = 3.8;
+    var sCluster = 3.6, //clusters size
+        heightGain = 1.8;
+
+
+    if(halfHeight <= 400){
+        sCluster = 3.2;
+        heightGain = 1.6;
+    }
+
 
     if(countCategories > 5){
         halfHeight = halfHeight - 100;
@@ -809,7 +813,7 @@ function riskInterconMap(graph){
         categoryObj[Object.keys(categoryObj)[0]].forEach(function (e, j) {
 
             e.cx = polygon.x[j] * sCluster;
-            e.cy = polygon.y[j] * sCluster - halfHeight / 2;
+            e.cy = polygon.y[j] * sCluster - halfHeight / heightGain;
 
         });
     }
@@ -817,7 +821,7 @@ function riskInterconMap(graph){
                             //2
     if(categoryObj[Object.keys(categoryObj)[1]]) {
         categoryObj[Object.keys(categoryObj)[1]].forEach(function (e, j) {
-            e.cx = polygon.x[j] * sCluster + halfWidth / 2.5;
+            e.cx = polygon.x[j] * sCluster + halfWidth / 2.2;
             e.cy = polygon.y[j] * sCluster;
 
         });
@@ -828,15 +832,15 @@ function riskInterconMap(graph){
         categoryObj[Object.keys(categoryObj)[2]].forEach(function (e, j) {
 
 
-            e.cx = (polygon.xLow[j] - 10) * sCluster;
-            e.cy = polygon.yLow[j]  * sCluster;
+            e.cx = (polygon.xLow[j] - 5) * sCluster;
+            e.cy = (polygon.yLow[j] + 5)  * sCluster;
         });
     }
 
                             //4
         categoryObj[Object.keys(categoryObj)[3]].forEach(function (e, j) {
-          e.cx = (polygon.xHeight[j] + 10) * sCluster - halfWidth / 2.5;
-          e.cy = (polygon.yHeight[j] + 5) * sCluster;
+          e.cx = (polygon.xHeight[j] + 5) * sCluster - halfWidth / 2.2;
+          e.cy = (polygon.yHeight[j] - 5) * sCluster;
 
         });
 
@@ -846,7 +850,7 @@ function riskInterconMap(graph){
         categoryObj[Object.keys(categoryObj)[4]].forEach(function (e, j) {
 
             e.cx = (polygon.x[j] + 10)  * sCluster;
-            e.cy = polygon.y[j] * sCluster + halfHeight / 2;
+            e.cy = (polygon.y[j] +5 ) * sCluster + halfHeight / heightGain;
 
         });
 
@@ -856,8 +860,8 @@ function riskInterconMap(graph){
         categoryObj[Object.keys(categoryObj)[5]].forEach(function (e, j) {
 
 
-            e.cx = (polygon.xHeight[j] + 5) * sCluster - halfWidth/2;
-            e.cy = polygon.yHeight[j] * sCluster + halfHeight / 2;
+            e.cx = (polygon.xHeight[j] + 5) * sCluster - halfWidth / 2.2;
+            e.cy = polygon.yHeight[j] * sCluster + halfHeight / heightGain;
 
         });
     }
@@ -865,8 +869,8 @@ function riskInterconMap(graph){
     if(categoryObj[Object.keys(categoryObj)[6]]) {
         categoryObj[Object.keys(categoryObj)[6]].forEach(function (e, j) {
 
-           e.cx = polygon.xLow[j] * sCluster + halfWidth/2;
-           e.cy = polygon.yLow[j] * sCluster + halfHeight / 2;
+           e.cx = polygon.xLow[j] * sCluster + halfWidth / 2.2;
+           e.cy = polygon.yLow[j] * sCluster + halfHeight / heightGain;
 
         });
     }
@@ -904,7 +908,7 @@ function riskInterconMap(graph){
         })
         .attr("stroke", edgesColor)
         .attr("title", function (d) {
-            return d.value
+            return d.source.rank;
         })
         .attr("source", function (d) {
             return d.source.id
@@ -913,9 +917,8 @@ function riskInterconMap(graph){
             return d.target.id
         })
         .attr("stroke-width", function(d){
-             return altStrength(d,strokeWidth,0);
-        });
-
+            return altStrength(d,strokeWidth, 0);
+         });
 
     //--------------RISK NODES-----------------------------------------
     //appends 'g' containers
@@ -933,10 +936,10 @@ function riskInterconMap(graph){
             return d.label || d.id;
         })
         .attr("dx", function (d) {
-            return d.cx + halfWidth + 10
+            return d.cx + halfWidth - 14
         })
         .attr("dy", function (d) {
-            return d.cy + halfHeight - 6
+            return d.cy + halfHeight - 8
         })
         .attr("id", function (d) {
             return d.id
@@ -955,13 +958,11 @@ function riskInterconMap(graph){
         .attr("id", function (d) {
             return d.id
         })
-        //.attr("width", widthRect)
-        //.attr("height", heightRect)
-        .attr("r", nodesRadius)
+        .attr("r", function(d){
+            return altNodeSize(d, nodesRadius, 0) })
         .attr("fill", function (d) {
             return color(d.category || d.group);
         });
-
 
 
 //----------------filtering Data--------------------------------------
@@ -977,13 +978,13 @@ function riskInterconMap(graph){
         d3.selectAll(".nodes-risks")
             .transition()
             .duration(300)
-            //.attr("width", widthRect)
-            //.attr("height", heightRect);
-            .attr("r", nodesRadius);
+            .attr("r", function(d){
+                return altNodeSize(d, nodesRadius,0) });
 
         d3.select(this).select("circle").transition()
             .duration(300)
-            .attr("r", nodesRadius + 2);
+            .attr("r", function(d){
+                return altNodeSize(d, nodesRadius,2) });
 
         //visible & transform TEXT
         d3.selectAll(".text-risks")
@@ -999,11 +1000,7 @@ function riskInterconMap(graph){
             currentColor = d3.select(this).select("circle").attr("fill");
 
 
-
-        //sorting all links Ascending
-         var sortedAllLinks = allLinks.sort(function(a, b) {return b.value -  a.value });
-
-        //filtering all lines where currentId = target
+        //filtering all lines where currentId = source
         d3.selectAll("line")
             .attr("stroke-width", function(d){
                 return altStrength(d, strokeWidth, 0);
@@ -1024,7 +1021,8 @@ function riskInterconMap(graph){
                 return altStrength(d,strokeWidth, 2.5);
             });
 
-        //filtering all links where currentId = source
+
+        //filtering all links where currentId = target
         d3.selectAll("line")
             .filter(function (d) {
                 if (d.target.id == currentID) {
@@ -1037,7 +1035,6 @@ function riskInterconMap(graph){
             .attr("stroke-width", function(d) {
                 return altStrength(d,strokeWidth, 2.5);
             });
-
 
         d3.selectAll(".text-risks")
             .attr("style", "font-size: 0.6em")
@@ -1091,100 +1088,62 @@ function riskInterconMap(graph){
         //clearing array
         oneTrend = [];
         edgesCutRisk = [];
-        allLinks = [];
-        sortedAllLinks = [];
+
 
     }//END currentNodeRisk
 
 
-    //function alt strokewidth
+
+    //function  node size depending on "rank 1-6"
+    function altNodeSize(d, nodesRadius, gainNodeSize) {
+
+        if (d.rank == 1 ) {
+            return d = nodesRadius + 3.2 + gainNodeSize;
+        }
+        else if (d.rank == 2 ) {
+            return d = nodesRadius + 2.6 + gainNodeSize;
+        }
+        else if (d.rank == 3 ) {
+            return d = nodesRadius + 2 + gainNodeSize;
+        }
+        else if (d.rank == 4 ) {
+            return d = nodesRadius + 1.4 + gainNodeSize;
+        }
+        else if (d.rank == 5 ) {
+            return d = nodesRadius + 0.8 + gainNodeSize;
+        }
+        else if (d.rank == 6 ) {
+            return d = nodesRadius + 0.2 + gainNodeSize
+        }
+        else{
+            return d = nodesRadius  + gainNodeSize;
+        }
+
+    }
+
+    //function  stroke width depending on "rank 1-6"
     function altStrength(d, strokeWidth, gainStrokeWidth) {
 
-        if (d.value <= 10 || d.strength <= 10) {
-            return d = strokeWidth + 0.1 + gainStrokeWidth;
-        }
-        else if (d.value <= 20 || d.strength <= 20) {
-            return d = strokeWidth + 0.2 + gainStrokeWidth;
-        }
-        else if (d.value <= 30 || d.strength <= 30) {
-            return d = strokeWidth + 0.3 + gainStrokeWidth;
-        }
-        else if (d.value <= 40 || d.strength <= 40) {
-            return d = strokeWidth + 0.4 + gainStrokeWidth;
-        }
-        else if (d.value <= 50 || d.strength <= 50) {
-            return d = strokeWidth + 0.5 + gainStrokeWidth;
-        }
-        else if (d.value <= 60 || d.strength <= 60) {
-            return d = strokeWidth + 0.6 + gainStrokeWidth;
-        }
-        else if (d.value <= 70 || d.strength <= 70) {
-            return d = strokeWidth + 0.7 + gainStrokeWidth;
-        }
-        else if (d.value <= 80 || d.strength <= 80) {
-            return d = strokeWidth + 0.8 + gainStrokeWidth;
-        }
-        else if (d.value <= 90 || d.strength <= 90) {
-            return d = strokeWidth + 0.9 + gainStrokeWidth;
-        }
-        else if (d.value <= 100 || d.strength <= 100) {
-            return d = strokeWidth + 1 + gainStrokeWidth;
-        }
-
-        else if (d.value <= 110 || d.strength <= 110) {
+        if (d.source.rank == 1 || d.target.rank == 1 ) {
             return d = strokeWidth + 1.1 + gainStrokeWidth;
         }
-
-        else if (d.value <= 120 || d.strength <= 120) {
-            return d = strokeWidth + 1.2 + gainStrokeWidth;
+        else if (d.source.rank == 2 || d.target.rank == 2) {
+            return d = strokeWidth  + 0.6 + gainStrokeWidth;
+        }
+        else{
+            return d = strokeWidth  - 0.2 + gainStrokeWidth;
         }
 
-        else  if (d.value <= 130 || d.strength <= 130) {
-            return d = strokeWidth + 1.3 + gainStrokeWidth;
-        }
-
-        else if (d.value <= 140 || d.strength <= 140) {
-            return d = strokeWidth + 1.4 + gainStrokeWidth;
-        }
-
-        else if (d.value <= 150 || d.strength <= 150) {
-            return d = strokeWidth + 1.5 + gainStrokeWidth;
-        }
-        else if (d.value <= 160 || d.strength <= 160) {
-            return d = strokeWidth + 1.6 + gainStrokeWidth;
-        }
-        else if (d.value <= 160 || d.strength <= 160) {
-            return d = strokeWidth + 1.7 + gainStrokeWidth;
-        }
-        else if (d.value <= 170 || d.strength <= 170) {
-            return d = strokeWidth + 1.8 + gainStrokeWidth;
-        }
-        else if (d.value <= 180 || d.strength <= 180) {
-            return d = strokeWidth + 1.9 + gainStrokeWidth;
-        }
-        else if (d.value <= 190 || d.strength <= 190) {
-            return d = strokeWidth + 2 + gainStrokeWidth;
-        }
-        else if (d.value <= 200 || d.strength <= 200) {
-            return d = strokeWidth + 2.1 + gainStrokeWidth;
-        }
-        else if(d.value > 200 || d.strength > 200){
-            return d = strokeWidth + 2.2 + gainStrokeWidth;
-        }
     }
 
     //-------------ABORTING filters FUNCTION--------------------------------------------
 
     $("#clear-filter").click(function () {
 
-        d3.selectAll(".nodes-trends")
-            .attr("r", nodesRadius + 2)
-            .attr("fill", trendsColor);
 
         d3.selectAll(".nodes-risks")
-            //.attr("width", widthRect)
-            //.attr("height", heightRect);
-            .attr("r", nodesRadius);
+            .attr("r", function(d){
+                return altNodeSize(d, nodesRadius,0) });
 
         d3.selectAll(".text-trends")
             .attr("class", "text text-trends text-hidden")
