@@ -196,7 +196,7 @@ header{
   }
   .text{
     display: none;
-    font: 100 0.9em cursive, sans-serif;
+    font: 100 0.9em cursive, consolas, sans-serif;
     stroke: none;
     fill: #000;
     text-anchor: start;
@@ -222,6 +222,12 @@ header{
     &:hover{
       cursor: pointer;
     }
+  }
+  .axis path,
+  .axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
   }
 }
 hr{
@@ -254,7 +260,7 @@ hr{
         font-size: 0.72em;
         padding: 8px;
         color: #636b66;
-        border-radius: 8px;
+        border-radius: 5px;
         &:hover{
           background: lighten($nav-bg, 20%);
           color: #fff;
@@ -273,11 +279,8 @@ hr{
     font-size: 0.9em;
     color: #333;
     margin-top: 10px;
-    .sel-cat, .trends-selected, #header-file-sb{
-      font-weight: bold;
-    }
   }
-  .category-selected, .file-name{
+  .file-name{
     color: $hyper-color;
   }
   p.description-risk{
@@ -333,9 +336,6 @@ footer{
    font-size: 0.8em;
   }
 }
-
-
-
 
 
 //import media

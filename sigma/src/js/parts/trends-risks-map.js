@@ -1,9 +1,11 @@
 //creating trend-risk map
 
 function trendsRiskMap(graph){
-    // map trigger
-    $(".map-list li").removeClass('active');
 
+    // maps trigger
+    //delete previous highlight button
+    $(".map-list li").removeClass('active');
+    //highlighting  map button
     $("#trends-button").addClass("active");
 
     //main variables
@@ -377,6 +379,14 @@ function trendsRiskMap(graph){
             })
             .attr("style", "color:" + currentColor);
 
+        //clear impact,likelihood
+        d3.selectAll(".sel-impact")
+            .text("");
+
+        d3.selectAll(".sel-likelihood")
+            .text("");
+
+
         oneTrend = [];
         edgesCutTrend = [];
 
@@ -488,6 +498,22 @@ function trendsRiskMap(graph){
                 return d.category || "No category";
             })
             .attr("style", "color:" + currentColor);
+
+        //Nodes impact
+        d3.selectAll(".sel-impact")
+            .data(oneTrend)
+            .text(function (d) {
+                return d.impact || "No impact value";
+            });
+        //Nodes likelihood
+        d3.selectAll(".sel-likelihood")
+            .data(oneTrend)
+            .text(function (d) {
+                return d.Likelihood || "No likelihood value";
+            });
+
+
+
 
         //clearing array
         oneTrend = [];

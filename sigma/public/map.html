@@ -53,7 +53,7 @@
         <div class="col-md-10 col-md-offset-1 container-expo" id="container-expo">
           <!-- Container for graphics-->
           <div id="graph-wrapper" class="graph-wrapper text-center">
-            <svg id="container-graph"></svg>
+            <svg id="container-graph" onload="staticMap()"></svg>
           </div>
         </div>
         <div class="col-md-2 sidebar-data hidden" id="sidebar-data">
@@ -73,7 +73,7 @@
                 <h3 class="category-selected"><span class="trends-selected s-data-text"></span></h3>
 
                 <p class="description-risk s-data-text">
-                  Rising number of people living in urban areas that results in the physical growth of cities.
+
                 </p>
 
                 <div class="category-selected">
@@ -96,35 +96,7 @@
         </div>
       </div>
     </div>
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="upload-wrapper">
-            <div class="button-nav">
-              <label class="btn btn-default nav-uploader" for="upload-input" title="Upload a Risk data file">Upload a Risk data file</label>
-              <input id="upload-input" type="file">
-            </div>
-            <div class="data-nav">
-              <span id="load-file" class="load-file-name"></span>
-              <span id="header-file" class="load-file-name"></span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
   </section>
-  <section class="snapshot-area">
-    <div class="container">
-       <div class="row">
-         <div class="col-md-12">
-            <div id="snap-area"></div>
-            <div class="hidden">
-            <button id="pj" class="btn btn-default nav-uploader"  title="parse into area">Snapshot</button>
-           </div>
-         </div>
-      </div>
-    </div>
-  </section>  
 </div>  
 
   <footer>

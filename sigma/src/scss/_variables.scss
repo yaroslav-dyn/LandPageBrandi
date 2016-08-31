@@ -34,7 +34,9 @@ $nav-link-color: #fff;
 %logos-shadow{
    text-shadow: 0 0 1px rgba(0,0,0,0.2);
 }
-
+.text-bold{
+  font-weight: bold;
+}
 //mixins
 
 @mixin transEff($time,$function:ease-in-out){

@@ -17,6 +17,9 @@
 header h1 a, footer, footer h4 {
   text-shadow: 0 0 1px rgba(0, 0, 0, 0.2); }
 
+.text-bold {
+  font-weight: bold; }
+
 body {
   font-size: 16px;
   overflow-x: hidden; }
@@ -171,7 +174,7 @@ header {
 
 .graph-wrapper .text {
   display: none;
-  font: 100 0.9em cursive, sans-serif;
+  font: 100 0.9em cursive, consolas, sans-serif;
   stroke: none;
   fill: #000;
   text-anchor: start; }
@@ -195,6 +198,12 @@ header {
   stroke-width: 1; }
   .graph-wrapper .nodes:hover {
     cursor: pointer; }
+
+.graph-wrapper .axis path,
+.graph-wrapper .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges; }
 
 hr {
   margin: 10px 10px 10px 0; }
@@ -224,7 +233,7 @@ hr {
       font-size: 0.72em;
       padding: 8px;
       color: #636b66;
-      border-radius: 8px; }
+      border-radius: 5px; }
       .sidebar-data ul.map-list li a:hover {
         background: #9fd7ac;
         color: #fff; }
@@ -237,9 +246,7 @@ hr {
     font-size: 0.9em;
     color: #333;
     margin-top: 10px; }
-    .sidebar-data .category-selected .sel-cat, .sidebar-data .category-selected .trends-selected, .sidebar-data .category-selected #header-file-sb, .sidebar-data .file-name .sel-cat, .sidebar-data .file-name .trends-selected, .sidebar-data .file-name #header-file-sb {
-      font-weight: bold; }
-  .sidebar-data .category-selected, .sidebar-data .file-name {
+  .sidebar-data .file-name {
     color: #636b66; }
   .sidebar-data p.description-risk {
     font-size: 0.75em;

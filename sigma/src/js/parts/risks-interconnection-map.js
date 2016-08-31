@@ -2,11 +2,10 @@
 
 function riskInterconMap(graph){
 
-    $("#container-expo").removeClass("col-md-offset-1");
-
-    // map trigger
+    // maps trigger
+    //delete previous highlight button
     $(".map-list li").removeClass('active');
-
+    //highlighting  map button
    $("#intercon-button").addClass("active");
 
 
@@ -33,7 +32,6 @@ function riskInterconMap(graph){
         edgesColor = "#a5a5a5",
         //increment current stroke width (stroke width = strokeWidth * gainStrokeWidth)
         inactiveOpacity = 0.2; //value inactive lines opacity (normal opacity = 1 )
-
 
 
 
@@ -213,9 +211,6 @@ function riskInterconMap(graph){
             return d.target.cy + halfHeight;
         })
         .attr("stroke", edgesColor)
-        .attr("title", function (d) {
-            return d.source.rank;
-        })
         .attr("source", function (d) {
             return d.source.id
         })
@@ -242,10 +237,10 @@ function riskInterconMap(graph){
             return d.label || d.id;
         })
         .attr("dx", function (d) {
-            return d.cx + halfWidth - 14
+            return d.cx + halfWidth - 14;
         })
         .attr("dy", function (d) {
-            return d.cy + halfHeight - 8
+            return d.cy + halfHeight - 8;
         })
         .attr("id", function (d) {
             return d.id
@@ -271,9 +266,9 @@ function riskInterconMap(graph){
         });
 
 
-//----------------filtering Data--------------------------------------
 
-    //------------Event functions---------------------------------------
+
+//------------Event functions---------------------------------------
 
 
 
@@ -391,6 +386,21 @@ function riskInterconMap(graph){
             })
             .attr("style", "color:" + currentColor);
 
+        //Nodes impact
+        d3.selectAll(".sel-impact")
+            .data(oneTrend)
+            .text(function (d) {
+                return d.impact || "No impact value";
+            });
+        //Nodes likelihood
+        d3.selectAll(".sel-likelihood")
+            .data(oneTrend)
+            .text(function (d) {
+                return d.Likelihood || "No likelihood value";
+            });
+
+
+
         //clearing array
         oneTrend = [];
         edgesCutRisk = [];
@@ -400,47 +410,6 @@ function riskInterconMap(graph){
 
 
 
-    //function  node size depending on "rank 1-6"
-    function altNodeSize(d, nodesRadius, gainNodeSize) {
-
-        if (d.rank == 1 ) {
-            return d = nodesRadius + 3.2 + gainNodeSize;
-        }
-        else if (d.rank == 2 ) {
-            return d = nodesRadius + 2.6 + gainNodeSize;
-        }
-        else if (d.rank == 3 ) {
-            return d = nodesRadius + 2 + gainNodeSize;
-        }
-        else if (d.rank == 4 ) {
-            return d = nodesRadius + 1.4 + gainNodeSize;
-        }
-        else if (d.rank == 5 ) {
-            return d = nodesRadius + 0.8 + gainNodeSize;
-        }
-        else if (d.rank == 6 ) {
-            return d = nodesRadius + 0.2 + gainNodeSize
-        }
-        else{
-            return d = nodesRadius  + gainNodeSize;
-        }
-
-    }
-
-    //function  stroke width depending on "rank 1-6"
-    function altStrength(d, strokeWidth, gainStrokeWidth) {
-
-        if (d.source.rank == 1 || d.target.rank == 1 ) {
-            return d = strokeWidth + 1.1 + gainStrokeWidth;
-        }
-        else if (d.source.rank == 2 || d.target.rank == 2) {
-            return d = strokeWidth  + 0.6 + gainStrokeWidth;
-        }
-        else{
-            return d = strokeWidth  - 0.2 + gainStrokeWidth;
-        }
-
-    }
 
     //-------------ABORTING filters FUNCTION--------------------------------------------
 
@@ -451,9 +420,6 @@ function riskInterconMap(graph){
             .attr("r", function(d){
                 return altNodeSize(d, nodesRadius,0) });
 
-        d3.selectAll(".text-trends")
-            .attr("class", "text text-trends text-hidden")
-            .attr("style", "font-weight: normal");
 
         d3.selectAll(".text-risks")
             .attr("class", "text text-risks text-hidden")

@@ -11,50 +11,14 @@
         </p>
       </div>
       <div class="row">
-        <div class="col-md-10 col-md-offset-1 container-expo" id="container-expo">
+        <div class="col-md-10  container-expo" id="container-expo">
           <!-- Container for graphics-->
           <div id="graph-wrapper" class="graph-wrapper text-center">
             <svg id="container-graph" onload="staticMap()"></svg>
           </div>
         </div>
-        <div class="col-md-2 sidebar-data hidden" id="sidebar-data">
-          <div class="sidebar-data-wrapper">
-            <h4 class="sidebar-main-header">View map</h4>
-            <hr/>
-            <ul class="nav nav-pills nav-stacked map-list">
-              <li role="presentation" id="intercon-button"><a href="#" >Global Risks Interconnections Map</a></li>
-              <li role="presentation" id="trends-button"><a href="#">Risks-Trends Interconnections Map</a></li>
-              <li role="presentation"><a href="#">Global Risks Landscape</a></li>
-            </ul>
-            <hr/>
-            <div class="side-panel">
-              <div class="sidebar-data-unity">
-                <h5 class="category-hyper">Selected <span class="trend-risk s-data-text"></span>:</h5>
-
-                <h3 class="category-selected"><span class="trends-selected s-data-text"></span></h3>
-
-                <p class="description-risk s-data-text">
-
-                </p>
-
-                <div class="category-selected">
-                  Category: <span class="sel-cat s-data-text"></span>
-                </div>
-                <hr/>
-                <div class="file-name">
-                  <span id="load-file-sb"></span>
-                  <span id="header-file-sb"></span>
-                </div>
-                <hr/>
-                <button id="highlight-text" class="btn btn-block panel-btn">Show label</button>
-                <hr/>
-              </div><!--END sidebar-data-unity-->
-              <div class="nav-wrap">
-                <button id="clear-filter" class="btn btn-block panel-btn">Clear selection</button>
-              </div>
-            </div>
-          </div>
-        </div>
+        <!-- Call template Sidebar-->
+        //=../sidebar.html
       </div>
     </div>
   </section>
