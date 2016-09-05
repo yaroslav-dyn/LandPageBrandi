@@ -24,7 +24,6 @@ $('#container-graph').attr('width', widthWindow).attr('height', heightWindow).cs
 	 $("#sidebar-data").removeClass("hidden");
 
 	//default cart:
-
 	//trendsRiskMap(graph);
 	riskInterconMap(graph);
 

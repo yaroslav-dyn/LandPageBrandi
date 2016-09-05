@@ -13,6 +13,7 @@ $nav-link-color-hover: #EDEA00;
 $nav-bg: #57B96D;
 $border-color: #1D8935;
 $nav-link-color: #fff;
+$category-button: #e3eae4;
 
 //classes
 %button-style-hover{
@@ -37,6 +38,7 @@ $nav-link-color: #fff;
 .text-bold{
   font-weight: bold;
 }
+
 //mixins
 
 @mixin transEff($time,$function:ease-in-out){

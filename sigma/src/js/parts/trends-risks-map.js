@@ -96,7 +96,6 @@ function trendsRiskMap(graph){
         categoryObj[categories].push(e);
 
     });
-
     //include coordinate in sort object
     var b = 1;
     for (var i in categoryObj) {
@@ -149,7 +148,7 @@ function trendsRiskMap(graph){
 
             var angle = j * step;
             e.cx = ( ( Math.cos(b) * (( halfWidth / n / 1.4) * zenith ) ) + ( Math.sin(angle) * ( clasterRadius / j) ) );
-            e.cy = ( ( Math.sin(b) * (( halfHeight / n / 1.2) * zenith ) ) + ( Math.cos(angle) * ( clasterRadius / j) ) );
+            e.cy = ( ( Math.sin(b) * (( halfHeight / n / 1.2) * zenith ) ) + (Math.cos(angle) * ( clasterRadius / j) ) );
 
 
         })
@@ -158,6 +157,8 @@ function trendsRiskMap(graph){
 
 
 //----------------Append in DOM SVG--------------------------------
+        svg
+            .attr("class","trends-risks");
 
     //--------------LINKS-----------------------------------------
     //append links
@@ -276,7 +277,13 @@ function trendsRiskMap(graph){
             return color(d.category || d.group);
         });
 
+
+
+
+
 //----------------filtering Data--------------------------------------
+    //clear filter block
+    $(".risk-categories").html("");
 
     //------------Event functions---------------------------------------
 
@@ -349,6 +356,7 @@ function trendsRiskMap(graph){
 
         //----Sidebar text data--------------------------
 
+
         //create one current object for sidebar data
         trendObj.forEach(function (e) {
             if (e.id == currentID) {
@@ -356,35 +364,8 @@ function trendsRiskMap(graph){
             }
         });
 
-        //type of risk
-        d3.selectAll(".trend-risk")
-            .text("trend");
-        //Nodes label
-        d3.selectAll(".trends-selected")
-            .data(oneTrend)
-            .text(function (d) {
-                return d.label || d.id;
-            });
-        //Nodes description
-        d3.selectAll(".description-risk")
-            .data(oneTrend)
-            .text(function (d) {
-                return d.description || "No description";
-            });
-        //Nodes category
-        d3.selectAll(".sel-cat")
-            .data(oneTrend)
-            .text(function (d) {
-                return d.category || "No category";
-            })
-            .attr("style", "color:" + currentColor);
-
-        //clear impact,likelihood
-        d3.selectAll(".sel-impact")
-            .text("");
-
-        d3.selectAll(".sel-likelihood")
-            .text("");
+        //special data sidebar for t-r map (Trends)
+        getDataSidebarTrendsMap(oneTrend,currentColor);
 
 
         oneTrend = [];
@@ -398,11 +379,14 @@ function trendsRiskMap(graph){
     function currentNodeRisk(){
         //visible & transform RiskNodes
         d3.selectAll(".nodes-risks")
+            .attr("class","nodes nodes-risks")
             .transition()
             .duration(300)
             .attr("r", nodesRadius);
 
-        d3.select(this).select("circle").transition()
+        d3.select(this).select("circle")
+            .attr("class","nodes nodes-risks current-node")
+            .transition()
             .duration(300)
             .attr("r", nodesRadius + 3);
 
@@ -476,43 +460,7 @@ function trendsRiskMap(graph){
             }
         });
 
-        //type of risk
-        d3.selectAll(".trend-risk")
-            .text("risk");
-        //Nodes label
-        d3.selectAll(".trends-selected")
-            .data(oneTrend)
-            .text(function (d) {
-                return d.label || d.id;
-            });
-        //Nodes description
-        d3.selectAll(".description-risk")
-            .data(oneTrend)
-            .text(function (d) {
-                return d.description || "No description";
-            });
-        //Nodes category
-        d3.selectAll(".sel-cat")
-            .data(oneTrend)
-            .text(function (d) {
-                return d.category || "No category";
-            })
-            .attr("style", "color:" + currentColor);
-
-        //Nodes impact
-        d3.selectAll(".sel-impact")
-            .data(oneTrend)
-            .text(function (d) {
-                return d.impact || "No impact value";
-            });
-        //Nodes likelihood
-        d3.selectAll(".sel-likelihood")
-            .data(oneTrend)
-            .text(function (d) {
-                return d.Likelihood || "No likelihood value";
-            });
-
-
+        getDataSidebar(riskObj, oneTrend, currentColor);
 
 
         //clearing array
@@ -520,6 +468,68 @@ function trendsRiskMap(graph){
         edgesCutRisk = [];
 
     }//END currentNodeRisk
+
+
+//-----------------------CURRENT NODE-----------------------------------------------
+
+    var
+        edgesCutRiskCur = [],
+        //save current node
+        currNode = $(".trends-selected").attr("curid"),
+        typeOfRisk = $(".trend-risk").text();
+
+    if(currNode != "empty" && typeOfRisk != "trend") {
+        svg.selectAll(".nodes-risks")
+            .filter(function (d) {
+                return d.id == currNode;
+            })
+            .transition()
+            .duration(300)
+            .attr("r", nodesRadius + 3);
+
+        d3.selectAll(".text-risks")
+            .filter(function (d) {
+                return d.id == currNode;
+            })
+            .attr("class", "text text-risks text-visible")
+            .attr("style", "font-weight: bold; font-size: 0.9em");
+
+
+
+        //filtering all lines where currentId = target
+        d3.selectAll("line")
+            .attr("stroke-width", strokeWidth)
+            .attr("style", "opacity: " + inactiveOpacity)
+            .data(edges)
+            .filter(function (d) {
+                if (d.target.id == currNode && d.source.type == "Trend") {
+                    edgesCutRiskCur.push(d.source.id)
+                }
+                if (d.source.type == "Trend") {
+                    return d.target.id == currNode;
+                }
+
+            })
+            .attr("stroke-width", strokeWidth * gainStrokeWidth)
+            .attr("style", "opacity: 1");
+
+
+        d3.selectAll(".text-trends")
+            .filter(function (d) {
+                return edgesCutRiskCur.indexOf(d.id) >= 0;
+            })
+            .attr("class", "text text-trends text-visible")
+            .attr("style", "font-size: 0.8em");
+
+
+        edgesCutRiskCur = [];
+
+    }
+
+
+
+
+//-----------------------END CURRENT NODE-----------------------------------------------
 
 
 //-------------ABORTING filters FUNCTION--------------------------------------------
@@ -531,6 +541,7 @@ $("#clear-filter").click(function() {
         .attr("fill", trendsColor);
 
     d3.selectAll(".nodes-risks")
+        .attr("class","nodes nodes-risks")
         .attr("r", nodesRadius);
 
     d3.selectAll(".text-trends")
@@ -547,9 +558,15 @@ $("#clear-filter").click(function() {
 
     //----Sidebar text data clearing--------------------------
 
+    d3.select(".data-area")
+        .attr("class","data-area hidden");
+
     //clearing all sidebar data text
     d3.selectAll(".s-data-text")
         .text("");
+
+    //clear current node
+    $(".trends-selected").attr("curid","empty");
 
 });
 

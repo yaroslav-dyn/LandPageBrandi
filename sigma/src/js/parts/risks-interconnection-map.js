@@ -21,7 +21,7 @@ function riskInterconMap(graph){
 
 
     var svg = d3.select("svg"),
-        width = +svg.attr("width") ,
+        width = +svg.attr("width"),
         height = +svg.attr("height"),
         halfWidth = width/ 2,
         halfHeight = height/ 2,
@@ -36,8 +36,8 @@ function riskInterconMap(graph){
 
 
     //color palette d3
-    var color = d3.scaleOrdinal(d3.schemeCategory20),
-        trendsColor = "#AB00AB";
+    var color = d3.scaleOrdinal(d3.schemeCategory20);
+
 
 
     //filtering 'Risk' nodes
@@ -191,6 +191,9 @@ function riskInterconMap(graph){
 
 //----------------Append in DOM SVG--------------------------------
 
+    svg
+        .attr("class","interconnections");
+
     //--------------LINKS-----------------------------------------
     //append links
     var link = svg.append("g")
@@ -265,8 +268,9 @@ function riskInterconMap(graph){
             return color(d.category || d.group);
         });
 
-
-
+//----------------filtering Data--------------------------------------
+    //clear filter block
+    $(".risk-categories").html("");
 
 //------------Event functions---------------------------------------
 
@@ -279,11 +283,13 @@ function riskInterconMap(graph){
         d3.selectAll(".nodes-risks")
             .transition()
             .duration(300)
+            .attr("class","nodes nodes-risks")
             .attr("r", function(d){
                 return altNodeSize(d, nodesRadius,0) });
 
         d3.select(this).select("circle").transition()
             .duration(300)
+            .attr("class","nodes nodes-risks current-node")
             .attr("r", function(d){
                 return altNodeSize(d, nodesRadius,2) });
 
@@ -353,7 +359,6 @@ function riskInterconMap(graph){
             .attr("style", "font-size: 0.8em; font-weight: bold");
 
 
-
         //----Sidebar text data--------------------------
 
         //create one current object for sidebar data
@@ -363,43 +368,8 @@ function riskInterconMap(graph){
             }
         });
 
-        //type of risk
-        d3.selectAll(".trend-risk")
-            .text("risk");
-        //Nodes label
-        d3.selectAll(".trends-selected")
-            .data(oneTrend)
-            .text(function (d) {
-                return d.label || d.id;
-            });
-        //Nodes description
-        d3.selectAll(".description-risk")
-            .data(oneTrend)
-            .text(function (d) {
-                return d.description || "No description";
-            });
-        //Nodes category
-        d3.selectAll(".sel-cat")
-            .data(oneTrend)
-            .text(function (d) {
-                return d.category || "No category";
-            })
-            .attr("style", "color:" + currentColor);
-
-        //Nodes impact
-        d3.selectAll(".sel-impact")
-            .data(oneTrend)
-            .text(function (d) {
-                return d.impact || "No impact value";
-            });
-        //Nodes likelihood
-        d3.selectAll(".sel-likelihood")
-            .data(oneTrend)
-            .text(function (d) {
-                return d.Likelihood || "No likelihood value";
-            });
-
-
+        //general sidebar data function (common-functions template)
+        getDataSidebar(riskObj, oneTrend, currentColor);
 
         //clearing array
         oneTrend = [];
@@ -409,6 +379,91 @@ function riskInterconMap(graph){
     }//END currentNodeRisk
 
 
+//-----------------------CURRENT NODE-----------------------------------------------
+
+
+    var edgesCutRiskCur = [],
+    //save current node
+     currNode = $(".trends-selected").attr("curid"),
+     typeOfRisk = $(".trend-risk").text();
+
+
+
+    if(currNode != "empty" && typeOfRisk != "trend") {
+
+        svg.selectAll(".nodes-risks")
+            .filter(function (d) {
+                return d.id == currNode;
+            })
+            .transition()
+            .duration(300)
+            .attr("r", function (d) {
+                return altNodeSize(d, nodesRadius, 2)
+            });
+
+        d3.selectAll(".text-risks")
+            .filter(function (d) {
+                return d.id == currNode;
+            })
+            .attr("class", "text text-risks text-visible")
+            .attr("style", "font-weight: bold; font-size: 0.9em");
+
+        d3.selectAll("line")
+            .attr("style", "opacity: 1");
+
+        //filtering all lines where currentId = source
+        d3.selectAll("line")
+            .attr("stroke-width", function (d) {
+                return altStrength(d, strokeWidth, 0);
+            })
+            .attr("style", "opacity: " + inactiveOpacity)
+            .attr("class", "")
+            .data(edges)
+            .filter(function (d) {
+                if (d.source.id == currNode) {
+                    edgesCutRiskCur.push(d.target.id)
+                }
+                return d.source.id == currNode;
+
+            })
+            .attr("style", "opacity: 1")
+            .attr("class", "current-line")
+            .attr("stroke-width", function (d) {
+                return altStrength(d, strokeWidth, 2.5);
+            });
+
+
+        //filtering all links where currentId = target
+        d3.selectAll("line")
+            .filter(function (d) {
+                if (d.target.id == currNode) {
+                    edgesCutRiskCur.push(d.source.id)
+                }
+                return d.target.id == currNode;
+            })
+            .attr("style", "opacity: 1")
+            .attr("class", "current-line")
+            .attr("stroke-width", function (d) {
+                return altStrength(d, strokeWidth, 2.5);
+            });
+
+        //filtering all text labels
+        d3.selectAll(".text-risks")
+            .filter(function (d) {
+                return edgesCutRiskCur.indexOf(d.id) >= 0;
+            })
+            .attr("class", "text text-risks text-visible")
+            .attr("style", "font-size: 0.8em");
+
+        edgesCutRiskCur = [];
+
+    }
+
+
+
+
+//-----------------------END CURRENT NODE-----------------------------------------------
+
 
 
     //-------------ABORTING filters FUNCTION--------------------------------------------
@@ -417,6 +472,7 @@ function riskInterconMap(graph){
 
 
         d3.selectAll(".nodes-risks")
+            .attr("class","nodes nodes-risks")
             .attr("r", function(d){
                 return altNodeSize(d, nodesRadius,0) });
 
@@ -436,9 +492,16 @@ function riskInterconMap(graph){
 
         //----Sidebar text data clearing--------------------------
 
+        d3.select(".data-area")
+            .attr("class","data-area hidden");
+
         //clearing all sidebar data text
         d3.selectAll(".s-data-text")
             .text("");
+
+        //clear current node
+        $(".trends-selected").attr("curid","empty");
+
 
     });
 

@@ -23,6 +23,9 @@ a{
   justify-content: space-between;
   align-content: center;
 }
+ul{
+  list-style: none;
+}
 //HEADER
 header{
   .navbar{
@@ -92,6 +95,7 @@ header{
     color: #1D8935;
     font-weight: 700;
     font-size: 1.8em;
+    margin-top: 14px;
   }
   .page-description{
     font-size: 1.1em;
@@ -223,12 +227,19 @@ header{
       cursor: pointer;
     }
   }
+  /*********Landscape map***************************/
   .axis path,
   .axis line {
     fill: none;
     stroke: #000;
     shape-rendering: crispEdges;
   }
+  text.label{
+    font: normal 12px Monaco, consolas ,cursive, sans-serif;
+  }
+
+
+  /************************************************/
 }
 hr{
   margin: 10px 10px 10px 0;
@@ -242,7 +253,13 @@ hr{
     text-transform: uppercase;
   }
   .sidebar-data-wrapper{
-    margin: 24px 0;
+    margin: 12px 0;
+  }
+  .data-area{
+    @include transEff(0.4s);
+    hr {
+      margin: 5px 5px 5px 0;
+    }
   }
   ul.map-list{
     li{
@@ -314,6 +331,55 @@ hr{
     &:focus, &:active{
       outline: none;
     }
+  }
+  .filters-container {
+    margin: 14px 0;
+    ul{
+      padding-left: 0;
+      li{
+        display: block;
+        margin: 5px 0;
+        padding: 6px 0 6px 15px;
+        color: #f6f6f6;
+        background: $category-button;
+        font-size: 0.8em;
+        border-radius: 4px;
+        cursor: pointer;
+        &:hover{
+          box-shadow: 0 0 1px 1px #3e3c3c;
+        }
+      }
+      .active{
+        box-shadow: 0 0 1px 1px #3e3c3c;
+        color: $logos-color;
+        &:hover{
+          box-shadow: 0 0 2px 1px #3e3c3c;
+        }
+      }
+    }
+
+  }
+  .compare-container{
+    ul {
+      li{
+        color: #444;
+        &:hover{
+          background: lighten($nav-bg, 20%);
+          box-shadow: none;
+          color: #fff;
+        }
+      }
+      .active{
+        background: lighten($nav-bg, 10%);
+        color: $logos-color;
+        box-shadow: none;
+        &:hover{
+          box-shadow: none;
+          color: $logos-color;
+        }
+      }
+    }
+
   }
 
 }//End sidebar-data

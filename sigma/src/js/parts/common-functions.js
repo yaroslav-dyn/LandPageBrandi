@@ -2,7 +2,7 @@
 
 //show all label
 $("#highlight-text").click(function(){
-    d3.selectAll(".text")
+    d3.selectAll(".text-risks")
         .attr("class", "text text-risks text-visible")
 });
 //abort event on link
@@ -42,7 +42,7 @@ function altNodeSize(d, nodesRadius, gainNodeSize) {
 }
 
 /*function  stroke width depending on "rank 1-6"
-    for r-i map
+*   for r-i map
 */
 function altStrength(d, strokeWidth, gainStrokeWidth) {
 
@@ -57,5 +57,111 @@ function altStrength(d, strokeWidth, gainStrokeWidth) {
     }
 
 }
+
+/* *********************************** SIDEBAR ******************************** */
+/*Sidebar text data
+* General function for all map
+*/
+
+function getDataSidebar(riskObj, oneTrend, currentColor){
+
+    d3.select(".data-area")
+        .attr("class","data-area visible");
+
+    //special rules for current map
+    d3.select(".risk-data-area")
+        .attr("class","risk-data-area visible");
+
+
+    //type of risk
+    d3.selectAll(".trend-risk")
+        .text("risk");
+    //Nodes label
+    d3.selectAll(".trends-selected")
+        .data(oneTrend)
+        .text(function (d) {
+            return d.label || d.id;
+        })
+        .attr("curID", function(d){
+            return d.id;
+        });
+
+    //Nodes description
+    d3.selectAll(".description-risk")
+        .data(oneTrend)
+        .text(function (d) {
+            return d.description || "No description";
+        });
+    //Nodes category
+    d3.selectAll(".sel-cat")
+        .data(oneTrend)
+        .text(function (d) {
+            return d.category || "No category";
+        })
+        .attr("style", "color:" + currentColor);
+
+    //Nodes impact
+    d3.selectAll(".sel-impact")
+        .data(oneTrend)
+        .text(function (d) {
+            return d.impact || "No impact value";
+        });
+    //Nodes likelihood
+    d3.selectAll(".sel-likelihood")
+        .data(oneTrend)
+        .text(function (d) {
+            return d.Likelihood || "No likelihood value";
+        });
+
+}
+/*
+* special data sidebar for t-r map (Trends)
+*/
+function getDataSidebarTrendsMap(oneTrend,currentColor) {
+
+    d3.select(".data-area")
+        .attr("class","data-area visible");
+
+    d3.select(".risk-data-area")
+        .attr("class","risk-data-area hidden");
+
+    //type of risk
+    d3.selectAll(".trend-risk")
+        .text("trend");
+    //Nodes label
+    d3.selectAll(".trends-selected")
+        .data(oneTrend)
+        .text(function (d) {
+            return d.label || d.id;
+        })
+        .attr("curID", function(d){
+            return d.id;
+        });
+    //Nodes description
+    d3.selectAll(".description-risk")
+        .data(oneTrend)
+        .text(function (d) {
+            return d.description || "No description";
+        });
+    //Nodes category
+    d3.selectAll(".sel-cat")
+        .data(oneTrend)
+        .text(function (d) {
+            return d.category || "No category";
+        })
+        .attr("style", "color:" + currentColor);
+
+    //clear impact,likelihood
+    d3.selectAll(".sel-impact")
+        .text("");
+
+    d3.selectAll(".sel-likelihood")
+        .text("");
+
+}
+
+
+
+
 
 

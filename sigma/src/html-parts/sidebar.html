@@ -1,3 +1,4 @@
+<!--Sidebar template-->
 <div class="col-md-2 sidebar-data hidden" id="sidebar-data">
   <div class="sidebar-data-wrapper">
     <h4 class="sidebar-main-header">View map</h4>
@@ -7,27 +8,45 @@
       <li role="presentation" id="trends-button"><a href="#">Risks-Trends Interconnections Map</a></li>
       <li role="presentation" id="landscape-map"><a href="#">Global Risks Landscape</a></li>
     </ul>
-    <hr/>
     <div class="side-panel">
       <div class="sidebar-data-unity">
-        <h5 class="category-hyper">Selected <span class="trend-risk s-data-text"></span>:</h5>
+        <div class="data-area hidden">
+          <hr/>
+          <h5 class="category-hyper">Selected <span class="trend-risk s-data-text"></span>:</h5>
 
-        <h3 class="category-selected"><span class="trends-selected s-data-text text-bold"></span></h3>
+          <h3 class="category-selected"><span class="trends-selected s-data-text text-bold" curid="empty"></span></h3>
 
-        <p class="description-risk s-data-text">
-          Rising number of people living in urban areas that results in the physical growth of cities.
-        </p>
+          <p class="description-risk s-data-text">
+            Rising number of people living in urban areas that results in the physical growth of cities.
+          </p>
 
-        <div class="category-selected">
-          Category: <span class="sel-cat s-data-text text-bold"></span>
+          <div class="category-selected">
+            Category: <span class="sel-cat s-data-text text-bold"></span>
+          </div>
+          <div class="risk-data-area">
+            <hr/>
+            <div class="category-selected">
+              Impact: <span class="sel-impact s-data-text"></span>
+            </div>
+            <hr/>
+            <div class="category-selected">
+              likelihood: <span class="sel-likelihood s-data-text"></span>
+            </div>
+          </div>
+          <hr/>
         </div>
-        <hr/>
-        <div class="category-selected">
-          Impact: <span class="sel-impact s-data-text"></span>
-        </div>
-        <hr/>
-        <div class="category-selected">
-          likelihood: <span class="sel-likelihood s-data-text"></span>
+        <div class="filters-container">
+          <div class="risk-categories"></div>
+          <hr/>
+          <div class="compare-container">
+            <h4>Compare:</h4>
+            <ul>
+              <li>Business to others</li>
+              <li>Male to female</li>
+              <li>Aged below 30 to older</li>
+              <li>Expert to non-expert</li>
+            </ul>
+          </div>
         </div>
         <hr/>
         <div class="file-name">
