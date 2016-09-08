@@ -16,6 +16,8 @@
 
       "category":"Economic",
       "description": "Unsustainably overpriced assets such as commodities, housing, shares, etc. in a major economy or region."},
+
+
     {"id": "R_DEFLATION", "label": "Deflation", "type": "Risk" ,
       "rank": 4,
       "impact":4.1,
@@ -915,7 +917,6 @@
               {"source":"R_INTERSTATE","target":"R_UNEMPLOYMENT","type":"Risk-Risk","value":3},
               {"source":"R_INTERSTATE","target":"R_WATER","type":"Risk-Risk","value":14},
               {"source":"R_INTERSTATE","target":"R_WMD","type":"Risk-Risk","value":17}
-
     ]
 
 }    

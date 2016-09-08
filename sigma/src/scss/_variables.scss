@@ -39,6 +39,31 @@ $category-button: #e3eae4;
   font-weight: bold;
 }
 
+
+//partials sidebar for different maps
+.compare-container{
+  display: none;
+}
+.landscape-map{
+  .visible-on-ls-map{
+    display: block;
+  }
+}
+.interconnections{
+  .visible-on-inter-map{
+    display: block;
+  }
+}
+.trends-risks {
+  .visible-on-trends-map{
+    display: block;
+  }
+}
+
+
+
+
+
 //mixins
 
 @mixin transEff($time,$function:ease-in-out){

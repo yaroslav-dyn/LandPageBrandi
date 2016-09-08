@@ -2,6 +2,8 @@
 
 function trendsRiskMap(graph){
 
+    $("body").attr("class","trends-risks");
+
     // maps trigger
     //delete previous highlight button
     $(".map-list li").removeClass('active');
@@ -26,7 +28,7 @@ function trendsRiskMap(graph){
         halfHeight = height/ 2,
         rLage = halfHeight - 20,
         rSmall = rLage/1.1,
-        nodesRadius = 5,
+        nodesRadius = 5.5,
         strokeWidth = 0.3,
         gainStrokeWidth = 6, //increment current stroke width (stroke width = strokeWidth * gainStrokeWidth)
         inactiveOpacity = 0.4; //value inactive lines opacity (normal opacity = 1 )
@@ -157,8 +159,8 @@ function trendsRiskMap(graph){
 
 
 //----------------Append in DOM SVG--------------------------------
-        svg
-            .attr("class","trends-risks");
+
+
 
     //--------------LINKS-----------------------------------------
     //append links
@@ -534,41 +536,56 @@ function trendsRiskMap(graph){
 
 //-------------ABORTING filters FUNCTION--------------------------------------------
 
-$("#clear-filter").click(function() {
+    //generic clearing function
+    function clearTrendMap(){
 
-    d3.selectAll(".nodes-trends")
-        .attr("r", nodesRadius + 2)
-        .attr("fill", trendsColor);
+        d3.selectAll(".nodes-trends")
+            .attr("r", nodesRadius + 2)
+            .attr("fill", trendsColor);
 
-    d3.selectAll(".nodes-risks")
-        .attr("class","nodes nodes-risks")
-        .attr("r", nodesRadius);
+        d3.selectAll(".nodes-risks")
+            .attr("class","nodes nodes-risks")
+            .attr("r", nodesRadius);
 
-    d3.selectAll(".text-trends")
-        .attr("class", "text text-trends text-hidden")
-        .attr("style", "font-weight: normal");
+        d3.selectAll(".text-trends")
+            .attr("class", "text text-trends text-hidden")
+            .attr("style", "font-weight: normal");
 
-    d3.selectAll(".text-risks")
-        .attr("class", "text text-risks text-hidden")
-        .attr("style", "font-weight: normal");
+        d3.selectAll(".text-risks")
+            .attr("class", "text text-risks text-hidden")
+            .attr("style", "font-weight: normal");
 
-    d3.selectAll("line")
-        .attr("stroke-width", strokeWidth)
-        .attr("style", "opacity: 1");
+        d3.selectAll("line")
+            .attr("stroke-width", strokeWidth)
+            .attr("style", "opacity: 1");
 
-    //----Sidebar text data clearing--------------------------
+        //----Sidebar text data clearing--------------------------
 
-    d3.select(".data-area")
-        .attr("class","data-area hidden");
+        d3.selectAll(".data-area")
+            .attr("class","data-area hidden");
 
-    //clearing all sidebar data text
-    d3.selectAll(".s-data-text")
-        .text("");
+        //clearing all sidebar data text
+        d3.selectAll(".s-data-text")
+            .text("");
 
-    //clear current node
-    $(".trends-selected").attr("curid","empty");
+        //clear current node
+        $(".trends-selected").attr("curid","empty");
 
-});
+    }
+    //clear button
+    $("#clear-filter").click(function() {
+        clearTrendMap();
+
+    });
+
+    //clear all on page on blur
+    $("#graph-wrapper").click(function (e) {
+        if(e.target.id != 'container-graph')
+            return;
+        clearTrendMap();
+
+    });
+
 
 
 

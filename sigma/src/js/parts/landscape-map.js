@@ -2,6 +2,8 @@
 
 function landscapeMap(graph){
 
+    $("body").attr("class","landscape-map");
+
     // maps trigger
     //delete previous highlight button
     $(".map-list li").removeClass('active');
@@ -49,8 +51,7 @@ function landscapeMap(graph){
 
 
 //----------------Append in DOM SVG--------------------------------
-    svg
-     .attr("class","landscape-map");
+
 
     var mainG = svg
         .attr("width", width + margin.left + margin.right)
@@ -176,6 +177,7 @@ function landscapeMap(graph){
         }
         return Object.keys(uniqueTextObj), Object.keys(uniqueColorObj);
 
+
     }
     returnUnique(cat,colorObj);
 //-----------------------------------------------------------------------
@@ -188,7 +190,7 @@ function landscapeMap(graph){
 
     //add category buttons
     function getCategoriesSide(catContIn, uniqueTextObj,uniqueColorObj ){
-        catContIn.append("<h4>Filter:</h4>");
+        catContIn.append("<h4 class='sidebar-main-header'>Filters:</h4>");
         catContIn.append("<ul></ul>");
 
         Object.keys(uniqueTextObj).forEach(function(e,i){
@@ -228,7 +230,6 @@ function landscapeMap(graph){
         //clear svg area
 
     });
-
 
 
 
@@ -321,8 +322,9 @@ function landscapeMap(graph){
 
     //-------------ABORTING filters FUNCTION--------------------------------------------
 
-    $("#clear-filter").click(function () {
 
+    //generic clearing function
+    function clearLanMap(){
         svg.selectAll(".g-nodes")
             .attr("style", "opacity:1");
 
@@ -341,7 +343,7 @@ function landscapeMap(graph){
 
         //----Sidebar text data clearing--------------------------
 
-        d3.select(".data-area")
+        d3.selectAll(".data-area")
             .attr("class","data-area hidden");
 
         //clearing all sidebar data text
@@ -354,8 +356,21 @@ function landscapeMap(graph){
         //clear current node
         $(".trends-selected").attr("curid","empty");
 
+    }
+
+    //clear button
+    $("#clear-filter").click(function () {
+        clearLanMap();
+
     });
 
+    //clear all on page on blur
+    $("#graph-wrapper").click(function (e) {
+        if(e.target.id != 'container-graph')
+            return;
+        clearLanMap();
+
+    });
 
 
 }//End landscapeMap

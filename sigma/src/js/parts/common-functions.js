@@ -2,9 +2,27 @@
 
 //show all label
 $("#highlight-text").click(function(){
-    d3.selectAll(".text-risks")
-        .attr("class", "text text-risks text-visible")
+
+    if($(this).data("click",false)){
+
+        d3.selectAll(".text-risks")
+            .attr("class", "text text-risks text-visible");
+        $(this).text("Hide labels");
+
+    }
+    else {
+
+        d3.selectAll(".text-risks")
+            .attr("class", "text text-risks text-hidden");
+        $(this).text("Show labels");
+
+    }
+
 });
+
+
+
+
 //abort event on link
 $( ".map-list li a" ).click(function( event ) {
     event.preventDefault();
@@ -65,7 +83,7 @@ function altStrength(d, strokeWidth, gainStrokeWidth) {
 
 function getDataSidebar(riskObj, oneTrend, currentColor){
 
-    d3.select(".data-area")
+    d3.selectAll(".data-area")
         .attr("class","data-area visible");
 
     //special rules for current map
@@ -113,6 +131,10 @@ function getDataSidebar(riskObj, oneTrend, currentColor){
             return d.Likelihood || "No likelihood value";
         });
 
+
+
+
+
 }
 /*
 * special data sidebar for t-r map (Trends)
@@ -159,7 +181,6 @@ function getDataSidebarTrendsMap(oneTrend,currentColor) {
         .text("");
 
 }
-
 
 
 

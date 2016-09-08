@@ -17,11 +17,12 @@ function handleFileSelect()
 //inicialize fileReader(uploader)
 function fileAppStare(){
     $('#container-graph').html('');
-    file = input.files[0];
+    file  = document.querySelector('input[type=file]').files[0];
     fr = new FileReader();
     fr.onload = receivedText;
-    //fr.readAsText(file);
-    fr.readAsDataURL(file);
+    fr.readAsText(file, "UTF-8");
+    //fr.readAsDataURL(file);
+
 }
 
 

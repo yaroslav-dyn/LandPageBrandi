@@ -1,3 +1,4 @@
+
 var heightWindow = $(window).innerHeight() - 120,
 	widthWindow = $(".container-expo").innerWidth() - 120;
 
@@ -14,22 +15,25 @@ $('#container-graph').attr('width', widthWindow).attr('height', heightWindow).cs
 //parse json D3.js
 	var fileName = e.target.result;
 
-	d3.json( fileName , function(error, graph) {
 
-		if (error) throw error;
+	//d3.json( fileName , function(error, graph) {
+    //
+	//	if (error) throw error;
 
 //-----------------filtering and coordinates-------------------
 
+	//change grid for left sidebar
+	$("#left-sidebar").removeClass("hidden");
+	$("#container-expo").removeClass("col-md-10").addClass("col-md-8");
 	//show sidebar
-	 $("#sidebar-data").removeClass("hidden");
+	$("#sidebar-data").removeClass("hidden");
 
 	//default cart:
 	//trendsRiskMap(graph);
-	riskInterconMap(graph);
+	//riskInterconMap(graph);
+	riskInterconMap(JSON.parse(fileName));
 
-
-
-	});//End json d3.js
+	//});//End json d3.js
 
 }//end receivedText
 
@@ -37,23 +41,24 @@ $('#container-graph').attr('width', widthWindow).attr('height', heightWindow).cs
 //--------FOR TESTING-------------------------------------------------------------------------------------------//
 function staticMap(){
 
-	$('#container-graph').attr('width', widthWindow).attr('height', heightWindow).css("height", heightWindow);
-
-	//show sidebar
 	$("#sidebar-data").removeClass("hidden");
+
+	//change size block for this map
+	var heightWindow = $(window).innerHeight() - 120,
+		widthWindow = $(".container-expo").innerWidth();
+
+	$('#container-graph').attr('width', widthWindow).attr('height', heightWindow).css("height", heightWindow);
 
 	//parse json D3.js
 	d3.json( "csv/complete-cut.json" , function(error, graph) {
 
-		if (error) throw error;
+			if (error) throw error;
 
 		//trendsRiskMap(graph);
 		//riskInterconMap(graph);
 		landscapeMap(graph);
 
-
 	});//End json d3.js
-
 
 
 }
@@ -62,22 +67,15 @@ function staticMap(){
 //call r-i map
 $("#intercon-button").on("click",function(){
 	$("#container-graph").html("");
-	$("#graph-wrapper").css("text-align", "center");
 
 	function receivedText(){
 		$("#container-graph").attr("width", widthWindow).attr("height", heightWindow).css("height", heightWindow);
 
 		//parse json D3.js
 		var fileName = fr.result;
-		d3.json( fileName , function(error, graph) {
 
+		riskInterconMap(JSON.parse(fileName));
 
-			if (error) throw error;
-
-			riskInterconMap(graph);
-
-
-		});//End json d3.js
 
 	}//end receivedText
 	receivedText();
@@ -86,19 +84,17 @@ $("#intercon-button").on("click",function(){
 //call t-r map
 $("#trends-button").on("click",function(){
 	$('#container-graph').html('');
-	$("#graph-wrapper").css("text-align", "right");
+
+
+
 
 	function receivedText(){
 		$('#container-graph').attr('width', widthWindow).attr('height', heightWindow).css("height", heightWindow);
 
 		//parse json D3.js
 		var fileName = fr.result;
-		d3.json( fileName , function(error, graph) {
-			if (error) throw error;
+			trendsRiskMap(JSON.parse(fileName));
 
-			trendsRiskMap(graph);
-
-		});//End json d3.js
 
 	}//end receivedText
 	receivedText();
@@ -107,19 +103,17 @@ $("#trends-button").on("click",function(){
 //call landscape map
 $("#landscape-map").on("click",function(){
 	$('#container-graph').html('');
-	$("#graph-wrapper").css("text-align", "right");
+
 
 	function receivedText(){
 		$('#container-graph').attr('width', widthWindow).attr('height', heightWindow).css("height", heightWindow);
 
 		//parse json D3.js
 		var fileName = fr.result;
-		d3.json( fileName , function(error, graph) {
-			if (error) throw error;
 
-			landscapeMap(graph);
+		landscapeMap(JSON.parse(fileName));
 
-		});//End json d3.js
+		//});//End json d3.js
 
 	}//end receivedText
 	receivedText();

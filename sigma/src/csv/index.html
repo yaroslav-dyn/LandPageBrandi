@@ -7,15 +7,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
   <!-- *plugin 'userev' concat your vendor css -->
-  <!-- build:css css/vendor.css -->
-  <link rel="stylesheet" href="vendor/bootstrap/bootstrap.css"/>
-  <link rel="stylesheet" href="vendor/bootstrap/bootstrap-theme.min.css"/>
-  <!-- endbuild -->
+  <link rel="stylesheet" href="css/vendor.css">
 
   <!-- *plugin 'userev' concat your dev css -->
-  <!-- build:css css/main.css -->
-  <link rel="stylesheet" href="css/main.css"/>
-  <!-- endbuild -->
+  <link rel="stylesheet" href="css/main.css">
 
 </head>
 <body> 
@@ -28,9 +23,8 @@
         </div>
         <div class="col-md-6 col-xs-6 text-center">
           <ul class="nav navbar-nav">
-            <li ><a href="index.html">Home</a></li>
+            <li ><a href="/">Home</a></li>
             <li ><a href="map.html">Map</a></li>
-            <li ><a href="#survey">Survey</a></li>
           </ul>
         </div>
         <div class="col-md-4 col-xs-6 text-right">
@@ -56,49 +50,10 @@
         </p>
       </div>
       <div class="row">
-        <!--Left Sidebar template-->
-        <div class="col-md-2 sidebar-data hidden" id="left-sidebar" >
-          <div class="row">
-              <div class="col-md-10">
-                  <div class="filters-container">
-                    <div class="risk-categories"></div>
-                    <div class="compare-container visible-on-ls-map">
-                      <h4>Compare:</h4>
-                      <ul>
-                        <li>Business to others</li>
-                        <li>Male to female</li>
-                        <li>Aged below 30 to older</li>
-                        <li>Expert to non-expert</li>
-                      </ul>
-                    </div>
-                  <div class="data-area hidden">
-                    <div class="most-connected compare-container visible-on-trends-map visible-on-inter-map">
-                      <h4 class="sidebar-main-header">Filters:</h4>
-                      <hr/>
-                      <div class="data-area hidden">
-                        <h4>Most connected global risks:</h4>
-                        <ul>
-                          <li>item 1</li>
-                          <li>item 2</li>
-                          <li>item 3</li>
-                          <li>item 4</li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-        
-                </div>
-        
-        
-              </div>
-        
-        
-          </div>
-        </div>
         <div class="col-md-10  container-expo" id="container-expo">
           <!-- Container for graphics-->
-          <div id="graph-wrapper" class="graph-wrapper text-center" >
-            <svg id="container-graph" onload="staticMap()"></svg>
+          <div id="graph-wrapper" class="graph-wrapper text-center">
+            <svg id="container-graph"></svg>
           </div>
         </div>
         <!-- Call template Sidebar-->
@@ -137,13 +92,28 @@
                       likelihood: <span class="sel-likelihood s-data-text"></span>
                     </div>
                   </div>
+                  <hr/>
                 </div>
+                <div class="filters-container">
+                  <div class="risk-categories"></div>
+                  <div class="compare-container hidden-on-map">
+                    <hr/>
+                    <h4>Compare:</h4>
+                    <ul>
+                      <li>Business to others</li>
+                      <li>Male to female</li>
+                      <li>Aged below 30 to older</li>
+                      <li>Expert to non-expert</li>
+                    </ul>
+                  </div>
+                </div>
+                <hr/>
                 <div class="file-name">
                   <span id="load-file-sb"></span>
                   <span class="text-bold" id="header-file-sb"></span>
                 </div>
                 <hr/>
-                <button id="highlight-text" class="btn btn-block panel-btn">Show labels</button>
+                <button id="highlight-text" class="btn btn-block panel-btn">Show label</button>
                 <hr/>
               </div><!--END sidebar-data-unity-->
               <div class="nav-wrap">
@@ -154,8 +124,36 @@
         </div>
       </div>
     </div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="upload-wrapper">
+            <div class="button-nav">
+              <label class="btn btn-default nav-uploader" for="upload-input" title="Upload a Risk data file">Upload a Risk data file</label>
+              <input id="upload-input" type="file">
+            </div>
+            <div class="data-nav">
+              <span id="load-file" class="load-file-name"></span>
+              <span id="header-file" class="load-file-name"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
-</div>
+  <section class="snapshot-area">
+    <div class="container">
+       <div class="row">
+         <div class="col-md-12">
+            <div id="snap-area"></div>
+            <div class="hidden">
+            <button id="pj" class="btn btn-default nav-uploader"  title="parse into area">Snapshot</button>
+           </div>
+         </div>
+      </div>
+    </div>
+  </section>  
+</div>  
 
   <footer>
     <div class="container">
@@ -170,27 +168,10 @@
     </div>
   </footer>
 <!-- *plugin 'userev' concat your vendor js -->
-<!-- build:js scripts/vendor.js -->
-<script src="vendor/jquery.js"></script>
-<script src="vendor/bootstrap/bootstrap.min.js"></script>
-<script src="vendor/d3.js"></script>
-<script src="vendor/angular.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
-
-<!-- endbuild -->
+<script src="scripts/vendor.js"></script>
 
 <!-- *plugin 'userev' concat your dev js -->
-
-<!-- build:js scripts/main.js -->
-<script src="js/main.js"></script>
-<!-- endbuild -->
-
-<!-- build:js scripts/app.js -->
-  <script src="js/app.js"></script>
-<!-- endbuild -->
-
-
-
+<script src="scripts/main.js"></script>
 </div><!--end wrapper-->
 
 </body>

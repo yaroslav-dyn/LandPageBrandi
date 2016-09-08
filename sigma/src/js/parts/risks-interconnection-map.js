@@ -2,6 +2,9 @@
 
 function riskInterconMap(graph){
 
+    $("body").attr("class","interconnections");
+
+
     // maps trigger
     //delete previous highlight button
     $(".map-list li").removeClass('active');
@@ -191,9 +194,6 @@ function riskInterconMap(graph){
 
 //----------------Append in DOM SVG--------------------------------
 
-    svg
-        .attr("class","interconnections");
-
     //--------------LINKS-----------------------------------------
     //append links
     var link = svg.append("g")
@@ -306,6 +306,7 @@ function riskInterconMap(graph){
         var currentID = d3.select(this).select("circle").attr("id"),
             currentColor = d3.select(this).select("circle").attr("fill");
 
+            var edgesForThree = [];
 
         //filtering all lines where currentId = source
         d3.selectAll("line")
@@ -317,7 +318,8 @@ function riskInterconMap(graph){
             .data(edges)
             .filter(function (d) {
                 if (d.source.id == currentID) {
-                    edgesCutRisk.push(d.target.id)
+                    edgesCutRisk.push(d.target.id);
+                    edgesForThree.push({source: d.target, value: d.value});
                 }
                     return d.source.id == currentID;
 
@@ -327,6 +329,18 @@ function riskInterconMap(graph){
             .attr("stroke-width", function(d) {
                 return altStrength(d,strokeWidth, 2.5);
             });
+
+
+
+        //for (var i in edgesForThree){
+        //    edgesForThree[i].forEach(function(e){
+        //        console.log(e);
+        //    });
+        //}
+
+
+
+        console.log(edgesForThree);
 
 
         //filtering all links where currentId = target
@@ -357,6 +371,8 @@ function riskInterconMap(graph){
                 return d.id == currentID;
             })
             .attr("style", "font-size: 0.8em; font-weight: bold");
+
+
 
 
         //----Sidebar text data--------------------------
@@ -455,10 +471,10 @@ function riskInterconMap(graph){
             .attr("class", "text text-risks text-visible")
             .attr("style", "font-size: 0.8em");
 
+
         edgesCutRiskCur = [];
 
     }
-
 
 
 
@@ -468,9 +484,8 @@ function riskInterconMap(graph){
 
     //-------------ABORTING filters FUNCTION--------------------------------------------
 
-    $("#clear-filter").click(function () {
-
-
+    //generic clearing function
+    function clearRimMap(){
         d3.selectAll(".nodes-risks")
             .attr("class","nodes nodes-risks")
             .attr("r", function(d){
@@ -492,7 +507,7 @@ function riskInterconMap(graph){
 
         //----Sidebar text data clearing--------------------------
 
-        d3.select(".data-area")
+        d3.selectAll(".data-area")
             .attr("class","data-area hidden");
 
         //clearing all sidebar data text
@@ -502,9 +517,20 @@ function riskInterconMap(graph){
         //clear current node
         $(".trends-selected").attr("curid","empty");
 
+    }
+    //clear button
+    $("#clear-filter").click(function () {
+        clearRimMap();
 
     });
 
+    //clear all on page on blur
+    $("#graph-wrapper").click(function (e) {
+        if(e.target.id != 'container-graph')
+            return;
+        clearRimMap();
+
+    });
 
 
 }//End riskInterconMap
