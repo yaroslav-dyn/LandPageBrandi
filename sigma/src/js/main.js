@@ -1860,3 +1860,9 @@ function getDataSidebarTrendsMap(oneTrend,currentColor) {
         .text("");
 
 }
+
+
+//tooltips in questionnaire
+$('body').tooltip({
+    selector: ".question-info"
+});

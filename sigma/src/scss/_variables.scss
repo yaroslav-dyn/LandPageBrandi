@@ -15,6 +15,8 @@ $border-color: #1D8935;
 $nav-link-color: #fff;
 $category-button: #e3eae4;
 
+
+
 //classes
 %button-style-hover{
    border: 1px solid #80a64a;
@@ -38,7 +40,21 @@ $category-button: #e3eae4;
 .text-bold{
   font-weight: bold;
 }
-
+//decor bubble
+.dot-if{
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: $footer-bg;
+  border-radius: 50%;
+  margin: 0;
+  &:first-child{
+    margin-left: 2px;
+  }
+  &:last-child{
+    margin-right: 2px;
+  }
+}
 
 //partials sidebar for different maps
 .compare-container{

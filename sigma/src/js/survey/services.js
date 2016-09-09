@@ -3,11 +3,12 @@
 
 app.config(function($routeProvider) {
     $routeProvider
-        .when("/survey", {
-            templateUrl : "survey.html"
+
+        .when("/", {
+            templateUrl : "/survey/survey.html"
         })
         .when("/landscape", {
-            templateUrl : "landscape.html"
+            templateUrl : "/survey/landscape.html"
         })
 
 });

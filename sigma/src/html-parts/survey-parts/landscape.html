@@ -1,0 +1,61 @@
+<!-- landscape page questionnaire -->
+  <div class="content landscape">
+    <section>
+    <div class="container render-area">
+      <div class="row">
+        <div class="col-md-12">
+          <h2 class="text-center">
+            Risk Landscape
+          </h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-10" ng-controller="landscapeCtrl">
+          <div class="questions bottom-preview ">
+            <ol>
+            <li class="page-description">What is the estimated impact globally if this risk were to materialize?
+            </li>
+              <span c>1=low, 7=high (or don’t know)</span>
+              <ul class="nodes-quest">
+                <li ng-repeat="quest in questions.nodes | limitTo: 10"  >
+                  <div class="row">
+                    <div class="col-md-6">
+                      {{quest.label}}
+                      <span class="glyphicon glyphicon-question-sign question-info" title="{{quest.description}}" ng-click="desc = !desc"></span>
+                    </div>
+                    <div class="col-md-6 text-right">
+                      <div class="rate-answer">
+                        <form action="#">
+                          <label ng-repeat="n in countRate">
+                            <input type="radio" name="question-1" value="n"/>
+                            <span class="number-of-rate">{{n}}</span>
+                          </label>
+                          <label>
+                            <input type="radio" name="question-1" value="don`t now"/>
+                            <span class="number-of-rate"> Don`t now</span>
+                          </label>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <p ng-show="desc">{{quest.description}}</p>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </ol>
+          </div><!-- End questions-->
+          <div class="next-page text-left">
+            <div class="next-button">
+              <a href="#/" class="btn btn-default" title="prev"><span class="glyphicon glyphicon-menu-left"></span></a>
+              <a href="#/" class="btn btn-default prev" title="next"><span class="glyphicon glyphicon-menu-right"></span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </section>
+  </div><!--End content-->
+

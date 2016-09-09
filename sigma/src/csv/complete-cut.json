@@ -13,7 +13,6 @@
       "LikelihoodAge":4.9,
       "impactNoneExpert": 4.9,
       "LikelihoodNoneExpert":4.9,
-
       "category":"Economic",
       "description": "Unsustainably overpriced assets such as commodities, housing, shares, etc. in a major economy or region."},
 
@@ -45,7 +44,7 @@
       "impactNoneExpert": 4.9,
       "LikelihoodNoneExpert":4.9,
       "category":"Economic",
-      "description": "Prolonged ultra-low inflation or deflation in a major economy or region."},
+      "description": "Collapse of a financial institution and/or inefficient functioning of a financial system with implications throughout the global economy."},
     {"id": "R_CRITICALINFRA", "label": "Failure of critical infrastructure", "type": "Risk" ,
       "rank": 4,
       "impact": 4.3,
