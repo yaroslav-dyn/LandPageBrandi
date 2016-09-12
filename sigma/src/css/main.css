@@ -343,8 +343,12 @@ hr {
       box-shadow: none;
       color: #EDEA00; }
 
-.survey-body .wrapper {
+.survey-body {
   background: #f9f9f9; }
+
+.survey ul, .survey ol {
+  padding-left: 0;
+  list-style: none; }
 
 .survey h2 {
   margin-bottom: 14px;
@@ -355,6 +359,10 @@ hr {
   margin-bottom: 24px;
   font-weight: 600;
   color: #636b66; }
+  .survey .page-description span {
+    padding-left: 24px;
+    font-size: 0.8em;
+    color: #444; }
 
 .survey p {
   font-size: 1em; }
@@ -367,7 +375,7 @@ hr {
   float: right; }
 
 .survey .next-button {
-  margin-top: 34px; }
+  margin: 34px 0; }
   .survey .next-button .label-btn {
     font-size: 1.1em;
     color: #636b66; }
@@ -393,29 +401,60 @@ hr {
   .survey .bottom-preview p {
     font-size: 1.2em; }
 
-.survey .nodes-quest {
-  padding-left: 20px; }
-  .survey .nodes-quest li {
-    font-size: 1.1em;
-    color: #636b66;
-    border: 1px solid #c6c6c6;
-    margin: 4px 0;
-    padding: 4px;
-    cursor: help; }
-    .survey .nodes-quest li span {
-      font-size: 1.1em;
-      color: #369F4D; }
-    .survey .nodes-quest li p {
-      font-size: 0.8em;
-      padding-left: 14px; }
-    .survey .nodes-quest li label {
-      font-size: 1em; }
-  .survey .nodes-quest .number-of-rate {
-    padding: 0 4px 0 2px;
-    color: #636b66;
+.survey .nodes-quest li {
+  font-size: 1em;
+  line-height: 1;
+  color: #444;
+  border: 1px solid #c6c6c6;
+  margin: 4px 0;
+  padding: 10px 14px 4px; }
+  .survey .nodes-quest li:nth-of-type(odd) {
+    background: #f1f1f1; }
+  .survey .nodes-quest li:nth-of-type(even) {
+    background: #f7f7f7; }
+  .survey .nodes-quest li span {
     font-size: 1em; }
+  .survey .nodes-quest li .question-info {
+    color: #369F4D;
+    font-size: 1.1em;
+    cursor: help; }
+    .survey .nodes-quest li .question-info:hover {
+      color: #dedb00; }
+  .survey .nodes-quest li p {
+    font-size: 0.9em;
+    color: #636b66;
+    padding: 10px;
+    border: 1px solid #c8c8c8;
+    border-left: none;
+    border-right: none; }
+  .survey .nodes-quest li .number-label {
+    font-size: 1em;
+    margin-left: 8px;
+    color: #fff;
+    background: #369F4D;
+    border-radius: 4px;
+    padding: 5px 8px;
+    cursor: pointer; }
+
+.survey .nodes-quest fieldset {
+  display: inline; }
+
+.survey .nodes-quest .number-of-rate {
+  font-size: 1em;
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  color: #fff; }
+
+.survey .nodes-quest input {
+  display: none; }
   .survey .nodes-quest input:focus {
     outline: none !important; }
+  .survey .nodes-quest input:checked + .number-label {
+    background: #369F4D; }
+
+.survey .nodes-quest input + .number-label {
+  background: #7c857f; }
 
 .content.survey {
   flex: 0 0 60%; }

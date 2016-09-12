@@ -1,5 +1,5 @@
 <!-- landscape page questionnaire -->
-  <div class="content landscape">
+  <div class="landscape">
     <section>
     <div class="container render-area">
       <div class="row">
@@ -10,14 +10,17 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-10" ng-controller="landscapeCtrl">
+        <div class="col-md-offset-1 col-md-10" ng-controller="landscapeCtrl">
           <div class="questions bottom-preview ">
             <ol>
-            <li class="page-description">What is the estimated impact globally if this risk were to materialize?
-            </li>
-              <span c>1=low, 7=high (or don’t know)</span>
+             <li>
+              <p class="page-description">
+                1. What is the estimated impact globally if this risk were to materialize? <br/>
+                <span>1=low, 7=high (or don’t know)</span>
+              </p>
+
               <ul class="nodes-quest">
-                <li ng-repeat="quest in questions.nodes | limitTo: 10"  >
+                <li ng-repeat="quest in questions.nodes | limitTo: 10 "  >
                   <div class="row">
                     <div class="col-md-6">
                       {{quest.label}}
@@ -26,14 +29,12 @@
                     <div class="col-md-6 text-right">
                       <div class="rate-answer">
                         <form action="#">
-                          <label ng-repeat="n in countRate">
-                            <input type="radio" name="question-1" value="n"/>
-                            <span class="number-of-rate">{{n}}</span>
-                          </label>
-                          <label>
-                            <input type="radio" name="question-1" value="don`t now"/>
-                            <span class="number-of-rate"> Don`t now</span>
-                          </label>
+                          <fieldset ng-repeat="n in countRate">
+                            <input type="radio" name="question-{{quest.id}}" id="{{quest.id}}-{{$index}}" value="{{n}}"/>
+                            <label class="number-label"  for="{{quest.id}}-{{$index}}">
+                              <span class="number-of-rate">{{n}}</span>
+                            </label>
+                          </fieldset>
                         </form>
                       </div>
                     </div>
@@ -45,6 +46,7 @@
                   </div>
                 </li>
               </ul>
+            </li>
             </ol>
           </div><!-- End questions-->
           <div class="next-page text-left">

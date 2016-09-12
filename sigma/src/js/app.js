@@ -6,9 +6,6 @@ var app = angular.module("surveyApp", ["ngRoute"]);
 //controller for landscape questions
 app.controller('landscapeCtrl',function($scope,$http){
 
-   // this.qestionsLandsape = questionsGem;
-
-
     $http.get('../csv/complete-cut.json').success(function(data) {
 
         $scope.questions = data;
@@ -16,8 +13,8 @@ app.controller('landscapeCtrl',function($scope,$http){
 
     });
 
-    $scope.countRate = [1,2,3,4,5,6,7];
-
+    //number of rate in questionnaire
+    $scope.countRate = [1,2,3,4,5,6,7,"don`t know"];
 
 });
 

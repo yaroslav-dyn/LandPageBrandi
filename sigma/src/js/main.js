@@ -1820,7 +1820,7 @@ function getDataSidebar(riskObj, oneTrend, currentColor){
 */
 function getDataSidebarTrendsMap(oneTrend,currentColor) {
 
-    d3.select(".data-area")
+    d3.selectAll(".data-area")
         .attr("class","data-area visible");
 
     d3.select(".risk-data-area")

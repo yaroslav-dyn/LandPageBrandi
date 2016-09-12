@@ -394,12 +394,13 @@ hr{
 
 //*****************survey page********************
 .survey-body{
-  .wrapper{
     background: #f9f9f9;
-  }
 }
 .survey {
-
+  ul,ol{
+    padding-left: 0;
+    list-style: none;
+  }
   h2{
     margin-bottom: 14px;
     font-size: 1.8em;
@@ -409,11 +410,14 @@ hr{
     margin-bottom: 24px;
     font-weight: 600;
     color: $hyper-color;
-
+    span{
+      padding-left: 24px;
+      font-size: 0.8em;
+      color: #444;
+    }
   }
   p{
     font-size: 1em;
-
   }
   .next-page{
     span {
@@ -425,7 +429,7 @@ hr{
     }
   }
   .next-button {
-    margin-top: 34px;
+    margin: 34px 0;
     .label-btn{
       font-size: 1.1em;
       color: $hyper-color;
@@ -458,38 +462,70 @@ hr{
       font-size: 1.2em;
     }
   }
-
   .nodes-quest{
-    padding-left: 20px;
-
     li{
-      font-size: 1.1em;
-      color: $hyper-color;
+      font-size: 1em;
+      line-height: 1;
+      color: #444;
       border: 1px solid #c6c6c6;
       margin: 4px 0;
-      padding: 4px;
-      cursor: help;
+      padding: 10px 14px 4px;
+      &:nth-of-type(odd){
+        background: #f1f1f1;
+      }
+      &:nth-of-type(even){
+        background: #f7f7f7;
+      }
       span{
-        font-size: 1.1em;
-        color: $footer-bg;
-      }
-      p{
-        font-size: 0.8em;
-        padding-left: 14px;
-      }
-      label{
         font-size: 1em;
       }
+      .question-info{
+        color: $footer-bg;
+        font-size: 1.1em;
+        cursor: help;
+        &:hover{
+          color: darken($logos-color, 3%);
+        }
+      }
+      p{
+        font-size: 0.9em;
+        color: $hyper-color;
+        padding: 10px;
+        border: 1px solid #c8c8c8;
+        border-left: none;
+        border-right: none;
+      }
+      .number-label{
+        font-size: 1em;
+        margin-left: 8px;
+        color: #fff;
+        background: $footer-bg;
+        border-radius: 4px;
+        padding: 5px 8px;
+        cursor: pointer;
+      }
+    }
+    fieldset{
+      display: inline;
     }
     .number-of-rate{
-      padding: 0 4px 0 2px;
-      color: $hyper-color;
       font-size: 1em;
+      display: inline-block;
+      text-align: center;
+      vertical-align: middle;
+      color: #fff;
     }
     input{
+      display: none;
       &:focus{
         outline: none !important;
       }
+      &:checked + .number-label{
+        background: $footer-bg;
+      }
+    }
+    input + .number-label{
+      background: lighten($hyper-color, 10%);
     }
 
   }
