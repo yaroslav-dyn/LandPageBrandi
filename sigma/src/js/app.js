@@ -20,6 +20,7 @@ app.controller('landscapeCtrl',function($scope,$http){
 
     //var regLater = [^aei];
 
+
 });
 
 //routing

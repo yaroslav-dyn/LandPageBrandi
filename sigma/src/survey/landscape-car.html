@@ -10,7 +10,6 @@
   <!-- build:css css/vendor.css -->
   <link rel="stylesheet" href="../vendor/bootstrap/bootstrap.css"/>
   <link rel="stylesheet" href="../vendor/bootstrap/bootstrap-theme.min.css"/>
-  <link rel="stylesheet" href="../vendor/angular-ui-bootstrap/dist/ui-bootstrap-csp.css"/>
 
   <!-- endbuild -->
 
@@ -21,7 +20,7 @@
 
 </head>
 <body ng-app="surveyApp" class="survey-body">
-
+<div class="wrapper">
   <header>
     <nav class="navbar navbar-default main-nav">
       <div class="container-fluid">
@@ -31,7 +30,6 @@
         <div class="col-md-6 col-xs-6 text-center">
           <ul class="nav navbar-nav">
             <li ><a href="../index.html">Home</a></li>
-            <li ><a href="../map.html">Map</a></li>
             <li ><a href="#/">Survey</a></li>
           </ul>
         </div>
@@ -74,10 +72,8 @@
 <script src="../vendor/d3.js"></script>
 <script src="../vendor/angular.js"></script>
 <script src="../vendor/angular-route.js"></script>
-<script src="../vendor/angular-ui-bootstrap/dist/ui-bootstrap.js"></script>
-<script src="../vendor/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
-
-
+<script src="../vendor/jquery.jcarousel-core.min.js"></script>
+<script src="../vendor/jquery.jcarousel-control.min.js"></script>
 <!-- endbuild -->
 
 <!-- *plugin 'userev' concat your dev js -->
@@ -92,7 +88,7 @@
 
 
 
-
+</div><!--end wrapper-->
 
 </body>
 </html>

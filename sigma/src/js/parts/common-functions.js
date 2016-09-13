@@ -189,7 +189,7 @@ $(document).ready(function(){
         selector: ".question-info"
     });
 
-console.log('sdsdsdsdsdsdsdsds');
+
 
 });
 
