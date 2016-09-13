@@ -463,25 +463,26 @@ hr{
     }
   }
   .nodes-quest{
+    .questions-wrapper{
+      margin: 38px 0;
+      font-size: 1.2em;
+    }
+    .quest-items{
+      min-height: 250px;
+    }
     li{
-      font-size: 1em;
       line-height: 1;
       color: #444;
       border: 1px solid #c6c6c6;
       margin: 4px 0;
       padding: 10px 14px 4px;
-      &:nth-of-type(odd){
-        background: #f1f1f1;
-      }
-      &:nth-of-type(even){
-        background: #f7f7f7;
-      }
+      background: #fff;
       span{
         font-size: 1em;
       }
       .question-info{
         color: $footer-bg;
-        font-size: 1.1em;
+        font-size: 1.0em;
         cursor: help;
         &:hover{
           color: darken($logos-color, 3%);
@@ -496,12 +497,15 @@ hr{
         border-right: none;
       }
       .number-label{
-        font-size: 1em;
-        margin-left: 8px;
+        display: table;
+        text-align: center;
         color: #fff;
+        font-size: 0.7em;
+        margin-right: 3em;
         background: $footer-bg;
-        border-radius: 4px;
-        padding: 5px 8px;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
         cursor: pointer;
       }
     }
@@ -509,23 +513,21 @@ hr{
       display: inline;
     }
     .number-of-rate{
-      font-size: 1em;
-      display: inline-block;
-      text-align: center;
+      height: 100%;
       vertical-align: middle;
-      color: #fff;
+      display: table-cell;
     }
     input{
       display: none;
       &:focus{
         outline: none !important;
       }
-      &:checked + .number-label{
+      &:checked + .number-label {
         background: $footer-bg;
       }
     }
-    input + .number-label{
-      background: lighten($hyper-color, 10%);
+    input + .number-label {
+      background: lighten($hyper-color, 20%);
     }
 
   }
@@ -551,6 +553,12 @@ footer{
    font-size: 0.8em;
   }
 }
+
+
+
+
+
+
 
 
 //import media

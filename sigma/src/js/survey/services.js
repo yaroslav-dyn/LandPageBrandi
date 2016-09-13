@@ -11,4 +11,5 @@ app.config(function($routeProvider) {
             templateUrl : "/survey/landscape.html"
         })
 
+
 });
