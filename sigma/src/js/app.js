@@ -13,33 +13,25 @@ app.controller('landscapeCtrl',function($scope,$http){
     });
 
 
+    //first question
     $scope._Index = 0;
 
-    // show prev image
+    // show prev question
     $scope.showPrev = function () {
-        $scope._Index =  --$scope._Index;
+        $scope._Index = ($scope._Index > 0) ? --$scope._Index : 0;
     };
 
-    // show next image
+    // show next question
     $scope.showNext = function () {
-        $scope._Index =  ++$scope._Index;
-        console.log( $scope._Index);
+        $scope._Index = ($scope._Index < $scope.questions.nodes.length - 1) ? ++$scope._Index : $scope.questions.nodes.length-1;
+        console.log($scope.questions.nodes.length-1);
+
     };
-
-
-
-
-
-
 
     //number of rate in questionnaire
     $scope.countRate = [1,2,3,4,5,6,7,"don`t know"];
 
 
-
-    $scope.showTrack = function (index) {
-         $scope._Index = index;
-    };
 
 
     //var regLater = [^aei];

@@ -438,9 +438,10 @@ hr{
       color: #fff;
       background: #57B96D;
       text-shadow: none;
-      font-size: 1em;
+      font-size: 14px;
       border-radius: 50%;
-      padding: 6px;
+      padding: 7px;
+      border: 1px solid #adadad;
       &:hover {
         span {
           color: $nav-link-color-hover;
@@ -469,6 +470,7 @@ hr{
     }
     .quest-items{
       min-height: 250px;
+      text-align: center;
     }
     li{
       line-height: 1;
@@ -524,11 +526,11 @@ hr{
         outline: none !important;
       }
       &:checked + .number-label {
-        background: $footer-bg;
+        background: lighten($border-color, 8%);
       }
     }
     input + .number-label {
-      background: lighten($hyper-color, 20%);
+      background: #69d4bc;
     }
 
   }

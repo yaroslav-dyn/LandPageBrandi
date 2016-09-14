@@ -383,9 +383,10 @@ hr {
     color: #fff;
     background: #57B96D;
     text-shadow: none;
-    font-size: 1em;
+    font-size: 14px;
     border-radius: 50%;
-    padding: 6px; }
+    padding: 7px;
+    border: 1px solid #adadad; }
     .survey .next-button a.btn:hover span {
       color: #EDEA00; }
   .survey .next-button .btn.first-page {
@@ -406,7 +407,8 @@ hr {
   font-size: 1.2em; }
 
 .survey .nodes-quest .quest-items {
-  min-height: 250px; }
+  min-height: 250px;
+  text-align: center; }
 
 .survey .nodes-quest li {
   line-height: 1;
@@ -456,10 +458,10 @@ hr {
   .survey .nodes-quest input:focus {
     outline: none !important; }
   .survey .nodes-quest input:checked + .number-label {
-    background: #369F4D; }
+    background: #24ab42; }
 
 .survey .nodes-quest input + .number-label {
-  background: #969e99; }
+  background: #69d4bc; }
 
 .content.survey {
   flex: 0 0 60%; }
