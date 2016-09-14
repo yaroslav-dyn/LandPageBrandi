@@ -13,35 +13,49 @@ gulp.task('sass', function () {
 });
 //build css
 gulp.task('css-build', function(){
-    gulp.src('src/css/*.js')
+    gulp.src('css/*.css')
         .pipe(gulp.dest('public/css/'))
 });
 //build js
 gulp.task('js-build', function(){
-    gulp.src('src/js/*.js')
+    gulp.src('js/*.js')
     .pipe(gulp.dest('public/js/'))
 });
 //build html with Dependencies
 gulp.task('html-build', function () {
-    return gulp.src('src/*.html')
+    return gulp.src('*.html')
         .pipe(useref())
         .pipe(gulp.dest('public/'));
 });
+
 //build img
-gulp.task('img-build', function () {
-    gulp.src('src/img/**/')
+gulp.task('src/img-build', function () {
+    gulp.src('img/**/')
     .pipe(gulp.dest('public/img/'));
 });
 
 //rigger html
 gulp.task('rigger-html', function () {
-    gulp.src('src/html-parts/src/*.html')
+    gulp.src('src/html-parts/index-parts/*.html')
         .pipe(rigger())
         .pipe(gulp.dest('src/'));
 });
+//rigger app html
+gulp.task('rigger-app-html', function () {
+    gulp.src('src/html-parts/survey-parts/*.html')
+        .pipe(rigger())
+        .pipe(gulp.dest('src/survey/'));
+});
+
 //rigger js
 gulp.task('rigger-js', function () {
     gulp.src('src/js/parts/main.js')
+        .pipe(rigger())
+        .pipe(gulp.dest('src/js/'));
+});
+//rigger app js
+gulp.task('rigger-app-js', function () {
+    gulp.src('src/js/survey/app.js')
         .pipe(rigger())
         .pipe(gulp.dest('src/js/'));
 });
@@ -66,11 +80,13 @@ gulp.task('serv', function() {
     browserSync.init({
         server: "./src/"
     });
-    gulp.watch('src/js/**/*.js',['rigger-js'] );
+    gulp.watch('src/js/parts/*.js',['rigger-js'] );
+    gulp.watch('src/js/survey/*.js',['rigger-app-js'] );
     gulp.watch('src/js/*.js').on('change', browserSync.reload);
     gulp.watch('src/scss/*.scss',['sass']);
-    gulp.watch('src/html-parts/**/*.html',['rigger-html']);
-    gulp.watch('src/*.html').on('change', browserSync.reload);
+    gulp.watch('src/html-parts/index-parts/**/*.html',['rigger-html']);
+    gulp.watch('src/html-parts/survey-parts/**/*.html',['rigger-app-html']);
+    gulp.watch('src/html-parts/**/*.html').on('change', browserSync.reload);
     gulp.watch('src/css/*.css' ).on('change', browserSync.reload);
 });
 

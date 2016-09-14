@@ -1,4 +1,3 @@
-
 var heightWindow = $(window).innerHeight() - 120,
 	widthWindow = $(".container-expo").innerWidth() - 120;
 
@@ -22,16 +21,16 @@ $('#container-graph').attr('width', widthWindow).attr('height', heightWindow).cs
 
 //-----------------filtering and coordinates-------------------
 
-	//change grid for left sidebar
-	$("#left-sidebar").removeClass("hidden");
-	$("#container-expo").removeClass("col-md-10").addClass("col-md-8");
 	//show sidebar
-	$("#sidebar-data").removeClass("hidden");
+	 $("#sidebar-data").removeClass("hidden");
 
 	//default cart:
 	//trendsRiskMap(graph);
 	//riskInterconMap(graph);
 	riskInterconMap(JSON.parse(fileName));
+
+
+
 
 	//});//End json d3.js
 
@@ -41,13 +40,10 @@ $('#container-graph').attr('width', widthWindow).attr('height', heightWindow).cs
 //--------FOR TESTING-------------------------------------------------------------------------------------------//
 function staticMap(){
 
-	$("#sidebar-data").removeClass("hidden");
-
-	//change size block for this map
-	var heightWindow = $(window).innerHeight() - 120,
-		widthWindow = $(".container-expo").innerWidth();
-
 	$('#container-graph').attr('width', widthWindow).attr('height', heightWindow).css("height", heightWindow);
+
+	//show sidebar
+	$("#sidebar-data").removeClass("hidden");
 
 	//parse json D3.js
 	d3.json( "csv/complete-cut.json" , function(error, graph) {
@@ -67,6 +63,7 @@ function staticMap(){
 //call r-i map
 $("#intercon-button").on("click",function(){
 	$("#container-graph").html("");
+	$("#graph-wrapper").css("text-align", "center");
 
 	function receivedText(){
 		$("#container-graph").attr("width", widthWindow).attr("height", heightWindow).css("height", heightWindow);
@@ -84,9 +81,7 @@ $("#intercon-button").on("click",function(){
 //call t-r map
 $("#trends-button").on("click",function(){
 	$('#container-graph').html('');
-
-
-
+	$("#graph-wrapper").css("text-align", "right");
 
 	function receivedText(){
 		$('#container-graph').attr('width', widthWindow).attr('height', heightWindow).css("height", heightWindow);
@@ -103,7 +98,7 @@ $("#trends-button").on("click",function(){
 //call landscape map
 $("#landscape-map").on("click",function(){
 	$('#container-graph').html('');
-
+	$("#graph-wrapper").css("text-align", "right");
 
 	function receivedText(){
 		$('#container-graph').attr('width', widthWindow).attr('height', heightWindow).css("height", heightWindow);
@@ -203,7 +198,7 @@ function trendsRiskMap(graph){
         halfHeight = height/ 2,
         rLage = halfHeight - 20,
         rSmall = rLage/1.1,
-        nodesRadius = 5.5,
+        nodesRadius = 5,
         strokeWidth = 0.3,
         gainStrokeWidth = 6, //increment current stroke width (stroke width = strokeWidth * gainStrokeWidth)
         inactiveOpacity = 0.4; //value inactive lines opacity (normal opacity = 1 )
@@ -711,56 +706,41 @@ function trendsRiskMap(graph){
 
 //-------------ABORTING filters FUNCTION--------------------------------------------
 
-    //generic clearing function
-    function clearTrendMap(){
+$("#clear-filter").click(function() {
 
-        d3.selectAll(".nodes-trends")
-            .attr("r", nodesRadius + 2)
-            .attr("fill", trendsColor);
+    d3.selectAll(".nodes-trends")
+        .attr("r", nodesRadius + 2)
+        .attr("fill", trendsColor);
 
-        d3.selectAll(".nodes-risks")
-            .attr("class","nodes nodes-risks")
-            .attr("r", nodesRadius);
+    d3.selectAll(".nodes-risks")
+        .attr("class","nodes nodes-risks")
+        .attr("r", nodesRadius);
 
-        d3.selectAll(".text-trends")
-            .attr("class", "text text-trends text-hidden")
-            .attr("style", "font-weight: normal");
+    d3.selectAll(".text-trends")
+        .attr("class", "text text-trends text-hidden")
+        .attr("style", "font-weight: normal");
 
-        d3.selectAll(".text-risks")
-            .attr("class", "text text-risks text-hidden")
-            .attr("style", "font-weight: normal");
+    d3.selectAll(".text-risks")
+        .attr("class", "text text-risks text-hidden")
+        .attr("style", "font-weight: normal");
 
-        d3.selectAll("line")
-            .attr("stroke-width", strokeWidth)
-            .attr("style", "opacity: 1");
+    d3.selectAll("line")
+        .attr("stroke-width", strokeWidth)
+        .attr("style", "opacity: 1");
 
-        //----Sidebar text data clearing--------------------------
+    //----Sidebar text data clearing--------------------------
 
-        d3.selectAll(".data-area")
-            .attr("class","data-area hidden");
+    d3.select(".data-area")
+        .attr("class","data-area hidden");
 
-        //clearing all sidebar data text
-        d3.selectAll(".s-data-text")
-            .text("");
+    //clearing all sidebar data text
+    d3.selectAll(".s-data-text")
+        .text("");
 
-        //clear current node
-        $(".trends-selected").attr("curid","empty");
+    //clear current node
+    $(".trends-selected").attr("curid","empty");
 
-    }
-    //clear button
-    $("#clear-filter").click(function() {
-        clearTrendMap();
-
-    });
-
-    //clear all on page on blur
-    $("#graph-wrapper").click(function (e) {
-        if(e.target.id != 'container-graph')
-            return;
-        clearTrendMap();
-
-    });
-
+});
 
 
 
@@ -961,6 +941,7 @@ function riskInterconMap(graph){
 
 //----------------Append in DOM SVG--------------------------------
 
+
     //--------------LINKS-----------------------------------------
     //append links
     var link = svg.append("g")
@@ -1073,7 +1054,6 @@ function riskInterconMap(graph){
         var currentID = d3.select(this).select("circle").attr("id"),
             currentColor = d3.select(this).select("circle").attr("fill");
 
-            var edgesForThree = [];
 
         //filtering all lines where currentId = source
         d3.selectAll("line")
@@ -1085,8 +1065,7 @@ function riskInterconMap(graph){
             .data(edges)
             .filter(function (d) {
                 if (d.source.id == currentID) {
-                    edgesCutRisk.push(d.target.id);
-                    edgesForThree.push({source: d.target, value: d.value});
+                    edgesCutRisk.push(d.target.id)
                 }
                     return d.source.id == currentID;
 
@@ -1096,18 +1075,6 @@ function riskInterconMap(graph){
             .attr("stroke-width", function(d) {
                 return altStrength(d,strokeWidth, 2.5);
             });
-
-
-
-        //for (var i in edgesForThree){
-        //    edgesForThree[i].forEach(function(e){
-        //        console.log(e);
-        //    });
-        //}
-
-
-
-        console.log(edgesForThree);
 
 
         //filtering all links where currentId = target
@@ -1138,8 +1105,6 @@ function riskInterconMap(graph){
                 return d.id == currentID;
             })
             .attr("style", "font-size: 0.8em; font-weight: bold");
-
-
 
 
         //----Sidebar text data--------------------------
@@ -1238,10 +1203,10 @@ function riskInterconMap(graph){
             .attr("class", "text text-risks text-visible")
             .attr("style", "font-size: 0.8em");
 
-
         edgesCutRiskCur = [];
 
     }
+
 
 
 
@@ -1251,8 +1216,9 @@ function riskInterconMap(graph){
 
     //-------------ABORTING filters FUNCTION--------------------------------------------
 
-    //generic clearing function
-    function clearRimMap(){
+    $("#clear-filter").click(function () {
+
+
         d3.selectAll(".nodes-risks")
             .attr("class","nodes nodes-risks")
             .attr("r", function(d){
@@ -1274,7 +1240,7 @@ function riskInterconMap(graph){
 
         //----Sidebar text data clearing--------------------------
 
-        d3.selectAll(".data-area")
+        d3.select(".data-area")
             .attr("class","data-area hidden");
 
         //clearing all sidebar data text
@@ -1284,20 +1250,9 @@ function riskInterconMap(graph){
         //clear current node
         $(".trends-selected").attr("curid","empty");
 
-    }
-    //clear button
-    $("#clear-filter").click(function () {
-        clearRimMap();
 
     });
 
-    //clear all on page on blur
-    $("#graph-wrapper").click(function (e) {
-        if(e.target.id != 'container-graph')
-            return;
-        clearRimMap();
-
-    });
 
 
 }//End riskInterconMap
@@ -1480,7 +1435,6 @@ function landscapeMap(graph){
         }
         return Object.keys(uniqueTextObj), Object.keys(uniqueColorObj);
 
-
     }
     returnUnique(cat,colorObj);
 //-----------------------------------------------------------------------
@@ -1493,7 +1447,7 @@ function landscapeMap(graph){
 
     //add category buttons
     function getCategoriesSide(catContIn, uniqueTextObj,uniqueColorObj ){
-        catContIn.append("<h4 class='sidebar-main-header'>Filters:</h4>");
+        catContIn.append("<h4>Filter:</h4>");
         catContIn.append("<ul></ul>");
 
         Object.keys(uniqueTextObj).forEach(function(e,i){
@@ -1533,6 +1487,7 @@ function landscapeMap(graph){
         //clear svg area
 
     });
+
 
 
 
@@ -1625,9 +1580,8 @@ function landscapeMap(graph){
 
     //-------------ABORTING filters FUNCTION--------------------------------------------
 
+    $("#clear-filter").click(function () {
 
-    //generic clearing function
-    function clearLanMap(){
         svg.selectAll(".g-nodes")
             .attr("style", "opacity:1");
 
@@ -1646,7 +1600,7 @@ function landscapeMap(graph){
 
         //----Sidebar text data clearing--------------------------
 
-        d3.selectAll(".data-area")
+        d3.select(".data-area")
             .attr("class","data-area hidden");
 
         //clearing all sidebar data text
@@ -1659,21 +1613,8 @@ function landscapeMap(graph){
         //clear current node
         $(".trends-selected").attr("curid","empty");
 
-    }
-
-    //clear button
-    $("#clear-filter").click(function () {
-        clearLanMap();
-
     });
 
-    //clear all on page on blur
-    $("#graph-wrapper").click(function (e) {
-        if(e.target.id != 'container-graph')
-            return;
-        clearLanMap();
-
-    });
 
 
 }//End landscapeMap
@@ -1681,27 +1622,9 @@ function landscapeMap(graph){
 
 //show all label
 $("#highlight-text").click(function(){
-
-    if($(this).data("click",false)){
-
-        d3.selectAll(".text-risks")
-            .attr("class", "text text-risks text-visible");
-        $(this).text("Hide labels");
-
-    }
-    else {
-
-        d3.selectAll(".text-risks")
-            .attr("class", "text text-risks text-hidden");
-        $(this).text("Show labels");
-
-    }
-
+    d3.selectAll(".text-risks")
+        .attr("class", "text text-risks text-visible")
 });
-
-
-
-
 //abort event on link
 $( ".map-list li a" ).click(function( event ) {
     event.preventDefault();
@@ -1762,7 +1685,7 @@ function altStrength(d, strokeWidth, gainStrokeWidth) {
 
 function getDataSidebar(riskObj, oneTrend, currentColor){
 
-    d3.selectAll(".data-area")
+    d3.select(".data-area")
         .attr("class","data-area visible");
 
     //special rules for current map
@@ -1810,17 +1733,13 @@ function getDataSidebar(riskObj, oneTrend, currentColor){
             return d.Likelihood || "No likelihood value";
         });
 
-
-
-
-
 }
 /*
 * special data sidebar for t-r map (Trends)
 */
 function getDataSidebarTrendsMap(oneTrend,currentColor) {
 
-    d3.selectAll(".data-area")
+    d3.select(".data-area")
         .attr("class","data-area visible");
 
     d3.select(".risk-data-area")
@@ -1860,13 +1779,3 @@ function getDataSidebarTrendsMap(oneTrend,currentColor) {
         .text("");
 
 }
-
-$(document).ready(function(){
-    //tooltips in questionnaire
-
-    $('body').tooltip({
-        selector: ".question-info"
-    });
-
-
-});

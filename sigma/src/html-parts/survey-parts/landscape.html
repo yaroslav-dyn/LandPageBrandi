@@ -1,42 +1,4 @@
 <!-- landscape page questionnaire -->
-
-<style>
-  /*
-This is the visible area of you carousel.
-Set a width here to define how much items are visible.
-The width can be either fixed in px or flexible in %.
-Position must be relative!
-*/
-  .jcarousel {
-    position: relative;
-    overflow: hidden;
-  }
-
-  /*
-  This is the container of the carousel items.
-  You must ensure that the position is relative or absolute and
-  that the width is big enough to contain all items.
-  */
-  .jcarousel ul {
-    width: 20000em;
-    position: relative;
-
-    /* Optional, required in this case since it's a <ul> element */
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  /*
-  These are the item elements. jCarousel works best, if the items
-  have a fixed width and height (but it's not required).
-  */
-  .jcarousel li {
-    /* Required only for block elements like <li>'s */
-    float: left;
-  }
-</style>
-
   <div class="landscape">
     <section>
     <div class="container render-area">
@@ -49,16 +11,17 @@ Position must be relative!
       </div>
       <div class="row">
         <div class=" col-md-12" ng-controller="landscapeCtrl">
-          <div class="questions bottom-preview jcarousel">
+          <div class="questions bottom-preview">
             <ul class="nodes-quest">
-              <li ng-repeat="quest in questions.nodes | limitTo: 10 ">
+              <li >
                 <div class="quest-items">
                  <div class="row">
                   <div class="col-md-12">
                     <div class="questions-wrapper">
-                      IF a <strong>{{quest.label}}</strong>
-                      <span class="glyphicon glyphicon-question-sign question-info" title="{{quest.description}}"></span>
+                      IF a {{questions.nodes[_Index].label}}
+                      <span class="glyphicon glyphicon-question-sign question-info" ng-click="showDesc = !showDesc"></span>
                       were to materialise what is your estimate of the <strong>impact?</strong>
+                      <p ng-show="showDesc">{{questions.nodes[_Index].description}}</p>
                     </div>
                   </div>
                   <!-- rate forms-->
@@ -66,8 +29,8 @@ Position must be relative!
                     <div class="rate-answer">
                       <form action="#">
                         <fieldset ng-repeat="n in countRate">
-                          <input type="radio" name="question-{{quest.id}}" id="1-{{quest.id}}-{{$index}}" value="{{n}}"/>
-                          <label class="number-label"  for="1-{{quest.id}}-{{$index}}">
+                          <input type="radio" name="{{questions.nodes[_Index].id}}" id="1-{{questions.nodes[_Index].id}}{{$index}}" value="{{n}}"/>
+                          <label class="number-label"  for="1-{{questions.nodes[_Index].id}}{{$index}}">
                             <span class="number-of-rate">{{n}}</span>
                           </label>
                         </fieldset>
@@ -80,10 +43,10 @@ Position must be relative!
                   <div class="row">
                     <div class="col-md-12">
                       <div class="questions-wrapper">
-                        What is your estimate of the <b>likelihood</b> of a <strong>{{quest.label}}</strong>
-                        <span class="glyphicon glyphicon-question-sign question-info"
-                              title="{{quest.description}}"></span>
+                        What is your estimate of the <b>likelihood</b> of a {{questions.nodes[_Index].label}}
+                        <span class="glyphicon glyphicon-question-sign question-info" ng-click="showDescTwo = !showDescTwo"></span>
                         materialising in the next 18 months ?
+                        <p ng-show="showDescTwo">{{questions.nodes[_Index].description}}</p>
                       </div>
                     </div>
                     <!-- rate forms-->
@@ -91,8 +54,7 @@ Position must be relative!
                       <div class="rate-answer">
                         <form action="#">
                           <fieldset ng-repeat="n in countRate">
-                            <input type="radio" name="question-{{quest.id}}" id="2-{{quest.id}}-{{$index}}"
-                                   value="{{n}}"/>
+                            <input type="radio" name="question-{{quest.id}}" id="2-{{quest.id}}-{{$index}}" value="{{n}}"/>
                             <label class="number-label" for="2-{{quest.id}}-{{$index}}">
                               <span class="number-of-rate">{{n}}</span>
                             </label>
@@ -106,16 +68,10 @@ Position must be relative!
             </ul>
           </div><!-- End questions-->
 
-
-          <a class="jcarousel-prev" href="" >Prev</a>
-          <a class="jcarousel-next" href="">Next</a>
-
-
-
           <div class="next-page text-left">
             <div class="next-button">
-              <a href="#/" class="btn btn-default" title="prev"><span class="glyphicon glyphicon-menu-left"></span></a>
-              <a href="#/" class="btn btn-default prev" title="next"><span class="glyphicon glyphicon-menu-right"></span></a>
+              <a href="" class="btn btn-default" title="prev" ng-click="showPrev();"><span class="glyphicon glyphicon-menu-left"></span></a>
+              <a href="" class="btn btn-default prev" title="next" ng-click="showNext();"><span class="glyphicon glyphicon-menu-right"></span></a>
             </div>
           </div>
         </div>
@@ -127,25 +83,9 @@ Position must be relative!
     </section>
 
 
-
   </div><!--End content-->
 
 
-<script>
-
-  $(function() {
-    $('.jcarousel').jcarousel({
-      // Configuration goes here
-    });
-  });
 
 
 
-  $('.jcarousel-prev').jcarouselControl({
-    target: '-=1'
-  });
-
-  $('.jcarousel-next').jcarouselControl({
-    target: '+=1'
-  });
-</script>
