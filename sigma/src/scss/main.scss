@@ -451,6 +451,9 @@ hr{
     .btn.first-page{
       padding: 3px;
     }
+    a.next-section{
+      border-radius: 6px;
+    }
   }
   .nav-uploader{
     padding: 4px;
@@ -465,7 +468,7 @@ hr{
   }
   .nodes-quest{
     .questions-wrapper{
-      margin: 36px 0;
+      margin: 36px 0 62px 0;
       font-size: 1.2em;
     }
     .quest-items{
@@ -512,8 +515,44 @@ hr{
         cursor: pointer;
       }
     }
-    fieldset{
+    fieldset {
       display: inline;
+      position: relative;
+      &:first-child {
+        &:before {
+          content: "Low";
+          position: absolute;
+          top: -18px;
+          left: 3px;
+          font-size: 12px;
+        }
+      }
+      &:nth-last-of-type(2) {
+        &:before {
+          content: "High";
+          position: absolute;
+          top: -18px;
+          left: 3px;
+          font-size: 12px;
+        }
+      }
+    }
+    .likely{
+        fieldset{
+          &:first-child{
+            &:before{
+              content: "Unlikely";
+              left: -3;
+            }
+          }
+          &:nth-last-of-type(2){
+            &:before{
+              content: "Very Likely";
+              left: -14px;
+
+            }
+          }
+        }
     }
     .number-of-rate{
       height: 100%;

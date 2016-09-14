@@ -27,6 +27,11 @@ gulp.task('html-build', function () {
         .pipe(useref())
         .pipe(gulp.dest('public/'));
 });
+gulp.task('html-survey-build', function () {
+    return gulp.src('survey/*.html')
+        .pipe(useref())
+        .pipe(gulp.dest('public/survey/'));
+});
 
 //build img
 gulp.task('src/img-build', function () {
@@ -64,6 +69,7 @@ gulp.task('rigger-app-js', function () {
 gulp.task('build', 
 [
     'html-build',
+    'html-survey-build',
     'js-build',
     'img-build',
     'css-build'

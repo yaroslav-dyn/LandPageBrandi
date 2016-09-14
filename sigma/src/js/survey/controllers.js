@@ -7,6 +7,7 @@ app.controller('landscapeCtrl',function($scope,$http){
 
         $scope.questions = data;
 
+
     });
 
 
@@ -21,7 +22,6 @@ app.controller('landscapeCtrl',function($scope,$http){
     // show next question
     $scope.showNext = function () {
         $scope._Index = ($scope._Index < $scope.questions.nodes.length - 1) ? ++$scope._Index : $scope.questions.nodes.length-1;
-        console.log($scope.questions.nodes.length-1);
 
     };
 
@@ -30,10 +30,12 @@ app.controller('landscapeCtrl',function($scope,$http){
 
 
 
-
-    //var regLater = [^aei];
-
 });
+
+
+
+
+
 
 
 

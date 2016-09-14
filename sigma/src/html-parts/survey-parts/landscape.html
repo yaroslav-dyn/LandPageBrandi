@@ -1,4 +1,4 @@
-<!-- landscape page questionnaire -->
+<!-- landscape page questionnaire(1,2) -->
   <div class="landscape">
     <section>
     <div class="container render-area">
@@ -13,13 +13,14 @@
         <div class=" col-md-12" ng-controller="landscapeCtrl">
           <div class="questions bottom-preview">
             <ul class="nodes-quest">
-              <li ng-repeat="quest in questions.nodes" ng-show="$index === _Index">
+              <li ng-repeat="quest in questions.nodes" ng-show="$index == _Index">
                 <span class="text-center">Page: {{$index + 1}}</span>
                 <div class="quest-items">
                  <div class="row">
                   <div class="col-md-12">
                     <div class="questions-wrapper">
-                      IF a {{quest.label}}
+                      IF <span class="article-trigger">a</span>
+                      <span class="article-data" ng-bind="questions.nodes[_Index].label"></span>
                       <span class="glyphicon glyphicon-question-sign question-info" ng-click="showDesc = !showDesc"></span>
                       were to materialise what is your estimate of the <strong>impact?</strong>
                       <p ng-show="showDesc">{{quest.description}}</p>
@@ -45,7 +46,8 @@
                   <div class="row">
                     <div class="col-md-12">
                       <div class="questions-wrapper">
-                        What is your estimate of the <b>likelihood</b> of a {{questions.nodes[_Index].label}}
+                        What is your estimate of the <b>likelihood</b> of <span class="article-trigger">a</span>
+                        <span class="article-data" ng-bind="questions.nodes[_Index].label"></span>
                         <span class="glyphicon glyphicon-question-sign question-info" ng-click="showDescTwo = !showDescTwo"></span>
                         materialising in the next 18 months ?
                         <p ng-show="showDescTwo">{{questions.nodes[_Index].description}}</p>
@@ -53,7 +55,7 @@
                     </div>
                     <!-- rate forms-->
                     <div class="col-md-12">
-                      <div class="rate-answer">
+                      <div class="rate-answer likely">
                         <form action="#">
                           <fieldset ng-repeat="n in countRate">
                             <input type="radio" name="question-{{quest.id}}" id="2-{{quest.id}}{{$index}}" value="{{n}}"/>
@@ -68,15 +70,20 @@
                 </div>
                 <div class="row next-page">
                   <div class="next-button">
-                    <div class="col-md-6">
-                      <a href="" class="btn btn-default" title="prev" ng-click="showPrev();">
+                    <div class="col-md-4">
+                      <a href="" class="btn btn-default" title="prev" ng-click="showPrev();" onclick="setTimeout(checkArticleFun, 100);">
                         <span class="glyphicon glyphicon-menu-left"></span>
                       </a>
-                      <span>Prev question</span>
+                      <span>Previos risk</span>
                     </div>
-                    <div class="col-md-6 text-right">
-                      <span>Next question</span>
-                      <a href="" class="btn btn-default" title="next" ng-click="showNext();">
+                    <div class="col-md-4 text-center ">
+                      <a href="" class="btn btn-default next-section hidden" title="next" ng-click="showNext();" >
+                        <span class="">Next section</span>
+                      </a>
+                    </div>
+                    <div class="col-md-4 text-right">
+                      <span>Next risk</span>
+                      <a href="" class="btn btn-default" title="next" ng-click="showNext();" onclick="setTimeout(checkArticleFun, 100);">
                         <span class="glyphicon glyphicon-menu-right"></span>
                       </a>
                     </div>
@@ -92,10 +99,23 @@
 
     </section>
 
-
   </div><!--End content-->
 
 
+<script>
+//function article
+  setTimeout(checkArticleFun, 100);
 
+  function checkArticleFun(){
+    var articleTrigger = $(".article-trigger");
 
+    if($(".article-data").text().match(/^[aeiouy]/i)){
+      articleTrigger.text("an");
 
+    }
+    else{
+      articleTrigger.text("a")
+    }
+  }
+
+</script>

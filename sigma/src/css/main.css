@@ -391,6 +391,8 @@ hr {
       color: #EDEA00; }
   .survey .next-button .btn.first-page {
     padding: 3px; }
+  .survey .next-button a.next-section {
+    border-radius: 6px; }
 
 .survey .nav-uploader {
   padding: 4px;
@@ -403,7 +405,7 @@ hr {
     font-size: 1.2em; }
 
 .survey .nodes-quest .questions-wrapper {
-  margin: 36px 0;
+  margin: 36px 0 62px 0;
   font-size: 1.2em; }
 
 .survey .nodes-quest .quest-items {
@@ -446,7 +448,28 @@ hr {
     cursor: pointer; }
 
 .survey .nodes-quest fieldset {
-  display: inline; }
+  display: inline;
+  position: relative; }
+  .survey .nodes-quest fieldset:first-child:before {
+    content: "Low";
+    position: absolute;
+    top: -18px;
+    left: 3px;
+    font-size: 12px; }
+  .survey .nodes-quest fieldset:nth-last-of-type(2):before {
+    content: "High";
+    position: absolute;
+    top: -18px;
+    left: 3px;
+    font-size: 12px; }
+
+.survey .nodes-quest .likely fieldset:first-child:before {
+  content: "Unlikely";
+  left: -3; }
+
+.survey .nodes-quest .likely fieldset:nth-last-of-type(2):before {
+  content: "Very Likely";
+  left: -14px; }
 
 .survey .nodes-quest .number-of-rate {
   height: 100%;
