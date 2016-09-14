@@ -13,29 +13,37 @@ gulp.task('sass', function () {
 });
 //build css
 gulp.task('css-build', function(){
-    gulp.src('css/*.css')
+    gulp.src('src/css/*.css')
         .pipe(gulp.dest('public/css/'))
 });
 //build js
-gulp.task('js-build', function(){
-    gulp.src('js/*.js')
-    .pipe(gulp.dest('public/js/'))
+gulp.task('fonts-build', function(){
+    gulp.src('src/vendor/fonts/*')
+    .pipe(gulp.dest('public/survey/fonts/'))
 });
 //build html with Dependencies
 gulp.task('html-build', function () {
-    return gulp.src('*.html')
+    return gulp.src('src/*.html')
         .pipe(useref())
         .pipe(gulp.dest('public/'));
 });
+//build data
+//build html with Dependencies
+gulp.task('data-build', function () {
+    return gulp.src('src/csv/*')
+        .pipe(useref())
+        .pipe(gulp.dest('public/csv/'));
+});
+
 gulp.task('html-survey-build', function () {
-    return gulp.src('survey/*.html')
+    return gulp.src('src/survey/*.html')
         .pipe(useref())
         .pipe(gulp.dest('public/survey/'));
 });
 
 //build img
-gulp.task('src/img-build', function () {
-    gulp.src('img/**/')
+gulp.task('img-build', function () {
+    gulp.src('src/img/**/')
     .pipe(gulp.dest('public/img/'));
 });
 
@@ -70,9 +78,10 @@ gulp.task('build',
 [
     'html-build',
     'html-survey-build',
-    'js-build',
+    'fonts-build',
     'img-build',
-    'css-build'
+    'css-build',
+    'data-build'
 ]);
 
 // Clean public

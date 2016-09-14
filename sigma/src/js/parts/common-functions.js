@@ -3,17 +3,18 @@
 //show all label
 $("#highlight-text").click(function(){
 
-    if($(this).data("click",false)){
+    if($(this).data("click")){
 
+        $(this).data("click",false);
         d3.selectAll(".text-risks")
-            .attr("class", "text text-risks text-visible");
+            .attr("class", "text text-risks text-hidden");
         $(this).text("Hide labels");
 
     }
     else {
-
+        $(this).data("click",true);
         d3.selectAll(".text-risks")
-            .attr("class", "text text-risks text-hidden");
+            .attr("class", "text text-risks text-visible");
         $(this).text("Show labels");
 
     }
