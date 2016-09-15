@@ -420,6 +420,7 @@ hr{
     font-size: 1em;
   }
   .next-page{
+    margin-bottom: 24px;
     span {
       font-size: 14px;
       padding: 0 4px;
@@ -472,8 +473,8 @@ hr{
       font-size: 1.2em;
     }
     .quest-items{
-      min-height: 250px;
       text-align: center;
+      margin-bottom: 34px;
     }
     li{
       line-height: 1;
@@ -575,7 +576,7 @@ hr{
   }
 }
 .content.survey{
-  flex: 0 0 60%;
+  flex: 0 0 auto;
 }
 footer{
   background: $footer-bg;

@@ -27,6 +27,7 @@ $('#container-graph').attr('width', widthWindow).attr('height', heightWindow).cs
 	$("#container-expo").removeClass("col-md-10").addClass("col-md-8");
 	//show sidebar
 	$("#sidebar-data").removeClass("hidden");
+	$(".upload-wrapper").addClass("hidden");
 
 	//default cart:
 	//trendsRiskMap(graph);
@@ -1098,16 +1099,18 @@ function riskInterconMap(graph){
             });
 
 
-
-        //for (var i in edgesForThree){
-        //    edgesForThree[i].forEach(function(e){
-        //        console.log(e);
-        //    });
-        //}
-
+            //for (var i in edgesForThree){
+            //    edgesForThree[i].forEach(function(e){
+            //        console.log(e);
+            //    });
+            //}
 
 
-        console.log(edgesForThree);
+      //  categoryObj[Object.keys(categoryObj)
+
+            edgesForThree.forEach(function(e){
+               console.log(e);
+            });
 
 
         //filtering all links where currentId = target

@@ -27,6 +27,7 @@ $('#container-graph').attr('width', widthWindow).attr('height', heightWindow).cs
 	$("#container-expo").removeClass("col-md-10").addClass("col-md-8");
 	//show sidebar
 	$("#sidebar-data").removeClass("hidden");
+	$(".upload-wrapper").addClass("hidden");
 
 	//default cart:
 	//trendsRiskMap(graph);

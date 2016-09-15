@@ -331,16 +331,18 @@ function riskInterconMap(graph){
             });
 
 
-
-        //for (var i in edgesForThree){
-        //    edgesForThree[i].forEach(function(e){
-        //        console.log(e);
-        //    });
-        //}
-
+            //for (var i in edgesForThree){
+            //    edgesForThree[i].forEach(function(e){
+            //        console.log(e);
+            //    });
+            //}
 
 
-        console.log(edgesForThree);
+      //  categoryObj[Object.keys(categoryObj)
+
+            edgesForThree.forEach(function(e){
+               console.log(e);
+            });
 
 
         //filtering all links where currentId = target

@@ -367,12 +367,13 @@ hr {
 .survey p {
   font-size: 1em; }
 
-.survey .next-page span {
-  font-size: 14px;
-  padding: 0 4px; }
-
-.survey .next-page .prev {
-  float: right; }
+.survey .next-page {
+  margin-bottom: 24px; }
+  .survey .next-page span {
+    font-size: 14px;
+    padding: 0 4px; }
+  .survey .next-page .prev {
+    float: right; }
 
 .survey .next-button {
   margin: 34px 0; }
@@ -409,8 +410,8 @@ hr {
   font-size: 1.2em; }
 
 .survey .nodes-quest .quest-items {
-  min-height: 250px;
-  text-align: center; }
+  text-align: center;
+  margin-bottom: 34px; }
 
 .survey .nodes-quest li {
   line-height: 1;
@@ -487,7 +488,7 @@ hr {
   background: #69d4bc; }
 
 .content.survey {
-  flex: 0 0 60%; }
+  flex: 0 0 auto; }
 
 footer {
   background: #369F4D;
