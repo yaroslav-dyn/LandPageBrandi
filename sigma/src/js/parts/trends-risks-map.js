@@ -10,6 +10,13 @@ function trendsRiskMap(graph){
     //highlighting  map button
     $("#trends-button").addClass("active");
 
+
+    //clear most connected
+    $(".most-connected").html("");
+
+    //hidden left sidebar
+    $(".data-area-left").addClass("hidden");
+
     //main variables
     var
         trendObj = [],

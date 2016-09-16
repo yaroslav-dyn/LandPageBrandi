@@ -306,9 +306,9 @@ hr{
     color: $hyper-color;
   }
   p.description-risk{
-    font-size: 0.75em;
+    font-size: 0.8em;
     color: $hyper-color;
-    margin-bottom: 15px;
+    padding: 10px 0;
   }
   .category-hyper{
     margin-bottom: 0;
@@ -320,6 +320,7 @@ hr{
   }
   .nav-wrap{
     padding-left: 10px;
+    margin-bottom: 24px;
     .panel-btn{
       line-height: 1.7em;
       background: lighten($border-color, 8%);
@@ -335,6 +336,17 @@ hr{
     }
     &:focus, &:active{
       outline: none;
+    }
+  }
+  .panel-btn.snapshot{
+    color: #444;
+    background: #d4d225;
+    border: 2px dashed #524904;
+    padding: 8px;
+    font-size: 1em;
+    text-transform: uppercase;
+    &:hover{
+      background: lighten(#d4d225, 6%);
     }
   }
   .filters-container {

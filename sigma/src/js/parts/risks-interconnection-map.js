@@ -11,6 +11,11 @@ function riskInterconMap(graph){
     //highlighting  map button
    $("#intercon-button").addClass("active");
 
+    //clear most connected
+    $(".most-connected").html("");
+
+    $(".data-area-left").addClass("hidden");
+
 
 
     //main variables
@@ -277,7 +282,7 @@ function riskInterconMap(graph){
 
 //-------function on click RISKS NODES----------------------------
     function currentNodeRisk() {
-
+        $(".data-area-left").removeClass("hidden");
         //visible & transform RiskNodes
         d3.selectAll(".nodes-risks")
             .transition()
@@ -472,7 +477,6 @@ function riskInterconMap(graph){
                 .attr("class", "text text-risks text-visible")
                 .attr("style", "font-size: 0.8em");
 
-
             edgesCutRiskCur = [];
 
         }
@@ -483,7 +487,8 @@ function riskInterconMap(graph){
 //-----------------Three most connected----------------------
     function threeNodeFun(cutOfThree){
 
-        var currentID;
+        var currentID,
+            currentColor;
 
         currentID = cutOfThree;
 
@@ -496,7 +501,6 @@ function riskInterconMap(graph){
             .attr("r", function(d){
                 return altNodeSize(d, nodesRadius,0) });
 
-
         svg.selectAll(".nodes-risks")
             .filter(function (d) {
                 return d.id == currentID;
@@ -506,7 +510,6 @@ function riskInterconMap(graph){
             .attr("r", function (d) {
                 return altNodeSize(d, nodesRadius, 2)
             });
-
 
 
         //visible & transform TEXT
@@ -577,8 +580,6 @@ function riskInterconMap(graph){
             .attr("style", "font-size: 0.8em; font-weight: bold");
 
 
-
-
         //----Sidebar text data--------------------------
 
         //create one current object for sidebar data
@@ -597,15 +598,23 @@ function riskInterconMap(graph){
         );
 
 
+        //category color
+        var io = d3.selectAll(".nodes-risks")
+            .filter(function(d){
+                return d.id == currentID
+            })
+            .attr("fill");
+
+        currentColor = io;
+
+
         //general sidebar data function (common-functions template)
         getDataSidebar(riskObj, oneTrend, currentColor, edgesForThree);
-
 
         //clearing array
         oneTrend = [];
         edgesCutRisk = [];
         edgesForThree = [];
-
 
      }
 
@@ -613,7 +622,6 @@ function riskInterconMap(graph){
 
     //function on click most connected button
     $(document).on("click", ".most-connected li",function() {
-
         $(this).parent().find('li').removeClass("active");
         $(this).addClass("active");
         var cutOfThree  = $(this).attr("mid");
@@ -622,8 +630,6 @@ function riskInterconMap(graph){
 
 
     });
-
-
 
 
 

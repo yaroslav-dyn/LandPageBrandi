@@ -101,7 +101,8 @@ gulp.task('serv', function() {
     gulp.watch('src/scss/*.scss',['sass']);
     gulp.watch('src/html-parts/index-parts/**/*.html',['rigger-html']);
     gulp.watch('src/html-parts/survey-parts/**/*.html',['rigger-app-html']);
-    gulp.watch('src/html-parts/**/*.html').on('change', browserSync.reload);
+    gulp.watch('src/*.html').on('change', browserSync.reload);
+    gulp.watch('src/survey/*.html').on('change', browserSync.reload);
     gulp.watch('src/css/*.css' ).on('change', browserSync.reload);
 });
 
