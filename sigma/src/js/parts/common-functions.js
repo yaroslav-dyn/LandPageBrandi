@@ -8,19 +8,23 @@ $("#highlight-text").click(function(){
         $(this).data("click",false);
         d3.selectAll(".text-risks")
             .attr("class", "text text-risks text-hidden");
-        $(this).text("Hide labels");
+       $(this).text("Show labels");
 
     }
     else {
         $(this).data("click",true);
         d3.selectAll(".text-risks")
             .attr("class", "text text-risks text-visible");
-        $(this).text("Show labels");
+
+        $(this).text("Hide labels");
 
     }
 
 });
-
+$("#clear-filter").click(function(){
+    $("#highlight-text").text("Show labels");
+});
+//End show all label
 
 
 
@@ -66,7 +70,7 @@ function altNodeSize(d, nodesRadius, gainNodeSize) {
 function altStrength(d, strokeWidth, gainStrokeWidth) {
 
     if (d.source.rank == 1 || d.target.rank == 1 ) {
-        return d = strokeWidth + 1.1 + gainStrokeWidth;
+        return d = strokeWidth + 1.4 + gainStrokeWidth;
     }
     else if (d.source.rank == 2 || d.target.rank == 2) {
         return d = strokeWidth  + 0.6 + gainStrokeWidth;
@@ -82,7 +86,7 @@ function altStrength(d, strokeWidth, gainStrokeWidth) {
 * General function for all map
 */
 
-function getDataSidebar(riskObj, oneTrend, currentColor){
+function getDataSidebar(riskObj, oneTrend, currentColor,edgesForThree){
 
     d3.selectAll(".data-area")
         .attr("class","data-area visible");
@@ -133,10 +137,21 @@ function getDataSidebar(riskObj, oneTrend, currentColor){
         });
 
 
-
+        //append three most connected risks in left sidebar
+        if($("body").attr("class") != 'map landscape-map') {
+            $(".most-connected").html("");
+            edgesForThree.forEach(function (e, i) {
+                //sort to just three nodes
+                if (i <= 2) {
+                    $(".most-connected").append("<li class = 'm-node' mid='" + e.source.id + "'>" + e.source.label + "</li>");
+                }
+            });
+        }
 
 
 }
+
+
 /*
 * special data sidebar for t-r map (Trends)
 */
@@ -182,6 +197,18 @@ function getDataSidebarTrendsMap(oneTrend,currentColor) {
         .text("");
 
 }
+
+//confirm for escape to nav
+$(".main-nav .nav a").on("click", function(){
+
+     //checking map template
+    if($("body").hasClass("map")){
+        var confirmCheck =  confirm("Navigating away will lose the data – do you wish to continue?");
+        if(confirmCheck == false){
+            event.preventDefault();
+        }
+    }
+});
 
 
 

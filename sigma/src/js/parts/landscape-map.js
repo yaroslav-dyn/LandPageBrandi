@@ -2,7 +2,7 @@
 
 function landscapeMap(graph){
 
-    $("body").attr("class","landscape-map");
+    $("body").attr("class","map landscape-map");
 
     // maps trigger
     //delete previous highlight button
@@ -230,7 +230,6 @@ function landscapeMap(graph){
         //clear svg area
 
     });
-
 
 
 

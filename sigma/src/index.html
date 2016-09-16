@@ -47,12 +47,14 @@
   <section>
     <div class="container-fluid render-area">
       <div class="row">
-        <h2 class="text-center">
+        <div class="col-md-12 slogan">
+          <h2 class="text-center">
           Welcome to Risk Insights
-        </h2>
-        <p class="page-description text-center">
-          the tool that allows you to create,visualise and categorise risk information networks.
-        </p>
+          </h2>
+          <p class="page-description text-center">
+            the tool that allows you to create,visualise and categorise risk information networks.
+          </p>
+        </div>
       </div>
       <div class="row">
         <!--Left Sidebar template-->
@@ -70,26 +72,18 @@
                         <li>Expert to non-expert</li>
                       </ul>
                     </div>
-                  <div class="data-area hidden">
-                    <div class="most-connected compare-container visible-on-trends-map visible-on-inter-map">
-                      <h4 class="sidebar-main-header">Filters:</h4>
-                      <hr/>
-                      <div class="data-area hidden">
-                        <h4>Most connected global risks:</h4>
-                        <ul>
-                          <li>item 1</li>
-                          <li>item 2</li>
-                          <li>item 3</li>
-                          <li>item 4</li>
-                        </ul>
+                    <div class="data-area hidden">
+                      <div class="compare-container visible-on-trends-map visible-on-inter-map">
+                        <h4 class="sidebar-main-header">Filters:</h4>
+                        <hr/>
+                        <div class="data-area hidden">
+                          <h5><strong>Most connected global risks:</strong></h5>
+                          <ul class='most-connected'></ul>
+                        </div>
                       </div>
                     </div>
-                  </div>
-        
                 </div>
-        
               </div>
-        
           </div>
         </div>
         <div class="col-md-8 container-expo" id="container-expo">
@@ -117,10 +111,6 @@
         
                   <h3 class="category-selected"><span class="trends-selected s-data-text text-bold" curid="empty"></span></h3>
         
-                  <p class="description-risk s-data-text">
-                    Rising number of people living in urban areas that results in the physical growth of cities.
-                  </p>
-        
                   <div class="category-selected">
                     Category: <span class="sel-cat s-data-text text-bold"></span>
                   </div>
@@ -135,12 +125,14 @@
                     </div>
                   </div>
                 </div>
-                <div class="file-name">
-                  <span id="load-file-sb"></span>
-                  <span class="text-bold" id="header-file-sb"></span>
-                </div>
                 <hr/>
                 <button id="highlight-text" class="btn btn-block panel-btn">Show labels</button>
+                <div class="data-area hidden">
+                  <hr/>
+                  <p class="description-risk s-data-text">
+                    Rising number of people living in urban areas that results in the physical growth of cities.
+                  </p>
+                </div>
                 <hr/>
               </div><!--END sidebar-data-unity-->
               <div class="nav-wrap">

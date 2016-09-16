@@ -2,7 +2,7 @@
 
 function trendsRiskMap(graph){
 
-    $("body").attr("class","trends-risks");
+    $("body").attr("class","map trends-risks");
 
     // maps trigger
     //delete previous highlight button
@@ -18,7 +18,8 @@ function trendsRiskMap(graph){
         categoryObj = {},
         edgesCutTrend  = [],
         edgesCutRisk = [],
-        oneTrend = [];
+        oneTrend = [],
+        edgesForThree = [];
 
 
     var svg = d3.select("svg"),
@@ -29,9 +30,9 @@ function trendsRiskMap(graph){
         rLage = halfHeight - 20,
         rSmall = rLage/1.1,
         nodesRadius = 5.5,
-        strokeWidth = 0.3,
+        strokeWidth = 0.35,
         gainStrokeWidth = 6, //increment current stroke width (stroke width = strokeWidth * gainStrokeWidth)
-        inactiveOpacity = 0.4; //value inactive lines opacity (normal opacity = 1 )
+        inactiveOpacity = 0.2; //value inactive lines opacity (normal opacity = 1 )
 
     //color palette d3
     var color = d3.scaleOrdinal(d3.schemeCategory20),
@@ -159,7 +160,6 @@ function trendsRiskMap(graph){
 
 
 //----------------Append in DOM SVG--------------------------------
-
 
 
     //--------------LINKS-----------------------------------------
@@ -293,7 +293,6 @@ function trendsRiskMap(graph){
 //-------------fun on click TRENDS NODES--------------------------------
     function currentNodeTrend() {
 
-
         //visible & transform trendsNodes
         d3.selectAll(".nodes-trends")
             .transition()
@@ -412,7 +411,8 @@ function trendsRiskMap(graph){
             .data(edges)
             .filter(function (d) {
                 if (d.target.id == currentID && d.source.type == "Trend") {
-                    edgesCutRisk.push(d.source.id)
+                    edgesCutRisk.push(d.source.id);
+                    edgesForThree.push({source: d.target, value: d.value});
                 }
                 if (d.source.type == "Trend") {
                     return d.target.id == currentID;
@@ -462,12 +462,22 @@ function trendsRiskMap(graph){
             }
         });
 
-        getDataSidebar(riskObj, oneTrend, currentColor);
 
+        //sort array to max
+        edgesForThree.sort(
+            function(a, b) {
+                return b.value - a.value;
+            }
+        );
+
+        
+        //general sidebar data function (common-functions template)
+        getDataSidebar(riskObj, oneTrend, currentColor, edgesForThree);
 
         //clearing array
         oneTrend = [];
         edgesCutRisk = [];
+        edgesForThree = [];
 
     }//END currentNodeRisk
 
