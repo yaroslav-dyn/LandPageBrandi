@@ -133,7 +133,7 @@ function getDataSidebar(riskObj, oneTrend, currentColor,edgesForThree){
     d3.selectAll(".sel-likelihood")
         .data(oneTrend)
         .text(function (d) {
-            return d.Likelihood || "No likelihood value";
+            return d.likelihood || "No likelihood value";
         });
 
 

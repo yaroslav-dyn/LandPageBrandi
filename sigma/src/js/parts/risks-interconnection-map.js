@@ -37,7 +37,6 @@ function riskInterconMap(graph){
         nodesRadius = 4,
         strokeWidth = 0.5,
         edgesColor = "#a5a5a5",
-        //increment current stroke width (stroke width = strokeWidth * gainStrokeWidth)
         inactiveOpacity = 0.2; //value inactive lines opacity (normal opacity = 1 )
 
 
@@ -105,12 +104,12 @@ function riskInterconMap(graph){
         };
 
     var sCluster = 3.6, //clusters size
-        heightGain = 1.8;
+        heightGain = 1.6;
 
 
     if(halfHeight <= 400){
         sCluster = 3.2;
-        heightGain = 1.6;
+        heightGain = 1.8;
     }
 
 
@@ -148,13 +147,13 @@ function riskInterconMap(graph){
         });
     }
 
-                            //4
+    if(categoryObj[Object.keys(categoryObj)[2]]) {                       //4
         categoryObj[Object.keys(categoryObj)[3]].forEach(function (e, j) {
           e.cx = (polygon.xHeight[j] + 5) * sCluster - halfWidth / 2.2;
           e.cy = (polygon.yHeight[j] - 5) * sCluster;
 
         });
-
+    }
 
                             //5
     if(categoryObj[Object.keys(categoryObj)[4]]) {
@@ -189,8 +188,8 @@ function riskInterconMap(graph){
     if(categoryObj[Object.keys(categoryObj)[7]]) {
         categoryObj[Object.keys(categoryObj)[7]].forEach(function (e, j) {
 
-            e.cx = polygon.x[j] * sCluster;
-            e.cy = polygon.y[j] * sCluster + halfHeight;
+            e.cx = polygon.x[j] * sCluster - halfHeight / heightGain ;
+            e.cy = polygon.y[j] * sCluster - halfWidth / 2.2;
 
         });
     }
@@ -295,7 +294,8 @@ function riskInterconMap(graph){
             .duration(300)
             .attr("class","nodes nodes-risks current-node")
             .attr("r", function(d){
-                return altNodeSize(d, nodesRadius,2) });
+                return altNodeSize(d, nodesRadius,2)
+            });
 
         //visible & transform TEXT
         d3.selectAll(".text-risks")
@@ -309,7 +309,6 @@ function riskInterconMap(graph){
         //check current node id
         var currentID = d3.select(this).select("circle").attr("id"),
             currentColor = d3.select(this).select("circle").attr("fill");
-
 
 
         //filtering all lines where currentId = source
@@ -333,7 +332,6 @@ function riskInterconMap(graph){
             .attr("stroke-width", function(d) {
                 return altStrength(d,strokeWidth, 2.5);
             });
-
 
 
         //filtering all links where currentId = target
@@ -499,7 +497,8 @@ function riskInterconMap(graph){
             .duration(300)
             .attr("class","nodes nodes-risks")
             .attr("r", function(d){
-                return altNodeSize(d, nodesRadius,0) });
+                return altNodeSize(d, nodesRadius,0) 
+            });
 
         svg.selectAll(".nodes-risks")
             .filter(function (d) {
@@ -618,8 +617,6 @@ function riskInterconMap(graph){
 
      }
 
-
-
     //function on click most connected button
     $(document).on("click", ".most-connected li",function() {
         $(this).parent().find('li').removeClass("active");
@@ -630,7 +627,6 @@ function riskInterconMap(graph){
 
 
     });
-
 
 
 
@@ -664,6 +660,9 @@ function riskInterconMap(graph){
         //----Sidebar text data clearing--------------------------
 
         d3.selectAll(".data-area")
+            .attr("class","data-area hidden");
+
+        d3.selectAll(".data-area-left")
             .attr("class","data-area hidden");
 
         //clearing all sidebar data text

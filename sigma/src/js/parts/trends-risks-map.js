@@ -35,8 +35,7 @@ function trendsRiskMap(graph){
         halfWidth = width/ 2,
         halfHeight = height/ 2,
         rLage = halfHeight - 20,
-        rSmall = rLage/1.1,
-        nodesRadius = 5.5,
+        nodesRadius = 5,
         strokeWidth = 0.35,
         gainStrokeWidth = 6, //increment current stroke width (stroke width = strokeWidth * gainStrokeWidth)
         inactiveOpacity = 0.2; //value inactive lines opacity (normal opacity = 1 )
@@ -45,7 +44,6 @@ function trendsRiskMap(graph){
     var color = d3.scaleOrdinal(d3.schemeCategory20),
         trendsColor = "#AB00AB",
         trendsColorCurrent  = "#E54FBD";
-
 
 
 
@@ -74,15 +72,6 @@ function trendsRiskMap(graph){
 
     });
 
-
-    //radius function for 'risk' nodes
-    riskObj.forEach(function (p, i) {
-        var n = riskObj.length,
-            step = (2 * Math.PI) / n,
-            angle = i * step;
-        p.cx = rSmall * Math.cos(angle);
-        p.cy = rSmall * Math.sin(angle);
-    });
 
     //creating object links
     graph.links.forEach(function (e) {
@@ -121,11 +110,11 @@ function trendsRiskMap(graph){
             j += 5;
 
             if (n <= 2) {
-                clasterRadius = 200;
+                clasterRadius = 250;
                 zenith = clasterRadius / 100;
             }
             else if (n <= 4) {
-                clasterRadius = 250;
+                clasterRadius = 300;
                 zenith = clasterRadius / 100;
             }
             else if (n <= 6) {

@@ -180,8 +180,7 @@ function trendsRiskMap(graph){
         halfWidth = width/ 2,
         halfHeight = height/ 2,
         rLage = halfHeight - 20,
-        rSmall = rLage/1.1,
-        nodesRadius = 5.5,
+        nodesRadius = 5,
         strokeWidth = 0.35,
         gainStrokeWidth = 6, //increment current stroke width (stroke width = strokeWidth * gainStrokeWidth)
         inactiveOpacity = 0.2; //value inactive lines opacity (normal opacity = 1 )
@@ -190,7 +189,6 @@ function trendsRiskMap(graph){
     var color = d3.scaleOrdinal(d3.schemeCategory20),
         trendsColor = "#AB00AB",
         trendsColorCurrent  = "#E54FBD";
-
 
 
 
@@ -219,15 +217,6 @@ function trendsRiskMap(graph){
 
     });
 
-
-    //radius function for 'risk' nodes
-    riskObj.forEach(function (p, i) {
-        var n = riskObj.length,
-            step = (2 * Math.PI) / n,
-            angle = i * step;
-        p.cx = rSmall * Math.cos(angle);
-        p.cy = rSmall * Math.sin(angle);
-    });
 
     //creating object links
     graph.links.forEach(function (e) {
@@ -266,11 +255,11 @@ function trendsRiskMap(graph){
             j += 5;
 
             if (n <= 2) {
-                clasterRadius = 200;
+                clasterRadius = 250;
                 zenith = clasterRadius / 100;
             }
             else if (n <= 4) {
-                clasterRadius = 250;
+                clasterRadius = 300;
                 zenith = clasterRadius / 100;
             }
             else if (n <= 6) {
@@ -791,7 +780,6 @@ function riskInterconMap(graph){
         nodesRadius = 4,
         strokeWidth = 0.5,
         edgesColor = "#a5a5a5",
-        //increment current stroke width (stroke width = strokeWidth * gainStrokeWidth)
         inactiveOpacity = 0.2; //value inactive lines opacity (normal opacity = 1 )
 
 
@@ -859,12 +847,12 @@ function riskInterconMap(graph){
         };
 
     var sCluster = 3.6, //clusters size
-        heightGain = 1.8;
+        heightGain = 1.6;
 
 
     if(halfHeight <= 400){
         sCluster = 3.2;
-        heightGain = 1.6;
+        heightGain = 1.8;
     }
 
 
@@ -902,13 +890,13 @@ function riskInterconMap(graph){
         });
     }
 
-                            //4
+    if(categoryObj[Object.keys(categoryObj)[2]]) {                       //4
         categoryObj[Object.keys(categoryObj)[3]].forEach(function (e, j) {
           e.cx = (polygon.xHeight[j] + 5) * sCluster - halfWidth / 2.2;
           e.cy = (polygon.yHeight[j] - 5) * sCluster;
 
         });
-
+    }
 
                             //5
     if(categoryObj[Object.keys(categoryObj)[4]]) {
@@ -943,8 +931,8 @@ function riskInterconMap(graph){
     if(categoryObj[Object.keys(categoryObj)[7]]) {
         categoryObj[Object.keys(categoryObj)[7]].forEach(function (e, j) {
 
-            e.cx = polygon.x[j] * sCluster;
-            e.cy = polygon.y[j] * sCluster + halfHeight;
+            e.cx = polygon.x[j] * sCluster - halfHeight / heightGain ;
+            e.cy = polygon.y[j] * sCluster - halfWidth / 2.2;
 
         });
     }
@@ -1049,7 +1037,8 @@ function riskInterconMap(graph){
             .duration(300)
             .attr("class","nodes nodes-risks current-node")
             .attr("r", function(d){
-                return altNodeSize(d, nodesRadius,2) });
+                return altNodeSize(d, nodesRadius,2)
+            });
 
         //visible & transform TEXT
         d3.selectAll(".text-risks")
@@ -1063,7 +1052,6 @@ function riskInterconMap(graph){
         //check current node id
         var currentID = d3.select(this).select("circle").attr("id"),
             currentColor = d3.select(this).select("circle").attr("fill");
-
 
 
         //filtering all lines where currentId = source
@@ -1087,7 +1075,6 @@ function riskInterconMap(graph){
             .attr("stroke-width", function(d) {
                 return altStrength(d,strokeWidth, 2.5);
             });
-
 
 
         //filtering all links where currentId = target
@@ -1253,7 +1240,8 @@ function riskInterconMap(graph){
             .duration(300)
             .attr("class","nodes nodes-risks")
             .attr("r", function(d){
-                return altNodeSize(d, nodesRadius,0) });
+                return altNodeSize(d, nodesRadius,0) 
+            });
 
         svg.selectAll(".nodes-risks")
             .filter(function (d) {
@@ -1372,8 +1360,6 @@ function riskInterconMap(graph){
 
      }
 
-
-
     //function on click most connected button
     $(document).on("click", ".most-connected li",function() {
         $(this).parent().find('li').removeClass("active");
@@ -1384,7 +1370,6 @@ function riskInterconMap(graph){
 
 
     });
-
 
 
 
@@ -1418,6 +1403,9 @@ function riskInterconMap(graph){
         //----Sidebar text data clearing--------------------------
 
         d3.selectAll(".data-area")
+            .attr("class","data-area hidden");
+
+        d3.selectAll(".data-area-left")
             .attr("class","data-area hidden");
 
         //clearing all sidebar data text
@@ -1483,7 +1471,7 @@ function landscapeMap(graph){
     });
 
 
-    var xValue = function(d) { return d.Likelihood;}, // data -> value
+    var xValue = function(d) { return d.likelihood;}, // data -> value
         yValue = function(d) { return d.impact;}, // data -> value
         xScale = d3.scaleLinear().range([0, width]), // value -> display
         xMap = function(d) { return xScale(xValue(d));}, // data -> display
@@ -1523,7 +1511,7 @@ function landscapeMap(graph){
         .attr("y", -6)
         .attr("fill", "#000")
         .style("text-anchor", "end")
-        .text("Likelihood");
+        .text("likelihood");
 
     // y-axis
     mainG
@@ -1533,12 +1521,23 @@ function landscapeMap(graph){
         .append("text")
         .attr("class", "label")
         .attr("transform", "rotate(-90)")
-        .attr("x", -5)
+        //.attr("x", -5)
         .attr("y", 10)
         .attr("fill", "#000")
         .attr("dy", ".5em")
         .style("text-anchor", "end")
         .text("Impact");
+
+
+
+
+    //sort array to max
+    //riskObj.sort(
+    //    function(a, b) {
+    //        return b.impact - a.impact;
+    //    }
+    //);
+
 
     //appends 'g' containers
     var rNode = svg.selectAll(".nodes-risks")
@@ -1550,6 +1549,22 @@ function landscapeMap(graph){
             return d.category
         });
 
+    //
+    //for(var b= 0, a=0; b < riskObj.length; b++ ) {
+    //
+    //    if(a == 0 ){
+    //        riskObj[b].textAncorY = "translate(10,-10)";
+    //        a++;
+    //    }
+    //    else if(a == 1){
+    //        riskObj[b].textAncorY = "translate(0, 0)";
+    //        a++;
+    //    }
+    //    else{
+    //        riskObj[b].textAncorY = "translate(10,10)";
+    //        a = 0;
+    //    }
+    //}
 
 
     //add nodes text
@@ -1558,17 +1573,39 @@ function landscapeMap(graph){
         .attr("class", "text text-risks")
         .attr("dx", xMap)
         .attr("dy", yMap)
-        .attr("transform", "translate(8,14)")
+
         .data(riskObj)
         .text(function (d) {
              return d.label || d.id;
          })
-        .attr("style",function(d){
-            return d.textAncor ;
-        })
+        //.attr("transform", function(d){
+        //    return d.textAncorY
+        //})
         .attr("id", function (d) {
             return d.id
         });
+
+
+
+    ////add nodes text
+    //var textRisksList = rNode
+    //    .append("text")
+    //    .attr("class", "text-risks-list")
+    //    .attr("dx", width)
+    //    .attr("dy", yMap)
+    //    .data(riskObj)
+    //    .text(function (d) {
+    //        return d.label || d.id;
+    //    })
+    //    .attr("transform", function(d){
+    //        return d.textAncorY
+    //    })
+    //    .attr("id", function (d) {
+    //        return d.id
+    //    });
+
+
+
 
 
 
@@ -1587,9 +1624,6 @@ function landscapeMap(graph){
         .attr("id", function (d) {
             return d.id
         });
-
-
-
 
 
 //-----------------Common functions---------------------------------------------
@@ -1954,7 +1988,7 @@ function getDataSidebar(riskObj, oneTrend, currentColor,edgesForThree){
     d3.selectAll(".sel-likelihood")
         .data(oneTrend)
         .text(function (d) {
-            return d.Likelihood || "No likelihood value";
+            return d.likelihood || "No likelihood value";
         });
 
 

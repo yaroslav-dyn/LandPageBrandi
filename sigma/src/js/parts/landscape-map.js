@@ -37,7 +37,7 @@ function landscapeMap(graph){
     });
 
 
-    var xValue = function(d) { return d.Likelihood;}, // data -> value
+    var xValue = function(d) { return d.likelihood;}, // data -> value
         yValue = function(d) { return d.impact;}, // data -> value
         xScale = d3.scaleLinear().range([0, width]), // value -> display
         xMap = function(d) { return xScale(xValue(d));}, // data -> display
@@ -77,7 +77,7 @@ function landscapeMap(graph){
         .attr("y", -6)
         .attr("fill", "#000")
         .style("text-anchor", "end")
-        .text("Likelihood");
+        .text("likelihood");
 
     // y-axis
     mainG
@@ -87,12 +87,23 @@ function landscapeMap(graph){
         .append("text")
         .attr("class", "label")
         .attr("transform", "rotate(-90)")
-        .attr("x", -5)
+        //.attr("x", -5)
         .attr("y", 10)
         .attr("fill", "#000")
         .attr("dy", ".5em")
         .style("text-anchor", "end")
         .text("Impact");
+
+
+
+
+    //sort array to max
+    //riskObj.sort(
+    //    function(a, b) {
+    //        return b.impact - a.impact;
+    //    }
+    //);
+
 
     //appends 'g' containers
     var rNode = svg.selectAll(".nodes-risks")
@@ -104,6 +115,22 @@ function landscapeMap(graph){
             return d.category
         });
 
+    //
+    //for(var b= 0, a=0; b < riskObj.length; b++ ) {
+    //
+    //    if(a == 0 ){
+    //        riskObj[b].textAncorY = "translate(10,-10)";
+    //        a++;
+    //    }
+    //    else if(a == 1){
+    //        riskObj[b].textAncorY = "translate(0, 0)";
+    //        a++;
+    //    }
+    //    else{
+    //        riskObj[b].textAncorY = "translate(10,10)";
+    //        a = 0;
+    //    }
+    //}
 
 
     //add nodes text
@@ -112,17 +139,39 @@ function landscapeMap(graph){
         .attr("class", "text text-risks")
         .attr("dx", xMap)
         .attr("dy", yMap)
-        .attr("transform", "translate(8,14)")
+
         .data(riskObj)
         .text(function (d) {
              return d.label || d.id;
          })
-        .attr("style",function(d){
-            return d.textAncor ;
-        })
+        //.attr("transform", function(d){
+        //    return d.textAncorY
+        //})
         .attr("id", function (d) {
             return d.id
         });
+
+
+
+    ////add nodes text
+    //var textRisksList = rNode
+    //    .append("text")
+    //    .attr("class", "text-risks-list")
+    //    .attr("dx", width)
+    //    .attr("dy", yMap)
+    //    .data(riskObj)
+    //    .text(function (d) {
+    //        return d.label || d.id;
+    //    })
+    //    .attr("transform", function(d){
+    //        return d.textAncorY
+    //    })
+    //    .attr("id", function (d) {
+    //        return d.id
+    //    });
+
+
+
 
 
 
@@ -141,9 +190,6 @@ function landscapeMap(graph){
         .attr("id", function (d) {
             return d.id
         });
-
-
-
 
 
 //-----------------Common functions---------------------------------------------
