@@ -180,7 +180,7 @@ function trendsRiskMap(graph){
         halfWidth = width/ 2,
         halfHeight = height/ 2,
         rLage = halfHeight - 20,
-        nodesRadius = 5,
+        nodesRadius = 4.5,
         strokeWidth = 0.35,
         gainStrokeWidth = 6, //increment current stroke width (stroke width = strokeWidth * gainStrokeWidth)
         inactiveOpacity = 0.2; //value inactive lines opacity (normal opacity = 1 )
@@ -358,7 +358,9 @@ function trendsRiskMap(graph){
         .attr("cy", function (d) {
             return d.cy + halfHeight
         })
-        .attr("r", nodesRadius + 2)
+        .attr("r", function (d) {
+            return altNodeSize(d, nodesRadius, 2)
+        })
         .attr("fill", trendsColor);
 
     //add nodes text
@@ -415,12 +417,12 @@ function trendsRiskMap(graph){
         .attr("id", function (d) {
             return d.id
         })
-        .attr("r", nodesRadius)
+        .attr("r", function (d) {
+            return altNodeSize(d, nodesRadius, 0)
+        })
         .attr("fill", function (d) {
             return color(d.category || d.group);
         });
-
-
 
 
 
@@ -438,12 +440,17 @@ function trendsRiskMap(graph){
         d3.selectAll(".nodes-trends")
             .transition()
             .duration(300)
-            .attr("r", nodesRadius + 2)
+            .attr("r", function (d) {
+                return altNodeSize(d, nodesRadius, 2)
+            })
             .attr("fill", trendsColor);
 
         d3.select(this).select(".nodes-trends").transition()
             .duration(300)
-            .attr("r", nodesRadius + 5);
+            .attr("fill", trendsColorCurrent)
+            .attr("r", function (d) {
+                return altNodeSize(d, nodesRadius, 5)
+            })
 
         //visible & transform TEXT
         d3.selectAll(".text-trends")
@@ -474,14 +481,18 @@ function trendsRiskMap(graph){
 
         //filtering current risk nodes
         d3.selectAll(".nodes-risks")
-            .attr("r", nodesRadius + 1)
+            .attr("r", function (d) {
+                return altNodeSize(d, nodesRadius, 1)
+            })
             .filter(function (d) {
                 return edgesCutTrend.indexOf(d.id) >= 0;
 
             })
             .transition()
             .duration(300)
-            .attr("r", nodesRadius + 3);
+            .attr("r", function (d) {
+                return altNodeSize(d, nodesRadius, 3)
+            })
 
 
         //abort filtering current text nodes
@@ -524,13 +535,17 @@ function trendsRiskMap(graph){
             .attr("class","nodes nodes-risks")
             .transition()
             .duration(300)
-            .attr("r", nodesRadius);
+            .attr("r", function (d) {
+                return altNodeSize(d, nodesRadius, 0)
+            });
 
         d3.select(this).select("circle")
             .attr("class","nodes nodes-risks current-node")
             .transition()
             .duration(300)
-            .attr("r", nodesRadius + 3);
+            .attr("r", function (d) {
+                return altNodeSize(d, nodesRadius, 3)
+            });
 
         //visible & transform TEXT
         d3.selectAll(".text-risks")
@@ -567,14 +582,20 @@ function trendsRiskMap(graph){
         //filtering current trend nodes
         d3.selectAll(".nodes-trends")
             .attr("fill", trendsColor)
-            .attr("r", nodesRadius + 2)
+            .attr("r", function (d) {
+                return altNodeSize(d, nodesRadius, 2)
+            })
             .filter(function (d) {
                 return edgesCutRisk.indexOf(d.id) >= 0;
             })
             .transition()
+            .duration(300)
             .attr("fill", trendsColorCurrent)
-            .attr("r", nodesRadius + 5);
+            .attr("r", function (d) {
+                return altNodeSize(d, nodesRadius, 5)
+            });
 
+        console.log(edgesCutRisk);
 
         //filtering corresponding text trends
         d3.selectAll(".text-trends")
@@ -638,7 +659,9 @@ function trendsRiskMap(graph){
             })
             .transition()
             .duration(300)
-            .attr("r", nodesRadius + 3);
+            .attr("r", function (d) {
+                return altNodeSize(d, nodesRadius, 3)
+            });
 
         d3.selectAll(".text-risks")
             .filter(function (d) {
@@ -661,7 +684,6 @@ function trendsRiskMap(graph){
                 if (d.source.type == "Trend") {
                     return d.target.id == currNode;
                 }
-
             })
             .attr("stroke-width", strokeWidth * gainStrokeWidth)
             .attr("style", "opacity: 1");
@@ -673,6 +695,8 @@ function trendsRiskMap(graph){
             })
             .attr("class", "text text-trends text-visible")
             .attr("style", "font-size: 0.8em");
+
+
 
 
         edgesCutRiskCur = [];
@@ -691,12 +715,16 @@ function trendsRiskMap(graph){
     function clearTrendMap(){
 
         d3.selectAll(".nodes-trends")
-            .attr("r", nodesRadius + 2)
+            .attr("r", function (d) {
+                return altNodeSize(d, nodesRadius, 2)
+            })
             .attr("fill", trendsColor);
 
         d3.selectAll(".nodes-risks")
             .attr("class","nodes nodes-risks")
-            .attr("r", nodesRadius);
+            .attr("r", function (d) {
+                return altNodeSize(d, nodesRadius, 0)
+            });
 
         d3.selectAll(".text-trends")
             .attr("class", "text text-trends text-hidden")
