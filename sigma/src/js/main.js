@@ -1496,7 +1496,7 @@ function landscapeMap(graph){
 
     //Closeness of nodes
     xScale.domain([d3.min(riskObj, xValue)-0.5, d3.max(riskObj, xValue)+0.5]);
-    yScale.domain([d3.min(riskObj, yValue)-0.5, d3.max(riskObj, yValue)+0.5]);
+    yScale.domain([d3.min(riskObj, yValue)-0.2, d3.max(riskObj, yValue)+0.2]);
 
 
     // x-axis
@@ -1530,13 +1530,30 @@ function landscapeMap(graph){
 
 
 
-
     //sort array to max
-    //riskObj.sort(
-    //    function(a, b) {
-    //        return b.impact - a.impact;
-    //    }
-    //);
+    riskObj.sort(
+        function(a, b) {
+            return a.impact - b.impact;
+        }
+    );
+
+    //function for different label position
+    for(var b= 0, a=0; b < riskObj.length; b++ ) {
+
+        if(a == 0 ){
+            riskObj[b].textAncorY = "translate(6,-10)";
+            a++;
+        }
+        else if(a == 1){
+            riskObj[b].textAncorY = "translate(6, 0)";
+            a++;
+        }
+        else{
+            riskObj[b].textAncorY = "translate(-40,14)";
+            a = 0;
+        }
+
+    }
 
 
     //appends 'g' containers
@@ -1544,27 +1561,12 @@ function landscapeMap(graph){
         .data(riskObj)
         .enter().append("g")
         .attr("class", "g-nodes risks")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
         .on("click", currentNodeRisk)
         .attr("cat",function(d){
             return d.category
         });
 
-    //
-    //for(var b= 0, a=0; b < riskObj.length; b++ ) {
-    //
-    //    if(a == 0 ){
-    //        riskObj[b].textAncorY = "translate(10,-10)";
-    //        a++;
-    //    }
-    //    else if(a == 1){
-    //        riskObj[b].textAncorY = "translate(0, 0)";
-    //        a++;
-    //    }
-    //    else{
-    //        riskObj[b].textAncorY = "translate(10,10)";
-    //        a = 0;
-    //    }
-    //}
 
 
     //add nodes text
@@ -1573,39 +1575,16 @@ function landscapeMap(graph){
         .attr("class", "text text-risks")
         .attr("dx", xMap)
         .attr("dy", yMap)
-
         .data(riskObj)
         .text(function (d) {
              return d.label || d.id;
          })
-        //.attr("transform", function(d){
-        //    return d.textAncorY
-        //})
+        .attr("transform", function(d){
+            return d.textAncorY
+        })
         .attr("id", function (d) {
             return d.id
         });
-
-
-
-    ////add nodes text
-    //var textRisksList = rNode
-    //    .append("text")
-    //    .attr("class", "text-risks-list")
-    //    .attr("dx", width)
-    //    .attr("dy", yMap)
-    //    .data(riskObj)
-    //    .text(function (d) {
-    //        return d.label || d.id;
-    //    })
-    //    .attr("transform", function(d){
-    //        return d.textAncorY
-    //    })
-    //    .attr("id", function (d) {
-    //        return d.id
-    //    });
-
-
-
 
 
 

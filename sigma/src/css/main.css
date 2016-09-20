@@ -310,11 +310,14 @@ hr {
       outline: none; }
   .sidebar-data .panel-btn.snapshot {
     color: #444;
-    background: #d4d225;
+    background: #e4e34b;
     border: 2px dashed #524904;
-    padding: 8px;
+    padding: 6px;
     font-size: 1em;
     text-transform: uppercase; }
+    .sidebar-data .panel-btn.snapshot span {
+      font-size: 18px;
+      top: 2px; }
     .sidebar-data .panel-btn.snapshot:hover {
       background: #dddb3b; }
   .sidebar-data .filters-container {
