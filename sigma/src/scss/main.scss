@@ -340,9 +340,8 @@ hr{
   }
   .panel-btn.snapshot{
     color: #444;
-    background: #e4e34b;
+    background: #f6f6f6;
     border: 2px dashed #524904;
-    padding: 6px;
     font-size: 1em;
     text-transform: uppercase;
     span{
@@ -350,7 +349,7 @@ hr{
       top: 2px;
     }
     &:hover{
-      background: lighten(#d4d225, 6%);
+      background: darken(#f6f6f6, 2%);
     }
   }
   .filters-container {

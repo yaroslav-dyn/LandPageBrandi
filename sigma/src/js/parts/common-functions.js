@@ -1,26 +1,28 @@
 //Global functions for maps
 
 //show all label
-$("#highlight-text").click(function(){
+function highlightLabels() {
+    $("#highlight-text").click(function () {
 
-    if($(this).data("click")){
+        if ($(this).data("click")) {
 
-        $(this).data("click",false);
-        d3.selectAll(".text-risks")
-            .attr("class", "text text-risks text-hidden");
-       $(this).text("Show labels");
+            $(this).data("click", false);
+            d3.selectAll(".text-risks")
+                .attr("class", "text text-risks text-hidden");
+            $(this).text("Show labels");
 
-    }
-    else {
-        $(this).data("click",true);
-        d3.selectAll(".text-risks")
-            .attr("class", "text text-risks text-visible");
+        }
+        else {
+            $(this).data("click", true);
+            d3.selectAll(".text-risks")
+                .attr("class", "text text-risks text-visible");
+            $(this).text("Hide labels");
+        }
 
-        $(this).text("Hide labels");
+    });
+}
+highlightLabels();
 
-    }
-
-});
 $("#clear-filter").click(function(){
     $("#highlight-text").text("Show labels");
 });
@@ -31,7 +33,6 @@ $("#clear-filter").click(function(){
 //abort event on link
 $( ".map-list li a" ).click(function( event ) {
     event.preventDefault();
-
 });
 
 
@@ -136,26 +137,15 @@ function getDataSidebar(riskObj, oneTrend, currentColor,edgesForThree){
             return d.likelihood || "No likelihood value";
         });
 
+    partSideMostThree(edgesForThree)
 
-        //append three most connected risks in left sidebar
-        if($("body").attr("class") != 'map landscape-map') {
-            $(".most-connected").html("");
-            edgesForThree.forEach(function (e, i) {
-                //sort to just three nodes
-                if (i <= 2) {
-                    $(".most-connected").append("<li class = 'm-node' mid='" + e.source.id + "'>" + e.source.label + "</li>");
-                }
-            });
-        }
-
-
-}
+}//end getDataSidebar
 
 
 /*
 * special data sidebar for t-r map (Trends)
 */
-function getDataSidebarTrendsMap(oneTrend,currentColor) {
+function getDataSidebarTrendsMap(oneTrend,currentColor, edgesForThree) {
 
     d3.selectAll(".data-area")
         .attr("class","data-area visible");
@@ -196,7 +186,40 @@ function getDataSidebarTrendsMap(oneTrend,currentColor) {
     d3.selectAll(".sel-likelihood")
         .text("");
 
+
+    partSideMostThreeTrends(edgesForThree);
+
+
+}//getDataSidebarTrendsMap
+
+
+function partSideMostThreeTrends(edgesForThree){
+    //append three most connected risks in left sidebar
+    if ($("body").attr("class") != 'map landscape-map') {
+        $(".most-connected").html("");
+        edgesForThree.forEach(function (e, i) {
+            //sort to just three nodes
+            if (i <= 2) {
+                $(".most-connected").append("<li class = 'm-risk' mid='" + e.source.id + "'>" + e.source.label + "</li>");
+            }
+        });
+    }
 }
+
+
+function partSideMostThree(edgesForThree) {
+    //append three most connected risks in left sidebar
+    if ($("body").attr("class") != 'map landscape-map') {
+        $(".most-connected").html("");
+        edgesForThree.forEach(function (e, i) {
+            //sort to just three nodes
+            if (i <= 2) {
+                $(".most-connected").append("<li class = 'm-node' mid='" + e.source.id + "'>" + e.source.label + "</li>");
+            }
+        });
+    }
+}
+
 
 //confirm for escape to nav
 $(".main-nav .nav a").on("click", function(){

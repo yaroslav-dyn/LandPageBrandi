@@ -310,16 +310,15 @@ hr {
       outline: none; }
   .sidebar-data .panel-btn.snapshot {
     color: #444;
-    background: #e4e34b;
+    background: #f6f6f6;
     border: 2px dashed #524904;
-    padding: 6px;
     font-size: 1em;
     text-transform: uppercase; }
     .sidebar-data .panel-btn.snapshot span {
       font-size: 18px;
       top: 2px; }
     .sidebar-data .panel-btn.snapshot:hover {
-      background: #dddb3b; }
+      background: #f1f1f1; }
   .sidebar-data .filters-container {
     margin: 14px 0; }
     .sidebar-data .filters-container .risk-categories {

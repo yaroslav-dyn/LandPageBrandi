@@ -17,7 +17,6 @@ function riskInterconMap(graph){
     $(".data-area-left").addClass("hidden");
 
 
-
     //main variables
     var
         riskObj = [],
@@ -26,7 +25,8 @@ function riskInterconMap(graph){
         edgesCutRisk = [],
         oneTrend = [],
         linksCut = [],
-        edgesForThree = [];
+        edgesForThree = [],
+        textClasses = {};
 
 
     var svg = d3.select("svg"),
@@ -43,6 +43,14 @@ function riskInterconMap(graph){
 
     //color palette d3
     var color = d3.scaleOrdinal(d3.schemeCategory20);
+
+
+    //classes for text object
+    textClasses = {
+        "default": "text text-risks",
+        "visible": "text text-risks text-visible",
+        "hidden": "text text-risks text-hidden"
+    };
 
 
 
@@ -238,7 +246,7 @@ function riskInterconMap(graph){
     //add nodes text
     var textRisks = rNode
         .append("text")
-        .attr("class", "text text-risks")
+        .attr("class", textClasses.default)
         .text(function (d) {
             return d.label || d.id;
         })
@@ -299,11 +307,11 @@ function riskInterconMap(graph){
 
         //visible & transform TEXT
         d3.selectAll(".text-risks")
-            .attr("class", "text text-risks text-hidden")
+            .attr("class", textClasses.hidden)
             .attr("style", "font-weight: normal");
 
         d3.select(this).select(".text-risks")
-            .attr("class", "text text-risks text-visible")
+            .attr("class", textClasses.visible)
             .attr("style", "font-weight: bold; font-size: 0.9em");
 
         //check current node id
@@ -353,7 +361,7 @@ function riskInterconMap(graph){
             .filter(function (d) {
                 return edgesCutRisk.indexOf(d.id) >= 0;
             })
-            .attr("class", "text text-risks text-visible")
+            .attr("class", textClasses.visible)
             .attr("style", "font-size: 0.8em");
 
         //text current id node
@@ -425,7 +433,7 @@ function riskInterconMap(graph){
                 .filter(function (d) {
                     return d.id == currNode;
                 })
-                .attr("class", "text text-risks text-visible")
+                .attr("class", textClasses.visible)
                 .attr("style", "font-weight: bold; font-size: 0.9em");
 
             d3.selectAll("line")
@@ -472,7 +480,7 @@ function riskInterconMap(graph){
                 .filter(function (d) {
                     return edgesCutRiskCur.indexOf(d.id) >= 0;
                 })
-                .attr("class", "text text-risks text-visible")
+                .attr("class", textClasses.visible)
                 .attr("style", "font-size: 0.8em");
 
             edgesCutRiskCur = [];
@@ -513,14 +521,14 @@ function riskInterconMap(graph){
 
         //visible & transform TEXT
         d3.selectAll(".text-risks")
-            .attr("class", "text text-risks text-hidden")
+            .attr("class", textClasses.hidden)
             .attr("style", "font-weight: normal");
 
         d3.selectAll(".text-risks")
             .filter(function (d) {
                 return d.id == currentID;
             })
-            .attr("class", "text text-risks text-visible")
+            .attr("class", textClasses.visible)
             .attr("style", "font-weight: bold; font-size: 0.9em");
 
 
@@ -568,7 +576,7 @@ function riskInterconMap(graph){
             .filter(function (d) {
                 return edgesCutRisk.indexOf(d.id) >= 0;
             })
-            .attr("class", "text text-risks text-visible")
+            .attr("class", textClasses.visible)
             .attr("style", "font-size: 0.8em");
 
         //text current id node
@@ -615,23 +623,22 @@ function riskInterconMap(graph){
         edgesCutRisk = [];
         edgesForThree = [];
 
-     }
+     }//End threeNodeFun
 
     //function on click most connected button
-    $(document).on("click", ".most-connected li",function() {
-        $(this).parent().find('li').removeClass("active");
-        $(this).addClass("active");
-        var cutOfThree  = $(this).attr("mid");
 
-        threeNodeFun(cutOfThree);
+        $(document).on("click", ".most-connected .m-node",function() {
+            if($("body").hasClass("interconnections")){
 
+                $(this).parent().find('li').removeClass("active");
+                $(this).addClass("active");
+                var cutOfThree  = $(this).attr("mid");
 
-    });
-
-
+                    threeNodeFun(cutOfThree);
+            }
+        });
 
 //-----------------------END CURRENT NODE-----------------------------------------------
-
 
 
     //-------------ABORTING filters FUNCTION--------------------------------------------
@@ -686,6 +693,9 @@ function riskInterconMap(graph){
         clearRimMap();
 
     });
+
+    //-------------END ABORTING filters FUNCTION--------------------------------------------
+
 
 
 }//End riskInterconMap

@@ -48,6 +48,8 @@ $("#intercon-button").on("click",function(){
 	function receivedText(){
 		$("#container-graph").attr("width", widthWindow).attr("height", heightWindow).css("height", heightWindow);
 
+
+
 		//parse json D3.js
 		var fileName = fr.result;
 
@@ -64,7 +66,10 @@ $("#trends-button").on("click",function(){
 
 
 	function receivedText(){
-		$('#container-graph').attr('width', widthWindow).attr('height', heightWindow).css("height", heightWindow)
+		$('#container-graph').attr('width', widthWindow).attr('height', heightWindow).css("height", heightWindow);
+
+
+
 
 		//parse json D3.js
 		var fileName = fr.result;

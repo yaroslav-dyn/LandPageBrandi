@@ -18,7 +18,16 @@ function landscapeMap(graph){
     var
         riskObj = [],
         oneTrend = [],
-        nodesRadius = 5;
+        nodesRadius = 5,
+        textClasses = {};
+
+
+    //classes for text object
+    textClasses = {
+        "default": "text text-risks",
+        "visible": "text text-risks text-visible",
+        "hidden": "text text-risks text-hidden"
+    };
 
 
 
@@ -126,7 +135,7 @@ function landscapeMap(graph){
     var rNode = svg.selectAll(".nodes-risks")
         .data(riskObj)
         .enter().append("g")
-        .attr("class", "g-nodes risks")
+        .attr("class", "g-nodes risks shape")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
         .on("click", currentNodeRisk)
         .attr("cat",function(d){
@@ -135,31 +144,12 @@ function landscapeMap(graph){
 
 
 
-    //add nodes text
-    var textRisks = rNode
-        .append("text")
-        .attr("class", "text text-risks")
-        .attr("dx", xMap)
-        .attr("dy", yMap)
-        .data(riskObj)
-        .text(function (d) {
-             return d.label || d.id;
-         })
-        .attr("transform", function(d){
-            return d.textAncorY
-        })
-        .attr("id", function (d) {
-            return d.id
-        });
-
-
-
     //append nodes in 'g' containers
     var riskNode = rNode
         .append("circle")
         .attr("class", "nodes nodes-risks")
-        .attr("cx", xMap)
-        .attr("cy", yMap)
+        .attr("cx", xMap )
+        .attr("cy", yMap )
         .attr("r", function(d){
             return altNodeSize(d, nodesRadius, 0) })
         .attr("fill", function (d) {
@@ -169,6 +159,55 @@ function landscapeMap(graph){
         .attr("id", function (d) {
             return d.id
         });
+
+
+    //add nodes text
+    var textRisks = rNode
+        .append("text")
+        .attr("class", textClasses.default)
+        .attr("dx", xMap)
+        .attr("dy", yMap)
+        .data(riskObj)
+        .text(function (d) {
+            return d.label || d.id;
+        })
+        .attr("transform", function(d){
+            return d.textAncorY
+        })
+        .attr("id", function (d) {
+            return d.id
+        });
+
+
+
+
+    function wrap(text, width) {
+        text.each(function() {
+            var text = d3.select(this),
+                words = text.text().split(/\s+/).reverse(),
+                word,
+                line = [],
+                lineNumber = 0,
+                lineHeight = 1.1, // ems
+                y = text.attr("y"),
+                dy = parseFloat(text.attr("dy")),
+                tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dy", dy + "em");
+            while (word = words.pop()) {
+                line.push(word);
+                tspan.text(line.join(" "));
+                if (tspan.node().getComputedTextLength() > width) {
+                    line.pop();
+                    tspan.text(line.join(" "));
+                    line = [word];
+                    tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
+                }
+            }
+        });
+    }
+
+
+
+
 
 
 //-----------------Common functions---------------------------------------------
@@ -277,11 +316,11 @@ function landscapeMap(graph){
 
         //visible & transform TEXT
         d3.selectAll(".text-risks")
-            .attr("class", "text text-risks text-hidden")
+            .attr("class",  textClasses.hidden)
             .attr("style", "font-weight: normal");
 
         d3.select(this).select(".text-risks")
-            .attr("class", "text text-risks text-visible")
+            .attr("class", textClasses.visible)
             .attr("style", "font-weight: bold; font-size: 0.9em");
 
         //check current node id
@@ -337,7 +376,7 @@ function landscapeMap(graph){
             .filter(function (d) {
                 return d.id == currNode;
             })
-            .attr("class", "text text-risks text-visible")
+            .attr("class", textClasses.visible)
             .attr("style", "font-weight: bold; font-size: 0.9em");
 
     }
@@ -360,7 +399,7 @@ function landscapeMap(graph){
 
 
         d3.selectAll(".text-risks")
-            .attr("class", "text text-risks text-hidden")
+            .attr("class", textClasses.hidden)
             .attr("style", "font-weight: normal");
 
 
@@ -395,6 +434,11 @@ function landscapeMap(graph){
         clearLanMap();
 
     });
+
+
+
+
+
 
 
 }//End landscapeMap

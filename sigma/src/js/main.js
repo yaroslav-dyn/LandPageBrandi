@@ -48,6 +48,8 @@ $("#intercon-button").on("click",function(){
 	function receivedText(){
 		$("#container-graph").attr("width", widthWindow).attr("height", heightWindow).css("height", heightWindow);
 
+
+
 		//parse json D3.js
 		var fileName = fr.result;
 
@@ -64,7 +66,10 @@ $("#trends-button").on("click",function(){
 
 
 	function receivedText(){
-		$('#container-graph').attr('width', widthWindow).attr('height', heightWindow).css("height", heightWindow)
+		$('#container-graph').attr('width', widthWindow).attr('height', heightWindow).css("height", heightWindow);
+
+
+
 
 		//parse json D3.js
 		var fileName = fr.result;
@@ -162,6 +167,7 @@ function trendsRiskMap(graph){
     //hidden left sidebar
     $(".data-area-left").addClass("hidden");
 
+
     //main variables
     var
         trendObj = [],
@@ -171,7 +177,8 @@ function trendsRiskMap(graph){
         edgesCutTrend  = [],
         edgesCutRisk = [],
         oneTrend = [],
-        edgesForThree = [];
+        edgesForThree = [],
+        textClasses = {};
 
 
     var svg = d3.select("svg"),
@@ -190,7 +197,15 @@ function trendsRiskMap(graph){
         trendsColor = "#AB00AB",
         trendsColorCurrent  = "#E54FBD";
 
-
+    //classes for text object
+    textClasses = {
+        "default": "text text-risks",
+        "visible": "text text-risks text-visible",
+        "hidden": "text text-risks text-hidden",
+        "defaultTrend": "text text-trends",
+        "visibleTrend": "text text-trends text-visible",
+        "hiddenTrend": "text text-trends text-hidden"
+    };
 
     //filtering 'Trends' nodes
     graph.nodes.forEach(function (p) {
@@ -252,7 +267,7 @@ function trendsRiskMap(graph){
 
         categoryObj[i].forEach(function (e, j) {
 
-            j += 5;
+            j += 4;
 
             if (n <= 2) {
                 clasterRadius = 250;
@@ -366,7 +381,7 @@ function trendsRiskMap(graph){
     //add nodes text
     var textTrends = gNode
         .append("text")
-        .attr("class", "text text-trends")
+        .attr("class", textClasses.defaultTrend)
         .text(function (d) {
             return d.label || d.id;
         })
@@ -389,7 +404,7 @@ function trendsRiskMap(graph){
     //add nodes text
     var textRisks = rNode
         .append("text")
-        .attr("class", "text text-risks")
+        .attr("class", textClasses.default)
         .text(function (d) {
             return d.label || d.id;
         })
@@ -450,15 +465,15 @@ function trendsRiskMap(graph){
             .attr("fill", trendsColorCurrent)
             .attr("r", function (d) {
                 return altNodeSize(d, nodesRadius, 5)
-            })
+            });
 
         //visible & transform TEXT
         d3.selectAll(".text-trends")
-            .attr("class", "text text-trends text-hidden")
+            .attr("class", textClasses.hiddenTrend)
             .attr("style", "font-size: 0.9em");
 
         d3.select(this).select(".text-trends")
-            .attr("class", "text text-trends text-visible")
+            .attr("class", textClasses.visibleTrend)
             .attr("style", "font-size: 1em: font-weight: bold");
 
         //check current node id
@@ -472,12 +487,19 @@ function trendsRiskMap(graph){
             .data(edges)
             .filter(function (d) {
                 if (d.source.id == currentID) {
-                    edgesCutTrend.push(d.target.id)
+                    edgesCutTrend.push(d.target.id);
                 }
-                return d.source.id == currentID;
+                if(d.source.id == currentID){
+                    edgesForThree.push({source: d.target, value: d.value});
+                    return d.source.id == currentID;
+
+                }
+
+
             })
             .attr("stroke-width", strokeWidth * gainStrokeWidth)
             .attr("style", "opacity: 1");
+
 
         //filtering current risk nodes
         d3.selectAll(".nodes-risks")
@@ -492,19 +514,19 @@ function trendsRiskMap(graph){
             .duration(300)
             .attr("r", function (d) {
                 return altNodeSize(d, nodesRadius, 3)
-            })
+            });
 
 
         //abort filtering current text nodes
         d3.selectAll(".text-risks")
-            .attr("class", "text text-risks text-hidden")
+            .attr("class", textClasses.hidden)
             .attr("style", "font-weight: normal");
         //filtering current risk-text nodes
         d3.selectAll(".text-risks")
             .filter(function (d) {
                 return edgesCutTrend.indexOf(d.id) >= 0;
             })
-            .attr("class", "text text-risks text-visible");
+            .attr("class", textClasses.visible);
 
 
         //----Sidebar text data--------------------------
@@ -517,19 +539,31 @@ function trendsRiskMap(graph){
             }
         });
 
-        //special data sidebar for t-r map (Trends)
-        getDataSidebarTrendsMap(oneTrend,currentColor);
 
+        //sort array to max
+        edgesForThree.sort(
+            function(a, b) {
+                return b.value - a.value;
+            }
+        );
+
+        //special data sidebar for t-r map (Trends)
+        getDataSidebarTrendsMap(oneTrend,currentColor,edgesForThree);
+
+
+        //change label tn three most connected(trends/risks)
+        $("#most-con-label strong").text("Most connected global risks:");
 
         oneTrend = [];
         edgesCutTrend = [];
+        edgesForThree = [];
 
     }//END currentNodeTrends
 
 
 //-------fun on click RISKS NODES----------------------------
-
     function currentNodeRisk(){
+
         //visible & transform RiskNodes
         d3.selectAll(".nodes-risks")
             .attr("class","nodes nodes-risks")
@@ -549,11 +583,11 @@ function trendsRiskMap(graph){
 
         //visible & transform TEXT
         d3.selectAll(".text-risks")
-            .attr("class", "text text-risks text-hidden")
+            .attr("class", textClasses.hidden)
             .attr("style", "font-weight: normal");
 
         d3.select(this).select(".text-risks")
-            .attr("class", "text text-risks text-visible")
+            .attr("class", textClasses.visible)
             .attr("style", "font-weight: bold; font-size: 0.9em");
 
         //check current node id
@@ -568,10 +602,12 @@ function trendsRiskMap(graph){
             .filter(function (d) {
                 if (d.target.id == currentID && d.source.type == "Trend") {
                     edgesCutRisk.push(d.source.id);
-                    edgesForThree.push({source: d.target, value: d.value});
+                    edgesForThree.push({source: d.source, value: d.value});
+
                 }
                 if (d.source.type == "Trend") {
                     return d.target.id == currentID;
+
                 }
 
             })
@@ -595,11 +631,9 @@ function trendsRiskMap(graph){
                 return altNodeSize(d, nodesRadius, 5)
             });
 
-        console.log(edgesCutRisk);
-
         //filtering corresponding text trends
         d3.selectAll(".text-trends")
-            .attr("class", "text text-trends text-hidden")
+            .attr("class", textClasses.hiddenTrend)
             .attr("style", "font-size: inherit");
 
 
@@ -607,7 +641,7 @@ function trendsRiskMap(graph){
             .filter(function (d) {
                 return edgesCutRisk.indexOf(d.id) >= 0;
             })
-            .attr("class", "text text-trends text-visible")
+            .attr("class", textClasses.visibleTrend)
             .attr("style", "font-size: 0.8em");
 
 
@@ -632,9 +666,13 @@ function trendsRiskMap(graph){
             }
         );
 
-        
+
+
         //general sidebar data function (common-functions template)
         getDataSidebar(riskObj, oneTrend, currentColor, edgesForThree);
+
+        //change label tn three most connected(trends/risks)
+        $("#most-con-label strong").text("Most connected global trends:");
 
         //clearing array
         oneTrend = [];
@@ -642,6 +680,296 @@ function trendsRiskMap(graph){
         edgesForThree = [];
 
     }//END currentNodeRisk
+
+
+
+
+    //-----------------Three most connected call feedback functions-----------
+        //---Trend
+    function threeNodeFunTmap(cutOfThree){
+
+        var currentID,
+            currentColor,
+            edgesCutRiskThree = [];
+
+        currentID = cutOfThree;
+
+        //visible & transform RiskNodes
+        d3.selectAll(".nodes-risks")
+            .transition()
+            .duration(300)
+            .attr("class","nodes nodes-risks")
+            .attr("r", function(d){
+                return altNodeSize(d, nodesRadius,0)
+            });
+
+        svg.selectAll(".nodes-risks")
+            .filter(function (d) {
+                return d.id == currentID;
+            })
+            .transition()
+            .duration(300)
+            .attr("r", function (d) {
+                return altNodeSize(d, nodesRadius, 2)
+            });
+
+
+        //visible & transform TEXT
+        d3.selectAll(".text-risks")
+            .attr("class", textClasses.hidden)
+            .attr("style", "font-weight: normal");
+
+        d3.selectAll(".text-risks")
+            .filter(function (d) {
+                return d.id == currentID;
+            })
+            .attr("class", textClasses.visible)
+            .attr("style", "font-weight: bold; font-size: 0.9em");
+
+
+
+        //filtering all lines where currentId = source
+        d3.selectAll("line")
+            .attr("stroke-width", function(d){
+                return altStrength(d, strokeWidth, 0);
+            })
+            .attr("style", "opacity: " + inactiveOpacity)
+            .attr("class", "")
+            .data(edges)
+            .filter(function (d) {
+                if (d.target.id == currentID && d.source.type == "Trend" ) {
+                    edgesCutRiskThree.push(d.source.id);
+                    edgesForThree.push({source: d.source, value: d.value});
+                }
+                if (d.source.type == "Trend") {
+
+                    return d.target.id == currentID;
+                }
+
+            })
+            .attr("stroke-width", strokeWidth * gainStrokeWidth)
+            .attr("style", "opacity: 1");
+
+        //filtering current trend nodes
+        d3.selectAll(".nodes-trends")
+            .attr("fill", trendsColor)
+            .attr("r", function (d) {
+                return altNodeSize(d, nodesRadius, 2)
+            })
+            .filter(function (d) {
+                return edgesCutRiskThree.indexOf(d.id) >= 0;
+            })
+            .transition()
+            .duration(300)
+            .attr("fill", trendsColorCurrent)
+            .attr("r", function (d) {
+                return altNodeSize(d, nodesRadius, 5)
+            });
+
+
+        d3.selectAll(".text-trends")
+            .filter(function (d) {
+                return edgesCutRiskThree.indexOf(d.id) >= 0;
+            })
+            .attr("class", textClasses.visibleTrend)
+            .attr("style", "font-size: 0.8em");
+
+
+        d3.selectAll(".trend-risk")
+            .text("risk");
+
+
+        //----Sidebar text data--------------------------
+
+        //create one current object for sidebar data
+        riskObj.forEach(function (e) {
+            if (e.id == currentID) {
+                oneTrend.push(e);
+            }
+        });
+
+        //sort array to max
+        edgesForThree.sort(
+            function(a, b) {
+                return b.value - a.value;
+            }
+        );
+
+        //category color
+        var io = d3.selectAll(".nodes-risks")
+            .filter(function(d){
+                return d.id == currentID
+            })
+            .attr("fill");
+
+        currentColor = io;
+
+
+        //general sidebar data function (common-functions template)
+        getDataSidebar(riskObj, oneTrend, currentColor, edgesForThree);
+
+        //clearing array
+        oneTrend = [];
+        edgesCutRiskThree = [];
+        edgesForThree = [];
+
+    }//End threeNodeFunTmap
+
+
+    //--Risk
+    function threeNodeFunTmapR(cutOfThree){
+
+        var currentID,
+            currentColor,
+            edgesCutTrendThree = [];
+
+        currentID = cutOfThree;
+
+        //visible & transform trendsNodes
+        d3.selectAll(".nodes-trends")
+            .transition()
+            .duration(300)
+            .attr("r", function (d) {
+                return altNodeSize(d, nodesRadius, 2)
+            })
+            .attr("fill", trendsColor);
+
+        d3.selectAll(".nodes-trends")
+            .filter(function(d){
+                return d.id == currentID;
+            })
+            .transition()
+            .duration(300)
+            .attr("fill", trendsColorCurrent)
+            .attr("r", function (d) {
+                return altNodeSize(d, nodesRadius, 5)
+            });
+
+        //visible & transform TEXT
+        d3.selectAll(".text-trends")
+            .attr("class", textClasses.hiddenTrend)
+            .attr("style", "font-size: 0.9em");
+
+        d3.selectAll(".text-trends")
+            .filter(function(d){
+                return d.id == currentID
+            })
+            .attr("class", textClasses.visibleTrend)
+            .attr("style", "font-size: 1em: font-weight: bold");
+
+
+        //category color
+        var io = d3.selectAll(".nodes-trends")
+            .filter(function(d){
+                return d.id == currentID
+            })
+            .attr("fill");
+
+        currentColor = io;
+
+        //filtering all lines where currentId = source
+        d3.selectAll("line")
+            .attr("stroke-width", strokeWidth)
+            .attr("style", "opacity: " + inactiveOpacity)
+            .data(edges)
+            .filter(function (d) {
+                if (d.source.id == currentID) {
+                    edgesCutTrendThree.push(d.target.id);
+                }
+                if(d.source.id == currentID){
+                    edgesForThree.push({source: d.target, value: d.value});
+                    return d.source.id == currentID;
+                }
+
+            })
+            .attr("stroke-width", strokeWidth * gainStrokeWidth)
+            .attr("style", "opacity: 1");
+
+
+        //filtering current risk nodes
+        d3.selectAll(".nodes-risks")
+            .attr("r", function (d) {
+                return altNodeSize(d, nodesRadius, 1)
+            })
+            .filter(function (d) {
+                return edgesCutTrendThree.indexOf(d.id) >= 0;
+
+            })
+            .transition()
+            .duration(300)
+            .attr("r", function (d) {
+                return altNodeSize(d, nodesRadius, 3)
+            });
+
+
+        //abort filtering current text nodes
+        d3.selectAll(".text-risks")
+            .attr("class", textClasses.hidden)
+            .attr("style", "font-weight: normal");
+        //filtering current risk-text nodes
+        d3.selectAll(".text-risks")
+            .filter(function (d) {
+                return edgesCutTrendThree.indexOf(d.id) >= 0;
+            })
+            .attr("class", textClasses.visible);
+
+
+        //----Sidebar text data--------------------------
+
+
+        //create one current object for sidebar data
+        trendObj.forEach(function (e) {
+            if (e.id == currentID) {
+                oneTrend.push(e);
+            }
+        });
+
+
+        //sort array to max
+        edgesForThree.sort(
+            function(a, b) {
+                return b.value - a.value;
+            }
+        );
+
+
+        //special data sidebar for t-r map (Trends)
+        getDataSidebarTrendsMap(oneTrend,currentColor,edgesForThree);
+
+
+        oneTrend = [];
+        edgesCutTrendThree = [];
+        edgesForThree = [];
+
+
+    }//End threeNodeFunTmapR
+
+
+
+    //function on click most connected button
+        //Risk
+    $(document).on("click", ".most-connected .m-risk",function() {
+
+        if($("body").hasClass("trends-risks")){
+
+        var cutOfThree  = $(this).attr("mid");
+            threeNodeFunTmap(cutOfThree);
+
+        }
+    });
+        //Trend
+    $(document).on("click", ".most-connected .m-node",function() {
+
+        if($("body").hasClass("trends-risks")) {
+
+            var cutOfThree = $(this).attr("mid");
+            threeNodeFunTmapR(cutOfThree);
+
+        }
+
+    });
+
+
 
 
 //-----------------------CURRENT NODE-----------------------------------------------
@@ -667,7 +995,7 @@ function trendsRiskMap(graph){
             .filter(function (d) {
                 return d.id == currNode;
             })
-            .attr("class", "text text-risks text-visible")
+            .attr("class", textClasses.visible)
             .attr("style", "font-weight: bold; font-size: 0.9em");
 
 
@@ -693,18 +1021,13 @@ function trendsRiskMap(graph){
             .filter(function (d) {
                 return edgesCutRiskCur.indexOf(d.id) >= 0;
             })
-            .attr("class", "text text-trends text-visible")
+            .attr("class", textClasses.visibleTrend)
             .attr("style", "font-size: 0.8em");
-
-
 
 
         edgesCutRiskCur = [];
 
     }
-
-
-
 
 //-----------------------END CURRENT NODE-----------------------------------------------
 
@@ -727,11 +1050,11 @@ function trendsRiskMap(graph){
             });
 
         d3.selectAll(".text-trends")
-            .attr("class", "text text-trends text-hidden")
+            .attr("class", textClasses.hiddenTrend)
             .attr("style", "font-weight: normal");
 
         d3.selectAll(".text-risks")
-            .attr("class", "text text-risks text-hidden")
+            .attr("class", textClasses.hidden)
             .attr("style", "font-weight: normal");
 
         d3.selectAll("line")
@@ -768,6 +1091,8 @@ function trendsRiskMap(graph){
 
 
 
+
+
 }//End trendsRiskMap
 //creating risk-interconnections map
 
@@ -788,7 +1113,6 @@ function riskInterconMap(graph){
     $(".data-area-left").addClass("hidden");
 
 
-
     //main variables
     var
         riskObj = [],
@@ -797,7 +1121,8 @@ function riskInterconMap(graph){
         edgesCutRisk = [],
         oneTrend = [],
         linksCut = [],
-        edgesForThree = [];
+        edgesForThree = [],
+        textClasses = {};
 
 
     var svg = d3.select("svg"),
@@ -814,6 +1139,14 @@ function riskInterconMap(graph){
 
     //color palette d3
     var color = d3.scaleOrdinal(d3.schemeCategory20);
+
+
+    //classes for text object
+    textClasses = {
+        "default": "text text-risks",
+        "visible": "text text-risks text-visible",
+        "hidden": "text text-risks text-hidden"
+    };
 
 
 
@@ -1009,7 +1342,7 @@ function riskInterconMap(graph){
     //add nodes text
     var textRisks = rNode
         .append("text")
-        .attr("class", "text text-risks")
+        .attr("class", textClasses.default)
         .text(function (d) {
             return d.label || d.id;
         })
@@ -1070,11 +1403,11 @@ function riskInterconMap(graph){
 
         //visible & transform TEXT
         d3.selectAll(".text-risks")
-            .attr("class", "text text-risks text-hidden")
+            .attr("class", textClasses.hidden)
             .attr("style", "font-weight: normal");
 
         d3.select(this).select(".text-risks")
-            .attr("class", "text text-risks text-visible")
+            .attr("class", textClasses.visible)
             .attr("style", "font-weight: bold; font-size: 0.9em");
 
         //check current node id
@@ -1124,7 +1457,7 @@ function riskInterconMap(graph){
             .filter(function (d) {
                 return edgesCutRisk.indexOf(d.id) >= 0;
             })
-            .attr("class", "text text-risks text-visible")
+            .attr("class", textClasses.visible)
             .attr("style", "font-size: 0.8em");
 
         //text current id node
@@ -1196,7 +1529,7 @@ function riskInterconMap(graph){
                 .filter(function (d) {
                     return d.id == currNode;
                 })
-                .attr("class", "text text-risks text-visible")
+                .attr("class", textClasses.visible)
                 .attr("style", "font-weight: bold; font-size: 0.9em");
 
             d3.selectAll("line")
@@ -1243,7 +1576,7 @@ function riskInterconMap(graph){
                 .filter(function (d) {
                     return edgesCutRiskCur.indexOf(d.id) >= 0;
                 })
-                .attr("class", "text text-risks text-visible")
+                .attr("class", textClasses.visible)
                 .attr("style", "font-size: 0.8em");
 
             edgesCutRiskCur = [];
@@ -1284,14 +1617,14 @@ function riskInterconMap(graph){
 
         //visible & transform TEXT
         d3.selectAll(".text-risks")
-            .attr("class", "text text-risks text-hidden")
+            .attr("class", textClasses.hidden)
             .attr("style", "font-weight: normal");
 
         d3.selectAll(".text-risks")
             .filter(function (d) {
                 return d.id == currentID;
             })
-            .attr("class", "text text-risks text-visible")
+            .attr("class", textClasses.visible)
             .attr("style", "font-weight: bold; font-size: 0.9em");
 
 
@@ -1339,7 +1672,7 @@ function riskInterconMap(graph){
             .filter(function (d) {
                 return edgesCutRisk.indexOf(d.id) >= 0;
             })
-            .attr("class", "text text-risks text-visible")
+            .attr("class", textClasses.visible)
             .attr("style", "font-size: 0.8em");
 
         //text current id node
@@ -1386,23 +1719,22 @@ function riskInterconMap(graph){
         edgesCutRisk = [];
         edgesForThree = [];
 
-     }
+     }//End threeNodeFun
 
     //function on click most connected button
-    $(document).on("click", ".most-connected li",function() {
-        $(this).parent().find('li').removeClass("active");
-        $(this).addClass("active");
-        var cutOfThree  = $(this).attr("mid");
 
-        threeNodeFun(cutOfThree);
+        $(document).on("click", ".most-connected .m-node",function() {
+            if($("body").hasClass("interconnections")){
 
+                $(this).parent().find('li').removeClass("active");
+                $(this).addClass("active");
+                var cutOfThree  = $(this).attr("mid");
 
-    });
-
-
+                    threeNodeFun(cutOfThree);
+            }
+        });
 
 //-----------------------END CURRENT NODE-----------------------------------------------
-
 
 
     //-------------ABORTING filters FUNCTION--------------------------------------------
@@ -1458,6 +1790,9 @@ function riskInterconMap(graph){
 
     });
 
+    //-------------END ABORTING filters FUNCTION--------------------------------------------
+
+
 
 }//End riskInterconMap
 //creating Landscape map
@@ -1480,7 +1815,16 @@ function landscapeMap(graph){
     var
         riskObj = [],
         oneTrend = [],
-        nodesRadius = 5;
+        nodesRadius = 5,
+        textClasses = {};
+
+
+    //classes for text object
+    textClasses = {
+        "default": "text text-risks",
+        "visible": "text text-risks text-visible",
+        "hidden": "text text-risks text-hidden"
+    };
 
 
 
@@ -1588,7 +1932,7 @@ function landscapeMap(graph){
     var rNode = svg.selectAll(".nodes-risks")
         .data(riskObj)
         .enter().append("g")
-        .attr("class", "g-nodes risks")
+        .attr("class", "g-nodes risks shape")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
         .on("click", currentNodeRisk)
         .attr("cat",function(d){
@@ -1597,31 +1941,12 @@ function landscapeMap(graph){
 
 
 
-    //add nodes text
-    var textRisks = rNode
-        .append("text")
-        .attr("class", "text text-risks")
-        .attr("dx", xMap)
-        .attr("dy", yMap)
-        .data(riskObj)
-        .text(function (d) {
-             return d.label || d.id;
-         })
-        .attr("transform", function(d){
-            return d.textAncorY
-        })
-        .attr("id", function (d) {
-            return d.id
-        });
-
-
-
     //append nodes in 'g' containers
     var riskNode = rNode
         .append("circle")
         .attr("class", "nodes nodes-risks")
-        .attr("cx", xMap)
-        .attr("cy", yMap)
+        .attr("cx", xMap )
+        .attr("cy", yMap )
         .attr("r", function(d){
             return altNodeSize(d, nodesRadius, 0) })
         .attr("fill", function (d) {
@@ -1631,6 +1956,55 @@ function landscapeMap(graph){
         .attr("id", function (d) {
             return d.id
         });
+
+
+    //add nodes text
+    var textRisks = rNode
+        .append("text")
+        .attr("class", textClasses.default)
+        .attr("dx", xMap)
+        .attr("dy", yMap)
+        .data(riskObj)
+        .text(function (d) {
+            return d.label || d.id;
+        })
+        .attr("transform", function(d){
+            return d.textAncorY
+        })
+        .attr("id", function (d) {
+            return d.id
+        });
+
+
+
+
+    function wrap(text, width) {
+        text.each(function() {
+            var text = d3.select(this),
+                words = text.text().split(/\s+/).reverse(),
+                word,
+                line = [],
+                lineNumber = 0,
+                lineHeight = 1.1, // ems
+                y = text.attr("y"),
+                dy = parseFloat(text.attr("dy")),
+                tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dy", dy + "em");
+            while (word = words.pop()) {
+                line.push(word);
+                tspan.text(line.join(" "));
+                if (tspan.node().getComputedTextLength() > width) {
+                    line.pop();
+                    tspan.text(line.join(" "));
+                    line = [word];
+                    tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
+                }
+            }
+        });
+    }
+
+
+
+
 
 
 //-----------------Common functions---------------------------------------------
@@ -1739,11 +2113,11 @@ function landscapeMap(graph){
 
         //visible & transform TEXT
         d3.selectAll(".text-risks")
-            .attr("class", "text text-risks text-hidden")
+            .attr("class",  textClasses.hidden)
             .attr("style", "font-weight: normal");
 
         d3.select(this).select(".text-risks")
-            .attr("class", "text text-risks text-visible")
+            .attr("class", textClasses.visible)
             .attr("style", "font-weight: bold; font-size: 0.9em");
 
         //check current node id
@@ -1799,7 +2173,7 @@ function landscapeMap(graph){
             .filter(function (d) {
                 return d.id == currNode;
             })
-            .attr("class", "text text-risks text-visible")
+            .attr("class", textClasses.visible)
             .attr("style", "font-weight: bold; font-size: 0.9em");
 
     }
@@ -1822,7 +2196,7 @@ function landscapeMap(graph){
 
 
         d3.selectAll(".text-risks")
-            .attr("class", "text text-risks text-hidden")
+            .attr("class", textClasses.hidden)
             .attr("style", "font-weight: normal");
 
 
@@ -1859,30 +2233,37 @@ function landscapeMap(graph){
     });
 
 
+
+
+
+
+
 }//End landscapeMap
 //Global functions for maps
 
 //show all label
-$("#highlight-text").click(function(){
+function highlightLabels() {
+    $("#highlight-text").click(function () {
 
-    if($(this).data("click")){
+        if ($(this).data("click")) {
 
-        $(this).data("click",false);
-        d3.selectAll(".text-risks")
-            .attr("class", "text text-risks text-hidden");
-       $(this).text("Show labels");
+            $(this).data("click", false);
+            d3.selectAll(".text-risks")
+                .attr("class", "text text-risks text-hidden");
+            $(this).text("Show labels");
 
-    }
-    else {
-        $(this).data("click",true);
-        d3.selectAll(".text-risks")
-            .attr("class", "text text-risks text-visible");
+        }
+        else {
+            $(this).data("click", true);
+            d3.selectAll(".text-risks")
+                .attr("class", "text text-risks text-visible");
+            $(this).text("Hide labels");
+        }
 
-        $(this).text("Hide labels");
+    });
+}
+highlightLabels();
 
-    }
-
-});
 $("#clear-filter").click(function(){
     $("#highlight-text").text("Show labels");
 });
@@ -1893,7 +2274,6 @@ $("#clear-filter").click(function(){
 //abort event on link
 $( ".map-list li a" ).click(function( event ) {
     event.preventDefault();
-
 });
 
 
@@ -1998,26 +2378,15 @@ function getDataSidebar(riskObj, oneTrend, currentColor,edgesForThree){
             return d.likelihood || "No likelihood value";
         });
 
+    partSideMostThree(edgesForThree)
 
-        //append three most connected risks in left sidebar
-        if($("body").attr("class") != 'map landscape-map') {
-            $(".most-connected").html("");
-            edgesForThree.forEach(function (e, i) {
-                //sort to just three nodes
-                if (i <= 2) {
-                    $(".most-connected").append("<li class = 'm-node' mid='" + e.source.id + "'>" + e.source.label + "</li>");
-                }
-            });
-        }
-
-
-}
+}//end getDataSidebar
 
 
 /*
 * special data sidebar for t-r map (Trends)
 */
-function getDataSidebarTrendsMap(oneTrend,currentColor) {
+function getDataSidebarTrendsMap(oneTrend,currentColor, edgesForThree) {
 
     d3.selectAll(".data-area")
         .attr("class","data-area visible");
@@ -2058,7 +2427,40 @@ function getDataSidebarTrendsMap(oneTrend,currentColor) {
     d3.selectAll(".sel-likelihood")
         .text("");
 
+
+    partSideMostThreeTrends(edgesForThree);
+
+
+}//getDataSidebarTrendsMap
+
+
+function partSideMostThreeTrends(edgesForThree){
+    //append three most connected risks in left sidebar
+    if ($("body").attr("class") != 'map landscape-map') {
+        $(".most-connected").html("");
+        edgesForThree.forEach(function (e, i) {
+            //sort to just three nodes
+            if (i <= 2) {
+                $(".most-connected").append("<li class = 'm-risk' mid='" + e.source.id + "'>" + e.source.label + "</li>");
+            }
+        });
+    }
 }
+
+
+function partSideMostThree(edgesForThree) {
+    //append three most connected risks in left sidebar
+    if ($("body").attr("class") != 'map landscape-map') {
+        $(".most-connected").html("");
+        edgesForThree.forEach(function (e, i) {
+            //sort to just three nodes
+            if (i <= 2) {
+                $(".most-connected").append("<li class = 'm-node' mid='" + e.source.id + "'>" + e.source.label + "</li>");
+            }
+        });
+    }
+}
+
 
 //confirm for escape to nav
 $(".main-nav .nav a").on("click", function(){
