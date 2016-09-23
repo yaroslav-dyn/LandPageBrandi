@@ -4,6 +4,7 @@
 @import '_variables';
 
 body{
+  font-family: Tahoma, Geneva, sans-serif;
   font-size: 16px;
   overflow-x: hidden;
 }
@@ -115,8 +116,8 @@ header{
 }
 .nav-uploader{
   display: inline-block;
-  font: 1em "Helvetica Neue", Helvetica, Arial, sans-serif;
-  padding: 12px 45px;
+  font-size: 1em;
+  padding: 10px 40px;
   border-radius: 6px;
   @extend %button-style-hover;
   &:hover{  
@@ -138,7 +139,8 @@ header{
   margin-top: 18px;
 }
 .load-file-name{
-    font:  16px/2 "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size:  16px;
+  line-height: 2;
     @include transEff(0.4s);
     opacity: 0;
     color: $hyper-color;
@@ -168,16 +170,22 @@ header{
 }
 
 #snap-area {
-  background: #f6f6f6;
-  max-height: 400px;
+  max-height: 580px;
   overflow-y: auto;
-  span{  
-    display: inline-block;
+  margin: 10px 0;
+
+  h4{
+    span.glyphicon{
+      top: 2px;
+      color: $hyper-color;
+    }
   }
-  canvas{
-     width: 48%;
-     margin: 4px 8px 0 8px;
-     outline: 1px dashed $canvas-line;
+
+  img{
+    border: 1px dashed #c6c6c6;
+    width: 100%;
+    height: auto;
+    margin-bottom: 2px;
   }
 }
 
@@ -187,26 +195,35 @@ header{
   }
 }
 
-
+//del button on popup snapshot
+.rem-wrapper{
+  display: inline-block;
+  float: right;
+  span.glyphicon{
+    font-size: 24px;
+    color: #ea6412;
+    right: 20px;
+    top: -30px;
+    &:hover{
+      color: red;
+    }
+  }
+}
 //svg
 .graph-wrapper{
   svg{
     height: 0;
   }
-  rect{
 
-  }
   .g-nodes:hover > .text, .nodes:hover + .text{
     display: inline;
   }
   line{
-    //stroke: lighten($nav-bg, 15%);
-    //stroke-width: 0.3px;
     @include transEff(0.2s);
   }
   .text{
     display: none;
-    font: 100 0.9em Monaco, consolas , sans-serif;;
+    font: 100 0.9em Monaco, consolas, sans-serif;
     stroke: none;
     fill: #000;
     text-anchor: start;
@@ -342,10 +359,9 @@ hr{
     color: #444;
     background: #f6f6f6;
     border: 2px dashed #524904;
-    font-size: 1em;
     text-transform: uppercase;
     span{
-      font-size: 18px;
+      font-size: 15px;
       top: 2px;
     }
     &:hover{

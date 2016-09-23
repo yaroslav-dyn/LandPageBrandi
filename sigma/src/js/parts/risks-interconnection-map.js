@@ -62,6 +62,8 @@ function riskInterconMap(graph){
 
     });
 
+
+
     //creating object links
     graph.links.forEach(function (e) {
 
@@ -246,7 +248,7 @@ function riskInterconMap(graph){
     //add nodes text
     var textRisks = rNode
         .append("text")
-        .attr("class", textClasses.default)
+        .attr("class", textClasses.hidden)
         .text(function (d) {
             return d.label || d.id;
         })
@@ -449,7 +451,8 @@ function riskInterconMap(graph){
                 .data(edges)
                 .filter(function (d) {
                     if (d.source.id == currNode) {
-                        edgesCutRiskCur.push(d.target.id)
+                        edgesCutRiskCur.push(d.target.id);
+                        edgesForThree.push({source: d.target, value: d.value});
                     }
                     return d.source.id == currNode;
 
@@ -483,7 +486,21 @@ function riskInterconMap(graph){
                 .attr("class", textClasses.visible)
                 .attr("style", "font-size: 0.8em");
 
+
+            //sort array to max
+            edgesForThree.sort(
+                function(a, b) {
+                    return b.value - a.value;
+                }
+            );
+
+
+            partSideMostThreeTrends(edgesForThree);
+            //change label tn three most connected(trends/risks)
+            $("#most-con-label strong").text("Most connected global risks:");
+
             edgesCutRiskCur = [];
+            edgesForThree = [];
 
         }
     }//end current node
@@ -497,7 +514,6 @@ function riskInterconMap(graph){
             currentColor;
 
         currentID = cutOfThree;
-
 
         //visible & transform RiskNodes
         d3.selectAll(".nodes-risks")
@@ -556,7 +572,6 @@ function riskInterconMap(graph){
             });
 
 
-
         //filtering all links where currentId = target
         d3.selectAll("line")
             .filter(function (d) {
@@ -604,7 +619,6 @@ function riskInterconMap(graph){
             }
         );
 
-
         //category color
         var io = d3.selectAll(".nodes-risks")
             .filter(function(d){
@@ -613,7 +627,6 @@ function riskInterconMap(graph){
             .attr("fill");
 
         currentColor = io;
-
 
         //general sidebar data function (common-functions template)
         getDataSidebar(riskObj, oneTrend, currentColor, edgesForThree);
@@ -624,21 +637,20 @@ function riskInterconMap(graph){
         edgesForThree = [];
 
      }//End threeNodeFun
+//-----------------------END CURRENT NODE-----------------------------------------------
+
 
     //function on click most connected button
 
-        $(document).on("click", ".most-connected .m-node",function() {
+        $(document).on("click", ".most-connected li",function() {
             if($("body").hasClass("interconnections")){
 
-                $(this).parent().find('li').removeClass("active");
-                $(this).addClass("active");
                 var cutOfThree  = $(this).attr("mid");
-
-                    threeNodeFun(cutOfThree);
+                threeNodeFun(cutOfThree);
             }
         });
 
-//-----------------------END CURRENT NODE-----------------------------------------------
+
 
 
     //-------------ABORTING filters FUNCTION--------------------------------------------

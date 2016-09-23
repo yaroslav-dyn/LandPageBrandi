@@ -34,20 +34,11 @@ $('#upload-input').on('change',function(){
     var fileName = document.getElementById('load-file');
     var parseName =  file.name;
     var spanEl = document.getElementById('header-file');
-    var spanElSb = document.getElementById('header-file-sb');
     fileName.innerText = "File Upload: ";
     spanEl.innerText = parseName;
     var nameEl = $('.load-file-name');
     nameEl.addClass('name-show');
 
-    //snapshot
-    $('#pj').on('click', function(){
-        html2canvas([ document.getElementById('container-graph') ], {
-            onrendered: function(canvas) {
-               $('#snap-area').append(canvas);
-            }
-        });
-    });
 
 });
 

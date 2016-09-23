@@ -44,7 +44,16 @@ header h1 a, footer, footer h4 {
 .trends-risks .visible-on-trends-map {
   display: block; }
 
+.popup-snap {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 2px #444; }
+
 body {
+  font-family: Tahoma, Geneva, sans-serif;
   font-size: 16px;
   overflow-x: hidden; }
 
@@ -133,8 +142,8 @@ header {
 
 .nav-uploader {
   display: inline-block;
-  font: 1em "Helvetica Neue", Helvetica, Arial, sans-serif;
-  padding: 12px 45px;
+  font-size: 1em;
+  padding: 10px 40px;
   border-radius: 6px; }
   .nav-uploader:hover {
     color: #EDEA00; }
@@ -151,7 +160,8 @@ header {
   margin-top: 18px; }
 
 .load-file-name {
-  font: 16px/2 "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 2;
   -webkit-transition: all 0.4s ease-in-out;
   -moz-transition: all 0.4s ease-in-out;
   -ms-transition: all 0.4s ease-in-out;
@@ -177,18 +187,31 @@ header {
   margin-top: 12px; }
 
 #snap-area {
-  background: #f6f6f6;
-  max-height: 400px;
-  overflow-y: auto; }
-  #snap-area span {
-    display: inline-block; }
-  #snap-area canvas {
-    width: 48%;
-    margin: 4px 8px 0 8px;
-    outline: 1px dashed #333; }
+  max-height: 580px;
+  overflow-y: auto;
+  margin: 10px 0; }
+  #snap-area h4 span.glyphicon {
+    top: 2px;
+    color: #636b66; }
+  #snap-area img {
+    border: 1px dashed #c6c6c6;
+    width: 100%;
+    height: auto;
+    margin-bottom: 2px; }
 
 .landscape-map .visible-on-ls-map {
   display: block; }
+
+.rem-wrapper {
+  display: inline-block;
+  float: right; }
+  .rem-wrapper span.glyphicon {
+    font-size: 24px;
+    color: #ea6412;
+    right: 20px;
+    top: -30px; }
+    .rem-wrapper span.glyphicon:hover {
+      color: red; }
 
 .graph-wrapper {
   /*********Landscape map***************************/
@@ -205,7 +228,7 @@ header {
     transition: all 0.2s ease-in-out; }
   .graph-wrapper .text {
     display: none;
-    font: 100 0.9em Monaco, consolas , sans-serif;
+    font: 100 0.9em Monaco, consolas, sans-serif;
     stroke: none;
     fill: #000;
     text-anchor: start; }
@@ -312,10 +335,9 @@ hr {
     color: #444;
     background: #f6f6f6;
     border: 2px dashed #524904;
-    font-size: 1em;
     text-transform: uppercase; }
     .sidebar-data .panel-btn.snapshot span {
-      font-size: 18px;
+      font-size: 15px;
       top: 2px; }
     .sidebar-data .panel-btn.snapshot:hover {
       background: #f1f1f1; }

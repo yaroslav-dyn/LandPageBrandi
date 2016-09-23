@@ -132,20 +132,11 @@ $('#upload-input').on('change',function(){
     var fileName = document.getElementById('load-file');
     var parseName =  file.name;
     var spanEl = document.getElementById('header-file');
-    var spanElSb = document.getElementById('header-file-sb');
     fileName.innerText = "File Upload: ";
     spanEl.innerText = parseName;
     var nameEl = $('.load-file-name');
     nameEl.addClass('name-show');
 
-    //snapshot
-    $('#pj').on('click', function(){
-        html2canvas([ document.getElementById('container-graph') ], {
-            onrendered: function(canvas) {
-               $('#snap-area').append(canvas);
-            }
-        });
-    });
 
 });
 //creating trend-risk map
@@ -381,7 +372,7 @@ function trendsRiskMap(graph){
     //add nodes text
     var textTrends = gNode
         .append("text")
-        .attr("class", textClasses.defaultTrend)
+        .attr("class", textClasses.hiddenTrend)
         .text(function (d) {
             return d.label || d.id;
         })
@@ -404,7 +395,7 @@ function trendsRiskMap(graph){
     //add nodes text
     var textRisks = rNode
         .append("text")
-        .attr("class", textClasses.default)
+        .attr("class", textClasses.hidden)
         .text(function (d) {
             return d.label || d.id;
         })
@@ -527,6 +518,8 @@ function trendsRiskMap(graph){
                 return edgesCutTrend.indexOf(d.id) >= 0;
             })
             .attr("class", textClasses.visible);
+
+        console.log(edgesCutTrend);
 
 
         //----Sidebar text data--------------------------
@@ -667,11 +660,10 @@ function trendsRiskMap(graph){
         );
 
 
-
         //general sidebar data function (common-functions template)
         getDataSidebar(riskObj, oneTrend, currentColor, edgesForThree);
 
-        //change label tn three most connected(trends/risks)
+        //change label the three most connected(trends/risks)
         $("#most-con-label strong").text("Most connected global trends:");
 
         //clearing array
@@ -796,7 +788,7 @@ function trendsRiskMap(graph){
         );
 
         //category color
-        var io = d3.selectAll(".nodes-risks")
+        var io = d3.selectAll(".nodes")
             .filter(function(d){
                 return d.id == currentID
             })
@@ -936,7 +928,6 @@ function trendsRiskMap(graph){
         //special data sidebar for t-r map (Trends)
         getDataSidebarTrendsMap(oneTrend,currentColor,edgesForThree);
 
-
         oneTrend = [];
         edgesCutTrendThree = [];
         edgesForThree = [];
@@ -1007,7 +998,8 @@ function trendsRiskMap(graph){
             .data(edges)
             .filter(function (d) {
                 if (d.target.id == currNode && d.source.type == "Trend") {
-                    edgesCutRiskCur.push(d.source.id)
+                    edgesCutRiskCur.push(d.source.id);
+                    edgesForThree.push({source: d.source, value: d.value});
                 }
                 if (d.source.type == "Trend") {
                     return d.target.id == currNode;
@@ -1025,7 +1017,37 @@ function trendsRiskMap(graph){
             .attr("style", "font-size: 0.8em");
 
 
+        //filtering current trend nodes
+        d3.selectAll(".nodes-trends")
+            .attr("fill", trendsColor)
+            .attr("r", function (d) {
+                return altNodeSize(d, nodesRadius, 2)
+            })
+            .filter(function (d) {
+                return edgesCutRiskCur.indexOf(d.id) >= 0;
+            })
+            .transition()
+            .duration(300)
+            .attr("fill", trendsColorCurrent)
+            .attr("r", function (d) {
+                return altNodeSize(d, nodesRadius, 5)
+            });
+
+        //sort array to max
+        edgesForThree.sort(
+            function(a, b) {
+                return b.value - a.value;
+            }
+        );
+
+
+        partSideMostThreeTrends(edgesForThree);
+        $("#most-con-label strong").text("Most connected global trends:");
+        $(".most-connected li").removeClass("m-risk").addClass("m-node");
+
+
         edgesCutRiskCur = [];
+        edgesForThree = [];
 
     }
 
@@ -1157,6 +1179,8 @@ function riskInterconMap(graph){
         }
 
     });
+
+
 
     //creating object links
     graph.links.forEach(function (e) {
@@ -1342,7 +1366,7 @@ function riskInterconMap(graph){
     //add nodes text
     var textRisks = rNode
         .append("text")
-        .attr("class", textClasses.default)
+        .attr("class", textClasses.hidden)
         .text(function (d) {
             return d.label || d.id;
         })
@@ -1545,7 +1569,8 @@ function riskInterconMap(graph){
                 .data(edges)
                 .filter(function (d) {
                     if (d.source.id == currNode) {
-                        edgesCutRiskCur.push(d.target.id)
+                        edgesCutRiskCur.push(d.target.id);
+                        edgesForThree.push({source: d.target, value: d.value});
                     }
                     return d.source.id == currNode;
 
@@ -1579,7 +1604,21 @@ function riskInterconMap(graph){
                 .attr("class", textClasses.visible)
                 .attr("style", "font-size: 0.8em");
 
+
+            //sort array to max
+            edgesForThree.sort(
+                function(a, b) {
+                    return b.value - a.value;
+                }
+            );
+
+
+            partSideMostThreeTrends(edgesForThree);
+            //change label tn three most connected(trends/risks)
+            $("#most-con-label strong").text("Most connected global risks:");
+
             edgesCutRiskCur = [];
+            edgesForThree = [];
 
         }
     }//end current node
@@ -1593,7 +1632,6 @@ function riskInterconMap(graph){
             currentColor;
 
         currentID = cutOfThree;
-
 
         //visible & transform RiskNodes
         d3.selectAll(".nodes-risks")
@@ -1652,7 +1690,6 @@ function riskInterconMap(graph){
             });
 
 
-
         //filtering all links where currentId = target
         d3.selectAll("line")
             .filter(function (d) {
@@ -1700,7 +1737,6 @@ function riskInterconMap(graph){
             }
         );
 
-
         //category color
         var io = d3.selectAll(".nodes-risks")
             .filter(function(d){
@@ -1709,7 +1745,6 @@ function riskInterconMap(graph){
             .attr("fill");
 
         currentColor = io;
-
 
         //general sidebar data function (common-functions template)
         getDataSidebar(riskObj, oneTrend, currentColor, edgesForThree);
@@ -1720,21 +1755,20 @@ function riskInterconMap(graph){
         edgesForThree = [];
 
      }//End threeNodeFun
+//-----------------------END CURRENT NODE-----------------------------------------------
+
 
     //function on click most connected button
 
-        $(document).on("click", ".most-connected .m-node",function() {
+        $(document).on("click", ".most-connected li",function() {
             if($("body").hasClass("interconnections")){
 
-                $(this).parent().find('li').removeClass("active");
-                $(this).addClass("active");
                 var cutOfThree  = $(this).attr("mid");
-
-                    threeNodeFun(cutOfThree);
+                threeNodeFun(cutOfThree);
             }
         });
 
-//-----------------------END CURRENT NODE-----------------------------------------------
+
 
 
     //-------------ABORTING filters FUNCTION--------------------------------------------
@@ -1961,7 +1995,7 @@ function landscapeMap(graph){
     //add nodes text
     var textRisks = rNode
         .append("text")
-        .attr("class", textClasses.default)
+        .attr("class", textClasses.hidden)
         .attr("dx", xMap)
         .attr("dy", yMap)
         .data(riskObj)
@@ -2001,11 +2035,6 @@ function landscapeMap(graph){
             }
         });
     }
-
-
-
-
-
 
 //-----------------Common functions---------------------------------------------
     /*
@@ -2088,10 +2117,7 @@ function landscapeMap(graph){
         $(this).parent().find('li').removeClass("active");
         $(this).addClass("active");
 
-        //clear svg area
-
     });
-
 
 
     //-------function on click RISKS NODES----------------------------
@@ -2433,7 +2459,7 @@ function getDataSidebarTrendsMap(oneTrend,currentColor, edgesForThree) {
 
 }//getDataSidebarTrendsMap
 
-
+//function for appending three most connected for Trends
 function partSideMostThreeTrends(edgesForThree){
     //append three most connected risks in left sidebar
     if ($("body").attr("class") != 'map landscape-map') {
@@ -2447,7 +2473,7 @@ function partSideMostThreeTrends(edgesForThree){
     }
 }
 
-
+//function for appending three most connected for Nodes
 function partSideMostThree(edgesForThree) {
     //append three most connected risks in left sidebar
     if ($("body").attr("class") != 'map landscape-map') {
@@ -2472,4 +2498,64 @@ $(".main-nav .nav a").on("click", function(){
             event.preventDefault();
         }
     }
+});
+
+
+//snapshot functionality
+$('#snapshot-button').on('click', function(){
+
+    $(".snapshot-area").removeClass("hidden");
+    $("#can-area").html();
+
+   var wCont =  $("#container-graph").attr("width"),
+       hCont =  $("#container-graph").attr("height"),
+       canvas = document.getElementById('can-area'),
+       ctx = canvas.getContext('2d'),
+       dataSvg = document.getElementById('container-graph');
+
+
+    $(".snapshot-area").addClass("popup-snap").css({"margin-left": - wCont/2, "margin-top": -hCont/2});
+
+    $("#can-area").attr("width",wCont).attr("height",hCont);
+
+
+    dataSvg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+
+    var data =  dataSvg.outerHTML,
+        parser = new DOMParser(),
+        xmlDoc = parser.parseFromString(data, "text/xml");
+
+    xmlDoc.querySelectorAll(".text-hidden").forEach(function(e){
+        e.remove()
+    });
+
+
+    var DOMURL = window.URL || window.webkitURL || window;
+
+
+    data = xmlDoc.documentElement.outerHTML;
+
+    var img = new Image(),
+        svg = new Blob([data], {type: 'image/svg+xml;charset=utf-8'}),
+        url = DOMURL.createObjectURL(svg);
+
+    img.onload = function () {
+        ctx.drawImage(img, 0, 0);
+       DOMURL.revokeObjectURL(url);
+        var jpegUrl = canvas.toDataURL("image/png", 1.0);
+        $('#save-snap-button').attr("href" ,jpegUrl);
+
+
+        $('.rem-wrapper').on("click",function(){
+            $(".snapshot-area").addClass("hidden");
+        });
+    };
+
+    img.src = url;
+
+
+
+    //cutIcon.setAttribute("class", "glyphicon glyphicon-remove-circle");
+   // document.getElementById('snap-area').appendChild(img);
+
 });

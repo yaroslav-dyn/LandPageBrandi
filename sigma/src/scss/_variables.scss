@@ -75,6 +75,14 @@ $category-button: #e3eae4;
     display: block;
   }
 }
+.popup-snap{
+  position: fixed;
+  top: 50%;
+  left:50%;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 2px #444;
+}
 
 //mixins
 

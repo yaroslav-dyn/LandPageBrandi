@@ -231,7 +231,7 @@ function trendsRiskMap(graph){
     //add nodes text
     var textTrends = gNode
         .append("text")
-        .attr("class", textClasses.defaultTrend)
+        .attr("class", textClasses.hiddenTrend)
         .text(function (d) {
             return d.label || d.id;
         })
@@ -254,7 +254,7 @@ function trendsRiskMap(graph){
     //add nodes text
     var textRisks = rNode
         .append("text")
-        .attr("class", textClasses.default)
+        .attr("class", textClasses.hidden)
         .text(function (d) {
             return d.label || d.id;
         })
@@ -377,6 +377,8 @@ function trendsRiskMap(graph){
                 return edgesCutTrend.indexOf(d.id) >= 0;
             })
             .attr("class", textClasses.visible);
+
+        console.log(edgesCutTrend);
 
 
         //----Sidebar text data--------------------------
@@ -517,11 +519,10 @@ function trendsRiskMap(graph){
         );
 
 
-
         //general sidebar data function (common-functions template)
         getDataSidebar(riskObj, oneTrend, currentColor, edgesForThree);
 
-        //change label tn three most connected(trends/risks)
+        //change label the three most connected(trends/risks)
         $("#most-con-label strong").text("Most connected global trends:");
 
         //clearing array
@@ -646,7 +647,7 @@ function trendsRiskMap(graph){
         );
 
         //category color
-        var io = d3.selectAll(".nodes-risks")
+        var io = d3.selectAll(".nodes")
             .filter(function(d){
                 return d.id == currentID
             })
@@ -786,7 +787,6 @@ function trendsRiskMap(graph){
         //special data sidebar for t-r map (Trends)
         getDataSidebarTrendsMap(oneTrend,currentColor,edgesForThree);
 
-
         oneTrend = [];
         edgesCutTrendThree = [];
         edgesForThree = [];
@@ -857,7 +857,8 @@ function trendsRiskMap(graph){
             .data(edges)
             .filter(function (d) {
                 if (d.target.id == currNode && d.source.type == "Trend") {
-                    edgesCutRiskCur.push(d.source.id)
+                    edgesCutRiskCur.push(d.source.id);
+                    edgesForThree.push({source: d.source, value: d.value});
                 }
                 if (d.source.type == "Trend") {
                     return d.target.id == currNode;
@@ -875,7 +876,37 @@ function trendsRiskMap(graph){
             .attr("style", "font-size: 0.8em");
 
 
+        //filtering current trend nodes
+        d3.selectAll(".nodes-trends")
+            .attr("fill", trendsColor)
+            .attr("r", function (d) {
+                return altNodeSize(d, nodesRadius, 2)
+            })
+            .filter(function (d) {
+                return edgesCutRiskCur.indexOf(d.id) >= 0;
+            })
+            .transition()
+            .duration(300)
+            .attr("fill", trendsColorCurrent)
+            .attr("r", function (d) {
+                return altNodeSize(d, nodesRadius, 5)
+            });
+
+        //sort array to max
+        edgesForThree.sort(
+            function(a, b) {
+                return b.value - a.value;
+            }
+        );
+
+
+        partSideMostThreeTrends(edgesForThree);
+        $("#most-con-label strong").text("Most connected global trends:");
+        $(".most-connected li").removeClass("m-risk").addClass("m-node");
+
+
         edgesCutRiskCur = [];
+        edgesForThree = [];
 
     }
 

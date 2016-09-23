@@ -164,7 +164,7 @@ function landscapeMap(graph){
     //add nodes text
     var textRisks = rNode
         .append("text")
-        .attr("class", textClasses.default)
+        .attr("class", textClasses.hidden)
         .attr("dx", xMap)
         .attr("dy", yMap)
         .data(riskObj)
@@ -204,11 +204,6 @@ function landscapeMap(graph){
             }
         });
     }
-
-
-
-
-
 
 //-----------------Common functions---------------------------------------------
     /*
@@ -291,10 +286,7 @@ function landscapeMap(graph){
         $(this).parent().find('li').removeClass("active");
         $(this).addClass("active");
 
-        //clear svg area
-
     });
-
 
 
     //-------function on click RISKS NODES----------------------------

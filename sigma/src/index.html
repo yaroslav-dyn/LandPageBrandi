@@ -76,18 +76,22 @@
                       <div class="compare-container visible-on-trends-map visible-on-inter-map">
                         <h4 class="sidebar-main-header">Filters:</h4>
                         <hr/>
-                        <h5 id="most-con-label"><strong>Most connected global risks:</strong></h5>
+                        <h5 id="most-con-label">
+                          <strong>Most connected global risks:</strong>
+                        </h5>
                         <ul class='most-connected'></ul>
                       </div>
                     </div>
                 </div>
               </div>
           </div>
+        
+        
         </div>
         <div class="col-md-8 container-expo" id="container-expo">
           <!-- Container for graphics-->
           <div id="graph-wrapper" class="graph-wrapper">
-            <svg id="container-graph"></svg>
+            <svg id="container-graph" style="font-family: Monaco, consolas, sans-serif"></svg>
           </div>
         </div>
         <!-- Call template Sidebar-->
@@ -163,18 +167,21 @@
       </div>
     </div>
   </section>
-  <section class="snapshot-area">
-    <div class="container">
-       <div class="row">
-         <div class="col-md-12">
-            <div id="snap-area"></div>
-            <div class="hidden">
-            <button id="pj" class="btn btn-default nav-uploader"  title="parse into area">Snapshot</button>
-           </div>
-         </div>
+  <!-- Popup snapshot-->
+  <div class="snapshot-area hidden">
+    <div class="text-center">
+      <h4><span class="glyphicon glyphicon-eye-open"></span> SNAPSHOT: </h4>
+      <div class='rem-wrapper'>
+        <span class="glyphicon glyphicon-remove-circle"></span>
+      </div>
+      <div id="snap-area">
+        <canvas id="can-area"></canvas>
+      </div>
+      <div class="sidebar-data">
+        <a class="btn btn-block panel-btn" id="save-snap-button" download='snap.png' title="Save snap">SAVE SNAPSHOT</a>
       </div>
     </div>
-  </section>
+  </div>
 </div>  
 
   <footer>
