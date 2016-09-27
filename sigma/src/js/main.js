@@ -2007,12 +2007,11 @@ function landscapeMap(graph){
         })
         .attr("id", function (d) {
             return d.id
-        });
+        })
+        //.call(wrap, width);
 
 
-
-
-    function wrap(text, width) {
+    function wrap(text, xMap) {
         text.each(function() {
             var text = d3.select(this),
                 words = text.text().split(/\s+/).reverse(),
@@ -2022,7 +2021,7 @@ function landscapeMap(graph){
                 lineHeight = 1.1, // ems
                 y = text.attr("y"),
                 dy = parseFloat(text.attr("dy")),
-                tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dy", dy + "em");
+                tspan = text.text(null).append("tspan").attr("dx", xMap).attr("y", y).attr("dy", dy);
             while (word = words.pop()) {
                 line.push(word);
                 tspan.text(line.join(" "));
@@ -2203,7 +2202,6 @@ function landscapeMap(graph){
             .attr("style", "font-weight: bold; font-size: 0.9em");
 
     }
-
 
 
     //-------------ABORTING filters FUNCTION--------------------------------------------

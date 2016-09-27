@@ -25,7 +25,6 @@ function fileAppStare(){
 
 }
 
-
 //* files parser in parts/parsers
 
 //On change do all

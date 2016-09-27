@@ -275,7 +275,7 @@ $('#snapshot-button').on('click', function(){
     img.onload = function () {
         ctx.drawImage(img, 0, 0);
        DOMURL.revokeObjectURL(url);
-        var jpegUrl = canvas.toDataURL("image/png", 1.0);
+        var jpegUrl = canvas.toDataURL("image/jpg", 1.0);
         $('#save-snap-button').attr("href" ,jpegUrl);
 
 
