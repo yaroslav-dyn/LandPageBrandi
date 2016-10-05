@@ -1,0 +1,49 @@
+.text-bold {
+  font-weight: bold; }
+
+body {
+  font-family: Tahoma, Geneva, sans-serif;
+  font-size: 16px;
+  overflow-x: hidden; }
+
+h1, h2, h3, h4, h5, h6 {
+  color: #444; }
+
+a:hover, a:focus {
+  text-decoration: none; }
+
+.wrapper {
+  padding: 40px 0; }
+
+ul {
+  list-style: none; }
+
+.regions {
+  text-align: center; }
+  .regions .pop-label, .regions .area-label {
+    padding: 12px;
+    background: #b9b9f1;
+    font-weight: bold;
+    outline: 1px solid #444; }
+  .regions .region {
+    outline: 1px solid #c6c6c6;
+    font-size: 0.8em; }
+    .regions .region-labels {
+      padding: 8px;
+      background: #c3bfc2;
+      outline: 1px solid #444; }
+    .regions .region:hover .pop {
+      display: block; }
+    .regions .region .label-country {
+      background: #b3f76b;
+      padding: 8px 0;
+      min-height: 63px;
+      outline: 1px solid #444; }
+    .regions .region .pop {
+      padding: 28px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      display: none;
+      color: #3F51B5; }
