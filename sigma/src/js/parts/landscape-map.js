@@ -426,9 +426,4 @@ function landscapeMap(graph){
     });
 
 
-
-
-
-
-
 }//End landscapeMap
