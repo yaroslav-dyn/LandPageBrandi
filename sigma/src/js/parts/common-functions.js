@@ -237,59 +237,11 @@ $(".main-nav .nav a").on("click", function(){
 //snapshot functionality
 $('#snapshot-button').on('click', function(){
 
-    $(".snapshot-area").removeClass("hidden");
-    $("#can-area").html();
-
-   var wCont =  $("#container-graph").attr("width"),
-       hCont =  $("#container-graph").attr("height"),
-       canvas = document.getElementById('can-area'),
-       ctx = canvas.getContext('2d'),
-       dataSvg = document.getElementById('container-graph');
-
-
-    $(".snapshot-area").addClass("popup-snap").css({"margin-left": - wCont/2, "margin-top": -hCont/2});
-
-    $("#can-area").attr("width",wCont).attr("height",hCont);
-
-
-    dataSvg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
-
-    var data =  dataSvg.outerHTML,
-        parser = new DOMParser(),
-        xmlDoc = parser.parseFromString(data, "text/xml");
-
-    xmlDoc.querySelectorAll(".text-hidden").forEach(function(e){
-        e.remove()
-    });
-
-
-    var DOMURL = window.URL || window.webkitURL || window;
-
-
-    data = xmlDoc.documentElement.outerHTML;
-
-    var img = new Image(),
-        svg = new Blob([data], {type: 'image/svg+xml;charset=utf-8'}),
-        url = DOMURL.createObjectURL(svg);
-
-    img.onload = function () {
-        ctx.drawImage(img, 0, 0);
-       DOMURL.revokeObjectURL(url);
-        var jpegUrl = canvas.toDataURL("image/jpg", 1.0);
-        $('#save-snap-button').attr("href" ,jpegUrl);
-
-
-        $('.rem-wrapper').on("click",function(){
-            $(".snapshot-area").addClass("hidden");
-        });
-    };
-
-    img.src = url;
+    $("#container-graph").find(".text-hidden").css("display","none");
 
 
 
-    //cutIcon.setAttribute("class", "glyphicon glyphicon-remove-circle");
-   // document.getElementById('snap-area').appendChild(img);
+    saveSvgAsPng(document.getElementById("container-graph"), "snap.png",{encoderOptions:1});
 
 });
 
