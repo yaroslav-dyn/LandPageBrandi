@@ -7,57 +7,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
   <!-- *plugin 'userev' concat your vendor css -->
-  <!-- build:css css/vendor.css -->
-  <link rel="stylesheet" href="vendor/bootstrap/bootstrap.css"/>
-  <link rel="stylesheet" href="vendor/bootstrap/bootstrap-theme.min.css"/>
-  <!-- endbuild -->
+  <link rel="stylesheet" href="css/vendor.css">
 
   <!-- *plugin 'userev' concat your dev css -->
-  <!-- build:css css/main.css -->
-  <link rel="stylesheet" href="css/main.css"/>
-  <!-- endbuild -->
+  <link rel="stylesheet" href="css/main.css">
 
 </head>
-<body> 
+<body>
 <div class="wrapper">
-  <header>
-    <nav class="navbar navbar-default main-nav">
-      <div class="container-fluid">
-        <div class="col-md-2 col-xs-12">
-           <h1><a href="/" title="Home">Risk Insights</a></h1>
-        </div>
-        <div class="col-md-6 col-xs-6 text-center">
-          <ul class="nav navbar-nav">
-            <li ><a href="index.html">Home</a></li>
-            <li ><a href="map.html">Map</a></li>
-            <li ><a href="survey/">Survey</a></li>
-          </ul>
-        </div>
-        <div class="col-md-4 col-xs-6 text-right">
-         <div class="logo-wrapper">
-            <a href="http://www.riskinsights.com/" target="_blank">
-              <img class="img-responsive" src="img/logo_big.png" alt="Risk Insights">
-               | www.riskinsights.com
-            </a>
-          </div>
-        </div>
-      </div>
-    </nav>
-  </header>
 <div class="content">
   <section>
     <div class="container-fluid render-area">
       <div class="row">
-        <h2 class="text-center">
+        <div class="col-md-12 slogan">
+          <h2 class="text-center">
           Welcome to Risk Insights
-        </h2>
-        <p class="page-description text-center">
-          the tool that allows you to create,visualise and categorise risk information networks.
-        </p>
+          </h2>
+          <p class="page-description text-center">
+            the tool that allows you to create,visualise and categorise risk information networks.
+          </p>
+        </div>
       </div>
       <div class="row">
         <!--Left Sidebar template-->
         <div class="col-md-2 sidebar-data hidden" id="left-sidebar" >
+          <div class="main-nav">
+            <div class="nav">
+              <a href="index.html"><span class="glyphicon glyphicon-home"></span>  Home</a>
+            </div>
+          </div>
           <div class="row">
               <div class="col-md-10">
                   <div class="filters-container">
@@ -71,34 +49,26 @@
                         <li>Expert to non-expert</li>
                       </ul>
                     </div>
-                  <div class="data-area hidden">
-                    <div class="most-connected compare-container visible-on-trends-map visible-on-inter-map">
-                      <h4 class="sidebar-main-header">Filters:</h4>
-                      <hr/>
-                      <div class="data-area hidden">
-                        <h4>Most connected global risks:</h4>
-                        <ul>
-                          <li>item 1</li>
-                          <li>item 2</li>
-                          <li>item 3</li>
-                          <li>item 4</li>
-                        </ul>
+                    <div class="data-area hidden">
+                      <div class="compare-container visible-on-trends-map visible-on-inter-map">
+                        <h4 class="sidebar-main-header">Filters:</h4>
+                        <hr/>
+                        <h5 id="most-con-label">
+                          <strong>Most connected global risks:</strong>
+                        </h5>
+                        <ul class='most-connected'></ul>
                       </div>
                     </div>
-                  </div>
-        
                 </div>
-        
-        
               </div>
-        
-        
           </div>
+        
+        
         </div>
-        <div class="col-md-10  container-expo" id="container-expo">
+        <div class="col-md-8 container-expo" id="container-expo">
           <!-- Container for graphics-->
-          <div id="graph-wrapper" class="graph-wrapper text-center" >
-            <svg id="container-graph" onload="staticMap()"></svg>
+          <div id="graph-wrapper" class="graph-wrapper">
+            <svg id="container-graph" style="font-family: Monaco, consolas; background: #fff"></svg>
           </div>
         </div>
         <!-- Call template Sidebar-->
@@ -120,10 +90,6 @@
         
                   <h3 class="category-selected"><span class="trends-selected s-data-text text-bold" curid="empty"></span></h3>
         
-                  <p class="description-risk s-data-text">
-                    Rising number of people living in urban areas that results in the physical growth of cities.
-                  </p>
-        
                   <div class="category-selected">
                     Category: <span class="sel-cat s-data-text text-bold"></span>
                   </div>
@@ -138,58 +104,69 @@
                     </div>
                   </div>
                 </div>
-                <div class="file-name">
-                  <span id="load-file-sb"></span>
-                  <span class="text-bold" id="header-file-sb"></span>
-                </div>
                 <hr/>
                 <button id="highlight-text" class="btn btn-block panel-btn">Show labels</button>
+                <div class="data-area hidden">
+                  <hr/>
+                  <p class="description-risk s-data-text">
+                    Rising number of people living in urban areas that results in the physical growth of cities.
+                  </p>
+                </div>
                 <hr/>
               </div><!--END sidebar-data-unity-->
               <div class="nav-wrap">
                 <button id="clear-filter" class="btn btn-block panel-btn">Clear selection</button>
+              </div>
+              <div class="nav-wrap">
+                <button id="snapshot-button" class="btn btn-block panel-btn snapshot">
+                   <span class="glyphicon glyphicon-camera"></span> Snapshot
+                </button>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </section>
-</div>
-
-  <footer>
-    <div class="container">
+    <div class="container-fluid">
       <div class="row">
-        <div class="col-md-12 text-center">
-          <h4>Risk Insights</h4>
-          <p>
-            the tool that allows you to create,visualise and categorise risk information networks.
-          </p>
+        <div class="col-md-12">
+          <div class="upload-wrapper">
+            <div class="button-nav">
+              <label class="btn btn-default nav-uploader" for="upload-input" title="Upload a Risk data file">Upload a Risk data file</label>
+              <input id="upload-input" type="file">
+            </div>
+            <div class="data-nav">
+              <span id="load-file" class="load-file-name"></span>
+              <span id="header-file" class="load-file-name"></span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </footer>
-<!-- *plugin 'userev' concat your vendor js -->
-<!-- build:js scripts/vendor.js -->
-<script src="vendor/jquery.js"></script>
-<script src="vendor/bootstrap/bootstrap.min.js"></script>
-<script src="vendor/d3.js"></script>
-<script src="vendor/angular.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+  </section>
+  <!-- Popup snapshot-->
+  <div class="snapshot-area hidden">
+    <div class="text-center">
+      <h4><span class="glyphicon glyphicon-eye-open"></span> SNAPSHOT: </h4>
+      <div class='rem-wrapper'>
+        <span class="glyphicon glyphicon-remove-circle"></span>
+      </div>
+      <div id="snap-area">
+        <canvas id="can-area"></canvas>
+      </div>
+      <div class="sidebar-data">
+        <a class="btn btn-block panel-btn" id="save-snap-button" download='snap.jpg' title="Save snap">SAVE SNAPSHOT</a>
+      </div>
+    </div>
+  </div>
+</div>  
 
-<!-- endbuild -->
+<!-- *plugin 'userev' concat your vendor js -->
+<script src="scripts/vendor.js"></script>
 
 <!-- *plugin 'userev' concat your dev js -->
-
-<!-- build:js scripts/main.js -->
-<script src="js/main.js"></script>
-<!-- endbuild -->
-
-<!-- build:js scripts/app.js -->
-  <script src="js/app.js"></script>
-<!-- endbuild -->
-
-
+<script src="scripts/saveSvgAsPng.js"></script>
+<script src="scripts/main.js"></script>
 
 </div><!--end wrapper-->
 

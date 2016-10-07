@@ -20,29 +20,6 @@
 </head>
 <body>
 <div class="wrapper">
-  <header>
-    <nav class="navbar navbar-default main-nav">
-      <div class="container-fluid">
-        <div class="col-md-2 col-xs-12">
-           <h1><a href="/" title="Home">Risk Insights</a></h1>
-        </div>
-        <div class="col-md-6 col-xs-6 text-center">
-          <ul class="nav navbar-nav">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="survey/">Survey</a></li>
-          </ul>
-        </div>
-        <div class="col-md-4 col-xs-6 text-right">
-         <div class="logo-wrapper">
-            <a href="http://www.riskinsights.com/" target="_blank">
-              <img class="img-responsive" src="img/logo_big.png" alt="Risk Insights">
-               | www.riskinsights.com
-            </a>
-          </div>
-        </div>
-      </div>
-    </nav>
-  </header>
 <div class="content">
   <section>
     <div class="container-fluid render-area">
@@ -59,6 +36,11 @@
       <div class="row">
         <!--Left Sidebar template-->
         <div class="col-md-2 sidebar-data hidden" id="left-sidebar" >
+          <div class="main-nav">
+            <div class="nav">
+              <a href="index.html"><span class="glyphicon glyphicon-home"></span>  Home</a>
+            </div>
+          </div>
           <div class="row">
               <div class="col-md-10">
                   <div class="filters-container">
@@ -184,27 +166,12 @@
   </div>
 </div>  
 
-  <footer>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12 text-center">
-          <h4>Risk Insights</h4>
-          <p>
-            the tool that allows you to create,visualise and categorise risk information networks.
-          </p>
-        </div>
-      </div>
-    </div>
-  </footer>
 <!-- *plugin 'userev' concat your vendor js -->
 <!-- build:js scripts/vendor.js -->
 <script src="vendor/jquery.js"></script>
 <script src="vendor/bootstrap/bootstrap.min.js"></script>
 <script src="vendor/d3.js"></script>
 <script src="vendor/saveSvgAsPng.js"></script>
-
-
-
 <!-- endbuild -->
 
 <!-- *plugin 'userev' concat your dev js -->
@@ -213,9 +180,6 @@
 <script src="js/main.js"></script>
 <!-- endbuild -->
 
-<!-- build:js scripts/app.js -->
-  <script src="js/app.js"></script>
-<!-- endbuild -->
 
 
 

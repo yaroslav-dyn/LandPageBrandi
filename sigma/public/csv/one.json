@@ -1,0 +1,30 @@
+{
+  "nodes": [
+    	{
+      "id": "R_ASSET", 
+       "type": "Risk" ,
+      "rank": 3,
+      "impact":4.9,
+      "likelihood": 5.0,
+      "category":"Economic",
+      "description": "Unsustainably overpriced assets such as commodities, housing, shares, etc. in a major economy or region."
+},
+{"id": "R_ENERGY", "label": "Energy price shock", "type": "Risk" ,
+      "rank": 6,
+      "impact": 5.1,
+      "likelihood": 4.5,
+      "category":"Economic",
+      "description": "Energy price increases or decreases significantly and places further economic pressures on highly energy-dependent industries and consumers."},
+{"id": "R_DEFLATION", "label": "Deflation", "type": "Risk" ,
+      "rank": 4,
+      "impact": 4.1,
+      "likelihood": 4.1,
+      "category":"Economic",
+      "description": "Prolonged ultra-low inflation or deflation in a major economy or region."
+}
+],
+  "links": [
+	   {"source":"R_ASSET","target":"R_DEFLATION","type":"Risk-Risk","value": 12},
+   	   {"source":"R_ASSET","target":"R_ENERGY","type":"Risk-Risk","value": 8}		
+  ]
+}

@@ -240,8 +240,12 @@ $('#snapshot-button').on('click', function(){
     $("#container-graph").find(".text-hidden").css("display","none");
 
 
-
     saveSvgAsPng(document.getElementById("container-graph"), "snap.png",{encoderOptions:1});
+
+    setTimeout(function(){
+        $("#container-graph").find(".text-hidden").css("");
+    },200)
+
 
 });
 
