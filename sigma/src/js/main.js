@@ -1973,6 +1973,7 @@ function landscapeMap(graph){
         });
 
 
+          
 
     //append nodes in 'g' containers
     var riskNode = rNode
@@ -1995,44 +1996,53 @@ function landscapeMap(graph){
     var textRisks = rNode
         .append("text")
         .attr("class", textClasses.hidden)
-        .attr("dx", xMap)
-        .attr("dy", yMap)
+        .attr("x", xMap)
+        .attr("y", yMap)
+        .attr("dy","1")
         .data(riskObj)
-        .text(function (d) {
-            return d.label || d.id;
+        .attr("id", function (d) {
+            return d.id
         })
         .attr("transform", function(d){
             return d.textAncorY
         })
-        .attr("id", function (d) {
-            return d.id
+        .text(function (d) {
+            return d.label;
         })
-        //.call(wrap, width);
+    
+        .call(wrap, 50);
 
 
-    function wrap(text, xMap) {
-        text.each(function() {
-            var text = d3.select(this),
-                words = text.text().split(/\s+/).reverse(),
-                word,
-                line = [],
-                lineNumber = 0,
-                lineHeight = 1.1, // ems
-                y = text.attr("y"),
-                dy = parseFloat(text.attr("dy")),
-                tspan = text.text(null).append("tspan").attr("dx", xMap).attr("y", y).attr("dy", dy);
-            while (word = words.pop()) {
-                line.push(word);
+ 
+
+function wrap(text, width) {
+    text.each(function() {
+        var text = d3.select(this),
+        words = text.text().split(/\s+/).reverse(),
+        word,
+        line = [],
+        lineNumber = 0,
+        lineHeight = 1.2, // ems
+        x = text.attr("x"),
+        y = text.attr("y"),
+        dy = text.attr("dy") ? text.attr("dy") : 0;
+        tspan = text.text(null).append("tspan").attr("x", x).attr("y", y).attr("dy", dy + "em");
+
+
+        while (word = words.pop()) {
+            line.push(word);
+            tspan.text(line.join(" "));
+
+            if (tspan.node().getComputedTextLength() > width) {
+                line.pop();
                 tspan.text(line.join(" "));
-                if (tspan.node().getComputedTextLength() > width) {
-                    line.pop();
-                    tspan.text(line.join(" "));
-                    line = [word];
-                    tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
-                }
+                line = [word];
+                tspan = text.append("tspan").attr("x", x).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
             }
-        });
-    }
+        }
+    });
+}
+
 
 //-----------------Common functions---------------------------------------------
     /*
@@ -2494,13 +2504,12 @@ $(".main-nav .nav a").on("click", function(){
 
 
 //snapshot functionality
-$('#snapshot-button').on('click', function(){
-
+function addSnapshot(){
     $("#container-graph").find(".text-hidden").css("display","none");
-
-
     saveSvgAsPng(document.getElementById("container-graph"), "snap.png",{encoderOptions:1});
+    console.log(this);
+}
 
-
-
-});
+var snapButton =  document.getElementById("snapshot-button");
+snapButton.addEventListener("click", addSnapshot, false);
+//-----------------------------------------------------------------------------------------

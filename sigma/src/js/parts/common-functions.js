@@ -235,19 +235,20 @@ $(".main-nav .nav a").on("click", function(){
 
 
 //snapshot functionality
-$('#snapshot-button').on('click', function(){
-
+function addSnapshot(){
     $("#container-graph").find(".text-hidden").css("display","none");
-
-
     saveSvgAsPng(document.getElementById("container-graph"), "snap.png",{encoderOptions:1});
+    console.log(this);
+}
 
-    setTimeout(function(){
-        $("#container-graph").find(".text-hidden").css("");
-    },200)
+var snapButton =  document.getElementById("snapshot-button");
+snapButton.addEventListener("click", addSnapshot, false);
+//-----------------------------------------------------------------------------------------
 
 
-});
+
+
+
 
 
 
