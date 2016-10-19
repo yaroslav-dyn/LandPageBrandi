@@ -92,7 +92,7 @@ section {
   }
   .soc-block-wrap{
     position: absolute;
-    bottom: 18px;
+    bottom: -24px;
     width: 100%;
   }
   .navbar-toggle{
@@ -148,6 +148,7 @@ section {
 .social-wrap{
   margin: 105px 0 40px 0;
   ul {
+    padding-left: 0;
     li{
       display: inline-block;
       padding-right: 17px;
@@ -160,7 +161,42 @@ section {
     }
   }
 }
-
+.down-prev{
+    border: 2px solid $accent-green;
+    padding: 3px 10px;
+    border-radius: 5px;
+    margin: 14px 0 4px -8px;
+    display: inline-block;
+    opacity: 0.8;
+      &:hover{
+        border-color: #fff;
+      }
+      &:hover span{
+        color: #fff;
+      }
+    span{
+      font-size: 28px;
+      color: $accent-green; 
+       -webkit-animation: arrowDomn 3s infinite; 
+       -moz-animation:   arrowDomn 3s infinite; 
+      -o-animation:     arrowDomn 3s infinite; 
+      animation:        arrowDomn 3s infinite; 
+    }
+  }
+  @keyframes arrowDomn{
+    0%{
+      position: relative;
+      top: 0;
+    }
+    50%{
+      position: relative;
+      top: 6px;
+    }
+    100%{
+      position: relative;
+      top: 0;
+    }
+  }
 h3.h-category{	//global style
   font: 600 1.75em "open_sansregular", sans-serif;
   color: $accent-green;

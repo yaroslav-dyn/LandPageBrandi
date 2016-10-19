@@ -154,7 +154,7 @@ section {
         color: #32b0ee; }
   .header .soc-block-wrap {
     position: absolute;
-    bottom: 18px;
+    bottom: -24px;
     width: 100%; }
   .header .navbar-toggle {
     background: #000;
@@ -190,13 +190,45 @@ section {
 /*social inks*/
 .social-wrap {
   margin: 105px 0 40px 0; }
-  .social-wrap ul li {
-    display: inline-block;
-    padding-right: 17px; }
-    .social-wrap ul li a {
-      color: rgba(255, 255, 255, 0.4); }
-      .social-wrap ul li a:hover {
-        color: rgba(255, 255, 255, 0.9); }
+  .social-wrap ul {
+    padding-left: 0; }
+    .social-wrap ul li {
+      display: inline-block;
+      padding-right: 17px; }
+      .social-wrap ul li a {
+        color: rgba(255, 255, 255, 0.4); }
+        .social-wrap ul li a:hover {
+          color: rgba(255, 255, 255, 0.9); }
+
+.down-prev {
+  border: 2px solid #0eb493;
+  padding: 3px 10px;
+  border-radius: 5px;
+  margin: 14px 0 4px -8px;
+  display: inline-block;
+  opacity: 0.8; }
+  .down-prev:hover {
+    border-color: #fff; }
+  .down-prev:hover span {
+    color: #fff; }
+  .down-prev span {
+    font-size: 28px;
+    color: #0eb493;
+    -webkit-animation: arrowDomn 3s infinite;
+    -moz-animation: arrowDomn 3s infinite;
+    -o-animation: arrowDomn 3s infinite;
+    animation: arrowDomn 3s infinite; }
+
+@keyframes arrowDomn {
+  0% {
+    position: relative;
+    top: 0; }
+  50% {
+    position: relative;
+    top: 6px; }
+  100% {
+    position: relative;
+    top: 0; } }
 
 h3.h-category {
   font: 600 1.75em "open_sansregular", sans-serif;
