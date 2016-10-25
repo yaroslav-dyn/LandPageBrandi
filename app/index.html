@@ -7,9 +7,14 @@
   <title>Brandi</title>
   <meta name="description" content="">
 
-  <link rel="stylesheet" href="css/vendor.css">
+  <!-- build:css css/vendor.css -->
+  <link href="app/dist/bootstrap.min.css" rel="stylesheet">
+  <link  href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <!-- endbuild -->
 
-  <link rel="stylesheet" href="css/main.css">
+  <!-- build:css css/main.css -->
+  <link  href="app/css/main.css" rel="stylesheet">
+  <!-- endbuild -->
 </head>
 <body>
 <div class="wrapper">
@@ -48,63 +53,66 @@
       </div>
     </div><!--end header-top-->
     <div class="container-fluid"><!-- carousel -->
-	  <div class="row">
-	    <div class="col-md-12 col-xs-12">
-	      <div class="carousel-wrapper">
-	        <div id="carousel-header" class="carousel slide vertical text-center">
-	          <div class="slide-indicators">
-	            <ol class="carousel-indicators">
-	              <li data-target="#carousel-header" data-slide-to="0" class="active"></li>
-	              <li data-target="#carousel-header" data-slide-to="1"></li>
-	              <li data-target="#carousel-header" data-slide-to="2"></li>
-	            </ol>
-	          </div>
-	          <div class="carousel-inner" role="listbox">
-	            <div class="active item">
-	              <h2>Meet <span>Brandi!</span></h2>
-	              <p><span>/creative</span> one page template.</p>
-	              <p class="skills">
-	                <span>&mdash;</span><em>We are a team of professionals</em><span>&mdash;</span>
-	              </p>
-	            </div>
-	            <div class="item">
-	              <h2>Two <span>Brandi!</span></h2>
-	              <p><span>/creative</span> one page template.</p>
-	              <p class="skills">
-	                <span>&mdash;</span>We are a team of professionals<span>&mdash;</span>
-	              </p>
-	            </div>
-	            <div class="item">
-	              <h2>Three <span>Brandi!</span></h2>
-	              <p><span>/creative</span> one page template.</p>
-	              <p class="skills">
-	                <span>&mdash;</span>We are a team of professionals<span>&mdash;</span>
-	              </p>
-	            </div>
-	          </div>
-	        </div>
-	      </div>              <!--end carousel-wrapper-->
-	    </div>
-	    <div class="soc-block-wrap">
-	      <div class="col-md-12">
-	        <div class="social-wrap text-center">
-	          <ul>
-	            <li><a href="/"><i class="fa fa-twitter"></i></a></li>
-	            <li><a href="/"><i class="fa fa-facebook"></i></a></li>
-	            <li><a href="/"><i class="fa fa-google-plus"></i></a></li>
-	            <li><a href="/"><i class="fa fa-skype"></i></a></li>
-	          </ul>
-	        </div>
-	      </div>
-	    </div>
-	  </div>
+      <div class="row">
+        <div class="col-md-12 col-xs-12">
+          <div class="carousel-wrapper">
+            <div id="carousel-header" class="carousel slide vertical text-center">
+              <div class="slide-indicators">
+                <ol class="carousel-indicators">
+                  <li data-target="#carousel-header" data-slide-to="0" class="active"></li>
+                  <li data-target="#carousel-header" data-slide-to="1"></li>
+                  <li data-target="#carousel-header" data-slide-to="2"></li>
+                </ol>
+              </div>
+              <div class="carousel-inner" role="listbox">
+                <div class="active item">
+                  <h2>Meet <span>Brandi!</span></h2>
+                  <p><span>/creative</span> one page template.</p>
+                  <p class="skills">
+                    <span>&mdash;</span><em>We are a team of professionals</em><span>&mdash;</span>
+                  </p>
+                </div>
+                <div class="item">
+                  <h2>Two <span>Brandi!</span></h2>
+                  <p><span>/creative</span> one page template.</p>
+                  <p class="skills">
+                    <span>&mdash;</span>We are a team of professionals<span>&mdash;</span>
+                  </p>
+                </div>
+                <div class="item">
+                  <h2>Three <span>Brandi!</span></h2>
+                  <p><span>/creative</span> one page template.</p>
+                  <p class="skills">
+                    <span>&mdash;</span>We are a team of professionals<span>&mdash;</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>              <!--end carousel-wrapper-->
+        </div>
+        <div class="soc-block-wrap">
+          <div class="col-md-12">
+            <div class="social-wrap text-center">
+              <ul>
+                <li><a href="/"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="/"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="/"><i class="fa fa-google-plus"></i></a></li>
+                <li><a href="/"><i class="fa fa-skype"></i></a></li>
+              </ul>
+                <a href="#futeres-anchor" class="down-prev">
+                  <span class="fa fa-angle-double-down"></span>
+                </a>
+            </div>    
+          </div>
+        </div>
+      </div>
     </div>
   </header><!-- End header -->
   <section  id="features-section" class="features pad-big-lg pad-big-sm">  <!-- section features -->
     <div class="container">
       <div class="row">
         <div class="col-md-12 text-center pad-normal-lg">
-          <h3 class="h-category">Features</h3>
+          <h3 id = "futeres-anchor"class="h-category">Features</h3>
           <img src="img/heart_icon.png" alt="your site features"/>
         </div>
         <div class="items-features">
@@ -423,8 +431,18 @@
     </div>
   </div> 
 </footer> 
-<script src="scripts/vendor.js"></script>
-<script src="scripts/main.js"></script>
+<!-- build:js scripts/vendor.js -->
+<script src="app/dist/jquery.min.js"></script>
+<script src="app/dist/angular.min.js"></script>
+<script src="app/dist/bootstrap.min.js"></script>
+<script src="app/dist/jquery.mixitup.js"></script>
+<script src="app/dist/jquery.animateNumber.min.js"></script>
+<script src="app/dist/jquery.scroolly.min.js"></script>
+<!-- endbuild -->
+<!-- build:js scripts/main.js -->
+<script src="js/app.js"></script>
+<script src="js/user.js"></script>
+<!-- endbuild -->
 </body>
 </html>
 
