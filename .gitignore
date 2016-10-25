@@ -1,6 +1,10 @@
 psd/
-
-
-
+.idea/
+*.iml
+*.iws
 node_modules/
+sigma/
+skyparallax/
+threemaps/
+manylines/
 
